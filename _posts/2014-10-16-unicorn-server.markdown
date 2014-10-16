@@ -5,17 +5,17 @@ date:   2014-10-16 12:01:27
 categories: Ruby on Rails, Heroku
 ---
 
-I was listening to a Ruby Rouges podcast sometime back and they had a guest on that worked at [Heroku][heroku].  Even though i 
+I was listening to a [Ruby Rouges][ruby-rouges] podcast sometime back and they had guest [Richard Schneeman][richard] who worked at [Heroku][heroku]. Though i 
 did not fully understand what he talking about for most of the show.. I remembered him specifically making a point to 
-tell the audience to "PLEASE switch your SERVERS from the default WEBRICK to UNICORN".  
+tell the audience to "PLEASE switch your WEBSERVERS from the default WEBRICK to UNICORN".  
 
-Well in my experience Webrick worked just fine..At least for developing with.  So I wasn't too hasty
-to change SERVERS right away.  But as I was finishing up my first contracted Website a couple weeks ago I remembered what
-that Heroku employee said on that Pod Cast. So I started to google for tutorials on how to switch it over to 'Unicorn'.
+Well in my experience Webrick worked just fine..at least for developing with.  So I wasn't too hasty
+to switch to 'Unicorn' right away.  But as I was finishing up my first contracted Website a couple weeks ago, I remembered what
+Richard had said. So I started to google for tutorials on how to switch it over to 'Unicorn'.
 
 Easy right?  
 
-Well maybe to an experience web developer..but I am not that.
+Well maybe to an experienced web developer..but I am not that :(
 
 I found most the tutorials especially from [Heroku-Docs][heroku-docs] were lacking the "Hold Your Hand" aspect to them that I kind of need
 at this point in my career.  So I decided to create a tutorial that does just that.  To help my future self and anyone
@@ -26,8 +26,8 @@ else who is confused by the documentation that is out there on the subject.
 This tutorial will show you step by step how to switch your default 'Webrick' server in a Ruby On Rails Application 
 to the 'Unicorn' server. Which is apparently  much faster for production purposes on hosting sites like [Heroku][heroku].
 
-First
--------------------
+##First
+
 
 You will want to add Unicorn to your app's 'Gemfile'.  Which is located in the 'root' directory of
 your application.
@@ -93,7 +93,7 @@ If you are feeling fancy,
 You can create the Procfile plus its contents above with one command in the commmand line:
 
 run `echo "web: bundle exec rails server thin -p \$PORT -e \$RACK_ENV" > Procfile`
-and the 'Procfile' will automatically be created in the 'root' directory of your application containing
+and the 'Procfile' will automatically be created in the 'root' directory of your application and contain
 the desired script.
 
 
@@ -103,4 +103,7 @@ pod cast can rest easy.
 
 [heroku]:      http://heroku.com
 [heroku-docs]: https://devcenter.heroku.com/articles/rails-unicorn
+[ruby-rouges]: https://rubyrouges.com
+[richard]: 		 http://rubyrogues.com/140-rr-heroku-with-richard-schneeman/
 [jekyll-help]: https://github.com/jekyll/jekyll-help
+
