@@ -5,7 +5,7 @@ date:   2014-10-16 12:01:27
 categories: Ruby on Rails, Heroku
 ---
 
-I was listening to a [Ruby Rouges][ruby-rouges] podcast sometime back and they had guest [Richard Schneeman][richard] who worked at [Heroku][heroku]. Though i 
+I was listening to a [Ruby Rouges][ruby-rouges] podcast sometime back and they had guest [Richard Schneeman][richard] who worked at [Heroku][heroku]. Although I 
 did not fully understand what he talking about for most of the show.. I remembered him specifically making a point to 
 tell the audience to "PLEASE switch your WEBSERVERS from the default WEBRICK to UNICORN".  
 
@@ -24,7 +24,7 @@ else who is confused by the documentation that is out there on the subject.
 
 
 This tutorial will show you step by step how to switch your default 'Webrick' server in a Ruby On Rails Application 
-to the 'Unicorn' server. Which is apparently  much faster for production purposes on hosting sites like [Heroku][heroku].
+to the 'Unicorn' server. Which is apparently much faster for production purposes on hosting sites like [Heroku][heroku].
 
 ##First
 
