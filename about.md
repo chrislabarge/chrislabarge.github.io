@@ -4,8 +4,12 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+My name is Chris LaBarge.  I am a 26 year old hardcore musician who realized the music scene is not a field to 
+make money an honest living anymore and decided in the summer of 2013  to pursue coding.  I had
+experience with computers from an early age but never actually got into the nitty gritty of computers
+until recent.  
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
-
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+I started with learning Ruby and now am full able to make 100% Responsive Websites
+with the help of Ruby on Rails and Bootstrap.  I am now in the process of trying to switch over from
+working full time as a "Burrito-Roller" (been working at a burrito bar for 4 years ) to doing free-lance
+web development (to build a resume) and hopefully landing a kick ass job.
