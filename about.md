@@ -4,8 +4,8 @@ title: About
 permalink: /about/
 ---
 
-My name is Chris LaBarge.  I am a 26 year old hardcore musician who realized the music scene is not a field to 
-make money an honest living anymore and decided in the summer of 2013  to pursue coding.  I had
+My name is Chris LaBarge.  I am a 26 year old hardcore musician who realized the music scene is not a great field to 
+make an honest living anymore. So in the summer of 2013 I decided to pursue coding.  I had
 experience with computers from an early age but never actually got into the nitty gritty of computers
 until recent.  
 

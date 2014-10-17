@@ -2,7 +2,7 @@
 layout: post
 title:  "Switching Your Rails Application Web Server to 'Unicorn'"
 date:   2014-10-16 12:01:27
-categories: Ruby on Rails, Heroku
+
 ---
 ###Introduction
 
@@ -79,6 +79,7 @@ on installing Unicorn.  They give a detailed explanation for the basic configura
 
 ##Third 
 
+####a)
 
 The last thing you have to do is create a 'Procfile' in your applications 'root' directory. `my_rails_app/Procfile`
 Once you have created the file just add the following to it:
@@ -87,10 +88,11 @@ Once you have created the file just add the following to it:
 	web: bundle exec unicorn -p $PORT  -c ./config/unicorn.rb
 {% endhighlight %}
 
-or....
+###or....
 
-If you are feeling fancy, 
-You can create the Procfile including its contents with one command in the commmand line:
+####b)
+If you are feeling fancy, (and have not done the step directly above) 
+you can create the Procfile including its contents with one command in the commmand line:
 
 run `echo "web: bundle exec rails server thin -p \$PORT -e \$RACK_ENV" > Procfile`
 and the 'Procfile' will automatically be created in the 'root' directory of your application and contain
