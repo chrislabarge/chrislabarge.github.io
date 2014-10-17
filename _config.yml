@@ -2,9 +2,9 @@
 title: Memory Blog
 email: chrislabarge2@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  A very basic Development blog that I started to honestly just remind myself of how to do things.  
+  A very basic Development blog that I started to honestly just remind myself how to do things.  
   My brain can't hold every little back-end trick so I just needed a blog that I could spit out
-  some tips/tutorials that were not easily googleable. If it helps some people out along the way 
+  some tips/tutorials that were not easy to google. If it helps some people out along the way 
   thats cool too!
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://chrislabarge.github.io" # the base hostname & protocol for your site
