@@ -109,7 +109,7 @@ Now all you have to do is `push` the application to [Github][github] and then [H
 
 * Lastly `git push heroku`
 
-##YOUR DONE!
+##YOU'RE DONE!
 
 Boom now you are running Unicorn in your production environment. You and that Heroku employee [Richard][richard] from
 the [Ruby Rouges][richard-pod] podcast can rest easy. 
