@@ -92,6 +92,14 @@
  * Site footer
  */
 .site-footer {
+    background: rgb(249,197,198); /* Old browsers */
+		background: -moz-linear-gradient(-45deg, rgba(249,197,198,1) 0%, rgba(252,224,255,1) 36%, rgba(169,164,242,1) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(249,197,198,1)), color-stop(36%,rgba(252,224,255,1)), color-stop(100%,rgba(169,164,242,1))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(-45deg, rgba(249,197,198,1) 0%,rgba(252,224,255,1) 36%,rgba(169,164,242,1) 100%); /* Chrome10+,Safari5.1+ */	
+		background: -o-linear-gradient(-45deg, rgba(249,197,198,1) 0%,rgba(252,224,255,1) 36%,rgba(169,164,242,1) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(-45deg, rgba(249,197,198,1) 0%,rgba(252,224,255,1) 36%,rgba(169,164,242,1) 100%); /* IE10+ */
+		background: linear-gradient(135deg, rgba(249,197,198,1) 0%,rgba(252,224,255,1) 36%,rgba(169,164,242,1) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9c5c6', endColorstr='#a9a4f2',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     border-top: 1px solid $grey-color-light;
     padding: $spacing-unit 0;
 }
@@ -161,6 +169,12 @@
 /**
  * Page content
  */
+
+.post {
+	
+}
+
+
 .page-content {
     padding: $spacing-unit 0;
 }
