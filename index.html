@@ -1,23 +1,98 @@
 ---
-layout: default
+layout: home
 ---
 
-<div class="home">
-
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+ <div class="container">
+    <div class="row blog"> 
+      <div class="col-sm-8">
+        <h2 class="center test">Blog</h2>
+       <b>July 8th </b>
+        <p class="lead">This will be the first couple lines of my blogs. I should make all of the introductions a really good summary of what the content will be so the viewer can decide quickly if they want to view more or not.</p>
+      </div>
+      <div class="col-sm-4 center">
+        <img src="http://www-tc.pbs.org/mediashift/wp-content/uploads/sites/8/2013/12/tools-html-coding.jpg" class="photo" width="100%">
+        
+        <button type="button" class="btn btn-info blog-more">View More</button>
+      
+      </div>
+    </div>
+    <hr class="space"></hr>
+    
+   <div class="row favorites center">
+     <h2>Current Favorites</h2>  
+     
+     <div class="col-sm-4">
+      <h3>Book</h3>
+      <img src="http://akamaicovers.oreilly.com/images/0636920025481/lrg.jpg" class="img-responsive center">
+      <p class="lead">"This book is a good because Of this many things"<p>
+     </div>
+     
+     <div class="col-sm-4">
+      <h3>Movie</h3>
+      <img src="https://koolcampus.files.wordpress.com/2014/10/night-poster.jpg?w=500" class="img-responsive center">
+      <p class="lead">"This movie is a good movie because Of this many things"<p>  
+     
+     </div> 
+     
+     <div class="col-sm-4">
+      <h3>Misc.</h3>
+      <img class="img-responsive center" src="http://img.washingtonpost.com/rw/2010-2019/WashingtonPost/2013/07/03/Obituaries/Images/Ob-main-engelbart41372884671.JPG?uuid=ThBeJuQiEeK__Tejbdq4IA">
+        <p class="lead">"This movie is a good movie because Of this many things"<p>  
+      
+     </div> 
+   </div> 
+    
+ </div> <!-- container-->
+<div class="color"> 
+  <div class="container">   
+  <div class="row about">	 	
+	       <div class="col-sm-4">
+            <img src="http://s11.postimg.org/rmei4qpoz/Head_Shot_small.jpg" class="img-responsive img-circle center" width="50%"></img>
+          <div class="row">      
+           <div class="col-xs-4">
+            <img class="img-responsive" src="http://static.movingpackets.net/2013/12/github-logo-transparent.jpg">
+            </div> 
+           <div class="col-xs-7">  
+            <h3>View my code on Github</h3>
+           </div> 
+           </div>
+       </div>  
+        
+       <div class="col-sm-4">
+         <h2 class="">Who am I?</h2>
+         <ul>
+          <li>27 Year Old Web Developer </li>
+          <li>Raspberry Pi Hobbyist</li>
+          <li>Musician</li>
+          <li>Movie Nerd </li>
+         </ul>
+        </div> 
+        <div class="col-sm-4">
+          <h2>Tools I Use</h2>
+         <ul>
+          <li>Ruby + Ruby on Rails </li>
+          <li>Bootstrap + Sass</li>
+          <li>Jekyll</li>
+          <li>Volt </li>
+          <li>Git</li>
+         </ul>
+        </div>
+     </div>
+ </div>
+</div>
+</div>
+<div class="container">
+	    <div class="row portfolio">
+      <h1 class="center">My Portfolio</h1>
+        
+      <div class="col-sm-6">
+        <img class="img-responsive"src="http://www.sjriskmanagement.com/assets/devices-4896ce02d8567d99ca635fc7c0dc4921.jpg">
+      </div>  
+        
+       <div class="col-sm-6">
+        <img class="img-responsive center" width="65%" src="http://s28.postimg.org/b5malxa2l/desktop.jpg">
+      </div>    
+        
+    </div>
 
 </div>

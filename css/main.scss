@@ -89,7 +89,7 @@ footer a {
   color:white;
 }
 
-@media (min-width:776px) {
+@media (min-width:768px) {
   .favorites img {
     max-width: 100%;
   }
@@ -97,13 +97,19 @@ footer a {
 
 @media (min-width:992px) {
   .favorites img {
-    max-width: 280px;
+    max-width: 240px;
   }
 
   footer li {
    max-width: 50px
   }
 } 
+
+@media (min-width:1200px) {
+  .favorites img {
+    max-width: 270px;
+  }
+}
 
 
 // Import partials from `sass_dir` (defaults to `_sass`)
