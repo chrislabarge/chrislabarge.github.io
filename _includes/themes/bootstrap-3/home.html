@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{{ page.title }}</title>
+    {% if page.description %}<meta name="description" content="{{ page.description }}">{% endif %}
+    <meta name="author" content="{{ site.author.name }}">
+
+    <!-- Enable responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap styles -->
+    <link href="{{ ASSET_PATH }}/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optional theme -->
+    <link href="{{ ASSET_PATH }}/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+   	<!-- Sticky Footer -->
+	 <link href="{{ ASSET_PATH }}/bootstrap/css/bs-sticky-footer.css" rel="stylesheet">
+    
+    <!-- Custom styles -->
+    <link href="{{ ASSET_PATH }}/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!-- Update these with your own images
+      <link rel="shortcut icon" href="images/favicon.ico">
+      <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+      <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    -->
+
+    <!-- atom & rss feed -->
+    <link href="{{ BASE_PATH }}{{ site.JB.atom_path }}" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="{{ BASE_PATH }}{{ site.JB.rss_path }}" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+
+  </head>
+
+  <body>	
+     <!-- <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Chris LaBarge</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="#about">About</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#contact">Blog</a>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav> -->
+	 
+  <div class="jumbo"> </div>
+      
+      
+      
+      
+  <div class="container">
+    <div class="row blog"> 
+      <div class="col-sm-8">
+        <h2 class="center test">Blog</h2>
+       <b>July 8th </b>
+        <p class="lead">This will be the first couple lines of my blogs. I should make all of the introductions a really good summary of what the content will be so the viewer can decide quickly if they want to view more or not.</p>
+      </div>
+      <div class="col-sm-4 center">
+        <img src="http://www-tc.pbs.org/mediashift/wp-content/uploads/sites/8/2013/12/tools-html-coding.jpg" class="photo" width="100%">
+        
+        <button type="button" class="btn btn-info blog-more">View More</button>
+      
+      </div>
+    </div>
+    <hr class="space"></hr>
+    
+   <div class="row favorites center">
+     <h2>Current Favorites</h2>  
+     
+     <div class="col-sm-4">
+      <h3>Book</h3>
+      <img src="http://akamaicovers.oreilly.com/images/0636920025481/lrg.jpg" class="img-responsive center">
+      <p class="lead">"This book is a good because Of this many things"<p>
+     </div>
+     
+     <div class="col-sm-4">
+      <h3>Movie</h3>
+      <img src="https://koolcampus.files.wordpress.com/2014/10/night-poster.jpg?w=500" class="img-responsive center">
+      <p class="lead">"This movie is a good movie because Of this many things"<p>  
+     
+     </div> 
+     
+     <div class="col-sm-4">
+      <h3>Misc.</h3>
+      <img class="img-responsive center" src="http://img.washingtonpost.com/rw/2010-2019/WashingtonPost/2013/07/03/Obituaries/Images/Ob-main-engelbart41372884671.JPG?uuid=ThBeJuQiEeK__Tejbdq4IA">
+        <p class="lead">"This movie is a good movie because Of this many things"<p>  
+      
+     </div> 
+   </div> 
+    
+ </div> <!-- container-->
+<div class="color"> 
+  <div class="container">   
+  <div class="row about">	 	
+	       <div class="col-sm-4">
+            <img src="http://s11.postimg.org/rmei4qpoz/Head_Shot_small.jpg" class="img-responsive img-circle center" width="50%"></img>
+          <div class="row">      
+           <div class="col-xs-4">
+            <img class="img-responsive" src="http://static.movingpackets.net/2013/12/github-logo-transparent.jpg">
+            </div> 
+           <div class="col-xs-7">  
+            <h3>View my code on Github</h3>
+           </div> 
+           </div>
+       </div>  
+        
+       <div class="col-sm-4">
+         <h2 class="">Who am I?</h2>
+         <ul>
+          <li>27 Year Old Web Developer </li>
+          <li>Raspberry Pi Hobbyist</li>
+          <li>Musician</li>
+          <li>Movie Nerd </li>
+         </ul>
+        </div> 
+        <div class="col-sm-4">
+          <h2>Tools I Use</h2>
+         <ul>
+          <li>Ruby + Ruby on Rails </li>
+          <li>Bootstrap + Sass</li>
+          <li>Jekyll</li>
+          <li>Volt </li>
+          <li>Git</li>
+         </ul>
+        </div>
+     </div>
+ </div>
+</div>
+</div>
+<div class="container">
+	    <div class="row portfolio">
+      <h1 class="center">My Portfolio</h1>
+        
+      <div class="col-sm-6">
+        <img class="img-responsive"src="http://www.sjriskmanagement.com/assets/devices-4896ce02d8567d99ca635fc7c0dc4921.jpg">
+      </div>  
+        
+       <div class="col-sm-6">
+        <img class="img-responsive center" width="65%" src="http://s28.postimg.org/b5malxa2l/desktop.jpg">
+      </div>    
+        
+    </div>
+
+</div>
+
+ <footer>
+   <div class="row">
+   <div class=" col-xs-4 col-sm-2">  
+   <ul>
+     <li><img class="img-responsive" src="http://www.ahernslawyers.com.au/img/template/linkedin-icon.png"></li>
+     <li><img class="img-responsive" src="https://g.twimg.com/Twitter_logo_white.png"></li>
+     <li><img class="img-responsive" src="http://png-2.findicons.com/files/icons/2779/simple_icons/4096/github.png"></li>
+   </ul>
+  </div>
+  <div class="col-xs-8 center">
+   <h2>Need a Website?</h2>
+  <p class="lead"><a href="mailto:chrislabargedev@gmail.com">ChrisLaBargeDev@gmail.com</a></p>
+   <a href="mailto:chrislabargedev@gmail.com"><button class="btn btn-lg btn-warning">Email Me Today</button><a>
+  </div> 
+   
+   </div> 
+ </footer>
+
+
+
+    <!-- Latest compiled and minified JavaScript, requires jQuery 1.x (2.x not supported in IE8) -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="{{ ASSET_PATH }}/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
