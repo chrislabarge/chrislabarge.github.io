@@ -1,8 +1,10 @@
 ---
-layout: post
+layout: post-movie
 title:  "Switching Your Rails Application Web Server to 'Unicorn'"
 date:   2014-10-16 12:01:27
-
+permalink: /unicorn/
+author: "Chris LaBarge"
+photo-heading: "http://blogs-images.forbes.com/scottmendelson/files/2014/11/maxresdefault.jpg"
 ---
 ###Introduction
 

@@ -4,8 +4,7 @@
 @charset "utf-8";
 
 .jumbo {
-  background-color: gray;
-  height: 500px;
+	margin-bottom: 30px;
       
 }
       
@@ -66,6 +65,13 @@
   padding: 20px 0px
 }
 
+
+.article p {
+	margin-bottom: 20px;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 1.4;
+}
 
 
 .about{ 
