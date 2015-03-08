@@ -3,20 +3,56 @@
 ---
 @charset "utf-8";
 
+.body {
+	border: 1px solid black;
+}
+
+
+/*--------Now We are cooking*/
+
+
+#heading {
+	color: white;
+	
+}
+
+.jumbotron {
+	color: white;	
+ 	text-shadow: 0 1px 2px rgba(0,0,0,.7);
+	-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+
+
+
+
+
+}
+
+
+
+
+/*--------------*/
+
 .jumbo {
 	
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 	color: white;
  	text-shadow: 0 1px 2px rgba(0,0,0,.5);
- 	background-image: url(images/me.jpg);
- 	background-size: cover;
+  height: 100%;
+ 	
+ 	
+ 
 	
 	img{
-		
   	width:100%;	  
-    
+
 	}
       
+	 
+
+
 }
       
 .read-more {
@@ -24,7 +60,7 @@
 }      
       
 .blog {
-	margin-top: 50px;
+
 }
       
 .blog-more {
@@ -112,6 +148,12 @@
 footer {
   background-color: gray;
   color: white;
+
+	.row{
+		margin-left: 0px;
+		margin-right:0px;
+	}
+
 }
 
 footer ul {
@@ -123,7 +165,35 @@ footer a {
   color:white;
 }
 
+
+
+@media (max-width: 500px) {
+	.jumbotron {
+	 margin-left: -75px;
+	}
+	
+	#heading{
+		margin-left: 75px;
+	}
+
+}
+
+@media (min-width: 500px) {
+	
+	
+	#heading{
+		margin-bottom: 50px;
+	}
+
+}
+
+
 @media (min-width:768px) {
+  
+  #heading {
+  	margin-left:50px;
+  }
+  
   .favorites img {
     max-width: 100%;
   }
@@ -135,6 +205,11 @@ footer a {
 } 
 
 @media (min-width:992px) {
+  
+  #heading {
+  	margin-bottom:150px;
+  }
+  
   .favorites img {
     max-width: 240px;
   }
@@ -147,6 +222,9 @@ footer a {
    max-width: 50px
   }
 } 
+
+
+
 
 @media (min-width:1200px) {
   .favorites img {
