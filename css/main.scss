@@ -4,7 +4,18 @@
 @charset "utf-8";
 
 .jumbo {
+	
 	margin-bottom: 30px;
+	color: white;
+ 	text-shadow: 0 1px 2px rgba(0,0,0,.5);
+ 	background-image: url(images/me.jpg);
+ 	background-size: cover;
+	
+	img{
+		
+  	width:100%;	  
+    
+	}
       
 }
       
@@ -116,6 +127,11 @@ footer a {
   .favorites img {
     max-width: 100%;
   }
+
+	.blog-sidebar {
+		padding-top:30px;
+	}
+	
 } 
 
 @media (min-width:992px) {
