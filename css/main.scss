@@ -17,35 +17,47 @@
 }
 
 .jumbotron {
-	color: white;	
+	
  	text-shadow: 0 1px 2px rgba(0,0,0,.7);
 	-webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 
-
+	
 
 
 
 }
 
 
-
+#hidden-contact{
+	margin-left:15px;
+}
 
 /*--------------*/
 
 .jumbo {
 	
-	margin-bottom: 10px;
-	color: white;
- 	text-shadow: 0 1px 2px rgba(0,0,0,.5);
-  height: 100%;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    position: absolute;
+    overflow: hidden;
+
  	
  	
  
 	
 	img{
+  	position: absolute;
+		left: 0px;
+		right: 0px;
+		top: -9999px;
+		bottom: -9999px;
+		margin: auto 0px;
+  	
   	width:100%;	  
 
 	}
@@ -172,10 +184,7 @@ footer a {
 	 margin-left: -75px;
 	}
 	
-	#heading{
-		margin-left: 75px;
-	}
-
+	
 }
 
 @media (min-width: 500px) {
@@ -190,9 +199,7 @@ footer a {
 
 @media (min-width:768px) {
   
-  #heading {
-  	margin-left:50px;
-  }
+ 
   
   .favorites img {
     max-width: 100%;
@@ -206,8 +213,14 @@ footer a {
 
 @media (min-width:992px) {
   
-  #heading {
-  	margin-bottom:150px;
+  
+  #heading{
+  	font-size:88px;
+  }
+  
+  .caption button {
+  	margin-bottom:10px;
+  	
   }
   
   .favorites img {
@@ -234,6 +247,11 @@ footer a {
 	.youtube {
 		margin-bottom: 20px;
 	}	
+	
+	  .caption button {
+  	margin-bottom:97px;
+  }
+	
 	
 }
 
