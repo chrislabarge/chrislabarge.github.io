@@ -7,6 +7,9 @@
 	border: 1px solid black;
 }
 
+.blog-title {
+	font-size:25px;
+}
 
 /*--------Now We are cooking*/
 
@@ -100,9 +103,15 @@
       
  .favorites {
  	
+ 	margin-bottom: 30px;
+ 	
  	p {
  		padding-top:15px;
  	}
+ 
+ 	img {
+  max-width: 280px;
+	}
  	
  }
  	
@@ -124,6 +133,11 @@
   padding: 20px 0px
 }
 
+.color-2{
+	background-color:#FFCC66;
+	padding: 10px 0px 20px 0px;
+}
+
 
 .article p {
 	margin-bottom: 20px;
@@ -137,18 +151,14 @@
   
   h2 {
     font-size: 45px;
+  	margin-top: 10px;
+  	margin-bottom: 30px;
   }
-  
-  li {
-  font-size:25px;
-  font-weight: 500;
-  }
+
   color: white;
   text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
-.favorites img {
-  max-width: 280px;
-}
+
 
 .portfolio {
   margin-bottom: 20px;
@@ -199,7 +209,9 @@ footer a {
 
 @media (min-width:768px) {
   
- 
+  .blog {
+  	margin-top: 30px;
+  }
   
   .favorites img {
     max-width: 100%;
