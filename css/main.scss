@@ -3,6 +3,17 @@
 ---
 @charset "utf-8";
 
+// Import partials from `sass_dir` (defaults to `_sass`)
+@import "bootstrap",
+				"syntax-highlighting"     
+        
+;
+
+
+
+
+
+
 .body {
 	border: 1px solid black;
 }
@@ -89,14 +100,7 @@
 	margin-right: auto;
 }
       
-.navbar-nav > li > a {
-	padding-top: 31px;
-	padding-bottom: 31px;
-} 
-.navbar-brand {
-	line-height: 50px;
-}
-      
+
 .photo {
 	padding-bottom:30px;
 }
@@ -268,10 +272,3 @@ footer a {
 }
 
 
-// Import partials from `sass_dir` (defaults to `_sass`)
-@import
-
-        "bootstrap",
-				"syntax-highlighting"     
-        
-;

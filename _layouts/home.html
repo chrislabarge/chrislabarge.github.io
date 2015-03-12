@@ -4,6 +4,8 @@
   {% include head.html %}
 
   <body>
+		 
+		 {% include nav.html%}
 		 <div class="jumbotron" style="background-image: url('/images/me.jpg');" >
 				
 			<!--	<img src="/images/me.jpg"> -->
@@ -27,7 +29,12 @@
         {{ content }}
    
     {% include footer.html %}
-
+    
+  
+  	<!--This is for getting query on your site, because bootstrap needs it-->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
+     
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   </body>
 
 </html>
