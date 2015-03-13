@@ -114,7 +114,7 @@
  	}
  
  	img {
-  max-width: 280px;
+  max-width: 200px;
 	}
  	
  }
@@ -134,12 +134,12 @@
 
 .color {
   background-color:#00E6B8;
-  padding: 20px 0px
+  padding: 40px 0px 20px 0px;
 }
 
 .color-2{
 	background-color:#FFCC66;
-	padding: 10px 0px 20px 0px;
+	padding: 20px 0px;
 }
 
 
@@ -151,21 +151,43 @@
 }
 
 
+
+ .about-img {
+  
+  	margin-top:40px;
+  	max-width: 185px;
+  	width: 100%;
+  }
+
+
 .about{ 
+  
+  
   
   h2 {
     font-size: 45px;
   	margin-top: 10px;
-  	margin-bottom: 30px;
+  	margin-bottom: 10px;
   }
-
+	
+	
   color: white;
   text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
+.tools {
+	h2 {
+		margin-bottom:20px;
+	}
+}
+
+
 
 .portfolio {
   margin-bottom: 20px;
+	img {
+		max-width: 300px;
+	}
 }
 
 .portfolio h1 {
@@ -198,6 +220,7 @@ footer a {
 	 margin-left: -75px;
 	}
 	
+
 	
 }
 
@@ -213,21 +236,35 @@ footer a {
 
 @media (min-width:768px) {
   
+  
+  
   .blog {
   	margin-top: 30px;
   }
   
   .favorites img {
-    max-width: 100%;
+    max-width: 150px;
   }
 
 	.blog-sidebar {
 		padding-top:30px;
 	}
 	
+	.portfolio {
+		img {
+			max-width: 100%;
+		}
+		
+	}
+
 } 
 
+
+
+
 @media (min-width:992px) {
+  
+  
   
   
   #heading{
@@ -240,13 +277,20 @@ footer a {
   }
   
   .favorites img {
-    max-width: 240px;
+    max-width: 160px;
   }
 	
 	.youtube {
 		margin-bottom: 8px;
 	}	
 
+	
+
+  .about-img {
+  	margin-top:30px;
+  	width: 80%;	
+  }
+  
   footer li {
    max-width: 50px
   }
@@ -257,7 +301,7 @@ footer a {
 
 @media (min-width:1200px) {
   .favorites img {
-    max-width: 270px;
+    max-width: 180px;
   }
 
 	.youtube {
