@@ -92,6 +92,10 @@
 .blog-more {
 	width: 200px;
 }
+
+
+
+
     
 .center {
 	text-align: center;
@@ -123,9 +127,9 @@
 
 
 .youtube {
-	margin-top: 25px;
-	
-	width: 160px;
+	margin-top: 15px;
+	margin-bottom: 0px;
+	width: 120px;
 }      
       
 .space {
@@ -194,6 +198,17 @@
 .portfolio h1 {
   margin-bottom: 45px;
 }
+
+
+.side-icons {
+	img {
+		width:30px;
+	}
+}
+
+
+
+
 footer {
   background-color: gray;
   color: white;
@@ -262,7 +277,7 @@ footer a {
   }
 
 	.blog-sidebar {
-		padding-top:30px;
+		padding-top:80px;
 	}
 	
 	.portfolio {
@@ -295,9 +310,7 @@ footer a {
     max-width: 160px;
   }
 	
-	.youtube {
-		margin-bottom: 8px;
-	}	
+	
 
 	
 

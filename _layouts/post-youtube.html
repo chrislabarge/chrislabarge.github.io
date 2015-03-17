@@ -1,0 +1,19 @@
+---
+layout: blog-movie
+---
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    <p class="post-meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
+  </header>
+
+<iframe id="player" type="text/html" width="100%" height="300px"
+  src="{{ page.photo-heading }}"
+  frameborder="0" allowfullscreen></iframe>
+
+  <article class="post-content">
+    {{ content }}
+  </article>
+
+</div>
