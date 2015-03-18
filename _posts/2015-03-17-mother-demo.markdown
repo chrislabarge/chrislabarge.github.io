@@ -9,7 +9,7 @@ photo-heading: "https://www.youtube.com/embed/VScVgXM7lQQ?list=PLCGFadV4FqU2yAqC
 
 ##Overview
 
-On December 9th, 1968, Dr. Engelbart presented what is known as "the mother of all demos".
+On December 9th, 1968, Dr. Engelbart presented what is known as "The Mother of All Demos".
 This 10-part video highlight of the computer demonstration is an absolute must see for 
 both developers and users alike. 
 

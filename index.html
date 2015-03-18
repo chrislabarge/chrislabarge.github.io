@@ -1,20 +1,21 @@
 ---
-layout: home
+layout: default
 
 
 ---
+ {% include jumbo.html%}		
 
  <div class="container">
-    <div class="row blog"> 
-      <div class="col-sm-8">
-        <h2 class="center test"> Most Recent Blog </h2>
+    <div class="row recent-blog"> 
+      <div class="col-sm-8 col-md-6 col-md-offset-1">
+        <h2 class="center recent-heading"> Most Recent Blog </h2>
         <span class="blog-title">My first pull request</span><B>-July 8th </b>
         <p class="lead">This will be the first couple lines of my blogs. I should make all of the introductions a really good summary of what the content will be so the viewer can decide quickly if they want to view more or not.</p>
       </div>
       <div class="col-sm-4 center">
-        <img src="http://www-tc.pbs.org/mediashift/wp-content/uploads/sites/8/2013/12/tools-html-coding.jpg" class="photo" width="100%">
-        
-        <button type="button" class="btn btn-info blog-more">View More</button>
+        <img src="/images/pull.jpg" class="recent-photo img-border" width="100%">
+        <br>
+      <a href="/pull-request">  <button type="button" class="btn btn-info blog-more">Read More</button></a>
       
       </div>
     </div>
@@ -33,19 +34,20 @@ layout: home
      
      <div class="col-sm-4">
       <h3>Movie</h3>
-      <img src="/images/nightcrawler-lg.jpg" class="img-responsive center">
-      <p class="lead">"This Dan Gilroy film starring Jake Gyllenhaal might be the
+    	<a href="/nightcrawler"> <img src="/images/nightcrawler-lg.jpg" class="img-responsive center"></a>
+       <p class="lead">"This Dan Gilroy film starring Jake Gyllenhaal might be the
       									best movie I'll see all year...."<p>  
-     	<button class="btn btn-warning read-more">Read More</button>
+     	<a href="/nightcrawler"><button class="btn btn-warning read-more">Read More</button></a>
      </div> 
      
      <div class="col-sm-4">
       <h3>Misc.</h3>
+     <a href="/mother">
       <img class="img-responsive center" src="/images/mother.jpg">
-      <img class="center youtube" src="/images/youtube.jpg">
+      <img class="center youtube" src="/images/youtube.jpg"> </a>
         <p class="lead">"Dec 9th, 1968, Dr. Engelbart presented what is known 
         									as the Mother of All Demos..."<p>  
-      	<button class="btn btn-warning read-more">Read More</button>
+      <a href="/mother">	<button class="btn btn-warning read-more">Read More</button> </a>
      </div> 
    </div> 
     
@@ -171,7 +173,7 @@ layout: home
       <h1 class="center">My Portfolio</h1>
         
       <div class="col-sm-6">
-        <img class="img-responsive center" width="100%"src="http://www.sjriskmanagement.com/assets/devices-4896ce02d8567d99ca635fc7c0dc4921.jpg">
+        <img class="img-responsive center" src="http://www.sjriskmanagement.com/assets/devices-4896ce02d8567d99ca635fc7c0dc4921.jpg">
       </div>  
         
        <div class="col-sm-6">

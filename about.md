@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: Night-Crawler
+title: 
 permalink: /about/
 ---
 ##What

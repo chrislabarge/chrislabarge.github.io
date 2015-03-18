@@ -10,16 +10,26 @@
 ;
 
 
+.responsive {
+	width:100%
+}
+
+.first-row {
+	margin-top: 20px;
+}
 
 
-
-
-.body {
+.img-border {
 	border: 1px solid black;
 }
 
+
 .blog-title {
 	font-size:25px;
+}
+
+.blog-photo-heading {
+	max-width: 610px;
 }
 
 /*--------Now We are cooking*/
@@ -51,43 +61,17 @@
 
 /*--------------*/
 
-.jumbo {
-	
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    position: absolute;
-    overflow: hidden;
-
- 	
- 	
- 
-	
-	img{
-  	position: absolute;
-		left: 0px;
-		right: 0px;
-		top: -9999px;
-		bottom: -9999px;
-		margin: auto 0px;
-  	
-  	width:100%;	  
-
-	}
-      
-	 
 
 
+.recent-heading {
+	margin-top: 0px;
 }
-      
+
+
 .read-more {
 	margin-top: -20px;
 }      
       
-.blog {
-
-}
       
 .blog-more {
 	width: 200px;
@@ -105,8 +89,9 @@
 }
       
 
-.photo {
-	padding-bottom:30px;
+.recent-photo {
+	margin-bottom:30px;
+	max-width: 500px;
 }
       
  .favorites {
@@ -188,9 +173,10 @@
 
 
 .portfolio {
- padding: 20px 0px;
+ padding-top: 20px;
 	img {
 		max-width: 300px;
+		
 		margin-bottom: 10px;
 	}
 }
@@ -209,7 +195,17 @@
 
 
 
+/* You tube player*/
+
+#player {
+	max-width: 580px;
+}
+
+
+
 footer {
+  margin-top: 50px;
+  
   background-color: gray;
   color: white;
 	padding: 30px 0px;
@@ -237,8 +233,17 @@ footer a {
 
 
 @media (max-width: 300px) {
-	footer h3{
-		margin-top: 10px;	
+	footer {
+	  h3{	
+	  	margin-top: 10px;	
+		}
+		
+		.col-xs-3 {
+			padding-left: 5px;
+			width: 60px;	
+		}
+	
+	
 	}
 
 
@@ -250,7 +255,9 @@ footer a {
 	 margin-left: -75px;
 	}
 	
-
+	#player{
+		height: 200px;
+	}
 	
 }
 
@@ -261,14 +268,23 @@ footer a {
 		margin-bottom: 50px;
 	}
 
+	footer{ 
+	
+		.col-xs-3 {
+			width: 100px;	
+		}
+	}
 }
 
 
 @media (min-width:768px) {
   
+  .first-row {
+		margin-top: 30px;
+	}
+
   
-  
-  .blog {
+  .recent-blog {
   	margin-top: 30px;
   }
   
@@ -285,6 +301,15 @@ footer a {
 			max-width: 100%;
 		}
 		
+	}
+
+	footer {
+		h3 {
+			margin-bottom:5px;
+		}
+		.lead{
+			margin-bottom: 10px;
+		}
 	}
 
 } 
