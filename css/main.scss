@@ -30,7 +30,15 @@
 
 .blog-photo-heading {
 	max-width: 610px;
+	margin: 15px 0px;
 }
+
+.post-content {
+	p {
+		@extend .lead;
+	}
+}
+
 
 /*--------Now We are cooking*/
 
@@ -137,6 +145,15 @@
 	font-size: 16px;
 	font-weight: 300;
 	line-height: 1.4;
+}
+
+.tutorial {
+	img {
+		border: 1px solid black;
+		max-width: 610px;
+		width:100%;
+		margin: 15px 0px;
+	}
 }
 
 
@@ -358,7 +375,7 @@ footer a {
   }
 
 	.youtube {
-		margin-bottom: 20px;
+		margin-bottom: 9px;
 	}	
 	
 	  .caption button {
