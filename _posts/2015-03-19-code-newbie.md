@@ -11,11 +11,11 @@ photo-heading: "/images/code-new.jpg"
 The [Code Newbie](http://www.codenewbie.org) website and community is a priceless tool for beginners.  It 
 offers several resources to help you along your programming journey.
 
-My favorite of it's resources are the podcasts.  The interviewer and 
+My favorite resource is the podcast.  The interviewer and 
 founder of Code Newbie, [Saron Yitbarek](https://twitter.com/saronyitbarek), does
 an absolutley fantastic job at keeping the podcast organic as well as informative.
 
-There are a lot of podcasts I listen to, that forget that not all listeners can
+There are a lot of podcasts I listen to that forget that not all listeners can
 keep up with pacing and terminology.  Saron does a tremendous job of having
 herself and guests re-clarify  things when they start to get abstract. Even the
 tone of her voice is very calm and reassuring which I think rubs off on the guests
