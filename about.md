@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: 
-permalink: /about/
+permalink: /test/
 ---
 ##What
 

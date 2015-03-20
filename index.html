@@ -8,13 +8,14 @@ layout: default
  <div class="container">
     <div class="row recent-blog"> 
       <div class="col-sm-8 col-md-6 col-md-offset-1">
-        <h2 class="center recent-heading">Recent Blog Post</h2>
-        <span class="blog-title">My first Pull-Request</span>
+       
+        <h2 class="recent-heading">My first Pull-Request</h2>
+        
         <p class="lead">
-        	"About a month ago I was searching for a local user-group of Ruby programmers, 
+        	About a month ago I was searching for a local user-group of Ruby programmers, 
 					and luckily came across the Tech Valley Ruby Brigade. Even more lucky, their 
 					website needed a modern design update and they provided the repository on github 
-					for anyone to grab...."  
+					for anyone to grab...<a href ="/pull-request">Read More</a>
 				</p>
       </div>
       <div class="col-sm-4 center">
@@ -30,28 +31,34 @@ layout: default
      <h2>My Current Favorites</h2>  
      
      <div class="col-sm-4">
-      <h3>Book</h3>
-      <img src="/images/book-understanding.jpg" class="img-responsive center">
-      <p class="lead">Learn the foundations of computer science by creating 
-      								Turing Machines in Ruby...."<p>
-     	<button class="btn btn-warning read-more">Read More</button>
+      <h3>Podcast</h3>
+      <a href="/code-newbie"><img src="/images/newbie.jpg" class="img-responsive center img-border"></a>
+      <p class="lead">
+      	The <b>Code Newbie</b> website and community is a priceless tool for beginners...
+      	
+      <p>
+    <a href="/code-newbie"><button class="btn btn-warning read-more">Read More</button></a>
      </div>
-     
+    
+     <hr class="visible-xs-block" >
+    
      <div class="col-sm-4">
       <h3>Movie</h3>
     	<a href="/nightcrawler"> <img src="/images/nightcrawler-lg.jpg" class="img-responsive center"></a>
-       <p class="lead">"This Dan Gilroy film starring Jake Gyllenhaal might be the
-      									best movie I'll see all year...."<p>  
+       <p class="lead">This Dan Gilroy film starring Jake Gyllenhaal might be the
+      									best movie I'll see all year....<p>  
      	<a href="/nightcrawler"><button class="btn btn-warning read-more">Read More</button></a>
      </div> 
+     
+      <hr class="visible-xs-block" >
      
      <div class="col-sm-4">
       <h3>Misc.</h3>
      <a href="/mother">
       <img class="img-responsive center" src="/images/mother.jpg">
       <img class="center youtube" src="/images/youtube.jpg"> </a>
-        <p class="lead">"Dec 9th, 1968, Dr. Engelbart presented what is known 
-        									as the Mother of All Demos..."<p>  
+        <p class="lead">Dec 9th, 1968, Dr. Engelbart presented what is known 
+        									as the Mother of All Demos...<p>  
       <a href="/mother">	<button class="btn btn-warning read-more">Read More</button> </a>
      </div> 
    </div> 
@@ -175,12 +182,15 @@ layout: default
 
 <div class="container">
 	    <div class="row portfolio">
-      <h1 class="center">My Portfolio</h1>
+      <h1 class="center">Recent Projects</h1>
         
       <div class="col-sm-6">
-        <img class="img-responsive center" src="http://www.sjriskmanagement.com/assets/devices-4896ce02d8567d99ca635fc7c0dc4921.jpg">
+        <img class="img-responsive center" id="sj"
+        		 src="http://www.sjriskmanagement.com/assets/devices-4896ce02d8567d99ca635fc7c0dc4921.jpg">
       </div>  
-        
+			
+
+				        
        <div class="col-sm-6">
         <img class="img-responsive center" width="65%" src="http://s28.postimg.org/b5malxa2l/desktop.jpg">
       </div>    

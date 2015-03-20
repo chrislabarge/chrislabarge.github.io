@@ -20,10 +20,10 @@ meetup.
 ##Things You Will Learn
 Through my experience I will go over how to.....
 
-- #####Fork a repository
-- #####Clone a repository
-- #####Commit and push new branch with changes
-- #####Submit a Pull-Request
+- Fork a repository
+- Clone a repository
+- Commit and push new branch with changes
+- Submit a Pull-Request
 
  
 ###1. Fork the repository
