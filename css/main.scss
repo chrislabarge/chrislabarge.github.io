@@ -10,6 +10,10 @@
 ;
 
 
+.container-bottom {
+	margin-bottom:50px;
+}
+
 .blog-text {
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 18px;
@@ -52,21 +56,32 @@
 
 .blog-sidebar {
   background-color: #00E6B8;
-  border-radius: 15px;
   color: white;
-  .lead{
-  	font-weight: 400;  	
+  p {
+  	font-size: 21px;
   	text-shadow: 0 1px 2px rgba(0,0,0,.1);
-  	line-height:1.3;
   }
-  
+	  
+	.learn-more {
+		a {
+			color: #3399FF;
+		}
+		margin-bottom:30px;
+	}
   .side-me{
+    margin-top: 30px;
     border: 5px solid white;
   }
 }
 
+
+
 .side-about{
-	margin-top:50px;
+	margin-top:30px;
+}
+
+.blog-button {
+	margin-top:20px;
 }
 
 .follow {
@@ -277,7 +292,7 @@
 
 
 footer {
-  margin-top: 50px;
+  
   
   background-color: gray;
   color: white;
@@ -350,6 +365,12 @@ footer a {
 }
 
 
+@media (max-width:768px){
+	.post-list{
+		padding-left:15px;
+	}
+}
+
 @media (min-width:768px) {
   
   .first-row {
@@ -372,9 +393,14 @@ footer a {
   }
 
 	.blog-sidebar {
+	 border-radius: 15px;
 	 .side-me{	
-	  margin-top:60px;
+	  margin-top:37px;
 		}
+	}
+	
+	.side-about{
+		margin-bottom:40px;
 	}
 	
 	.portfolio {
@@ -406,7 +432,6 @@ footer a {
   
   
   
-  
   #heading{
   	font-size:88px;
   }
@@ -420,8 +445,14 @@ footer a {
     max-width: 160px;
   }
 	
+	.blog-container{
+		margin-bottom: 50px;
+	}
 	
-
+	.side-about{
+		margin-bottom:0px;
+		margin-top:30px;
+	}
 	
 
   .about-img {
