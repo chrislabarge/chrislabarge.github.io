@@ -1,8 +1,9 @@
 ---
-layout: page
-title: About
-permalink: /about/
+layout: blog
+title: 
+permalink: /test/
 ---
+##What
 
 My name is Chris LaBarge.  I am a 27 year old newbie coder from Albany NY.  In the
 summer of 2013 I made a transition from guitar to coding. Besides dabbling in html

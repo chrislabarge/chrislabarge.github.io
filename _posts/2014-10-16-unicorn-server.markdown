@@ -1,9 +1,16 @@
 ---
-layout: post
+layout: post-movie
 title:  "Switching Your Rails Application Web Server to 'Unicorn'"
 date:   2014-10-16 12:01:27
-
+permalink: /unicorn/
+author: "Chris LaBarge"
+photo-heading: "http://tech.co/wp-content/uploads/2014/08/rubyrails.png"
 ---
+
+## Edit- This blog post is out of date.
+ Heroku now wants Puma as the web server of choice. As of 2015
+	
+	
 ###Introduction
 
 I was listening to a [Ruby Rouges][richard-pod] podcast sometime back and they had guest [Richard Schneeman][richard] who worked at [Heroku][heroku]. Although I 
