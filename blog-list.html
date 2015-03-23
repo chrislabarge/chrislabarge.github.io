@@ -1,16 +1,16 @@
 ---
 layout: default
 title: My Blog 
-permalink: /blog/
+
 ---
 
 <div class="container container-bottom">
-	<div class="row first-row">
+	<div class="row first-row portfolio-heading">
 		<div class="col-xs-12 center"><h1>My Blog Posts</h1></div>
 <div class="col-sm-10 col-sm-offset-1">
  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
+    {% for post in paginator.posts %}
+      <li style="font-size:18px;">
         <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
 
         <h2>
@@ -20,6 +20,11 @@ permalink: /blog/
     <hr>
     {% endfor %}
   </ul>
+	
+
+ 
+ 
  </div> 
 </div>
 </div>  
+

@@ -1,7 +1,7 @@
 ---
 layout: post-youtube
 title:  "The Mother of ALL Demos"
-date:   2014-10-16 12:01:27
+date:   2015-03-17 12:01:27
 permalink: /mother/
 author: "Chris LaBarge"
 photo-heading: "https://www.youtube.com/embed/VScVgXM7lQQ?list=PLCGFadV4FqU2yAqCzKaxnKKXgnJBUrKTE"
@@ -29,7 +29,7 @@ boggling how many innovative ideas are all crammed into this 90-minute demo.
 - Version Control
 - And more..
 
-The amount of modern day computer tech in this video that is just now being utlized by the 
+The amount of modern day computer tech in this video that is just now being utilized by the 
 general public is astonishing.  I had heard about this video on a couple different podcasts 
 but was not expecting to be so impressed. We are talking about close to a half
 a century ago this stuff was fully realized by genius's who were able

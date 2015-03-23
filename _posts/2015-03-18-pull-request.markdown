@@ -46,12 +46,13 @@ machine. By going to terminal and entering the following command.
 You can get the url path of the above command from the forked repository on your 
 github account by copying from and pasting into the command-line.
 
-![Url Path ](/images/fork.jpg)
+![Url Path ](/images/clone.jpg)
 
 ###3. Create a new branch
 
 Once I had the repository cloned onto my machine, I created a new branch
-from the master which is required in order to make changes.
+from the master and named it "updating-bootstrap". Creating a new required in 
+order to make changes.
 
 {%highlight bash%}
 	chrislabarge$ git checkout -b updating-bootstrap
@@ -87,8 +88,10 @@ It was finally time to show off my changes and submit a pull-request.  I went ba
 to the original repository of the website, the one I went to in step 1. And
 clicked the green button below. 
 
-![Pull-Icon Screen Shot](/images/fork.jpg)
+![Pull-Icon Screen Shot](/images/compare-pull.jpg)
 
-Next, I selected my branch to compare, (updating-bootstrap) and clicked "Create pull request".
+Next, I selected my branch to compare, (updating-bootstrap) and clicked 
+"Create pull request".
+(The compare branch in the photo below says testing, it should be updating-bootstrap.)
 
 ![Fork Screen Shot](/images/pull.jpg)

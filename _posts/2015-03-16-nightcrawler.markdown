@@ -1,7 +1,7 @@
 ---
 layout: post-movie
 title:  "Nightcrawler"
-date:   2014-10-16 12:01:27
+date:   2015-03-16 12:01:27
 permalink: /nightcrawler/
 author: "Chris LaBarge"
 photo-heading: "http://blogs-images.forbes.com/scottmendelson/files/2014/11/maxresdefault.jpg"

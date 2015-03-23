@@ -18,8 +18,28 @@ comments: true
 					    <p class="post-meta blog-text ">
 					    	{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} by <a href="/about">{{ page.author }}</a>{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}
 					  	</p>
-  					</header>
+  						
+  						{% assign tagStr = '' %}
+{% capture url %}{{ site.url }}{{ page.url }}{% endcapture %}
+{% if page.shortUrl != null %}
+{% assign url = page.shortUrl %}
+{% for tag in page.tags %}
+{% capture tagStr %}{{ tagStr }},{{ tag }}{% endcapture %}
+{% endfor %}
+{% endif %}
 
+<h4>Share This Blog Post</h4>
+<div class="social-share side-icons">
+<a class="social-share-element" id="social-twitter" href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ url }}&via=clabvessels&hashtags={{ tagStr }}" target="_blank" title="Share this post on Twitter"><img src="/images/twitter.png"></a>
+<a class="social-share-element" id="social-facebook" href="https://www.facebook.com/sharer/sharer.php?t={{ page.title }}&u={{ url }}" target="_blank" title="Share this post on Facebook"><img src="/images/facebook500.png"></a>
+<a class="social-share-element" id="social-google" href="https://plus.google.com/share?url={{ site.url }}{{ page.url }}" target="_blank" title="Share this post on Google Plus"><img src="/images/googleplus.png"></a>
+<!--<a class="social-share-element" id="social-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&title={{ page.title }}&url={{ url }}&source=http%3a%2f%2fzhangwenli.com" target="_blank" title="Share this post on LinkedIn"></a> -->
+
+</div> 
+  						
+  						
+  					</header>
+							
 						
 				    {{ content }}
 					  
@@ -28,14 +48,9 @@ comments: true
         
         </div><!-- /.blog-post -->
 
-          <nav>
-            <ul class="pager">
-              <li><a href="#">Previous</a></li>
-              <li><a href="#">Next</a></li>
-            </ul>
-          </nav>
+     
 				
-				<div id="disqus_thread"></div>
+				<div class="container-bottom"id="disqus_thread"></div>
 					<script type="text/javascript">
     			/* * * CONFIGURATION VARIABLES * * */
     			var disqus_shortname = 'chrislabarge';

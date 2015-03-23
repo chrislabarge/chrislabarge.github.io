@@ -10,19 +10,40 @@
 ;
 
 
-.container-bottom {
-	margin-bottom:50px;
+
+/*??Not-sure??*/
+
+
+
+
+/*Universal*/
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 245px;
 }
 
-.blog-text {
-	font-family: Georgia, "Times New Roman", Times, serif;
-	font-size: 18px;
+.container-bottom {
+	padding-bottom:50px;
+}
+
+.center {
+	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 
 .responsive {
 	width:100%
 }
+
 
 .first-row {
 	margin-top: 20px;
@@ -31,6 +52,37 @@
 
 .img-border {
 	border: 1px solid black;
+}
+
+
+
+#disqus_thread{
+	margin-top:30px;
+}
+
+/*----Jumbotron----*/
+#heading {
+	color: white;
+	
+}
+
+.jumbotron {
+	
+ 	text-shadow: 0 1px 2px rgba(0,0,0,.7);
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+}
+
+
+
+/*-------BLOG-------*/
+
+.blog-text {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size: 18px;
 }
 
 
@@ -53,6 +105,29 @@
 		padding: 5px 0px;
 	}
 }
+
+
+
+
+.tutorial {
+	img {
+		border: 1px solid black;
+		max-width: 610px;
+		width:100%;
+		margin: 10px 0px;
+	}
+}
+
+
+/* You tube player*/
+
+#player {
+	max-width: 580px;
+}
+
+
+
+/*Side-Bar*/
 
 .blog-sidebar {
   background-color: #00E6B8;
@@ -89,34 +164,27 @@
 	padding: 5px 0px 15px 0px;
 }
 
-/*--------Now We are cooking*/
-
-
-#heading {
-	color: white;
-	
-}
-
-.jumbotron {
-	
- 	text-shadow: 0 1px 2px rgba(0,0,0,.7);
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-
-	
-
-
-
+.side-icons {
+	img {
+		width:30px;
+	}
 }
 
 
-#hidden-contact{
-	margin-left:15px;
+/*Blog-list*/
+
+
+.post-list{
+	h2{
+		font-size: 22px;
+	}
 }
 
-/*--------------*/
+
+
+
+
+/*-------Featured-Blog-------*/
 
 
 
@@ -125,9 +193,7 @@
 }
 
 
-.read-more {
-	margin-top: -20px;
-}      
+
       
       
 .blog-more {
@@ -135,22 +201,20 @@
 }
 
 
-
-
-    
-.center {
-	text-align: center;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-      
-
 .recent-photo {
 	margin-bottom:30px;
 	max-width: 500px;
 }
       
+
+/*-Favorites-*/
+
+.read-more {
+	margin-top: -20px;
+}      
+
+
+
  .favorites {
  	
  	margin-bottom: 30px;
@@ -173,18 +237,23 @@
  	
  }
  	
- 
-
-
 .youtube {
 	margin-top: 15px;
 	margin-bottom: 0px;
 	width: 120px;
 }      
       
+
+
+
 .space {
-	margin: 35px 0px 35px 0px
+	margin: 35px 0px;
 }
+
+
+
+
+/*--Showcase of me on index-*/
 
 .color {
   background-color:#00E6B8;
@@ -196,46 +265,21 @@
 	padding: 20px 0px;
 }
 
-
-.article p {
-	margin-bottom: 20px;
-	font-size: 16px;
-	font-weight: 300;
-	line-height: 1.4;
-}
-
-.tutorial {
-	img {
-		border: 1px solid black;
-		max-width: 610px;
-		width:100%;
-		margin: 10px 0px;
-	}
+.showcase-me-img {
+  margin-top:40px;
+  max-width: 185px;
+  width: 100%;
 }
 
 
-
- .about-img {
-  
-  	margin-top:40px;
-  	max-width: 185px;
-  	width: 100%;
-  }
-
-
-.about{ 
-  
-  
-  
+.showcase-me{ 
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
   h2 {
     font-size: 45px;
   	margin-top: 10px;
   	margin-bottom: 10px;
   }
-	
-	
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 
 .tools {
@@ -244,7 +288,7 @@
 	}
 }
 
-
+/*--Portfolio row on index--*/
 
 .portfolio {
  padding-top: 20px;
@@ -260,8 +304,6 @@
 }
 
 
-
-
 .portfolio h1 {
   margin-bottom: 45px;
 }
@@ -274,25 +316,19 @@
 }
 
 
-.side-icons {
-	img {
-		width:30px;
-	}
-}
 
 
 
 
-/* You tube player*/
 
-#player {
-	max-width: 580px;
-}
-
-
+/*----FOOTER----*/
 
 footer {
-  
+	position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 245px;
   
   background-color: gray;
   color: white;
@@ -319,6 +355,9 @@ footer a {
   color:white;
 }
 
+
+
+/*--Responsive--*/
 
 @media (max-width: 300px) {
 	footer {
@@ -367,6 +406,7 @@ footer a {
 
 @media (max-width:768px){
 	.post-list{
+	
 		padding-left:15px;
 	}
 }
@@ -455,7 +495,7 @@ footer a {
 	}
 	
 
-  .about-img {
+  .showcase-me-img {
   	margin-top:30px;
   	width: 80%;	
   }
