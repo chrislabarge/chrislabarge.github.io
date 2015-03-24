@@ -383,6 +383,10 @@ footer a {
 
 
 @media (max-width: 500px) {
+	.caption {
+		margin-left: 60px;
+	}
+	
 	.jumbotron {
 	 margin-left: -75px;
 	}
@@ -411,9 +415,7 @@ footer a {
 
 @media (max-width:768px){
 	
-	.caption {
-		margin-left: 60px;
-	}
+	
 	
 	.post-list{
 	
