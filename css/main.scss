@@ -71,7 +71,7 @@ body {
 }
 
 .jumbotron {
-	
+	margin-bottom: 40px;
  	text-shadow: 0 1px 2px rgba(0,0,0,.7);
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -81,6 +81,53 @@ body {
 }
 
 
+
+.btn-color-green { 
+  color: #FFFFFF; 
+  background-color: #00E6B8; 
+  border-color: #00E6B8; 
+	margin-left: 10px;
+} 
+ 
+.btn-color-green:hover, 
+.btn-color-green:focus, 
+.btn-color-green:active, 
+.btn-color-green.active, 
+.open .dropdown-toggle.btn-color-green { 
+  color: #FFFFFF; 
+  background-color: #08CCA5; 
+  border-color: #00E6B8; 
+} 
+ 
+.btn-color-green:active, 
+.btn-color-green.active, 
+.open .dropdown-toggle.btn-color-green { 
+  background-image: none; 
+} 
+ 
+.btn-color-green.disabled, 
+.btn-color-green[disabled], 
+fieldset[disabled] .btn-color-green, 
+.btn-color-green.disabled:hover, 
+.btn-color-green[disabled]:hover, 
+fieldset[disabled] .btn-color-green:hover, 
+.btn-color-green.disabled:focus, 
+.btn-color-green[disabled]:focus, 
+fieldset[disabled] .btn-color-green:focus, 
+.btn-color-green.disabled:active, 
+.btn-color-green[disabled]:active, 
+fieldset[disabled] .btn-color-green:active, 
+.btn-color-green.disabled.active, 
+.btn-color-green[disabled].active, 
+fieldset[disabled] .btn-color-green.active { 
+  background-color: #00E6B8; 
+  border-color: #00E6B8; 
+} 
+ 
+.btn-color-green .badge { 
+  color: #00E6B8; 
+  background-color: #FFFFFF; 
+}
 
 /*-------BLOG-------*/
 
@@ -222,10 +269,10 @@ body {
 
  .favorites {
  	
- 	margin-bottom: 30px;
+ 	margin-bottom: 50px;
  	
  	h2 {
- 		padding-bottom: 26px;
+ 		padding-bottom: 10px;
  	}
  	
  	h3 {
@@ -252,7 +299,7 @@ body {
 
 
 .space {
-	margin: 35px 0px;
+	margin: 53px 0px 25px 0px;
 }
 
 
@@ -262,12 +309,12 @@ body {
 
 .color {
   background-color:#00E6B8;
-  padding: 40px 0px 20px 0px;
+  padding: 55px 0px 35px 0px;
 }
 
 .color-2{
 	background-color:#FFCC66;
-	padding: 20px 0px;
+	padding: 35px 0px 45px 0px;
 }
 
 .showcase-me-img {
@@ -289,7 +336,7 @@ body {
 
 .tools {
 	h2 {
-		margin-bottom:20px;
+		margin-bottom:25px;
 	}
 }
 
