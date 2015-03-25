@@ -5,6 +5,9 @@ date:   2015-03-17 12:01:27
 permalink: /mother/
 author: "Chris LaBarge"
 photo-heading: "https://www.youtube.com/embed/VScVgXM7lQQ?list=PLCGFadV4FqU2yAqCzKaxnKKXgnJBUrKTE"
+description: "An overview of Dr. Engelbart's computer demonstration on December 9th, 1968. Commonly 
+referred to as The Mother of All Demos"
+keywords: "The mother of all demos, Dr. Engelbart, 1968"
 ---
 
 ##Overview

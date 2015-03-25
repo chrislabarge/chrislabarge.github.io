@@ -5,6 +5,9 @@ date:   2015-03-19 12:01:27
 permalink: /code-newbie/
 author: "Chris LaBarge"
 photo-heading: "/images/code-new.jpg"
+description: "The Code Newbie podcast is a great resource for beginner coders. 
+This is an overview of the their website and content of the podcast"
+keywords: "Code Newbie, Saron Yitbarek, podcast, Hansel Minutes"
 ---
 
 ##Overview

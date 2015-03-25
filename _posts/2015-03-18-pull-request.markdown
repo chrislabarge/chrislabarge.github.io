@@ -5,6 +5,9 @@ date:   2015-03-18 12:01:27
 permalink: /pull-request/
 author: "Chris LaBarge"
 photo-heading: "/images/pull.jpg"
+description: "A pull request tutorial for beginners told through my own first experience with
+submitting a pull request"
+keywords: "git, github, pull request, pull-request"
 ---
 
 ##Overview

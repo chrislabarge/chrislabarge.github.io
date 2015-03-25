@@ -5,11 +5,17 @@ date:   2015-03-16 12:01:27
 permalink: /nightcrawler/
 author: "Chris LaBarge"
 photo-heading: "http://blogs-images.forbes.com/scottmendelson/files/2014/11/maxresdefault.jpg"
+description: "Nightcrawler movie review. First film I saw this year, and I couldn't 
+have been more pleased."
+keywords: "Nightcrawler, Dan Gilroy, Jake Gyllenhaal, Rene Russo, 2014 "
+
+
 ---
 
 ##Overview
 
-This Dan Gilroy film (director and writer) starring Jake Gyllenhaal was the 
+This [Dan Gilroy](http://www.imdb.com/name/nm0319659/) film (director and writer)
+ starring [Jake Gyllenhaal](http://www.imdb.com/name/nm0350453/) was the 
 the first film I saw this year, and I couldn't have been more pleased.   
 
 
@@ -18,7 +24,7 @@ Not only is the acting, music and cinematography top notch but it gives an extra
 intimate view local news media. Which in my opinion is a very fascinating subject 
 given thats almost everyone consumes. If you are familiar with the teleivision show [The Wire](http://en.wikipedia.org/wiki/The_Wire) , 
 each season examines a different part of the city of Batlimore.  My favorite, 
-season 5(LOOKUP WHAT SEASON)  which focus's on the local newspaper, in particular, 
+season 5  which focus's on the local newspaper, in particular, 
 which articles made it to print.  
 
 This film follows that season's same type of news trasparency but instead, on
@@ -42,7 +48,7 @@ and willing of anything as long as he is ahead in the system.
 
 ##Plot
 After capturing some very amateur video, Louis stumbles into the editing 
-room of executive producer Nina Romina's (Renee Russo) news station, attempting 
+room of executive producer Nina Romina's ([Rene Russo](http://www.imdb.com/name/nm0000623/)) news station, attempting 
 to sell his footage. Let's just say he THRIVES in the environment.
 
 He quickly evolves from an amateur to a professional free-lance video journalist in no time at all.  
