@@ -8,7 +8,7 @@ photo-heading: "/images/jake.jpg"
 description: "Nightcrawler movie review. First film I saw this year, and I couldn't 
 have been more pleased."
 keywords: "Nightcrawler, Dan Gilroy, Jake Gyllenhaal, Rene Russo, 2014 "
-
+category: entertainment
 
 ---
 

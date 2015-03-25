@@ -8,6 +8,7 @@ photo-heading: "/images/pull.jpg"
 description: "A pull request tutorial for beginners told through my own first experience with
 submitting a pull request"
 keywords: "git, github, pull request, pull-request"
+category: coding
 ---
 
 ##Overview

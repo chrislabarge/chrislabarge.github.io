@@ -5,6 +5,9 @@ date:   2014-10-16 12:01:27
 permalink: /unicorn/
 author: "Chris LaBarge"
 photo-heading: "http://tech.co/wp-content/uploads/2014/08/rubyrails.png"
+description: "A Ruby on Rails blog post tutorial on switching web server to Unicorn. EDIT, OUTDATED"
+keywords: "Unicorn, Ruby on Rails, RoR, Web brick, server, tutorial"
+category: coding
 ---
 
 ## Edit- This blog post is out of date.
