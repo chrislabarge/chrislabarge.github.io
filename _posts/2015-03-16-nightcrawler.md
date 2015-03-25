@@ -4,7 +4,7 @@ title:  "Nightcrawler - Review"
 date:   2015-03-16 12:01:27
 permalink: /nightcrawler/
 author: "Chris LaBarge"
-photo-heading: "http://blogs-images.forbes.com/scottmendelson/files/2014/11/maxresdefault.jpg"
+photo-heading: "/images/jake.jpg"
 description: "Nightcrawler movie review. First film I saw this year, and I couldn't 
 have been more pleased."
 keywords: "Nightcrawler, Dan Gilroy, Jake Gyllenhaal, Rene Russo, 2014 "
