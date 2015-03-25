@@ -51,10 +51,10 @@ After capturing some very amateur video, Louis stumbles into the editing
 room of executive producer Nina Romina's ([Rene Russo](http://www.imdb.com/name/nm0000623/)) news station, attempting 
 to sell his footage. Let's just say he THRIVES in the environment.
 
-He quickly evolves from an amateur to a professional free-lance video journalist in no time at all.  
-Learning all the tricks of the trade, and understanding what
-sells, he begins to manipulate.  Not only the people around him,(Nina as well as Louis's
-new intern Rick) but the actual crime scenes he is filming. 
+He quickly evolves from an amateur to a professional free-lance video journalist in no time at all.
+Learning all the tricks of the trade, and understanding what sells, he begins to manipulate. 
+Not only the people around him,(Nina as well as Louis's new intern Rick) 
+but the actual crime scenes he is filming. 
 
 By the time this manipulated footage makes it to air, Nina has added her own
 spin to give the local audience exactly what they want.  The content being broadcasted

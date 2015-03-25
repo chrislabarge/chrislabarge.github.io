@@ -86,7 +86,7 @@ body {
   color: #FFFFFF; 
   background-color: #00E6B8; 
   border-color: #00E6B8; 
-	margin-left: 10px;
+	
 } 
  
 .btn-color-green:hover, 
@@ -131,9 +131,12 @@ fieldset[disabled] .btn-color-green.active {
 
 /*-------BLOG-------*/
 
+
+
 .blog-text {
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 18px;
+	
 }
 
 
@@ -148,12 +151,21 @@ fieldset[disabled] .btn-color-green.active {
 
 .post-content {
 	
+	h2{
+		margin-bottom: 13px;
+	}
+	
 	p {
 		@extend .blog-text;
+		margin-bottom: 23px;
 	}
 	li {
 		@extend .blog-text;
-		padding: 5px 0px;
+		padding: 10px 0px;
+	}
+
+	ul{
+		margin-bottom: 23px;	
 	}
 }
 
@@ -212,16 +224,21 @@ fieldset[disabled] .btn-color-green.active {
 }
 
 .follow {
+	background-color: #FFCC66 ;
 	margin-top:30px;
 	padding: 5px 0px 15px 0px;
 }
 
 .side-icons {
+	
 	img {
 		width:30px;
 	}
 }
 
+#hidden-contact{
+	margin-left: 10px;
+}
 
 /*Blog-list*/
 
