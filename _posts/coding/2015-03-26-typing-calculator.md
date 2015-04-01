@@ -4,10 +4,10 @@ title:  "Typing Calculator Tutorial"
 date:   2015-03-26 12:01:27
 permalink: /typing-calculator/
 author: "Chris LaBarge"
-photo-heading: "/images/code-new.jpg"
+photo-heading: "/images/WPM6.jpg"
 description: "A tutorial on creating a typing calculator words per minute app 
 using Ruby and the Volt frame-work."
-keywords: "typing calculator, volt, words per minute, opal, "
+keywords: "typing calculator, volt, words per minute, opal, ruby "
 category: coding
 ---
 
@@ -21,13 +21,16 @@ I suggest watching the [Intro to Volt](https://www.youtube.com/watch?v=Tg-EtRnMz
 video, that goes over how to set up a to-do list in under 20 minutes. It is very
 comprehensible and showcases the magic of Volt.
 
-In this tutorial you will learn how to...
+In this tutorial you will learn how to create a working
+that updates as the user types.([like this one](https://typing-calculator.herokuapp.com/))  The the tutorial will go over how to...
 
 - Install the Volt Framework
 - Generate new Volt application 
 - Use reactive form input 
 - Create backend code for the typing calculator
 - Enable Bootstrap Animation
+
+
 
 ##Installation
 
@@ -56,7 +59,7 @@ applications config directory...
 config/app.rb
 {% endhighlight %}
 
-And delete the variable labeled secret key.
+And delete the string labeled config.app_secret
 
 
 ##SetUp
@@ -99,17 +102,39 @@ And comment out the user templates
 
 {%endhighlight%}
 
-MIGHT NEED TO SHOW THEM HOW TO COMMENT OUT THE ROUTES AS WELL FOR LOGIN/SIGNUP
+You can also comment out the routes for signing in and logging in as well.
+
+{% highlight bash%}
+	app/main/config/routes.rb
+{% endhighlight %}
+
+{% highlight Ruby %}
+# See https://github.com/voltrb/volt#routes for more info on routes
+
+get '/about', _action: 'about'
+
+# Routes for login and signup, provided by user-templates component gem
+#get '/signup', _controller: 'user-templates', _action: 'signup'
+#get '/login', _controller: 'user-templates', _action: 'login'
+
+# The main route, this should be last. It will match any params not
+# previously matched.
+get '/', {}
+
+{% endhighlight %}
+
+
 
 ##Reactive Form Input
 
-Locate the index.html file within views
+Locate the index.html file within views and add some content along with a form 
+to get user input.  
+
 
 {% highlight bash%}
 	app/main/views/main/index.html
 {% endhighlight %}
 
-We will add some content along with a form to get user input.  
 
 {% highlight html %}
 <:Title>
@@ -135,8 +160,6 @@ there are several types of collections to store data.  Page collections are
 temporary, meaning they will lose their data once you refresh or visit a 
 different page.  Which is fine because we only need one page.
 
-!!!!!!!!!!!!!!!The e-submit attribute points to a method named "complete" that we will define in the 
-controller later. !!!!!!!!!!!!!!!
 
 This form/input field is where the users will begin typing. The data we get from
 this form is how we will calculate the typing speed of the user.
@@ -261,7 +284,7 @@ an array of user mistakes.
 def mistakes_array
   popped_array = user_array
   popped_array.pop
-  mistakes = popped_array - sample_text.split
+  mistakes = popped_array - sample_array
 end
 .
 .
@@ -320,7 +343,7 @@ end
 {% endhighlight %}
 
 Dividing the total character length of the user_array by only the correct_word_length
-gives use  a decimal that we multiply by 100 to get the accuracy percentage.
+gives us a decimal/fraction that we multiply by 100 to get the accuracy percentage.
 
 Per  [SpeedTypingOnline.com](http://www.speedtypingonline.com/typing-equations), 
 when calculation a typing speed, a WORD is any "5 characters".  Lets create the
@@ -362,6 +385,10 @@ page if you want to see them in action.
 Now it is time to create the methods that will allow us to calculate how much
 time has passed.
 
+{% highlight bash%}
+	app/main/controllers/main_controller.rb
+{% endhighlight %}
+
 {% highlight ruby%}
 
 def time_elapsed
@@ -373,7 +400,7 @@ def time_elapsed
    nil
   end	
  
-  seconds = (Time.now - @start_time).round
+  minutes = (Time.now - @start_time).round / 60
 
 end
 
@@ -383,7 +410,14 @@ The if-statement allows the timer to start only when the user starts typing.  Th
 function then returns the amount of time elapsed in minutes.  The if-statement
 also allows the timer to start over once the user clears out the form.
 
+By dividing the elapsed time in seconds by 60, the function returns the number
+of elapsed time in minutes.
+
 Now that we have the time, we can find the gross words per minute. 
+
+{% highlight bash%}
+	app/main/controllers/main_controller.rb
+{% endhighlight %}
 
 {% highlight ruby %}
 def gross_wpm
@@ -443,23 +477,22 @@ input to control real time animation on your page.
 
 ##DONE
 
-Now we have a working application, you can style and animate it how ever you want.
+Now we have a working application, you can style and animate it how ever you like.
+You can change whatever you want about the app too.  Have it do something cool like
+randomly access sample text from parts of the web. Make sure to let me know of
+any cool features you come up with!
+
 Here is an example of my design.  
 
-![Progress Bar](/images/WPM6.jpg)
+![Finished Product](/images/WPM6.jpg)
+
+The above site is hosted on Heroku @ [https://typing-calculator.herokuapp.com/](https://typing-calculator.herokuapp.com/)
 
 You can view the code for this application 
-on my [Github](http://github.com/chrislabarge)POST CODE OF NEW APP NOT OLD ONE.  
+on my [Github](https://github.com/chrislabarge/typing-calculator)
 
 
 
-
-Just remember before you host it anywhere, like github, to delete the secret key 
-in the config of the Volt application. Located at....
-
-{% highlight bash %}
-config/app.rb
-{% endhighlight %}
 
 
 
