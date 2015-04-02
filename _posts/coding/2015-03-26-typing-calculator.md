@@ -50,9 +50,6 @@ cd typing-calculator
 {% endhighlight %}
 
 
-Note, Volt uses [mongoDB](https://www.mongodb.org/) for its database. You will 
-need to download and install it if you do not have it already on your machine.
-
 If you are using git for version control and plan on pushing your app up to 
 github, you must get rid of your secret key. Just open up the app.rb in your 
 applications config directory...
