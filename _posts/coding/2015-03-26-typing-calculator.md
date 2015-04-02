@@ -21,8 +21,10 @@ I suggest watching the [Intro to Volt](https://www.youtube.com/watch?v=Tg-EtRnMz
 video, that goes over how to set up a to-do list in under 20 minutes. It is very
 comprehensible and showcases the magic of Volt.
 
-In this tutorial you will learn how to create a working
-that updates as the user types.([like this one](https://typing-calculator.herokuapp.com/))  The the tutorial will go over how to...
+In this tutorial you will learn how to create a typing speed calculator
+that updates as the user types in real time ([like this one](https://typing-calculator.herokuapp.com/)). 
+
+We will cover how to:
 
 - Install the Volt Framework
 - Generate new Volt application 
@@ -70,10 +72,10 @@ anyone viewing the page.
 	bundle exec volt server
 {% endhighlight %}
 
-Open your browser and put "http://localhost:3000/" in the address bar.  This 
+Open your browser and type "http://localhost:3000/" in the address bar.  This 
 will bring you to the homepage of your new app. The template already includes
 a login link for in the navigation.  We won't be needing users to sign up or 
-login for this project so go ahead open the project in your favorite editor and 
+log in for this project so go ahead open the project in your favorite editor and 
 locate the main.html file.
 
 {% highlight bash%}
@@ -158,7 +160,8 @@ of Ruby code.  Anything within the double curly brackets {% raw %}{{ ruby_functi
 is executed as ruby code.  In this case we are creating a page collection. In Volt, 
 there are several types of collections to store data.  Page collections are 
 temporary, meaning they will lose their data once you refresh or visit a 
-different page.  Which is fine because we only need one page.
+different page.  We will not be using more that one page, so page collections are
+perfect for this project.
 
 
 This form/input field is where the users will begin typing. The data we get from
@@ -166,7 +169,7 @@ this form is how we will calculate the typing speed of the user.
 
 ![Reactive Form Input](/images/WPM1.jpg)
 
-Now we need sample text that the user will type. This can be any chunk of text want.
+Now we need sample text that the user will type. This can be any chunk of text you want to use.
 We will start by defining a function in the app controller that returns the 
 text.
 
@@ -214,12 +217,12 @@ Now add the newly defined method to the home-page
 
 ##Words Per Minute(WPM) Calculations
 
-Now for writing the back end code in order to compare the users input with the
+Now we can work on the back end code.  This will compare the users input with the
 sample text and calculate how much time has passed.
 
 [How to Calculate Typing Speed (WPM) and Accuracy](http://www.speedtypingonline.com/typing-equations)
-is what I used to come up with the back-end. Check it out if you would like a 
-deeper understanding.  It's really not that complicated.
+is what I used to come up with the back end. Browse through the article in order
+to get a deeper understanding of the code.
 
 In order to compare the sample text with the user input we must split the strings
 and put them into an array.
@@ -291,8 +294,8 @@ end
 .
 {% endhighlight %}
 
-The reason we set a new variable to the user array and pop that new variable is 
-because you do not want the word the user is in the process of typing to count as 
+The reason we set a new variable to the "user_array" and "pop" that new variable is 
+because you do not want the current word that the user is typing to count as 
 a mistake.  You only want completed words to be considered.  
 
 Add the 'mistakes_array' function to the home page to get an idea of what I am 
@@ -319,7 +322,7 @@ talking about.
 As you can see in the photo above, the second mistake will not count until the
 user starts a new word following the mistake.  
 
-We can use the mistakes_array to find the user's accuracy. But before writing 
+We can use the mistakes_array to find the users accuracy. But before writing 
 the accuracy method, we must create one the finds the total number of characters
 in an array.
 
@@ -342,12 +345,12 @@ end
 
 {% endhighlight %}
 
-Dividing the total character length of the user_array by only the correct_word_length
+Dividing the total character length of the 'user_array' by only the 'correct_word_length'
 gives us a decimal/fraction that we multiply by 100 to get the accuracy percentage.
 
 Per  [SpeedTypingOnline.com](http://www.speedtypingonline.com/typing-equations), 
-when calculation a typing speed, a WORD is any "5 characters".  Lets create the
-function to find the number of words, in the controller. 
+when calculating a typing speed, a WORD is any "5 characters".  Lets create the
+function to find the number of words in the controller. 
 
 {% highlight bash%}
 	app/main/controllers/main_controller.rb
@@ -382,7 +385,7 @@ page if you want to see them in action.
 {% endhighlight %} 
 
 
-Now it is time to create the methods that will allow us to calculate how much
+Now it's time to create the methods that will allow us to calculate how much
 time has passed.
 
 {% highlight bash%}
@@ -408,7 +411,7 @@ end
 
 The if-statement allows the timer to start only when the user starts typing.  The
 function then returns the amount of time elapsed in minutes.  The if-statement
-also allows the timer to start over once the user clears out the form.
+also allows the timer to restart once the user clears out the form.
 
 By dividing the elapsed time in seconds by 60, the function returns the number
 of elapsed time in minutes.
@@ -425,7 +428,7 @@ def gross_wpm
 end
 {% endhighlight %}
 
-Using the gross_wpm function we can find the net words per minute, which is
+Using the 'gross_wpm' function we can find the net words per minute, which is
 what will give us our final words per minute calculation.
 
 {% highlight ruby %}
@@ -475,12 +478,10 @@ input to control real time animation on your page.
 
 ![Progress Bar](/images/WPM5.jpg)
 
-##DONE
+##ALL DONE
 
-Now we have a working application, you can style and animate it how ever you like.
-You can change whatever you want about the app too.  Have it do something cool like
-randomly access sample text from parts of the web. Make sure to let me know of
-any cool features you come up with!
+Now we have a working application, you can style and animate it how ever you'd like.
+This is your chance to be creative with new features. Leave a comment below and share with me what you've come up with.
 
 Here is an example of my design.  
 
