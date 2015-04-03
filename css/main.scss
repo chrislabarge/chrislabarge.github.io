@@ -11,9 +11,24 @@
 
 
 
-/*??Not-sure??*/
+/*??circle border??*/
 
+.activity_rounded {
+    display: inline-block;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -khtml-border-radius: 50%;
+    border: 5px solid #fff;
+}
 
+.activity_rounded img  {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -khtml-border-radius: 50%;
+    vertical-align: middle;
+}
 
 
 /*Universal*/
@@ -212,10 +227,7 @@ fieldset[disabled] .btn-color-green.active {
 		}
 		margin-bottom:30px;
 	}
-  .side-me{
-    
-    border: 5px solid white;
-  }
+  
 	
 	padding: 35px 0px;
 
