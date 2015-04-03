@@ -54,6 +54,9 @@ body {
 	margin-top: 20px;
 }
 
+.about-me {
+	max-width:250px 
+}
 
 .img-border {
 	border: 1px solid black;
@@ -498,7 +501,10 @@ footer a {
   .first-row {
 		margin-top: 30px;
 	}
-
+	
+	.about-me {
+		max-width:350px 
+	}
   
   .recent-blog {
   	margin-top: 30px;
