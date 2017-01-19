@@ -2,7 +2,7 @@
 layout: post-movie
 title:  "Switching Your Rails Application Web Server to 'Unicorn'"
 date:   2014-10-16 12:01:27
-permalink: /unicorn/
+permalink: posts/unicorn/
 author: "Chris LaBarge"
 photo-heading: "http://tech.co/wp-content/uploads/2014/08/rubyrails.png"
 description: "A Ruby on Rails blog post tutorial on switching web server to Unicorn. EDIT, OUTDATED"
@@ -12,30 +12,29 @@ category: coding
 
 ## Edit- This blog post is out of date.
  Heroku now wants Puma as the web server of choice. As of 2015
-	
-	
+
 ###Introduction
 
-I was listening to a [Ruby Rouges][richard-pod] podcast sometime back and they had guest [Richard Schneeman][richard] who worked at [Heroku][heroku]. Although I 
-did not fully understand what he talking about for most of the show.. I remembered him specifically making a point to 
-tell the audience to "PLEASE switch your WEBSERVERS from the default WEBRICK to UNICORN".  
+I was listening to a [Ruby Rouges][richard-pod] podcast sometime back and they had guest [Richard Schneeman][richard] who worked at [Heroku][heroku]. Although I
+did not fully understand what he talking about for most of the show.. I remembered him specifically making a point to
+tell the audience to "PLEASE switch your WEBSERVERS from the default WEBRICK to UNICORN".
 
 Well in my experience Webrick worked just fine..at least for developing with.  So I wasn't too hasty with
 switching right away.  But as I was finishing up my first contracted Website a couple weeks ago, I remembered what
 Richard had said. So I started to google for tutorials on how to switch over to 'Unicorn'.
 
-Easy right?  
+Easy right?
 
 Well maybe to an experienced web developer..but I am not that :(
 
 I found most the tutorials especially from [Heroku-Docs][heroku-docs] were lacking the "Hold My Hand" aspect to them that I kind of need
 at this point in my career.  So I decided to create a tutorial that does just that.  To help my future self and anyone
-else who is confused by current documentation on the subject. 
+else who is confused by current documentation on the subject.
 
 
 ###What You Will Learn
 
-This tutorial will show you step by step how to switch your default 'Webrick' web server in a Ruby On Rails Application 
+This tutorial will show you step by step how to switch your default 'Webrick' web server in a Ruby On Rails Application
 to the 'Unicorn' server. Which is apparently much faster for production purposes on hosting sites like [Heroku][heroku].
 
 ##First
@@ -50,7 +49,7 @@ your application.
 	gem 'unicorn' # It might already be in your Gemfile but commented out. If so just remove the '#' before it
 {% endhighlight %}
 
-Next, you have to install the gem with bundler.  Run `bundle install` 
+Next, you have to install the gem with bundler.  Run `bundle install`
 
 
 ##Second
@@ -84,10 +83,10 @@ after_fork do |server, worker|
 end
 {% endhighlight %}
 
-If you would like to discover what all of this script does, go to the [Heroku Documentation][heroku-docs] page 
-on installing Unicorn.  They give a detailed explanation for the basic configuration script above.  
+If you would like to discover what all of this script does, go to the [Heroku Documentation][heroku-docs] page
+on installing Unicorn.  They give a detailed explanation for the basic configuration script above.
 
-##Third 
+##Third
 
 ####a)
 
@@ -101,7 +100,7 @@ Once you have created the file just add the following to it:
 ###or....
 
 ####b)
-If you are feeling fancy, (and have not done the step directly above) 
+If you are feeling fancy, (and have not done the step directly above)
 you can create the Procfile including its contents with one command in the commmand line:
 
 run `echo "web: bundle exec rails server thin -p \$PORT -e \$RACK_ENV" > Procfile`
@@ -122,14 +121,14 @@ Now all you have to do is `push` the application to [Github][github] and then [H
 ##YOU'RE DONE!
 
 Boom now you are running Unicorn in your production environment. You and that Heroku employee [Richard][richard] from
-the [Ruby Rouges][richard-pod] podcast can rest easy. 
+the [Ruby Rouges][richard-pod] podcast can rest easy.
 
 [heroku]:      http://heroku.com
 [heroku-docs]: https://devcenter.heroku.com/articles/rails-unicorn
 
 [richard-pod]: 		 http://rubyrogues.com/140-rr-heroku-with-richard-schneeman/
 [richard]: https://twitter.com/schneems
-[github]:  		http://github.com	
+[github]:  		http://github.com
 [jekyll-help]: https://github.com/jekyll/jekyll-help
 
 

@@ -2,10 +2,10 @@
 layout: post
 title:  "Typing Calculator Tutorial"
 date:   2015-03-26 12:01:27
-permalink: /typing-calculator/
+permalink: /posts/typing-calculator/
 author: "Chris LaBarge"
 photo-heading: "/images/WPM6.jpg"
-description: "A tutorial on creating a typing calculator words per minute app 
+description: "A tutorial on creating a typing calculator words per minute app
 using Ruby and the Volt frame-work."
 keywords: "typing calculator, volt, words per minute, opal, ruby "
 category: coding
@@ -13,8 +13,8 @@ category: coding
 
 ##Overview
 
-[Volt](http://voltframework.com/) is a new Ruby framework that allows your Ruby code to run on both the 
-server and the client.  It uses the [opal](http://opalrb.org/) gem to compile 
+[Volt](http://voltframework.com/) is a new Ruby framework that allows your Ruby code to run on both the
+server and the client.  It uses the [opal](http://opalrb.org/) gem to compile
 the Ruby code to Javascript.
 
 I suggest watching the [Intro to Volt](https://www.youtube.com/watch?v=Tg-EtRnMz7o)
@@ -22,13 +22,13 @@ video, that goes over how to set up a to-do list in under 20 minutes. It is very
 comprehensible and showcases the magic of Volt.
 
 In this tutorial you will learn how to create a typing speed calculator
-that updates as the user types in real time ([like this one](https://typing-calculator.herokuapp.com/)). 
+that updates as the user types in real time ([like this one](https://typing-calculator.herokuapp.com/)).
 
 We will cover how to:
 
 - Install the Volt Framework
-- Generate new Volt application 
-- Use reactive form input 
+- Generate new Volt application
+- Use reactive form input
 - Create backend code for the typing calculator
 - Enable Bootstrap Animation
 
@@ -50,8 +50,8 @@ cd typing-calculator
 {% endhighlight %}
 
 
-If you are using git for version control and plan on pushing your app up to 
-github, you must get rid of your secret key. Just open up the app.rb in your 
+If you are using git for version control and plan on pushing your app up to
+github, you must get rid of your secret key. Just open up the app.rb in your
 applications config directory...
 
 {% highlight bash %}
@@ -69,10 +69,10 @@ anyone viewing the page.
 	bundle exec volt server
 {% endhighlight %}
 
-Open your browser and type "http://localhost:3000/" in the address bar.  This 
+Open your browser and type "http://localhost:3000/" in the address bar.  This
 will bring you to the homepage of your new app. The template already includes
-a login link for in the navigation.  We won't be needing users to sign up or 
-log in for this project so go ahead open the project in your favorite editor and 
+a login link for in the navigation.  We won't be needing users to sign up or
+log in for this project so go ahead open the project in your favorite editor and
 locate the main.html file.
 
 {% highlight bash%}
@@ -126,8 +126,8 @@ get '/', {}
 
 ##Reactive Form Input
 
-Locate the index.html file within views and add some content along with a form 
-to get user input.  
+Locate the index.html file within views and add some content along with a form
+to get user input.
 
 
 {% highlight bash%}
@@ -141,22 +141,22 @@ to get user input.
 
 <:Body>
   <h1>Words Per Minute Typing Calculator</h1>
- 
+
   <form e-submit="complete" role="form">
     <div class="form-group">
      <label><h3>Begin Typing</h3></label>
-     <input class="form-control submit-field" type="text" 
-            value=" {% raw html %}{{page._user_string}}{% endraw %}"> 
+     <input class="form-control submit-field" type="text"
+            value=" {% raw html %}{{page._user_string}}{% endraw %}">
     </div>
   </form>
 {% endhighlight %}
 
 
-The input value for the form {% raw %}{{ page._user_string }}{% endraw %} is a piece 
+The input value for the form {% raw %}{{ page._user_string }}{% endraw %} is a piece
 of Ruby code.  Anything within the double curly brackets {% raw %}{{ ruby_function }}{% endraw %}
-is executed as ruby code.  In this case we are creating a page collection. In Volt, 
-there are several types of collections to store data.  Page collections are 
-temporary, meaning they will lose their data once you refresh or visit a 
+is executed as ruby code.  In this case we are creating a page collection. In Volt,
+there are several types of collections to store data.  Page collections are
+temporary, meaning they will lose their data once you refresh or visit a
 different page.  We will not be using more that one page, so page collections are
 perfect for this project.
 
@@ -167,7 +167,7 @@ this form is how we will calculate the typing speed of the user.
 ![Reactive Form Input](/images/WPM1.jpg)
 
 Now we need sample text that the user will type. This can be any chunk of text you want to use.
-We will start by defining a function in the app controller that returns the 
+We will start by defining a function in the app controller that returns the
 text.
 
 {% highlight bash%}
@@ -202,7 +202,7 @@ Now add the newly defined method to the home-page
 
 <:Body>
  <h1>Words Per Minute Typing Calculator</h1>
- 
+
  <h3>Sample Text</h3>
  <p>{%raw ruby%}{{sample_text}}{%endraw%}</p>
 .
@@ -235,47 +235,47 @@ class MainController < Volt::ModelController
  .
  .
  .
- def sample_array 
+ def sample_array
    sample_text.split
  end
- 
- def user_array 
+
+ def user_array
    page._user_string.split
  end
 {% endhighlight %}
 
 
 
- 
 
-You can do this right on the home page for now in order to help you visualize. 
+
+You can do this right on the home page for now in order to help you visualize.
 
 {% highlight bash%}
 	app/main/views/index.html
-{% endhighlight %} 
+{% endhighlight %}
 
 {% highlight html %}
 
-{% raw ruby%} 
+{% raw ruby%}
 <b>sample text array</b>
 <p>{{sample_array}}</p>
-	
+
 <b>user text array</b>
 <p>{{user_array}}</p>
 
- {% endraw %} 
-{% endhighlight %} 
+ {% endraw %}
+{% endhighlight %}
 
 
 ![Sample Text](/images/WPM3.jpg)
 
-Now we have to create a function that compares the two arrays, and gives us 
-an array of user mistakes. 
+Now we have to create a function that compares the two arrays, and gives us
+an array of user mistakes.
 
 
 {% highlight bash%}
 	app/main/controllers/main_controller.rb
-{% endhighlight %} 
+{% endhighlight %}
 
 {% highlight ruby%}
 .
@@ -291,35 +291,35 @@ end
 .
 {% endhighlight %}
 
-The reason we set a new variable to the "user_array" and "pop" that new variable is 
-because you do not want the current word that the user is typing to count as 
-a mistake.  You only want completed words to be considered.  
+The reason we set a new variable to the "user_array" and "pop" that new variable is
+because you do not want the current word that the user is typing to count as
+a mistake.  You only want completed words to be considered.
 
-Add the 'mistakes_array' function to the home page to get an idea of what I am 
+Add the 'mistakes_array' function to the home page to get an idea of what I am
 talking about.
 
 {% highlight bash%}
 	app/main/views/index.html
-{% endhighlight %} 
+{% endhighlight %}
 
 
 {% highlight html %}
 
-{% raw ruby%} 
+{% raw ruby%}
 
 <b>mistakes array</b>
 <p>{{mistakes_array}}</p>
 
 
- {% endraw %} 
-{% endhighlight %} 
+ {% endraw %}
+{% endhighlight %}
 
 ![Sample Text](/images/WPM4.jpg)
 
 As you can see in the photo above, the second mistake will not count until the
-user starts a new word following the mistake.  
+user starts a new word following the mistake.
 
-We can use the mistakes_array to find the users accuracy. But before writing 
+We can use the mistakes_array to find the users accuracy. But before writing
 the accuracy method, we must create one the finds the total number of characters
 in an array.
 
@@ -345,9 +345,9 @@ end
 Dividing the total character length of the 'user_array' by only the 'correct_word_length'
 gives us a decimal/fraction that we multiply by 100 to get the accuracy percentage.
 
-Per  [SpeedTypingOnline.com](http://www.speedtypingonline.com/typing-equations), 
+Per  [SpeedTypingOnline.com](http://www.speedtypingonline.com/typing-equations),
 when calculating a typing speed, a WORD is any "5 characters".  Lets create the
-function to find the number of words in the controller. 
+function to find the number of words in the controller.
 
 {% highlight bash%}
 	app/main/controllers/main_controller.rb
@@ -356,7 +356,7 @@ function to find the number of words in the controller.
 {% highlight ruby%}
 def word_num
  character_length(user_array) / 5
-end 
+end
 
 {% endhighlight %}
 
@@ -366,7 +366,7 @@ page if you want to see them in action.
 
 {% highlight bash%}
 	app/main/views/index.html
-{% endhighlight %} 
+{% endhighlight %}
 
 
 {% highlight html %}
@@ -379,7 +379,7 @@ page if you want to see them in action.
 <b>accuracy</b>
 
 {% endraw %}
-{% endhighlight %} 
+{% endhighlight %}
 
 
 Now it's time to create the methods that will allow us to calculate how much
@@ -395,11 +395,11 @@ def time_elapsed
   if page._user_string.length == 1
     @start_time = Time.new
   elsif page._user_string.length == 0
-    @start_time = 0	
+    @start_time = 0
   else
    nil
-  end	
- 
+  end
+
   minutes = (Time.now - @start_time).round / 60
 
 end
@@ -413,7 +413,7 @@ also allows the timer to restart once the user clears out the form.
 By dividing the elapsed time in seconds by 60, the function returns the number
 of elapsed time in minutes.
 
-Now that we have the time, we can find the gross words per minute. 
+Now that we have the time, we can find the gross words per minute.
 
 {% highlight bash%}
 	app/main/controllers/main_controller.rb
@@ -436,26 +436,26 @@ end
 {% endhighlight %}
 
 
-Now that we have the net words per minute typed we can use that function in 
+Now that we have the net words per minute typed we can use that function in
 a bootstap progress bar.  This is one of several ways you can use reactive form
 input to control real time animation on your page.
 
 {% highlight bash%}
 	app/main/views/index.html
-{% endhighlight %} 
+{% endhighlight %}
 
 {% highlight html %}
 <div class="progress">
 {% raw %}
   <div class="progress-bar progress-bar-{{ if net_wpm > 60 }}success
                           {{elsif net_wpm > 31 }}warning
-                          {{else}}danger{{end}} 
-              progress-bar-striped" role="progressbar" 
-              aria-valuenow="{{net_wpm}}" 
-              aria-valuemin="0" 
-              aria-valuemax="100" 
+                          {{else}}danger{{end}}
+              progress-bar-striped" role="progressbar"
+              aria-valuenow="{{net_wpm}}"
+              aria-valuemin="0"
+              aria-valuemax="100"
               style="width: {{net_wpm}}%">
-							
+
      <span class="sr-only">{{net_wpm}}%</span>
   </div>
 
@@ -480,13 +480,13 @@ input to control real time animation on your page.
 Now we have a working application, you can style and animate it how ever you'd like.
 This is your chance to be creative with new features. Leave a comment below and share with me what you've come up with.
 
-Here is an example of my design.  
+Here is an example of my design.
 
 ![Finished Product](/images/WPM6.jpg)
 
 The above site is hosted on Heroku @ [https://typing-calculator.herokuapp.com/](https://typing-calculator.herokuapp.com/)
 
-You can view the code for this application 
+You can view the code for this application
 on my [Github](https://github.com/chrislabarge/typing-calculator)
 
 
