@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Example Blog</title>
+    <link>http://example.org/posts/</link>
+    <description>Recent content in Posts on Example Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 27 Feb 2017 18:30:21 -0500</lastBuildDate>
+    
+	<atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Installing Raspberry Pi OS on SD card</title>
+      <link>http://example.org/posts/sd-format/</link>
+      <pubDate>Mon, 27 Feb 2017 18:30:21 -0500</pubDate>
+      
+      <guid>http://example.org/posts/sd-format/</guid>
+      <description>Overview A Raspberry Pi is an $35 dollar computer that is the size of a credit card. It can be utilized in everything from DIY home projects to missle guidence systems.
+This tutorial will demonstrate the process of installing an operating system on the device. Although it is aimed at beginners, we will be using the command line. Don&amp;rsquo;t worry though, the goal is to ease newbies into command line, as you are sure to come across it again and again in future raspberry pi endeavers.</description>
+    </item>
+    
+    <item>
+      <title>How I Made a Typing Speed Calculator</title>
+      <link>http://example.org/posts/typing-speed-calulator/</link>
+      <pubDate>Thu, 26 Mar 2015 12:01:27 +0000</pubDate>
+      
+      <guid>http://example.org/posts/typing-speed-calulator/</guid>
+      <description>Overview Volt is a new Ruby framework that allows your Ruby code to run on both the server and the client. It uses the opal gem to compile the Ruby code to Javascript.
+I suggest watching the Intro to Volt video, that goes over how to set up a to-do list in under 20 minutes. It is very comprehensible and showcases the magic of Volt.
+In this tutorial you will learn how to create a typing speed calculator that updates as the user types in real time (like this one).</description>
+    </item>
+    
+    <item>
+      <title>Code Newbie Podcast</title>
+      <link>http://example.org/posts/code-newbie/</link>
+      <pubDate>Thu, 19 Mar 2015 12:01:27 +0000</pubDate>
+      
+      <guid>http://example.org/posts/code-newbie/</guid>
+      <description>Overview The Code Newbie website and community are priceless tools for beginners. They offer several resources to help you along your programming journey.
+My favorite of these resources is the podcast. The interviewer and founder of Code Newbie, Saron Yitbarek, does an absolutley fantastic job at keeping the podcast organic as well as informative.
+There are plenty of podcasts I listen to that forget that not all listeners can keep up with pacing and terminology.</description>
+    </item>
+    
+    <item>
+      <title>My first Pull Request (Tutorial)</title>
+      <link>http://example.org/posts/first-pull-request/</link>
+      <pubDate>Wed, 18 Mar 2015 12:01:27 +0000</pubDate>
+      
+      <guid>http://example.org/posts/first-pull-request/</guid>
+      <description>Overview About a month ago I was searching for a local user-group of Ruby programmers, and luckily came across the Tech Valley Ruby Brigade. Even more lucky, their website needed a modern design update and they provided the repository on github for anyone to grab.
+It was a perfect opportunity for me to learn how to submit a pull-request and at the same time a good ice-breaker for the first time I would attend the user-group meetup.</description>
+    </item>
+    
+    <item>
+      <title>Nightcrawler - Movie Review</title>
+      <link>http://example.org/posts/nightcrawler/</link>
+      <pubDate>Mon, 16 Mar 2015 12:01:27 +0000</pubDate>
+      
+      <guid>http://example.org/posts/nightcrawler/</guid>
+      <description>Overview This Dan Gilroy film (director and writer) starring Jake Gyllenhaal was the the first film I saw this year, and I couldn&amp;rsquo;t have been more pleased.
+Not only is the acting, music and cinematography top notch but it gives an extraordinarly intimate view local news media. Which in my opinion is a very fascinating subject given thats almost everyone consumes. If you are familiar with the teleivision show The Wire , each season examines a different part of the city of Batlimore.</description>
+    </item>
+    
+  </channel>
+</rss>
