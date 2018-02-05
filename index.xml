@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Example Blog</title>
-    <link>http://example.org/</link>
-    <description>Recent content on Example Blog</description>
+    <title>Chris LaBarge</title>
+    <link>http://chrislabarge.com/</link>
+    <description>Recent content on Chris LaBarge</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 02 Jan 2018 18:30:21 -0500</lastBuildDate>
     
-	<atom:link href="http://example.org/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://chrislabarge.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>MenuBerry</title>
-      <link>http://example.org/projects/menuberry/</link>
+      <link>http://chrislabarge.com/projects/menuberry/</link>
       <pubDate>Tue, 02 Jan 2018 18:30:21 -0500</pubDate>
       
-      <guid>http://example.org/projects/menuberry/</guid>
+      <guid>http://chrislabarge.com/projects/menuberry/</guid>
       <description>MenuBerry is a app for vegans to discover what to eat at restaurants.
 I have been building MenuBerry part-time for the last year or so. It started as a hobby project that eventually grew over time. It is still in the early days, but it&amp;rsquo;s fully functional for people to use. Visitors can utlize the application by using it as a resource to find restaurants and vegan options, as well as sign up to receive updates plus contribute content.</description>
     </item>
     
     <item>
       <title>MACC Roofing</title>
-      <link>http://example.org/projects/macc-roofing/</link>
+      <link>http://chrislabarge.com/projects/macc-roofing/</link>
       <pubDate>Sun, 02 Apr 2017 18:30:21 -0500</pubDate>
       
-      <guid>http://example.org/projects/macc-roofing/</guid>
+      <guid>http://chrislabarge.com/projects/macc-roofing/</guid>
       <description>This is a project I did for a client that needed an online presence for his roofing business. I built him a static website using the GOlang Hugo generator, and hosted it on github pages. I than integrated it with Forestry.io to allow for a CMS like expeprience. He can now update content on the fly without having to pay a monthly fee.</description>
     </item>
     
     <item>
       <title>Installing Raspberry Pi OS on SD card</title>
-      <link>http://example.org/posts/sd-format/</link>
+      <link>http://chrislabarge.com/posts/sd-format/</link>
       <pubDate>Mon, 27 Feb 2017 18:30:21 -0500</pubDate>
       
-      <guid>http://example.org/posts/sd-format/</guid>
+      <guid>http://chrislabarge.com/posts/sd-format/</guid>
       <description>Overview A Raspberry Pi is an $35 dollar computer that is the size of a credit card. It can be utilized in everything from DIY home projects to missle guidence systems.
 This tutorial will demonstrate the process of installing an operating system on the device. Although it is aimed at beginners, we will be using the command line. Don&amp;rsquo;t worry though, the goal is to ease newbies into command line, as you are sure to come across it again and again in future raspberry pi endeavers.</description>
     </item>
     
     <item>
       <title>How I Made a Typing Speed Calculator</title>
-      <link>http://example.org/posts/typing-speed-calulator/</link>
+      <link>http://chrislabarge.com/posts/typing-speed-calulator/</link>
       <pubDate>Thu, 26 Mar 2015 12:01:27 +0000</pubDate>
       
-      <guid>http://example.org/posts/typing-speed-calulator/</guid>
+      <guid>http://chrislabarge.com/posts/typing-speed-calulator/</guid>
       <description>Overview Volt is a new Ruby framework that allows your Ruby code to run on both the server and the client. It uses the opal gem to compile the Ruby code to Javascript.
 I suggest watching the Intro to Volt video, that goes over how to set up a to-do list in under 20 minutes. It is very comprehensible and showcases the magic of Volt.
 In this tutorial you will learn how to create a typing speed calculator that updates as the user types in real time (like this one).</description>
@@ -53,10 +53,10 @@ In this tutorial you will learn how to create a typing speed calculator that upd
     
     <item>
       <title>Code Newbie Podcast</title>
-      <link>http://example.org/posts/code-newbie/</link>
+      <link>http://chrislabarge.com/posts/code-newbie/</link>
       <pubDate>Thu, 19 Mar 2015 12:01:27 +0000</pubDate>
       
-      <guid>http://example.org/posts/code-newbie/</guid>
+      <guid>http://chrislabarge.com/posts/code-newbie/</guid>
       <description>Overview The Code Newbie website and community are priceless tools for beginners. They offer several resources to help you along your programming journey.
 My favorite of these resources is the podcast. The interviewer and founder of Code Newbie, Saron Yitbarek, does an absolutley fantastic job at keeping the podcast organic as well as informative.
 There are plenty of podcasts I listen to that forget that not all listeners can keep up with pacing and terminology.</description>
@@ -64,48 +64,48 @@ There are plenty of podcasts I listen to that forget that not all listeners can 
     
     <item>
       <title>My first Pull Request (Tutorial)</title>
-      <link>http://example.org/posts/first-pull-request/</link>
+      <link>http://chrislabarge.com/posts/first-pull-request/</link>
       <pubDate>Wed, 18 Mar 2015 12:01:27 +0000</pubDate>
       
-      <guid>http://example.org/posts/first-pull-request/</guid>
+      <guid>http://chrislabarge.com/posts/first-pull-request/</guid>
       <description>Overview About a month ago I was searching for a local user-group of Ruby programmers, and luckily came across the Tech Valley Ruby Brigade. Even more lucky, their website needed a modern design update and they provided the repository on github for anyone to grab.
 It was a perfect opportunity for me to learn how to submit a pull-request and at the same time a good ice-breaker for the first time I would attend the user-group meetup.</description>
     </item>
     
     <item>
       <title>Nightcrawler - Movie Review</title>
-      <link>http://example.org/posts/nightcrawler/</link>
+      <link>http://chrislabarge.com/posts/nightcrawler/</link>
       <pubDate>Mon, 16 Mar 2015 12:01:27 +0000</pubDate>
       
-      <guid>http://example.org/posts/nightcrawler/</guid>
+      <guid>http://chrislabarge.com/posts/nightcrawler/</guid>
       <description>Overview This Dan Gilroy film (director and writer) starring Jake Gyllenhaal was the the first film I saw this year, and I couldn&amp;rsquo;t have been more pleased.
 Not only is the acting, music and cinematography top notch but it gives an extraordinarly intimate view local news media. Which in my opinion is a very fascinating subject given thats almost everyone consumes. If you are familiar with the teleivision show The Wire , each season examines a different part of the city of Batlimore.</description>
     </item>
     
     <item>
       <title>Typing Speed Calculator</title>
-      <link>http://example.org/projects/typing-calculator/</link>
+      <link>http://chrislabarge.com/projects/typing-calculator/</link>
       <pubDate>Mon, 02 Mar 2015 18:30:21 -0500</pubDate>
       
-      <guid>http://example.org/projects/typing-calculator/</guid>
+      <guid>http://chrislabarge.com/projects/typing-calculator/</guid>
       <description>This is a simple words per minute typing calculator. I built it using the Volt framework, which specializes in running your Ruby code on the CLIENT as well as the server. I did not write a single line of Javascript, as Volt uses the Opal gem to compile your Ruby code to javascript. You can read about how I made this simple app here .</description>
     </item>
     
     <item>
       <title>Tech Valley Ruby Brigade</title>
-      <link>http://example.org/projects/tech-valley/</link>
+      <link>http://chrislabarge.com/projects/tech-valley/</link>
       <pubDate>Sun, 04 Jan 2015 18:30:21 -0500</pubDate>
       
-      <guid>http://example.org/projects/tech-valley/</guid>
+      <guid>http://chrislabarge.com/projects/tech-valley/</guid>
       <description>This is redesign I did for a local User-Group of Ruby programmers. It was already using github pages for hosting so there was no need to mess with the back-end, I simply updated the bootstrap and took advantage of the responsive grid.</description>
     </item>
     
     <item>
       <title>About</title>
-      <link>http://example.org/about/</link>
+      <link>http://chrislabarge.com/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://example.org/about/</guid>
+      <guid>http://chrislabarge.com/about/</guid>
       <description>I am a web developer from Albany NY and the creator of MenuBerry. I enjoy programming, playing guitar, watching movies and hiking. I got married to my soulmate Jessica last fall. I really love building new things with software, hardware, and/or construction. It is always great to work on projects with new people, so contact me if you would like to collabortate!</description>
     </item>
     
