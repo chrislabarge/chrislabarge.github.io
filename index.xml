@@ -6,10 +6,20 @@
     <description>Recent content on Chris LaBarge</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 02 Jan 2018 18:30:21 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 25 Mar 2018 18:30:21 -0500</lastBuildDate>
     
 	<atom:link href="http://chrislabarge.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Make Yourself Designs</title>
+      <link>http://chrislabarge.com/projects/make-yourself-designs/</link>
+      <pubDate>Sun, 25 Mar 2018 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/projects/make-yourself-designs/</guid>
+      <description>This is a e-commerce project I did for a client that wanted to have a website based around her Etsy store.
+I wanted to get a little creative with this one so I decided to build my own tools in order to sync the Etsy shop with the website. Basically, I did not want the client to have to upload new content to both her Etsy shop and website. It would be easier for her and future clients to just be able to add a new product to their Etsy shop and have it automatically show up on the website.</description>
+    </item>
     
     <item>
       <title>MenuBerry</title>
@@ -19,15 +29,6 @@
       <guid>http://chrislabarge.com/projects/menuberry/</guid>
       <description>MenuBerry is resource for vegans to discover food options at restaurants.
 I have been building MenuBerry part-time for the last year or so. It started as a hobby project that eventually grew over time. It is still in the early days, but it&amp;rsquo;s fully functional. Visitors can utilize the application as a resource to find restaurants and vegan options. Registered users are allowed to and contribute content and receive updates about their favorite restaurants.</description>
-    </item>
-    
-    <item>
-      <title>MACC Roofing</title>
-      <link>http://chrislabarge.com/projects/macc-roofing/</link>
-      <pubDate>Sun, 02 Apr 2017 18:30:21 -0500</pubDate>
-      
-      <guid>http://chrislabarge.com/projects/macc-roofing/</guid>
-      <description>This is a project I did for a client that needed an online presence for his roofing business. I built him a static website using the GOlang Hugo generator, and hosted it on github pages. I than integrated it with Forestry.io to allow for a CMS like expeprience. He can now update content on the fly without having to pay a monthly fee.</description>
     </item>
     
     <item>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+        <title>Make Yourself Designs</title>
+
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/custom.css">
+        <link rel="icon" type="image/png" href="/img/favicon.ico">
+
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    </head>
+    <body>
+        <section id="page-title">
+            <h1><a href="/">Chris LaBarge</a></h1>
+        </section>
+        <div class="content">
+
+
+<section class="blog-post">
+    
+    <img class="header-img" src="/img/myd.png" />
+    
+    <h1>Make Yourself Designs</h1>
+    <div class="blog-post-subheader">
+        
+            <span class="date-title">
+                March 25, 2018
+            </span>
+        
+        
+            <span class="website">
+                <a href="http://makeyourselfdesigns.com">http://makeyourselfdesigns.com</a>
+            </span>
+        
+    </div>
+    <div class="blog-post-content">
+        
+
+<p>This is a e-commerce project I did for a client that wanted to have a website based around her Etsy store.</p>
+
+<p>I wanted to get a little creative with this one so I decided to build my own tools in order to sync the Etsy shop with the website.  Basically, I did not want the client to have to upload new content to both her Etsy shop and website.  It would be easier for her and future clients to just be able to add a new product to their Etsy shop and have it automatically show up on the website.</p>
+
+<h2 id="tech-stack">Tech Stack</h2>
+
+<h3 id="front-end-repo-github-com-makeyourselfdesigns">Front-End - <a href="github.com/makeyourselfdesigns">Repo</a></h3>
+
+<ul>
+<li>Hugo</li>
+<li>Github Pages</li>
+<li>Introduction Theme</li>
+<li>Forestry.io</li>
+</ul>
+
+<h3 id="back-end-repo-https-github-com-chrislabarge-etsy-sync">Back-End - <a href="https://github.com/chrislabarge/etsy_sync">Repo</a></h3>
+
+<ul>
+<li>Ruby</li>
+<li>Etsy API</li>
+</ul>
+
+<p>I built a static website using the GOlang <a href="https://gohugo.io/">Hugo</a> generator, and hosted it on github pages.  I also integrated it with <a href="https://www.forestry.io">Forestry.io<a/> to allow for a CMS like expeprience.</p>
+
+<p>Then I began building the ruby utility that would sync the products.  I used the Etsy API  ruby gem  <a href="https://github.com/kytrinyx/etsy">etsy</a> to request the product data from the shop, and then cross reference that with the existing data in the static website.  The product files in the static website are Markdown with yaml for the Frontmatter.</p>
+
+<p>I may eventually extract the core logic from this and make a gem.  I would like to get rid of the etsy gem, and just retrive the raw json from Etsy endpoints, allow the developer to pluck the relevent content and put the JSON object in the Markdown frontmatter.</p>
+
+    </div>
+</section>
+
+        </div>
+        <div class="footer">
+            <div class="contact-options">
+                <div class="social-icons">
+                    <a href="https://github.com/chrislabarge">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:chrislabargedev@gmail.com">
+                        <i class="far fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+
+            
+                <section id=nav>
+                    <ul class=navbar>
+                        <li><div><a href="/">Home</a></div></li>
+                        <li><div><a href="/about">About Me</a></div></li>
+                        <li><div><a href="/projects">Projects</a></div></li>
+                        <li><div><a href="/posts">Blog</a></div></li>
+                    </ul>
+                </section>
+            
+        </div>
+    </body>
+</html>
+
