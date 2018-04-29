@@ -6,10 +6,19 @@
     <description>Recent content on Chris LaBarge</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 25 Mar 2018 18:30:21 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 20 Apr 2018 18:30:21 -0500</lastBuildDate>
     
 	<atom:link href="http://chrislabarge.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using Chrome Driver For Headless Scraping and Downloading</title>
+      <link>http://chrislabarge.com/posts/headless-scrape/</link>
+      <pubDate>Fri, 20 Apr 2018 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/posts/headless-scrape/</guid>
+      <description>What You Will Learn  How to use a non headless web driver on a headless server. How to setup the Chrome Driver with Selenium and Capybara. How to set up the driver to allow from automatic browser downloads.  Who This Is For  Ruby developers wanting to use the Chrome Driver with for their browser automations. Coders looking for a solution to headless file downloads using the browser.</description>
+    </item>
     
     <item>
       <title>Make Yourself Designs</title>

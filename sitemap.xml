@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://chrislabarge.com/posts/headless-scrape/</loc>
+    <lastmod>2018-04-20T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://chrislabarge.com/projects/make-yourself-designs/</loc>
     <lastmod>2018-03-25T18:30:21-05:00</lastmod>
   </url>
@@ -58,13 +63,13 @@
   
   <url>
     <loc>http://chrislabarge.com/</loc>
-    <lastmod>2018-03-25T18:30:21-05:00</lastmod>
+    <lastmod>2018-04-20T18:30:21-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://chrislabarge.com/posts/</loc>
-    <lastmod>2017-02-27T18:30:21-05:00</lastmod>
+    <lastmod>2018-04-20T18:30:21-05:00</lastmod>
     <priority>0</priority>
   </url>
   
