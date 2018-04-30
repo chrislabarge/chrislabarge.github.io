@@ -17,7 +17,7 @@
       <pubDate>Fri, 20 Apr 2018 18:30:21 -0500</pubDate>
       
       <guid>http://chrislabarge.com/posts/headless-scrape/</guid>
-      <description>What You Will Learn  How to use a non headless web driver on a headless server. How to setup the Chrome Driver with Selenium and Capybara. How to set up the driver to allow from automatic browser downloads.  Who This Is For  Ruby developers wanting to use the Chrome Driver for their browser automations. Coders looking for a solution to headless file downloads using the browser. Coders that need to run a non headless web driver in a headless environment.</description>
+      <description>What You Will Learn  How to use a non headless web driver on a headless server. How to setup the Chrome Driver with Selenium and Capybara. How to set up the driver to allow for automatic browser downloads.  Who This Is For  Ruby developers wanting to use the Chrome Driver for their browser automations. Coders looking for a solution to headless file downloads using the browser. Coders that need to run a non headless web driver in a headless environment.</description>
     </item>
     
     <item>
