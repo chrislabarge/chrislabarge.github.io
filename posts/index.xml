@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Chris LaBarge</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 20 Apr 2018 18:30:21 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 23 May 2018 18:30:21 -0500</lastBuildDate>
     
 	<atom:link href="http://chrislabarge.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rails &#39;#delete_all&#39; - Fast &amp; Powerful - Beware</title>
+      <link>http://chrislabarge.com/posts/delete-all/</link>
+      <pubDate>Wed, 23 May 2018 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/posts/delete-all/</guid>
+      <description>What You Will Learn  A fast way to delete a large batch of rows from a Database table How to prevent from locking your Database  Who This Is For  Rails developers who need to delete records more efficiently.  Requirements  Ruby Rails &amp;gt;= 5.0 Relational Database like MySQL or PostgreSQL  Overview I am currently working on a Rails project that deals with importing and exporting large amounts of data.</description>
+    </item>
     
     <item>
       <title>Using Chrome Driver For Headless Scraping and Downloading</title>
