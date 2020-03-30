@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+        <title>Bold &#43; Italic in TMUX</title>
+
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/custom.css">
+        <link rel="icon" type="image/png" href="/img/favicon.ico">
+
+        <script src="/javascript/custom.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    </head>
+    <body>
+        <section id="page-title">
+            <h1><a href="/">Chris LaBarge</a></h1>
+        </section>
+        <div class="content">
+
+
+<section class="blog-post">
+    
+    <img class="header-img" src="/img/bold.png" />
+    
+    <h1>Bold &#43; Italic in TMUX</h1>
+    <div class="blog-post-subheader">
+        
+            <span class="date-title">
+                March 28, 2020
+            </span>
+        
+        
+    </div>
+    <div class="blog-post-content">
+        <p>You have just installed a hip new font face for programming. 🤙</p>
+<p>It has the all of the bells and whistles including <strong>bold</strong> and <em>italic</em> font styles.</p>
+<p>You configure your terminal to use the new font, and start typing away.</p>
+<p>&hellip;.<strong>WHAT???</strong>&hellip;.</p>
+<p>Its not working&hellip;.🙄</p>
+<p><strong>Has this happened to you before?</strong></p>
+<p>There is always some caveat when tweaking your work environment no matter how trivial.</p>
+<p>This guide will briefly outline the solutions I came across to get <strong>bold</strong> and
+<em>italic</em> font styles working Vim/NeoVim running within a TMUX session, from a
+GNOME terminal shell.</p>
+<ul>
+<li>-&gt; <strong>Bold</strong></li>
+<li>-&gt; <em>Italic</em></li>
+<li>-&gt; VIM/NeoVIM</li>
+<li>-&gt; TMUX</li>
+<li>-&gt; GNOME Shell</li>
+</ul>
+<h2 id="the-problem">The Problem</h2>
+<p>The <strong>bold</strong> and <em>italic</em> font faces were not properly working in a Tmux
+session. But they <strong>were</strong> working outside of Tmux in a gnome terminal.</p>
+<p>I came across this
+<a href="https://gist.github.com/gutoyr/4192af1aced7a1b555df06bd3781a722">Tutorial</a> and
+it got me close to a solution. But there was issues.</p>
+<ul>
+<li>Step 3 in the
+<a href="https://gist.github.com/gutoyr/4192af1aced7a1b555df06bd3781a722">tutorial</a>
+did not work for me, so I had to rely on exporting the TERM env variable
+previous to running <code>tmux</code> command. (<em>Per the instructions</em>)</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">  env <span style="color:#8be9fd;font-style:italic">TERM</span><span style="color:#ff79c6">=</span>screen-256color tmux</code></pre></div>
+<ul>
+<li>
+<p>This worked for me. The <code>bold</code> and <code>italic</code> fonts are now working within Tmux.</p>
+</li>
+<li>
+<p>Add this to the <code>.zhrc</code> configuration file to make an alias to prevent from
+having to explicitly set the <code>TERM</code> environment variable.</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">  <span style="color:#8be9fd;font-style:italic">alias</span> <span style="color:#8be9fd;font-style:italic">tmux</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;env TERM=screen-256color tmux&#34;</span></code></pre></div>
+<h2 id="cursor-issues">Cursor Issues</h2>
+<p>In Vim and NeoVim I have the options to allow for <code>block</code> cursor shape when in
+<code>normal</code> mode and <code>line</code> shape when in <code>insert</code> mode.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-vim" data-lang="vim">  <span style="color:#ff79c6">if</span> &amp;term =~ <span style="color:#f1fa8c">&#34;screen.&#34;</span>
+     <span style="color:#ff79c6">let</span> &amp;t_ti.=<span style="color:#f1fa8c">&#34;\eP\e[1 q\e\\&#34;</span>
+     <span style="color:#ff79c6">let</span> &amp;t_SI.=<span style="color:#f1fa8c">&#34;\eP\e[5 q\e\\&#34;</span>
+     <span style="color:#ff79c6">let</span> &amp;t_EI.=<span style="color:#f1fa8c">&#34;\eP\e[1 q\e\\&#34;</span>
+     <span style="color:#ff79c6">let</span> &amp;t_te.=<span style="color:#f1fa8c">&#34;\eP\e[0 q\e\\&#34;</span>
+  <span style="color:#ff79c6">else</span>
+     <span style="color:#ff79c6">let</span> &amp;t_ti.=<span style="color:#f1fa8c">&#34;\&lt;Esc&gt;[1 q&#34;</span>
+     <span style="color:#ff79c6">let</span> &amp;t_SI.=<span style="color:#f1fa8c">&#34;\&lt;Esc&gt;[5 q&#34;</span>
+     <span style="color:#ff79c6">let</span> &amp;t_EI.=<span style="color:#f1fa8c">&#34;\&lt;Esc&gt;[1 q&#34;</span>
+     <span style="color:#ff79c6">let</span> &amp;t_te.=<span style="color:#f1fa8c">&#34;\&lt;Esc&gt;[0 q&#34;</span>
+  <span style="color:#ff79c6">endif</span></code></pre></div>
+<p><em>This code is for displaying the desired cursor dependent on being in a remote
+session or not.</em></p>
+<p>Unfortunately the font solution broke the cursor shape for Vim, running in
+Tmux.   The fix from above was only showing the <code>line</code> shape cursor.</p>
+<p>I found this solution from a neovim <a href="https://neovim.io/doc/user/term.html#tui-cursor-shape"> document </a></p>
+<p>Which instructed me to add an override to <code>~/.tmux.conf</code> file</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">  <span style="color:#8be9fd;font-style:italic">set</span> -ga terminal-overrides <span style="color:#f1fa8c">&#39;*:Ss=\E[%p1%d q:Se=\E[ q&#39;</span></code></pre></div>
+
+    </div>
+</section>
+
+        </div>
+        <div class="footer" id="footer">
+            <div class="contact-options">
+                <div class="social-icons">
+                    <a href="https://github.com/chrislabarge" class="tooltip">
+                        <span class="tooltip-text">Github</span>
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://gitlab.com/chrislabarge" class="tooltip">
+                        <span class="tooltip-text">Gitlab</span>
+                        <i class="fab fa-gitlab"></i>
+                    </a>
+                    <a href="mailto:chrislabargedev@gmail.com" class="tooltip">
+                        <span class="tooltip-text">Send Email</span>
+                        <i class="far fa-envelope"></i>
+                    </a>
+                    <a id="light" class="toggle-theme tooltip">
+                        <span class="tooltip-text"> Light Theme</span>
+                        <i class="fas fa-sun"></i>
+                    </a>
+                    <a id="dark" class="toggle-theme tooltip" style="display: none">
+                        <span class="tooltip-text">Dark Theme</span>
+                        <i class="fas fa-moon"></i>
+                    </a>
+                </div>
+            </div>
+
+            
+                <section id=nav>
+                    <ul class=navbar>
+                        <li><div><a href="/">Home</a></div></li>
+                        <li><div><a href="/about">About Me</a></div></li>
+                        <li><div><a href="/projects">Projects</a></div></li>
+                        <li><div><a href="/posts">Blog</a></div></li>
+                    </ul>
+                </section>
+            
+        </div>
+    </body>
+</html>
+

@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="/css/custom.css">
         <link rel="icon" type="image/png" href="/img/favicon.ico">
 
+        <script src="/javascript/custom.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     </head>
     <body>
@@ -31,20 +32,34 @@
         
     </div>
     <div class="blog-post-content">
-        <p>I am a web developer from Albany NY and the creator of <a href="/projects/menuberry">MenuBerry</a>. Recently, I married my soulmate Jessica. I enjoy programming, playing guitar, watching movies and hiking. I really love building new things with software, hardware, and/or construction. It is always great to work on projects with new people, so contact me if you would like to collaborate!</p>
+        <p>I am a web developer from Albany NY and the creator of <!-- raw HTML omitted -->MenuBerry<!-- raw HTML omitted -->. Recently, I married my soulmate Jessica. I enjoy programming, playing guitar, watching movies and hiking. I really love building new things with software, hardware, and/or construction. It is always great to work on projects with new people, so contact me if you would like to collaborate!</p>
 
     </div>
 </section>
 
         </div>
-        <div class="footer">
+        <div class="footer" id="footer">
             <div class="contact-options">
                 <div class="social-icons">
-                    <a href="https://github.com/chrislabarge">
+                    <a href="https://github.com/chrislabarge" class="tooltip">
+                        <span class="tooltip-text">Github</span>
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="mailto:chrislabargedev@gmail.com">
+                    <a href="https://gitlab.com/chrislabarge" class="tooltip">
+                        <span class="tooltip-text">Gitlab</span>
+                        <i class="fab fa-gitlab"></i>
+                    </a>
+                    <a href="mailto:chrislabargedev@gmail.com" class="tooltip">
+                        <span class="tooltip-text">Send Email</span>
                         <i class="far fa-envelope"></i>
+                    </a>
+                    <a id="light" class="toggle-theme tooltip">
+                        <span class="tooltip-text"> Light Theme</span>
+                        <i class="fas fa-sun"></i>
+                    </a>
+                    <a id="dark" class="toggle-theme tooltip" style="display: none">
+                        <span class="tooltip-text">Dark Theme</span>
+                        <i class="fas fa-moon"></i>
                     </a>
                 </div>
             </div>

@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="/css/custom.css">
         <link rel="icon" type="image/png" href="/img/favicon.ico">
 
+        <script src="/javascript/custom.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     </head>
     <body>
@@ -35,127 +36,103 @@
         
     </div>
     <div class="blog-post-content">
-        
-
-<h2 id="what-you-will-learn">What You Will Learn</h2>
-
+        <h2 id="what-you-will-learn">What You Will Learn</h2>
 <ul>
 <li>How to use a non headless web driver on a headless server.</li>
 <li>How to setup the Chrome Driver with Selenium and Capybara.</li>
 <li>How to set up the driver to allow for automatic browser downloads.</li>
 </ul>
-
 <h2 id="who-this-is-for">Who This Is For</h2>
-
 <ul>
 <li>Ruby developers wanting to use the Chrome Driver for their browser automations.</li>
 <li>Coders looking for a solution to headless file downloads using the browser.</li>
 <li>Coders that need to run a non headless web driver in a headless environment.</li>
 </ul>
-
 <h2 id="requirements">Requirements</h2>
-
 <ul>
 <li>Ruby</li>
 <li><a href="https://github.com/teamcapybara/capybara"> Capybara </a> and <a href="http://robotframework.org/SeleniumLibrary/"> Selenium </a> installed.</li>
 <li>Framework(ex Rails) or program utilizing the above libraries.</li>
 </ul>
-
 <h2 id="overview">Overview</h2>
-
 <p>Recently I was making some scrapers for a client who needed pdf&rsquo;s downloaded. The program runs on a AWS Ubuntu server and is developed with the Ruby language and the Capybara library. Because this is running in a headless environment I decided to go with Phantom JS as my web driver using Poltergeist gem to integrate it with Ruby and Capybara. I use this driver for integration testing when developing in Rails and have found it accomplished most of what I asked of it, without having to rely on the Selenium Library</p>
-
 <p>Most of the pdf&rsquo;s I was scraping came from websites that would render them at URL  endpoints. This allowed me to just scrape the URL string with Phantom JS and use the Ruby module <a href="https://ruby-doc.org/stdlib-2.4.3/libdoc/open-uri/rdoc/OpenURI.html"> open-uri </a> to handle the downloading of the actual pdf document.</p>
-
 <p>Well unfortunetly I ran into a situation where the website would only let the user download the pdf as a file-attachment.  You cannot download files from the browser using Phantom JS.  This makes sense considering the whole point of Phantom JS is that it is truley headless driver.</p>
-
 <p>I would have to bring in <a href="http://robotframework.org/SeleniumLibrary/"> Selenium </a> after all.  Selenium is the end all be all of  automated browser interaction libraries. You can utilize several different web drivers with it, and integrate it with Capybara.  This allowed me to use Selenium in replace of Poltergiest without having to change any of my code.</p>
-
 <p>I decided to go with the <a href="https://sites.google.com/a/chromium.org/chromedriver/"> Chrome Driver </a> because I when I was researching how I could download the pdf&rsquo;s using a headless driver someone suggested that the Chrome Driver had a new headless feature that would allow for downloading.(nope!)</p>
-
 <p>I plugged it in and started running the headless feature as I would Phantom JS. I actually really enjoyed the speed and performance of the driver.  I might start using it as my integration driver from now on.  Unfortunetly, it would not allow for downloads using the browser while using headless mode.(at least at this point)</p>
-
 <p>However, I was able to download the file using the non-headless mode of the Chrome Driver.</p>
-
 <h2 id="code">Code</h2>
-
 <p><em>The following is for installing the driver on Ubuntu</em></p>
-
 <p>Make sure Chrome is installed. <a href="https://askubuntu.com/questions/510056/how-to-install-google-chrome"> Install Options </a></p>
-
 <p>Download and extract the Chrome Driver from the <a href="https://sites.google.com/a/chromium.org/chromedriver/downloads"> Download Link </a>. Then move the extracted binary driver file to &ldquo;/usr/local/bin&rdquo;</p>
-
 <p>There are some preferences and arguments you have to send/set in the Chrome Driver to be able to download files from the browser.
 These will allow the browser to immediately download the file without having to accept the save_as prompt that ususally pops up.  You will also have to tell the driver what folder you would like the files to be downloaded to.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby">  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">driver_options</span>
+    download_directory <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;./downloads/&#39;</span>
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e"></span><span style="color:#f92672"></span><span style="color:#a6e22e">driver_options</span>
-    download_directory <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./downloads/&#39;</span>
-
-    { <span style="color:#e6db74">args</span>: <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;test-type&#39;</span>, <span style="color:#e6db74">&#39;disable-extensions&#39;</span><span style="color:#f92672">]</span>,
-     <span style="color:#e6db74">prefs</span>: { <span style="color:#e6db74">plugins</span>: { <span style="color:#e6db74">always_open_pdf_externally</span>: <span style="color:#66d9ef">true</span>  },
-             <span style="color:#e6db74">savefile</span>: { <span style="color:#e6db74">default_directory</span>: download_directory },
-             <span style="color:#e6db74">download</span>: { <span style="color:#e6db74">prompt_for_download</span>: <span style="color:#66d9ef">false</span>,
-                           <span style="color:#e6db74">default_directory</span>: download_directory } } }
-  <span style="color:#66d9ef">end</span></code></pre></div>
-
+    { <span style="color:#f1fa8c">args</span>: <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#39;test-type&#39;</span>, <span style="color:#f1fa8c">&#39;disable-extensions&#39;</span><span style="color:#ff79c6">]</span>,
+     <span style="color:#f1fa8c">prefs</span>: { <span style="color:#f1fa8c">plugins</span>: { <span style="color:#f1fa8c">always_open_pdf_externally</span>: <span style="color:#ff79c6">true</span>  },
+             <span style="color:#f1fa8c">savefile</span>: { <span style="color:#f1fa8c">default_directory</span>: download_directory },
+             <span style="color:#f1fa8c">download</span>: { <span style="color:#f1fa8c">prompt_for_download</span>: <span style="color:#ff79c6">false</span>,
+                           <span style="color:#f1fa8c">default_directory</span>: download_directory } } }
+  <span style="color:#ff79c6">end</span></code></pre></div>
 <p>Above I have wrapped the options within a ruby function.  I will call this function when passing the parameter option [:chromeOptions] to the #chrome method for  Remote::Capabilities. This takes place below when registering the driver with Capybara.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby">  Capybara<span style="color:#ff79c6">.</span>register_driver <span style="color:#f1fa8c">:chrome</span> <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>app<span style="color:#ff79c6">|</span>
+    capabilities <span style="color:#ff79c6">=</span> Selenium<span style="color:#ff79c6">::</span>
+                   WebDriver<span style="color:#ff79c6">::</span>
+                   Remote<span style="color:#ff79c6">::</span>
+                   Capabilities<span style="color:#ff79c6">.</span>chrome(<span style="color:#f1fa8c">chromeOptions</span>: driver_options)
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ruby" data-lang="ruby">  <span style="color:#66d9ef">Capybara</span><span style="color:#f92672">.</span>register_driver <span style="color:#e6db74">:chrome</span> <span style="color:#66d9ef">do</span> <span style="color:#f92672">|</span>app<span style="color:#f92672">|</span>
-    capabilities <span style="color:#f92672">=</span> <span style="color:#66d9ef">Selenium</span><span style="color:#f92672">::</span>
-                   <span style="color:#66d9ef">WebDriver</span><span style="color:#f92672">::</span>
-                   <span style="color:#66d9ef">Remote</span><span style="color:#f92672">::</span>
-                   <span style="color:#66d9ef">Capabilities</span><span style="color:#f92672">.</span>chrome(<span style="color:#e6db74">chromeOptions</span>: driver_options)
+    Capybara<span style="color:#ff79c6">::</span>
+    Selenium<span style="color:#ff79c6">::</span>
+    Driver<span style="color:#ff79c6">.</span>new app, <span style="color:#f1fa8c">browser</span>: <span style="color:#f1fa8c">:chrome</span>,
+                    <span style="color:#f1fa8c">desired_capabilities</span>: capabilities
+  <span style="color:#ff79c6">end</span>
 
-    <span style="color:#66d9ef">Capybara</span><span style="color:#f92672">::</span>
-    <span style="color:#66d9ef">Selenium</span><span style="color:#f92672">::</span>
-    <span style="color:#66d9ef">Driver</span><span style="color:#f92672">.</span>new app, <span style="color:#e6db74">browser</span>: <span style="color:#e6db74">:chrome</span>,
-                    <span style="color:#e6db74">desired_capabilities</span>: capabilities
-  <span style="color:#66d9ef">end</span>
-
-  <span style="color:#66d9ef">Capybara</span><span style="color:#f92672">.</span>ignore_hidden_elements <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span></code></pre></div>
-
+  Capybara<span style="color:#ff79c6">.</span>ignore_hidden_elements <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">false</span></code></pre></div>
 <p>The hash from the function #driver_options() gets parsed by the Selenium Library and then passed to the chrome driver.</p>
-
 <p>If you want to see a complete list of options that you can pass to the chrome driver check out this <a href="https://stackoverflow.com/questions/38335671/selenium-chrome-where-can-i-find-a-list-of-all-available-chromeoption-arguments">stacked overflow response</a></p>
-
 <p>Now when I  run the scraper locally using &hellip;</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  bundle exec rake scrape_pdfs</code></pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">  bundle <span style="color:#8be9fd;font-style:italic">exec</span> rake scrape_pdfs</code></pre></div>
 <p>The chrome browser window pops up and runs through the list of the Capybara session commands, navigating to the download link, and then clicking the link.  This is where the driver options come to play and automatically save the file to the proper directory.</p>
-
 <p>Great!  But I need this same thing to happen on the AWS with no monitor. What am I to do?</p>
-
 <p>Well that is where  Xvfb comes it.  It creates a virtual monitor and allows you to use non headless web drivers in headless environments.</p>
-
 <p><a href="http://tobyho.com/2015/01/09/headless-browser-testing-xvfb/">Xvfb Tutorial</a></p>
-
 <p>As long as Xvfb is properly installed all you need to do is pass the command that kicks off your Capybara Session to the &ldquo;xvfb-run&rdquo; command.</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  xvfb-run bundle exec rake scrape_pdfs</code></pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">  xvfb-run bundle <span style="color:#8be9fd;font-style:italic">exec</span> rake scrape_pdfs</code></pre></div>
 <p>I can no longer watch the scrape occur on my monitor, but after the program is done running, I can verify it worked by finding a freshly downloaded pdf in my &ldquo;./downloads&rdquo; folder.</p>
-
 <p>And there you have it a simple way to run non headless Chrome Driver session in a headless server environment, in order to download files using the browser.</p>
-
 <h2 id="notes">Notes</h2>
-
 <p>The default screen size for the &ldquo;xfvb-run&rdquo; command is fairly small.  So if you are interacting with a responsive website and need you change the virtual screen dimensions run the command like so&hellip;</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  xvfb-run --server-args<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;-screen 0 1024x768x24&#39;</span> bundle exec rake scrape_pdfs</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">  xvfb-run --server-args<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;-screen 0 1024x768x24&#39;</span> bundle <span style="color:#8be9fd;font-style:italic">exec</span> rake scrape_pdfs</code></pre></div>
 
     </div>
 </section>
 
         </div>
-        <div class="footer">
+        <div class="footer" id="footer">
             <div class="contact-options">
                 <div class="social-icons">
-                    <a href="https://github.com/chrislabarge">
+                    <a href="https://github.com/chrislabarge" class="tooltip">
+                        <span class="tooltip-text">Github</span>
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="mailto:chrislabargedev@gmail.com">
+                    <a href="https://gitlab.com/chrislabarge" class="tooltip">
+                        <span class="tooltip-text">Gitlab</span>
+                        <i class="fab fa-gitlab"></i>
+                    </a>
+                    <a href="mailto:chrislabargedev@gmail.com" class="tooltip">
+                        <span class="tooltip-text">Send Email</span>
                         <i class="far fa-envelope"></i>
+                    </a>
+                    <a id="light" class="toggle-theme tooltip">
+                        <span class="tooltip-text"> Light Theme</span>
+                        <i class="fas fa-sun"></i>
+                    </a>
+                    <a id="dark" class="toggle-theme tooltip" style="display: none">
+                        <span class="tooltip-text">Dark Theme</span>
+                        <i class="fas fa-moon"></i>
                     </a>
                 </div>
             </div>

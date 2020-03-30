@@ -1,6 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://chrislabarge.com/posts/bold-italic-tmux/</loc>
+    <lastmod>2020-03-28T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://chrislabarge.com/</loc>
+    <lastmod>2020-03-28T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://chrislabarge.com/posts/</loc>
+    <lastmod>2020-03-28T18:30:21-05:00</lastmod>
+  </url>
   
   <url>
     <loc>http://chrislabarge.com/posts/delete-all/</loc>
@@ -10,16 +25,6 @@
   <url>
     <loc>http://chrislabarge.com/posts/headless-scrape/</loc>
     <lastmod>2018-04-20T18:30:21-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://chrislabarge.com/projects/make-yourself-designs/</loc>
-    <lastmod>2018-03-25T18:30:21-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://chrislabarge.com/projects/menuberry/</loc>
-    <lastmod>2018-01-02T18:30:21-05:00</lastmod>
   </url>
   
   <url>
@@ -48,6 +53,11 @@
   </url>
   
   <url>
+    <loc>http://chrislabarge.com/projects/</loc>
+    <lastmod>2015-03-02T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://chrislabarge.com/projects/typing-calculator/</loc>
     <lastmod>2015-03-02T18:30:21-05:00</lastmod>
   </url>
@@ -63,30 +73,10 @@
   
   <url>
     <loc>http://chrislabarge.com/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://chrislabarge.com/</loc>
-    <lastmod>2018-05-23T18:30:21-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://chrislabarge.com/posts/</loc>
-    <lastmod>2018-05-23T18:30:21-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://chrislabarge.com/projects/</loc>
-    <lastmod>2018-03-25T18:30:21-05:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>http://chrislabarge.com/tags/</loc>
-    <priority>0</priority>
   </url>
   
 </urlset>

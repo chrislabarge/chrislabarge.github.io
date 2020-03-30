@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Chris LaBarge</title>
@@ -6,10 +6,26 @@
     <description>Recent content on Chris LaBarge</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 23 May 2018 18:30:21 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 28 Mar 2020 18:30:21 -0500</lastBuildDate>
     
 	<atom:link href="http://chrislabarge.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bold &#43; Italic in TMUX</title>
+      <link>http://chrislabarge.com/posts/bold-italic-tmux/</link>
+      <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/posts/bold-italic-tmux/</guid>
+      <description>You have just installed a hip new font face for programming. 🤙
+It has the all of the bells and whistles including bold and italic font styles.
+You configure your terminal to use the new font, and start typing away.
+&amp;hellip;.WHAT???&amp;hellip;.
+Its not working&amp;hellip;.🙄
+Has this happened to you before?
+There is always some caveat when tweaking your work environment no matter how trivial.
+This guide will briefly outline the solutions I came across to get bold and italic font styles working Vim/NeoVim running within a TMUX session, from a GNOME terminal shell.</description>
+    </item>
     
     <item>
       <title>Rails &#39;#delete_all&#39; - Fast &amp; Powerful - Beware</title>
@@ -27,26 +43,6 @@
       
       <guid>http://chrislabarge.com/posts/headless-scrape/</guid>
       <description>What You Will Learn  How to use a non headless web driver on a headless server. How to setup the Chrome Driver with Selenium and Capybara. How to set up the driver to allow for automatic browser downloads.  Who This Is For  Ruby developers wanting to use the Chrome Driver for their browser automations. Coders looking for a solution to headless file downloads using the browser. Coders that need to run a non headless web driver in a headless environment.</description>
-    </item>
-    
-    <item>
-      <title>Make Yourself Designs</title>
-      <link>http://chrislabarge.com/projects/make-yourself-designs/</link>
-      <pubDate>Sun, 25 Mar 2018 18:30:21 -0500</pubDate>
-      
-      <guid>http://chrislabarge.com/projects/make-yourself-designs/</guid>
-      <description>This is a e-commerce project I did for a client that wanted to have a website based around her Etsy store.
-I wanted to get a little creative with this one so I decided to build my own tools in order to sync the Etsy shop with the website. Basically, I did not want the client to have to upload new content to both her Etsy shop and website. It would be easier for her and future clients to just be able to add a new product to their Etsy shop and have it automatically show up on the website.</description>
-    </item>
-    
-    <item>
-      <title>MenuBerry</title>
-      <link>http://chrislabarge.com/projects/menuberry/</link>
-      <pubDate>Tue, 02 Jan 2018 18:30:21 -0500</pubDate>
-      
-      <guid>http://chrislabarge.com/projects/menuberry/</guid>
-      <description>MenuBerry is resource for vegans to discover food options at restaurants.
-I have been building MenuBerry part-time for the last year or so. It started as a hobby project that eventually grew over time. It is still in the early days, but it&amp;rsquo;s fully functional. Visitors can utilize the application as a resource to find restaurants and vegan options. Registered users are allowed to and contribute content and receive updates about their favorite restaurants.</description>
     </item>
     
     <item>

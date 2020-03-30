@@ -12,12 +12,10 @@
 
 .posts_listing {
   padding-left: 0;
-  margin-top: 20%;
+  margin-top: 10%;
   text-align: center;
   display: inline-block;
 }
-
-
 
 .list-item {
   padding-left: 0;
@@ -39,7 +37,6 @@
   height: 100%;
   border-radius: 26px;
 }
-
 .blog-post {
   padding-right: 1em;
 }
@@ -48,11 +45,15 @@
   width: 100%
 }
 
+.highlight {
+  padding: 10px 0 10px 0;
+  font-size: 15px;
+}
+
 .highlight pre {
-  overflow: scroll;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-right: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
   border-radius: 8px;
 }
 
@@ -63,15 +64,14 @@
   font-size: 30px;
 }
 
-.social-icons a, .navbar a {
-  color: black;
+.social-icons a {
+  padding: 0 10px;
 }
 
 .social-icons svg:hover,
 .list-item:hover,
 .navbar li div:hover,
-#page-title:hover
-{
+#page-title:hover {
   transform: scale(1.2);
 }
 
@@ -110,6 +110,11 @@ body {
   padding-bottom: 40px;
 }
 
+.navbar a{
+  font-weight: bold;
+  padding: 0 10px;
+}
+
 .navbar a:hover{
   text-decoration: underline;
 }
@@ -144,4 +149,100 @@ body {
     padding-top: 15px;
     padding-bottom: 0;
   }
+}
+
+
+html {
+  background-color: #242729 !important;
+}
+
+body {
+  color: white;
+  background-color: #242729 !important;
+}
+
+a, .navbar a {
+  color: #8be9fd !important;
+}
+
+.social-icons a, h1 a {
+  color: white !important;
+}
+html.light {
+  background-color: white !important;
+}
+
+html.light body {
+  color: black;
+  background-color: white !important;
+}
+
+html.light a,
+html.light .navbar a {
+  color: #a35dff !important;
+}
+
+html.light .social-icons a,
+html.light h1 a,
+html.light .list-item a {
+  color: black !important;
+}
+
+h1 { padding: 25px 0px 15px 0px }
+
+.blog-post h1 {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.blog-post-subheader {
+  margin-bottom: 40px;
+  color: #50fa7b;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+html.light .blog-post-subheader {
+  color: #5bd67a;
+}
+
+h2 { padding: 20px 0px 10px 0px }
+
+h3, h4, h5 {
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+  font-size: 15px;
+}
+
+.tooltip .tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
 }
