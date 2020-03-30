@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Chris LaBarge</title>
+    <title>Chris LaBarge - Software Developer - Portfolio</title>
     <link>http://chrislabarge.com/</link>
-    <description>Recent content on Chris LaBarge</description>
+    <description>Recent content on Chris LaBarge - Software Developer - Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 28 Mar 2020 18:30:21 -0500</lastBuildDate>
@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>Bold &#43; Italic in TMUX</title>
+      <title>Bold &#43; Italic Font in TMUX</title>
       <link>http://chrislabarge.com/posts/bold-italic-tmux/</link>
       <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
       
@@ -94,7 +94,7 @@ It was a perfect opportunity for me to learn how to submit a pull-request and at
       
       <guid>http://chrislabarge.com/posts/nightcrawler/</guid>
       <description>Overview This Dan Gilroy film (director and writer) starring Jake Gyllenhaal was the the first film I saw this year, and I couldn&amp;rsquo;t have been more pleased.
-Not only is the acting, music and cinematography top notch but it gives an extraordinarly intimate view local news media. Which in my opinion is a very fascinating subject given thats almost everyone consumes. If you are familiar with the teleivision show The Wire , each season examines a different part of the city of Batlimore.</description>
+Not only is the acting, music and cinematography top notch but it gives an extraordinarly intimate view local news media. Which in my opinion is a very fascinating subject given thats almost everyone consumes. If you are familiar with the television show The Wire , each season examines a different part of the city of Baltimore.</description>
     </item>
     
     <item>
@@ -116,12 +116,17 @@ Not only is the acting, music and cinematography top notch but it gives an extra
     </item>
     
     <item>
-      <title>About</title>
+      <title>About Chris</title>
       <link>http://chrislabarge.com/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://chrislabarge.com/about/</guid>
-      <description>I am a web developer from Albany NY and the creator of MenuBerry. Recently, I married my soulmate Jessica. I enjoy programming, playing guitar, watching movies and hiking. I really love building new things with software, hardware, and/or construction. It is always great to work on projects with new people, so contact me if you would like to collaborate!</description>
+      <description>I am a software developer from Albany NY.
+I enjoy programming, playing guitar, watching movies and hiking.
+I really love building new things with software, hardware, and/or construction.
+It is always great to work on projects with new people, so contact me if you would like to collaborate!
+Some Tools I use on a daily basis.
+ NeoVim TMUX Ruby on Rails Rspec  </description>
     </item>
     
   </channel>

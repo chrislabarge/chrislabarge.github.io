@@ -1,14 +1,51 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Chris LaBarge</title>
+    <title>Tags on Chris LaBarge - Software Developer - Portfolio</title>
     <link>http://chrislabarge.com/tags/</link>
-    <description>Recent content in Tags on Chris LaBarge</description>
+    <description>Recent content in Tags on Chris LaBarge - Software Developer - Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Sat, 28 Mar 2020 18:30:21 -0500</lastBuildDate>
     
 	<atom:link href="http://chrislabarge.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Coding</title>
+      <link>http://chrislabarge.com/tags/coding/</link>
+      <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/tags/coding/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Development Tools</title>
+      <link>http://chrislabarge.com/tags/development-tools/</link>
+      <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/tags/development-tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TMUX</title>
+      <link>http://chrislabarge.com/tags/tmux/</link>
+      <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/tags/tmux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vim</title>
+      <link>http://chrislabarge.com/tags/vim/</link>
+      <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/tags/vim/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

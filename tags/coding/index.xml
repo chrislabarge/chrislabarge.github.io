@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Coding on Chris LaBarge - Software Developer - Portfolio</title>
+    <link>http://chrislabarge.com/tags/coding/</link>
+    <description>Recent content in Coding on Chris LaBarge - Software Developer - Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 28 Mar 2020 18:30:21 -0500</lastBuildDate>
+    
+	<atom:link href="http://chrislabarge.com/tags/coding/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bold &#43; Italic Font in TMUX</title>
+      <link>http://chrislabarge.com/posts/bold-italic-tmux/</link>
+      <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/posts/bold-italic-tmux/</guid>
+      <description>You have just installed a hip new font face for programming. 🤙
+It has the all of the bells and whistles including bold and italic font styles.
+You configure your terminal to use the new font, and start typing away.
+&amp;hellip;.WHAT???&amp;hellip;.
+Its not working&amp;hellip;.🙄
+Has this happened to you before?
+There is always some caveat when tweaking your work environment no matter how trivial.
+This guide will briefly outline the solutions I came across to get bold and italic font styles working Vim/NeoVim running within a TMUX session, from a GNOME terminal shell.</description>
+    </item>
+    
+  </channel>
+</rss>

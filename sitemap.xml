@@ -18,6 +18,31 @@
   </url>
   
   <url>
+    <loc>http://chrislabarge.com/tags/coding/</loc>
+    <lastmod>2020-03-28T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://chrislabarge.com/tags/development-tools/</loc>
+    <lastmod>2020-03-28T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://chrislabarge.com/tags/</loc>
+    <lastmod>2020-03-28T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://chrislabarge.com/tags/tmux/</loc>
+    <lastmod>2020-03-28T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://chrislabarge.com/tags/vim/</loc>
+    <lastmod>2020-03-28T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://chrislabarge.com/posts/delete-all/</loc>
     <lastmod>2018-05-23T18:30:21-05:00</lastmod>
   </url>
@@ -73,10 +98,6 @@
   
   <url>
     <loc>http://chrislabarge.com/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>http://chrislabarge.com/tags/</loc>
   </url>
   
 </urlset>
