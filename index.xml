@@ -17,14 +17,68 @@
       <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
       
       <guid>http://chrislabarge.com/posts/bold-italic-tmux/</guid>
-      <description>You have just installed a hip new font face for programming. 🤙
-It has the all of the bells and whistles including bold and italic font styles.
-You configure your terminal to use the new font, and start typing away.
-&amp;hellip;.WHAT???&amp;hellip;.
-Its not working&amp;hellip;.🙄
-Has this happened to you before?
-There is always some caveat when tweaking your work environment no matter how trivial.
-This guide will briefly outline the solutions I came across to get bold and italic font styles working Vim/NeoVim running within a TMUX session, from a GNOME terminal shell.</description>
+      <description>&lt;p&gt;You have just installed a hip new font face for programming. 🤙&lt;/p&gt;
+&lt;p&gt;It has the all of the bells and whistles including &lt;strong&gt;bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt; font styles.&lt;/p&gt;
+&lt;p&gt;You configure your terminal to use the new font, and start typing away.&lt;/p&gt;
+&lt;p&gt;&amp;hellip;.&lt;strong&gt;WHAT???&lt;/strong&gt;&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;Its not working&amp;hellip;.🙄&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Has this happened to you before?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;There is always some caveat when tweaking your work environment no matter how trivial.&lt;/p&gt;
+&lt;p&gt;This guide will briefly outline the solutions I came across to get &lt;strong&gt;bold&lt;/strong&gt; and
+&lt;em&gt;italic&lt;/em&gt; font styles working Vim/NeoVim running within a TMUX session, from a
+GNOME terminal shell.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Bold&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Italic&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;VIM/NeoVIM&lt;/li&gt;
+&lt;li&gt;TMUX&lt;/li&gt;
+&lt;li&gt;GNOME Shell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;
+&lt;p&gt;The &lt;strong&gt;bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt; font faces were not properly working in a Tmux
+session. But they &lt;strong&gt;were&lt;/strong&gt; working outside of Tmux in a gnome terminal.&lt;/p&gt;
+&lt;p&gt;I came across this
+&lt;a href=&#34;https://gist.github.com/gutoyr/4192af1aced7a1b555df06bd3781a722&#34;&gt;Tutorial&lt;/a&gt; and
+it got me close to a solution. But there was issues.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Step 3 in the
+&lt;a href=&#34;https://gist.github.com/gutoyr/4192af1aced7a1b555df06bd3781a722&#34;&gt;tutorial&lt;/a&gt;
+did not work for me, so I had to rely on exporting the TERM env variable
+previous to running &lt;code&gt;tmux&lt;/code&gt; command. (&lt;em&gt;Per the instructions&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;env &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;TERM&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;screen-256color tmux&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;This worked for me. The &lt;code&gt;bold&lt;/code&gt; and &lt;code&gt;italic&lt;/code&gt; fonts are now working within Tmux.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add this to the &lt;code&gt;.zhrc&lt;/code&gt; configuration file to make an alias to prevent from
+having to explicitly set the &lt;code&gt;TERM&lt;/code&gt; environment variable.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;alias&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;tmux&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;env TERM=screen-256color tmux&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;cursor-issues&#34;&gt;Cursor Issues&lt;/h2&gt;
+&lt;p&gt;In Vim and NeoVim I have the options to allow for &lt;code&gt;block&lt;/code&gt; cursor shape when in
+&lt;code&gt;normal&lt;/code&gt; mode and &lt;code&gt;line&lt;/code&gt; shape when in &lt;code&gt;insert&lt;/code&gt; mode.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; &amp;amp;term =~ &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;screen.&amp;#34;&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_ti.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\eP\e[1 q\e\\&amp;#34;&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_SI.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\eP\e[5 q\e\\&amp;#34;&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_EI.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\eP\e[1 q\e\\&amp;#34;&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_te.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\eP\e[0 q\e\\&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_ti.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\&amp;lt;Esc&amp;gt;[1 q&amp;#34;&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_SI.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\&amp;lt;Esc&amp;gt;[5 q&amp;#34;&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_EI.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\&amp;lt;Esc&amp;gt;[1 q&amp;#34;&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_te.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\&amp;lt;Esc&amp;gt;[0 q&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;endif&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;This code is for displaying the desired cursor dependent on being in a remote
+session or not.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Unfortunately the font solution broke the cursor shape for Vim, running in
+Tmux.   The fix from above was only showing the &lt;code&gt;line&lt;/code&gt; shape cursor.&lt;/p&gt;
+&lt;p&gt;I found this solution from a neovim &lt;a href=&#34;https://neovim.io/doc/user/term.html#tui-cursor-shape&#34;&gt; document &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Which instructed me to add an override to &lt;code&gt;~/.tmux.conf&lt;/code&gt; file&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;set&lt;/span&gt; -ga terminal-overrides &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;*:Ss=\E[%p1%d q:Se=\E[ q&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
     </item>
     
     <item>
@@ -33,7 +87,66 @@ This guide will briefly outline the solutions I came across to get bold and ital
       <pubDate>Wed, 23 May 2018 18:30:21 -0500</pubDate>
       
       <guid>http://chrislabarge.com/posts/delete-all/</guid>
-      <description>What You Will Learn  A fast way to delete a large batch of rows from a Database table How to prevent from locking your Database  Who This Is For  Rails developers who need to delete records more efficiently.  Requirements  Ruby Rails &amp;gt;= 5.0 Relational Database like MySQL or PostgreSQL  Overview I am currently working on a Rails project that deals with importing and exporting large amounts of data.</description>
+      <description>&lt;h2 id=&#34;what-you-will-learn&#34;&gt;What You Will Learn&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;A fast way to delete a large batch of rows from a Database table&lt;/li&gt;
+&lt;li&gt;How to prevent from locking your Database&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;who-this-is-for&#34;&gt;Who This Is For&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Rails developers who need to delete records more efficiently.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby&lt;/li&gt;
+&lt;li&gt;Rails &amp;gt;= 5.0&lt;/li&gt;
+&lt;li&gt;Relational Database like MySQL or PostgreSQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I am currently working on a Rails project that deals with importing and exporting large amounts of data.  The user is able to import and store data into the applications Database as well and delete the data.&lt;/p&gt;
+&lt;p&gt;Because some of these data deletions can consist of thousands of rows you must code the removal process a little differently.&lt;/p&gt;
+&lt;p&gt;When a User imports/uploads new data into the application it creates a new &lt;code&gt;DataUplodad&lt;/code&gt; model.  The application also creates a new &lt;code&gt;DataSet&lt;/code&gt; record for every single data set from the import.&lt;/p&gt;
+&lt;p&gt;I have the model &lt;code&gt;DataSet&lt;/code&gt; which has a &lt;code&gt;belongs_to&lt;/code&gt; relationship to &lt;code&gt;DataUploads&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataSet&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
+  belongs_to &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_uploads&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I have the model &lt;code&gt;DataUploads&lt;/code&gt; which has a &lt;code&gt;has_many&lt;/code&gt; relationship to &lt;code&gt;DataSets&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataUpload&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
+  has_many &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_sets&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;dependent&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;:destroy&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Notice the &lt;code&gt;dependent: :destroy&lt;/code&gt;.  This means that when a &lt;code&gt;DataUpload&lt;/code&gt; model gets deleted/destroyed, all of the associated &lt;code&gt;DataSet&lt;/code&gt; models will all get destroyed as well.&lt;/p&gt;
+&lt;p&gt;This also loads every associated &lt;code&gt;DataSet&lt;/code&gt; model into memory as well.  This will bog down the server if there is a very large association of thousands of &lt;code&gt;DataSet&lt;/code&gt; records.&lt;/p&gt;
+&lt;p&gt;The way we solve this is to use the &lt;code&gt;ActiveRecord::Relation#delete_all&lt;/code&gt;. This &lt;a href=&#34;https://apidock.com/rails/ActiveRecord/Relation/delete_all&#34;&gt;method&lt;/a&gt; performs a single SQL statement and efficiently deletes all of the records within the Relation.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Look at the example below.&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;upload &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; DataUpload&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;last
+data_sets &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; upload&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;data_sets
+
+data_sets&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;delete_all&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;warning&#34;&gt;WARNING&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;DO NOT use this method on more then 5,000 records in a Database table.  It will lock the Database for the entire transaction.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;#delete_all&lt;/code&gt; does not load the record, so any callbacks will not be fired.  Make sure the application and/or model is not dependent on any pre/post delete processes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now we can implement the method in the in the &lt;code&gt;DataUpload&lt;/code&gt; callback.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataUpload&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
+  has_many &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_sets&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;dependent&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;:delete_all&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;BUT WAIT!! If you were a good reader and saw the first WARNING above you will notice that if I left the code this way and a particular &lt;code&gt;DataUpload&lt;/code&gt; instance had an association of more then 5,000 &lt;code&gt;DataSet&lt;/code&gt; records&amp;hellip;the Database will lock for the entire transaction. To prevent from this we must utilize one of the Ruby on Rails 5.0 &lt;a href=&#34;http://api.rubyonrails.org/classes/ActiveRecord/Batches.html#method-i-in_batches&#34;&gt;methods&lt;/a&gt; &lt;code&gt;#in_batches&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;If you are not use a Rails version that is &amp;gt;= 5.0 then check out the gem &lt;a href=&#34;https://github.com/ankane/delete_in_batches&#34;&gt;delete_in_batches&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataUpload&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
+  has_many &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_sets&lt;/span&gt;
+
+  before_destroy &lt;span style=&#34;color:#f1fa8c&#34;&gt;:destroy_data_sets&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;private&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;destroy_data_sets&lt;/span&gt;
+    data_sets&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;in_batches(&lt;span style=&#34;color:#f1fa8c&#34;&gt;of&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;1000&lt;/span&gt;)&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;delete_all
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;First we remove the previous callback &lt;code&gt;dependent: :delete_all&lt;/code&gt;, and replace it with &lt;code&gt;before_destroy&lt;/code&gt; callback and pass in the new private method &lt;code&gt;#destroy_data_sets&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You will notice that &lt;code&gt;#in_batches&lt;/code&gt; takes an option &lt;code&gt;:of&lt;/code&gt; set to &lt;code&gt;1000&lt;/code&gt;. This will limit the amount of records deleted in a single SQL transaction to 1,000.  Thus preventing the Database from locking.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -42,7 +155,81 @@ This guide will briefly outline the solutions I came across to get bold and ital
       <pubDate>Fri, 20 Apr 2018 18:30:21 -0500</pubDate>
       
       <guid>http://chrislabarge.com/posts/headless-scrape/</guid>
-      <description>What You Will Learn  How to use a non headless web driver on a headless server. How to setup the Chrome Driver with Selenium and Capybara. How to set up the driver to allow for automatic browser downloads.  Who This Is For  Ruby developers wanting to use the Chrome Driver for their browser automations. Coders looking for a solution to headless file downloads using the browser. Coders that need to run a non headless web driver in a headless environment.</description>
+      <description>&lt;h2 id=&#34;what-you-will-learn&#34;&gt;What You Will Learn&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;How to use a non headless web driver on a headless server.&lt;/li&gt;
+&lt;li&gt;How to setup the Chrome Driver with Selenium and Capybara.&lt;/li&gt;
+&lt;li&gt;How to set up the driver to allow for automatic browser downloads.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;who-this-is-for&#34;&gt;Who This Is For&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby developers wanting to use the Chrome Driver for their browser automations.&lt;/li&gt;
+&lt;li&gt;Coders looking for a solution to headless file downloads using the browser.&lt;/li&gt;
+&lt;li&gt;Coders that need to run a non headless web driver in a headless environment.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/teamcapybara/capybara&#34;&gt; Capybara &lt;/a&gt; and &lt;a href=&#34;http://robotframework.org/SeleniumLibrary/&#34;&gt; Selenium &lt;/a&gt; installed.&lt;/li&gt;
+&lt;li&gt;Framework(ex Rails) or program utilizing the above libraries.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;Recently I was making some scrapers for a client who needed pdf&amp;rsquo;s downloaded. The program runs on a AWS Ubuntu server and is developed with the Ruby language and the Capybara library. Because this is running in a headless environment I decided to go with Phantom JS as my web driver using Poltergeist gem to integrate it with Ruby and Capybara. I use this driver for integration testing when developing in Rails and have found it accomplished most of what I asked of it, without having to rely on the Selenium Library&lt;/p&gt;
+&lt;p&gt;Most of the pdf&amp;rsquo;s I was scraping came from websites that would render them at URL  endpoints. This allowed me to just scrape the URL string with Phantom JS and use the Ruby module &lt;a href=&#34;https://ruby-doc.org/stdlib-2.4.3/libdoc/open-uri/rdoc/OpenURI.html&#34;&gt; open-uri &lt;/a&gt; to handle the downloading of the actual pdf document.&lt;/p&gt;
+&lt;p&gt;Well unfortunetly I ran into a situation where the website would only let the user download the pdf as a file-attachment.  You cannot download files from the browser using Phantom JS.  This makes sense considering the whole point of Phantom JS is that it is truley headless driver.&lt;/p&gt;
+&lt;p&gt;I would have to bring in &lt;a href=&#34;http://robotframework.org/SeleniumLibrary/&#34;&gt; Selenium &lt;/a&gt; after all.  Selenium is the end all be all of  automated browser interaction libraries. You can utilize several different web drivers with it, and integrate it with Capybara.  This allowed me to use Selenium in replace of Poltergiest without having to change any of my code.&lt;/p&gt;
+&lt;p&gt;I decided to go with the &lt;a href=&#34;https://sites.google.com/a/chromium.org/chromedriver/&#34;&gt; Chrome Driver &lt;/a&gt; because I when I was researching how I could download the pdf&amp;rsquo;s using a headless driver someone suggested that the Chrome Driver had a new headless feature that would allow for downloading.(nope!)&lt;/p&gt;
+&lt;p&gt;I plugged it in and started running the headless feature as I would Phantom JS. I actually really enjoyed the speed and performance of the driver.  I might start using it as my integration driver from now on.  Unfortunetly, it would not allow for downloads using the browser while using headless mode.(at least at this point)&lt;/p&gt;
+&lt;p&gt;However, I was able to download the file using the non-headless mode of the Chrome Driver.&lt;/p&gt;
+&lt;h2 id=&#34;code&#34;&gt;Code&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;The following is for installing the driver on Ubuntu&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Make sure Chrome is installed. &lt;a href=&#34;https://askubuntu.com/questions/510056/how-to-install-google-chrome&#34;&gt; Install Options &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Download and extract the Chrome Driver from the &lt;a href=&#34;https://sites.google.com/a/chromium.org/chromedriver/downloads&#34;&gt; Download Link &lt;/a&gt;. Then move the extracted binary driver file to &amp;ldquo;/usr/local/bin&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;There are some preferences and arguments you have to send/set in the Chrome Driver to be able to download files from the browser.
+These will allow the browser to immediately download the file without having to accept the save_as prompt that ususally pops up.  You will also have to tell the driver what folder you would like the files to be downloaded to.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;driver_options&lt;/span&gt;
+  download_directory &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;./downloads/&amp;#39;&lt;/span&gt;
+
+  { &lt;span style=&#34;color:#f1fa8c&#34;&gt;args&lt;/span&gt;: &lt;span style=&#34;color:#ff79c6&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;test-type&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;disable-extensions&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;]&lt;/span&gt;,
+    &lt;span style=&#34;color:#f1fa8c&#34;&gt;prefs&lt;/span&gt;: {
+      &lt;span style=&#34;color:#f1fa8c&#34;&gt;plugins&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;always_open_pdf_externally&lt;/span&gt;: &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt; },
+      &lt;span style=&#34;color:#f1fa8c&#34;&gt;savefile&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;default_directory&lt;/span&gt;: download_directory },
+      &lt;span style=&#34;color:#f1fa8c&#34;&gt;download&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;prompt_for_download&lt;/span&gt;: &lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;,
+                  &lt;span style=&#34;color:#f1fa8c&#34;&gt;default_directory&lt;/span&gt;: download_directory }
+    }
+  }
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Above I have wrapped the options within a ruby function.  I will call this function when passing the parameter option [:chromeOptions] to the #chrome method for  Remote::Capabilities. This takes place below when registering the driver with Capybara.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;Capybara&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;register_driver &lt;span style=&#34;color:#f1fa8c&#34;&gt;:chrome&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt;app&lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt;
+  capabilities &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; Selenium&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;WebDriver&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Remote&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;
+    Capabilities&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;chrome(
+      &lt;span style=&#34;color:#f1fa8c&#34;&gt;chromeOptions&lt;/span&gt;: driver_options
+    )
+
+  Capybara&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Selenium&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Driver&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;new(
+    app,
+    &lt;span style=&#34;color:#f1fa8c&#34;&gt;browser&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;:chrome&lt;/span&gt;,
+    &lt;span style=&#34;color:#f1fa8c&#34;&gt;desired_capabilities&lt;/span&gt;: capabilities
+  )
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+
+Capybara&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;ignore_hidden_elements &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The hash from the function #driver_options() gets parsed by the Selenium Library and then passed to the chrome driver.&lt;/p&gt;
+&lt;p&gt;If you want to see a complete list of options that you can pass to the chrome driver check out this &lt;a href=&#34;https://stackoverflow.com/questions/38335671/selenium-chrome-where-can-i-find-a-list-of-all-available-chromeoption-arguments&#34;&gt;stacked overflow response&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now when I  run the scraper locally using &amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The chrome browser window pops up and runs through the list of the Capybara session commands, navigating to the download link, and then clicking the link.  This is where the driver options come to play and automatically save the file to the proper directory.&lt;/p&gt;
+&lt;p&gt;Great!  But I need this same thing to happen on the AWS with no monitor. What am I to do?&lt;/p&gt;
+&lt;p&gt;Well that is where  Xvfb comes it.  It creates a virtual monitor and allows you to use non headless web drivers in headless environments.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://tobyho.com/2015/01/09/headless-browser-testing-xvfb/&#34;&gt;Xvfb Tutorial&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As long as Xvfb is properly installed all you need to do is pass the command that kicks off your Capybara Session to the &amp;ldquo;xvfb-run&amp;rdquo; command.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xvfb-run bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I can no longer watch the scrape occur on my monitor, but after the program is done running, I can verify it worked by finding a freshly downloaded pdf in my &amp;ldquo;./downloads&amp;rdquo; folder.&lt;/p&gt;
+&lt;p&gt;And there you have it a simple way to run non headless Chrome Driver session in a headless server environment, in order to download files using the browser.&lt;/p&gt;
+&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
+&lt;p&gt;The default screen size for the &amp;ldquo;xfvb-run&amp;rdquo; command is fairly small.  So if you are interacting with a responsive website and need you change the virtual screen dimensions run the command like so&amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xvfb-run --server-args&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;-screen 0 1024x768x24&amp;#39;&lt;/span&gt; bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
     </item>
     
     <item>
@@ -51,8 +238,169 @@ This guide will briefly outline the solutions I came across to get bold and ital
       <pubDate>Mon, 27 Feb 2017 18:30:21 -0500</pubDate>
       
       <guid>http://chrislabarge.com/posts/sd-format/</guid>
-      <description>Overview A Raspberry Pi is an $35 dollar computer that is the size of a credit card. It can be utilized in everything from DIY home projects to missle guidence systems.
-This tutorial will demonstrate the process of installing an operating system on the device. Although it is aimed at beginners, we will be using the command line. Don&amp;rsquo;t worry though, the goal is to ease newbies into command line, as you are sure to come across it again and again in future raspberry pi endeavers.</description>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;A &lt;a href=&#34;https://www.raspberrypi.org/&#34;&gt;Raspberry Pi&lt;/a&gt; is an $35 dollar computer that is the size of a credit card.
+It can be utilized in everything from &lt;a href=&#34;https://pimylifeup.com/category/projects/&#34;&gt;DIY home projects&lt;/a&gt; to &lt;a href=&#34;https://www.reddit.com/r/raspberry_pi/comments/5c2f6d/raspberry_pi_spotted_in_ukrainian_missile/&#34;&gt;missle guidence systems&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This tutorial will demonstrate the process of installing an operating system on the device.
+Although it is aimed at beginners, we will be using the command line.  Don&amp;rsquo;t worry though,
+the goal is to ease newbies into command line, as you are sure to come across it
+again and again in future raspberry pi endeavers.&lt;/p&gt;
+&lt;h2 id=&#34;items-needed&#34;&gt;Items Needed&lt;/h2&gt;
+&lt;p&gt;For this tutorial you will need the following items&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Computer with OSX (Unix) or Linux installed&lt;/li&gt;
+&lt;li&gt;Raspberry Pi&lt;/li&gt;
+&lt;li&gt;MicroSD card (4gb minimum)&lt;/li&gt;
+&lt;li&gt;SD adapter (comes with the microSD card)&lt;/li&gt;
+&lt;li&gt;SD card reader (internal or external)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;step-1-choose-an-operating-system&#34;&gt;Step 1. Choose an operating system&lt;/h3&gt;
+&lt;p&gt;Although there are many different raspberry pi operating systems (aka distributions) that range in functionality, the
+installation process of these operating systems are for the most part, all the same.&lt;/p&gt;
+&lt;p&gt;For this tutorial we will be installing the &lt;a href=&#34;https://retropie.org.uk/download/&#34;&gt;RetroPi OS&lt;/a&gt;, which turns the Pi into a emulation station for gaming.&lt;/p&gt;
+&lt;h3 id=&#34;step-2-download-and-extract-the-operating-system&#34;&gt;Step 2. Download and Extract the operating system&lt;/h3&gt;
+&lt;p&gt;From your OSX or Linux computer, download and extract the .img file of the operating system you will be installing.&lt;/p&gt;
+&lt;h3 id=&#34;step-3-find-the-pathname-of-the-extracted-image-file&#34;&gt;Step 3. Find the pathname of the extracted Image file.&lt;/h3&gt;
+&lt;p&gt;Everything on a computer is a file. And all of these files have pathnames.  One way to discover the pathname is as follows..&lt;/p&gt;
+&lt;p&gt;Right click on the extracted Image (.img) file from STEP 2 and select &amp;ldquo;Get Info&amp;rdquo; (OSX) or &amp;ldquo;Properties&amp;rdquo; (Linux).
+Within the window that pops up, under &amp;ldquo;Where:&amp;rdquo; for OSX you will see a pathname that looks similar to this
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/Users/chris/Downloads/the_file_name.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;For Linux users, under &amp;ldquo;Location:&amp;rdquo; you will see a pathname that looks similar to this
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/home/chris/Downloads/the_file_name.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+On your computer ‘chris’ will be replaced with your username, ‘Downloads’ will be replaced with whichever folder the .img file is contained in.&lt;/p&gt;
+&lt;p&gt;We will need this pathname later in the tutorial, so copy it down.&lt;/p&gt;
+&lt;h3 id=&#34;step-4-connect-the-microsd-card-to-your-computer&#34;&gt;Step 4. Connect the microSD card to your computer&lt;/h3&gt;
+&lt;p&gt;Insert the microSD card into the SD adapter.
+Plug the SD adapter card into the SD card reader.
+If the card reader is external, you may now plug the card reader into the computer.&lt;/p&gt;
+&lt;h3 id=&#34;step-5-find-the-sd-card-partition-pathname&#34;&gt;Step 5. Find the SD card partition pathname&lt;/h3&gt;
+&lt;p&gt;Now we must find the pathname of the SD card &lt;a href=&#34;https://en.wikipedia.org/wiki/Disk_partitioning&#34;&gt;partition&lt;/a&gt; (aka region).
+So how would go about repeating process in Step 3 and right clicking the SD card reader file?&lt;/p&gt;
+&lt;p&gt;Well we could try sifting through system folders with the mouse to find the correct file, but that would take too long.
+The computer can just tell us the pathname if we ask it.&lt;/p&gt;
+&lt;p&gt;This is where the command line comes in.  Now don’t be scared.  Although the command line can be intimidating, it is fairly easy to use.&lt;/p&gt;
+&lt;p&gt;We can use the command line to tell the computer to do things.
+In this case, will will be entering a command that tells the computer to display information for us.&lt;/p&gt;
+&lt;p&gt;Open the Terminal application on your computer.  Here is the command we are going to type into the terminal (aka command line)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo fdisk -l&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Lets break down this command.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;sudo&amp;rdquo; stands for superuser, and it gives us &amp;ldquo;superuser&amp;rdquo; privileges in order to have access to the &amp;ldquo;fdisk&amp;rdquo; command.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;fdisk&amp;rdquo; stands for &amp;ldquo;fixed disks&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;The &amp;ldquo;-l&amp;rdquo; at the end of the command stands for &amp;ldquo;List&amp;rdquo;, and is a &amp;ldquo;fdisk&amp;rdquo; option flag.&lt;/p&gt;
+&lt;p&gt;If you want a closer look at the capabilities of the commands, you can type &amp;ldquo;man&amp;rdquo; (manual) + the command.
+For instance
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;man sudo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+will show us all of the capabilities of &amp;ldquo;sudo&amp;rdquo; and how to use it.  You can do the same for &amp;ldquo;fdisk&amp;rdquo;.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;man fdisk&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Do yourself a favor and scroll through the manual pages for each command and take note of the format similarities.
+All &amp;ldquo;man&amp;rdquo; (manual) pages for commands will be in this format.
+So if you are ever unsure of how a command works, just read up on it using &amp;ldquo;man&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Alright so now that you know what the command is doing, type out the full command and press enter.&lt;/p&gt;
+&lt;p&gt;Because we used &amp;ldquo;sudo&amp;rdquo; (superuser) in this command, it will ask for a password. Type your username’s password and press enter.
+(The traditional dots or ‘*’ asterisk that appear when you type your password will not do so in the command line. This is normal.)&lt;/p&gt;
+&lt;p&gt;You should now see a list of columns. Look for the column with the header labeled &amp;ldquo;Size&amp;rdquo;
+and look the corresponding amount that your SD card has available on it. The size will
+usually be a couple hundred megabytes less then the full capacity of the card. So for
+instance I am formatting a 8gb SD card and it shows up in the size column as 7.2gb. The
+column with the header labled &amp;ldquo;Device&amp;rdquo; is the pathname of the card partition.&lt;/p&gt;
+&lt;p&gt;If the card reader is external the pathname should look similar to
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/dev/sdc1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+If it is internal the pathname should look similar to
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/dev/mmcblk0p1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;This is the file pathname for the partition on the SD card. Copy down
+this path name which will be used in the following step.&lt;/p&gt;
+&lt;h3 id=&#34;step-6-unmount-the-sd-card&#34;&gt;Step 6. Unmount the SD card&lt;/h3&gt;
+&lt;p&gt;Before we can format the card in the next step, we must unmount it. This is accomplished by entering another command in the (not so scary) command line.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo umount the_pathname_from_step5&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+So the command for this demonstration will be
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo umount /dev/mmcblk0p1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;h3 id=&#34;step-7-format-the-sd-card&#34;&gt;Step 7. Format the SD card&lt;/h3&gt;
+&lt;p&gt;In order to format the SD card, we will need the pathname of the SD card reader.  Fortunetly, this is as easy as
+modifying the pathname used in the last step.  For external card readers remove the last character from the pathname.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/dev/sdc1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Turns into
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/dev/sdc&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+For internal readers, remove the last 2 characters. ‘/dev/mmcblk0p1’ turns to ‘/dev/mmcblk0’.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/dev/mmcblk0p1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Turns into
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/dev/mmcblk0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Now that we have the pathname of the SD card reader, it is time to format the card.  The command is
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo fdisk the_pathname&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+So for this demonstration I will enter
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo fdisk /dev/mmcblk0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Once you enter the command it may ask for your password again (because we are using &amp;ldquo;sudo&amp;rdquo;).&lt;/p&gt;
+&lt;p&gt;You should now see a menu for &amp;ldquo;fdisk&amp;rdquo; within the command line.
+Now you can enter menu commands. As you can see, if we type and enter ‘m’, we will be shown the help menu.  This displays all of the available commands we can enter within the &amp;ldquo;fdisk&amp;rdquo; menu. We first are going to delete any existing partitions on the SD card.  We do this by entering the simple command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;d&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+My card had 2 existing partitions so after I entered the above command I saw the below screen.&lt;/p&gt;
+&lt;p&gt;SCREEN HERE&lt;/p&gt;
+&lt;p&gt;It tells me there are 2 partitions on the card and the default partition is 2. It wants me to tell it which one to delete by entering either &amp;ldquo;1&amp;rdquo;, &amp;ldquo;2&amp;rdquo;, or nothing at all (since the default is 2). I will enter 2, although I could just press enter and I should see the same screen as below.&lt;/p&gt;
+&lt;p&gt;SCREEN&lt;/p&gt;
+&lt;p&gt;In order to delete the last partition enter the command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;d&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+one more time.  Since there is only one left we should automatically be presented with the prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Partition &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt; has been deleted&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;We will now add a new partition to the SD card.&lt;/p&gt;
+&lt;p&gt;This is accomplished by entering the command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;n&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+(Remember you can see where these commands are coming from by entering &amp;ldquo;m&amp;rdquo; for the help menu)
+We will now be presented with the following prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Partition &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;type&lt;/span&gt;
+ p   primary &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt; primary, &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt; extended, &lt;span style=&#34;color:#bd93f9&#34;&gt;4&lt;/span&gt; free&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;
+ e   extended &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;container &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; logical partitions&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+The prompt asks for the &amp;ldquo;Partition Type&amp;rdquo; and the options are &amp;ldquo;p&amp;rdquo; for primary and &amp;ldquo;e&amp;rdquo; for extended.
+We want this new partition to be primary so enter the command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;p&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+We will now be presented with following prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Partition number &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;1-4, default 1&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Enter
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+We will now be presented with following prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;First sector &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;2048-15130623, default 2048&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Just press enter without typing anything else, for the default 2048 selection.
+We will now be presented with following prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Last sector, +sectors or +size&lt;span style=&#34;color:#ff79c6&#34;&gt;{&lt;/span&gt;K,M,G,T,P&lt;span style=&#34;color:#ff79c6&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;2048-15130623, default 15130623&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Just press enter without typing anything else, for the default 15130623 selection.
+(Feel free to read up more on &lt;a href=&#34;https://en.wikipedia.org/wiki/Master_boot_record&#34;&gt;sectors&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;We will be presented with following prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Created a new partition &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt; of &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;Linux&amp;#39;&lt;/span&gt; and of size 7.2 GiB.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Beautiful! Except we want the partition type to be &amp;ldquo;FAT32&amp;rdquo; not &amp;ldquo;Linux&amp;rdquo;.  We can do this by entering the command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;t&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;We will be presented with following prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Selected partition &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;
+Partition &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;type&lt;/span&gt; L to list all types&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Enter the command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;L&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+We will be presented with all of the different foramt types. W95 FAT32 is the format we are looking for.  On my machine it is toward the beginning of the list. Once you find it, take note of the code beside it (mine is &amp;ldquo;b&amp;rdquo;).&lt;/p&gt;
+&lt;p&gt;Type the code that was beside &amp;ldquo;W95 FAT32&amp;rdquo; and press enter.
+In my case
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;b&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Now enter the command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;p&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+We should see that the newly created partition has a type of &amp;ldquo;W95 FAT32&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Now we must write all of our changed to the card in order to finalize the formatted partition. Enter the command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;w&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+We will be presented with following prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;The partition table has been altered.
+Calling ioctl&lt;span style=&#34;color:#ff79c6&#34;&gt;()&lt;/span&gt; to re-read partition table.
+Syncing disks.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Success!  It will exit out of the &amp;lsquo;fdisk&amp;rsquo; program after writing.  Now for the last step in formatting the card. We must create a file system on the new clean partition we just created on the SD card.  This is accomplished with the commmand
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo mkfs.vfat partition_pathname_from_step5&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+So the command I entered is
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo mkfs.vfat /dev/mmcblk0p1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;h3 id=&#34;step-8-install-the-img-file-onto-the-sd-card&#34;&gt;Step 8. Install the .img file onto the SD card&lt;/h3&gt;
+&lt;p&gt;Now for the last and final step of the tutorial.  To install the the operating system onto the SD card we will need the
+pathname of the Image (.img) file from step 3, and the pathname from the card reader (the modified partition pathname) from the beginning of step 7.&lt;/p&gt;
+&lt;p&gt;The command will be&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo dd &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;bs&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;1M &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;image_pathname &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;of&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;card_reader_device_pathname&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note, if you are on a OSX(Unix) computer, the above &amp;ldquo;M&amp;rdquo; command will need to be lowercase &amp;ldquo;m&amp;rdquo; instead.&lt;/p&gt;
+&lt;p&gt;This is the command I entered
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo dd &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;bs&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;1M &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;home/chris/Downloads/retro_pi.img &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;of&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;/dev/mmcblk0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Once you have entered the correct command, the installation will begin. This take a while and you will just see a blinking cursor. As long as it&amp;rsquo;s blinking that means it is writing the Image (.img) file to the SD card. On my machine it was almost 5 minutes per gigabyte.  So just hang in there!!&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Once the installation is complete, you can eject the SD card from your computer and insert the microSD card into your Raspberry Pi.  And if everything goes well, you should witness your Pi boot up with installed operating system. Congradulations!  You just installed a operating system using only the command line, that wasn&amp;rsquo;t so hard was it?&lt;/p&gt;
+&lt;p&gt;If you have any questions, issues, or advice, please send me an email and I will be more then happy to respond.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -61,9 +409,283 @@ This tutorial will demonstrate the process of installing an operating system on 
       <pubDate>Thu, 26 Mar 2015 12:01:27 +0000</pubDate>
       
       <guid>http://chrislabarge.com/posts/typing-speed-calulator/</guid>
-      <description>Overview Volt is a new Ruby framework that allows your Ruby code to run on both the server and the client. It uses the opal gem to compile the Ruby code to Javascript.
-I suggest watching the Intro to Volt video, that goes over how to set up a to-do list in under 20 minutes. It is very comprehensible and showcases the magic of Volt.
-In this tutorial you will learn how to create a typing speed calculator that updates as the user types in real time (like this one).</description>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;http://voltframework.com/&#34;&gt;Volt&lt;/a&gt; is a new Ruby framework that allows your Ruby code to run on both the
+server and the client.  It uses the &lt;a href=&#34;http://opalrb.org/&#34;&gt;opal&lt;/a&gt; gem to compile
+the Ruby code to Javascript.&lt;/p&gt;
+&lt;p&gt;I suggest watching the &lt;a href=&#34;https://www.youtube.com/watch?v=Tg-EtRnMz7o&#34;&gt;Intro to Volt&lt;/a&gt;
+video, that goes over how to set up a to-do list in under 20 minutes. It is very
+comprehensible and showcases the magic of Volt.&lt;/p&gt;
+&lt;p&gt;In this tutorial you will learn how to create a typing speed calculator
+that updates as the user types in real time (&lt;a href=&#34;https://typing-calculator.herokuapp.com/&#34;&gt;like this one&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;We will cover how to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Install the Volt Framework&lt;/li&gt;
+&lt;li&gt;Generate new Volt application&lt;/li&gt;
+&lt;li&gt;Use reactive form input&lt;/li&gt;
+&lt;li&gt;Create backend code for the typing calculator&lt;/li&gt;
+&lt;li&gt;Enable Bootstrap Animation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;First we need to install the Volt framework:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;gem install volt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once installed, create a new Volt project:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;volt new typing-calculator
+
+&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;cd&lt;/span&gt; typing-calculator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you are using git for version control and plan on pushing your app up to
+github, you must get rid of your secret key. Just open up the app.rb in your
+applications config directory&amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;config/app.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And delete the string labeled config.app_secret&lt;/p&gt;
+&lt;h2 id=&#34;setup&#34;&gt;SetUp&lt;/h2&gt;
+&lt;p&gt;Fire up the Volt server which automatically pushes any changes you save to
+anyone viewing the page.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; volt server&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Open your browser and type &amp;ldquo;http://localhost:3000/&amp;rdquo; in the address bar.  This
+will bring you to the homepage of your new app. The template already includes
+a login link for in the navigation.  We won&amp;rsquo;t be needing users to sign up or
+log in for this project so go ahead open the project in your favorite editor and
+locate the main.html file.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/views/main/main.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And comment out the user templates&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;.
+.
+.
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:Body&lt;/span&gt;&amp;gt;
+  &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;container&amp;#34;&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;header&amp;#34;&lt;/span&gt;&amp;gt;
+      &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;ul&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;nav nav-pills pull-right&amp;#34;&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:nav&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;text&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Home&amp;#34;&lt;/span&gt; /&amp;gt;
+        &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:nav&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;/about&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;text&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;About&amp;#34;&lt;/span&gt; /&amp;gt;
+    &lt;span style=&#34;color:#6272a4&#34;&gt;&amp;lt;!--    &amp;lt;:user-templates:menu /&amp;gt; COMMENT ME OUT --&amp;gt;&lt;/span&gt;
+      &amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;ul&lt;/span&gt;&amp;gt;
+      &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;h3&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;text-muted&amp;#34;&lt;/span&gt;&amp;gt;typing-calculator&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;h3&lt;/span&gt;&amp;gt;
+    &amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt;&amp;gt;
+.
+.
+.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can also comment out the routes for signing in and logging in as well.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/config/routes.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;# See https://github.com/voltrb/volt#routes for more info on routes&lt;/span&gt;
+
+get &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;/about&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;_action&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;about&amp;#39;&lt;/span&gt;
+
+&lt;span style=&#34;color:#6272a4&#34;&gt;# Routes for login and signup, provided by user-templates component gem&lt;/span&gt;
+&lt;span style=&#34;color:#6272a4&#34;&gt;#get &amp;#39;/signup&amp;#39;, _controller: &amp;#39;user-templates&amp;#39;, _action: &amp;#39;signup&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#6272a4&#34;&gt;#get &amp;#39;/login&amp;#39;, _controller: &amp;#39;user-templates&amp;#39;, _action: &amp;#39;login&amp;#39;&lt;/span&gt;
+
+&lt;span style=&#34;color:#6272a4&#34;&gt;# The main route, this should be last. It will match any params not&lt;/span&gt;
+&lt;span style=&#34;color:#6272a4&#34;&gt;# previously matched.&lt;/span&gt;
+get &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;, {}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;reactive-form-input&#34;&gt;Reactive Form Input&lt;/h2&gt;
+&lt;p&gt;Locate the index.html file within views and add some content along with a form
+to get user input.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/views/main/index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:Title&lt;/span&gt;&amp;gt;
+  Typing Calculator
+
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:Body&lt;/span&gt;&amp;gt;
+  &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;h1&lt;/span&gt;&amp;gt;Words Per Minute Typing Calculator&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;h1&lt;/span&gt;&amp;gt;
+
+  &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;form&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;e-submit&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;complete&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;role&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;form&amp;#34;&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;form-group&amp;#34;&lt;/span&gt;&amp;gt;
+     &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;label&lt;/span&gt;&amp;gt;&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;h3&lt;/span&gt;&amp;gt;Begin Typing&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;h3&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;label&lt;/span&gt;&amp;gt;
+     &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;input&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;form-control submit-field&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;text&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#50fa7b&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34; {% raw html %}{{page._user_string}}{% endraw %}&amp;#34;&lt;/span&gt;&amp;gt;
+    &amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt;&amp;gt;
+  &amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;form&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The input value for the form {% raw %}{{ page._user_string }}{% endraw %} is a piece
+of Ruby code.  Anything within the double curly brackets {% raw %}{{ ruby_function }}{% endraw %}
+is executed as ruby code.  In this case we are creating a page collection. In Volt,
+there are several types of collections to store data.  Page collections are
+temporary, meaning they will lose their data once you refresh or visit a
+different page.  We will not be using more that one page, so page collections are
+perfect for this project.&lt;/p&gt;
+&lt;p&gt;This form/input field is where the users will begin typing. The data we get from
+this form is how we will calculate the typing speed of the user.&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;Now we need sample text that the user will type. This can be any chunk of text you want to use.
+We will start by defining a function in the app controller that returns the
+text.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/controllers/main_controller.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;MainController&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; Volt&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;ModelController
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;index&lt;/span&gt;
+    &lt;span style=&#34;color:#6272a4&#34;&gt;# Add code for when the index view is loaded&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;about&lt;/span&gt;
+    &lt;span style=&#34;color:#6272a4&#34;&gt;# Add code for when the about view is loaded&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;sample_text&lt;/span&gt;
+   &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;In Volt, to simplify managing application state, all application state is kept in models that can optionally be persisted in different locations. By centralizing the application state, we reduce the amount of complex code needed to update a page. We can then build our page&amp;#39;s html declaratively.&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now add the newly defined method to the home-page&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/views/main/index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:Title&lt;/span&gt;&amp;gt;
+  Typing Calculator
+
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:Body&lt;/span&gt;&amp;gt;
+ &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;h1&lt;/span&gt;&amp;gt;Words Per Minute Typing Calculator&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;h1&lt;/span&gt;&amp;gt;
+
+ &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;h3&lt;/span&gt;&amp;gt;Sample Text&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;h3&lt;/span&gt;&amp;gt;
+ &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{%raw ruby%}{{sample_text}}{%endraw%}&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;
+.
+.
+.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;h2 id=&#34;words-per-minutewpm-calculations&#34;&gt;Words Per Minute(WPM) Calculations&lt;/h2&gt;
+&lt;p&gt;Now we can work on the back end code.  This will compare the users input with the
+sample text and calculate how much time has passed.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.speedtypingonline.com/typing-equations&#34;&gt;How to Calculate Typing Speed (WPM) and Accuracy&lt;/a&gt;
+is what I used to come up with the back end. Browse through the article in order
+to get a deeper understanding of the code.&lt;/p&gt;
+&lt;p&gt;In order to compare the sample text with the user input we must split the strings
+and put them into an array.&lt;/p&gt;
+&lt;p&gt;Create two functions in the controller that handle this task.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/controllers/main_controller.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;MainController&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; Volt&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;ModelController
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;sample_array&lt;/span&gt;
+    sample_text&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;split
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;user_array&lt;/span&gt;
+    page&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;_user_string&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;split
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can do this right on the home page for now in order to help you visualize.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/views/index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;sample text array&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{{sample_array}}&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;
+
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;user text array&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{{user_array}}&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;Now we have to create a function that compares the two arrays, and gives us
+an array of user mistakes.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/controllers/main_controller.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;mistakes_array&lt;/span&gt;
+  popped_array &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; user_array
+  popped_array&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;pop
+  mistakes &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; popped_array &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; sample_array
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The reason we set a new variable to the &amp;ldquo;user_array&amp;rdquo; and &amp;ldquo;pop&amp;rdquo; that new variable is
+because you do not want the current word that the user is typing to count as
+a mistake.  You only want completed words to be considered.&lt;/p&gt;
+&lt;p&gt;Add the &amp;lsquo;mistakes_array&amp;rsquo; function to the home page to get an idea of what I am
+talking about.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/views/index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;mistakes array&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{{mistakes_array}}&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;As you can see in the photo above, the second mistake will not count until the
+user starts a new word following the mistake.&lt;/p&gt;
+&lt;p&gt;We can use the mistakes_array to find the users accuracy. But before writing
+the accuracy method, we must create one the finds the total number of characters
+in an array.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/controllers/main_controller.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;character_length&lt;/span&gt;(array)
+  array&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;join&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;length
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+
+&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;accuracy&lt;/span&gt;
+  correct_characters &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; character_length(user_array) &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; character_length(mistakes_array)
+  fraction &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; correct_characters&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; character_length(user_array)
+  accuracy_percentage &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (fraction &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;100&lt;/span&gt;)&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;round
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Dividing the total character length of the &amp;lsquo;user_array&amp;rsquo; by only the &amp;lsquo;correct_word_length&amp;rsquo;
+gives us a decimal/fraction that we multiply by 100 to get the accuracy percentage.&lt;/p&gt;
+&lt;p&gt;Per  &lt;a href=&#34;http://www.speedtypingonline.com/typing-equations&#34;&gt;SpeedTypingOnline.com&lt;/a&gt;,
+when calculating a typing speed, a WORD is any &amp;ldquo;5 characters&amp;rdquo;.  Lets create the
+function to find the number of words in the controller.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/controllers/main_controller.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;word_num&lt;/span&gt;
+ character_length(user_array) &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;5&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Feel free to add your new &amp;ldquo;word_num&amp;rdquo; and &amp;ldquo;accuracy&amp;rdquo; functions to the the home
+page if you want to see them in action.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/views/index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{{word_num}}&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;number of words&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;
+
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{{accuracy}}&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;accuracy&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now it&amp;rsquo;s time to create the methods that will allow us to calculate how much
+time has passed.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/controllers/main_controller.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;time_elapsed&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; page&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;_user_string&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;length &lt;span style=&#34;color:#ff79c6&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;@start_time&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; Time&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;new
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;elsif&lt;/span&gt; page&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;_user_string&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;length &lt;span style=&#34;color:#ff79c6&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;@start_time&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+
+  minutes &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (Time&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;now &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;@start_time&lt;/span&gt;)&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;round &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;60&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The if-statement allows the timer to start only when the user starts typing.  The
+function then returns the amount of time elapsed in minutes.  The if-statement
+also allows the timer to restart once the user clears out the form.&lt;/p&gt;
+&lt;p&gt;By dividing the elapsed time in seconds by 60, the function returns the number
+of elapsed time in minutes.&lt;/p&gt;
+&lt;p&gt;Now that we have the time, we can find the gross words per minute.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/controllers/main_controller.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;gross_wpm&lt;/span&gt;
+  (word_num &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; time_elapsed)&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;round
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Using the &amp;lsquo;gross_wpm&amp;rsquo; function we can find the net words per minute, which is
+what will give us our final words per minute calculation.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;net_wpm&lt;/span&gt;
+  errors_per_min &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (mistakes_array&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;count &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; time_elapsed)&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;round
+  gross_wpm &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; errors_per_min
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now that we have the net words per minute typed we can use that function in
+a bootstap progress bar.  This is one of several ways you can use reactive form
+input to control real time animation on your page.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/views/index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;progress&amp;#34;&lt;/span&gt;&amp;gt;
+  &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;progress-bar progress-bar-{{ if net_wpm &amp;gt; 60 }}success
+&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;                          {{elsif net_wpm &amp;gt; 31 }}warning
+&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;                          {{else}}danger{{end}}
+&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;              progress-bar-striped&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;role&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;progressbar&amp;#34;&lt;/span&gt;
+              &lt;span style=&#34;color:#50fa7b&#34;&gt;aria-valuenow&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;{{net_wpm}}&amp;#34;&lt;/span&gt;
+              &lt;span style=&#34;color:#50fa7b&#34;&gt;aria-valuemin&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;
+              &lt;span style=&#34;color:#50fa7b&#34;&gt;aria-valuemax&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;100&amp;#34;&lt;/span&gt;
+              &lt;span style=&#34;color:#50fa7b&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;width: {{net_wpm}}%&amp;#34;&lt;/span&gt;&amp;gt;
+
+     &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;span&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;sr-only&amp;#34;&lt;/span&gt;&amp;gt;{{net_wpm}}%&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;span&lt;/span&gt;&amp;gt;
+  &amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt;&amp;gt;
+.
+.
+.
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{{net_wpm}}&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;net wpm&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;
+
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{{gross_wpm}}&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;gross wpm&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;h2 id=&#34;all-done&#34;&gt;ALL DONE&lt;/h2&gt;
+&lt;p&gt;Now we have a working application, you can style and animate it how ever you&amp;rsquo;d like.
+This is your chance to be creative with new features. Leave a comment below and share with me what you&amp;rsquo;ve come up with.&lt;/p&gt;
+&lt;p&gt;Here is an example of my design.&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;The above site is hosted on Heroku @ &lt;a href=&#34;https://typing-calculator.herokuapp.com/&#34;&gt;https://typing-calculator.herokuapp.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can view the code for this application
+on my &lt;a href=&#34;https://github.com/chrislabarge/typing-calculator&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -72,19 +694,99 @@ In this tutorial you will learn how to create a typing speed calculator that upd
       <pubDate>Thu, 19 Mar 2015 12:01:27 +0000</pubDate>
       
       <guid>http://chrislabarge.com/posts/code-newbie/</guid>
-      <description>Overview The Code Newbie website and community are priceless tools for beginners. They offer several resources to help you along your programming journey.
-My favorite of these resources is the podcast. The interviewer and founder of Code Newbie, Saron Yitbarek, does an absolutley fantastic job at keeping the podcast organic as well as informative.
-There are plenty of podcasts I listen to that forget that not all listeners can keep up with pacing and terminology.</description>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&#34;http://www.codenewbie.org&#34;&gt;Code Newbie&lt;/a&gt; website and community are priceless
+tools for beginners.  They offer several resources to help you along your
+programming journey.&lt;/p&gt;
+&lt;p&gt;My favorite of these resources is the podcast.  The interviewer and founder of
+Code Newbie, &lt;a href=&#34;https://twitter.com/saronyitbarek&#34;&gt;Saron Yitbarek&lt;/a&gt;, does an
+absolutley fantastic job at keeping the podcast organic as well as informative.&lt;/p&gt;
+&lt;p&gt;There are plenty of podcasts I listen to that forget that not all listeners can
+keep up with pacing and terminology.  Saron does a tremendous job of having
+herself and guests re-clarify  things when they start to get abstract. Even the
+tone of her voice is very calm and reassuring which I think rubs off on the guests
+and allows them to be very natural during the interview.&lt;/p&gt;
+&lt;h2 id=&#34;subject-matter&#34;&gt;Subject Matter&lt;/h2&gt;
+&lt;p&gt;The shows them selves each feature one guest and range from subjects like&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.codenewbie.org/podcast/autotune-inclusivity-and-getting-a-job&#34;&gt;Getting a job in the field&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.codenewbie.org/podcast/ep-5-speaking-of-speaking&#34;&gt;Speaking in front of an audience&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.codenewbie.org/podcast/mother-coders&#34;&gt;Mother Coders&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.codenewbie.org/podcast/accessibility&#34;&gt;Accessibility&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This month Code Newbie is teaming up with another one of my favorite podcasts
+&lt;a href=&#34;http://hanselminutes.com/&#34;&gt;Hansel Minutes&lt;/a&gt; and doing March is for Makers.  Each
+podcasts in the month of March involve hardware, and both shows have had really
+good content so far.&lt;/p&gt;
+&lt;h2 id=&#34;bottom-line&#34;&gt;Bottom Line&lt;/h2&gt;
+&lt;p&gt;You do not have to be a beginner to appreciate all of the amazing things
+&lt;a href=&#34;http://www.codenewbie.org&#34;&gt;Code Newbie&lt;/a&gt; has to  offer. Go head over to the
+website now and become part of a wonderful community.&lt;/p&gt;
+</description>
     </item>
     
     <item>
-      <title>My first Pull Request (Tutorial)</title>
+      <title>My first Pull Request</title>
       <link>http://chrislabarge.com/posts/first-pull-request/</link>
       <pubDate>Wed, 18 Mar 2015 12:01:27 +0000</pubDate>
       
       <guid>http://chrislabarge.com/posts/first-pull-request/</guid>
-      <description>Overview About a month ago I was searching for a local user-group of Ruby programmers, and luckily came across the Tech Valley Ruby Brigade. Even more lucky, their website needed a modern design update and they provided the repository on github for anyone to grab.
-It was a perfect opportunity for me to learn how to submit a pull-request and at the same time a good ice-breaker for the first time I would attend the user-group meetup.</description>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;About a month ago I was searching for a local user-group of Ruby programmers,
+and luckily came across the Tech Valley Ruby Brigade. Even more lucky, their
+website needed a modern design update and they provided the repository on github
+for anyone to grab.&lt;/p&gt;
+&lt;p&gt;It was a perfect opportunity for me to learn how to submit a pull-request and at
+the same time a good ice-breaker for the first time I would attend the user-group
+meetup.&lt;/p&gt;
+&lt;h2 id=&#34;things-you-will-learn&#34;&gt;Things You Will Learn&lt;/h2&gt;
+&lt;p&gt;Through my experience I will go over how to&amp;hellip;..&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fork a repository&lt;/li&gt;
+&lt;li&gt;Clone a repository&lt;/li&gt;
+&lt;li&gt;Commit and push new branch with changes&lt;/li&gt;
+&lt;li&gt;Submit a Pull-Request&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;1-fork-the-repository&#34;&gt;1. Fork the repository&lt;/h3&gt;
+&lt;p&gt;I went to the github repository for the website that I wanted to work on. Once
+there, I clicked the &amp;ldquo;Fork&amp;rdquo; button in the top right corner.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;This copies the entire repository of the website right onto my personal github
+account.&lt;/p&gt;
+&lt;h3 id=&#34;2-clone-the-repository&#34;&gt;2. Clone the repository&lt;/h3&gt;
+&lt;p&gt;Next I had to clone the forked repository from my github account to my local
+machine. By going to terminal and entering the following command.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;	chrislabarge$ git clone https://github.com/chrislabarge/techvalleyrb.github.com.git&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;You can get the url path of the above command from the forked repository on your
+github account by copying from and pasting into the command-line.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://chrislabarge.com/images/clone.jpg&#34; alt=&#34;Url Path &#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3-create-a-new-branch&#34;&gt;3. Create a new branch&lt;/h3&gt;
+&lt;p&gt;Once I had the repository cloned onto my machine, I created a new branch
+from the master and named it &amp;ldquo;updating-bootstrap&amp;rdquo;. Creating a new required in
+order to make changes.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;	chrislabarge$ git checkout -b updating-bootstrap&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;At this point I was able to start making changes. I updated the css bootstrap
+framework for the website and took advantage of the responsive grid design.&lt;/p&gt;
+&lt;h4 id=&#34;note&#34;&gt;Note&lt;/h4&gt;
+&lt;p&gt;&lt;em&gt;Normally you would not want  want to perform any MAJOR adjustments on your contribution&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4-add-and-commit-any-changes&#34;&gt;4. Add and commit any changes&lt;/h3&gt;
+&lt;p&gt;Once I was satisfied with my changes, I added all of the newly changed files&amp;hellip;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;   chrislabarge$ git add -A&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;And then made a commit.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;	chrislabarge$ git commit -m &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;updated the bootstrap version and put the content into grid format&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;5-push-the-branch-to-github&#34;&gt;5. Push the branch to Github&lt;/h3&gt;
+&lt;p&gt;After I made the commit, it was time to push the branch up to my github.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;	chrislabarge$ git push origin updating-bootstrap&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;6-final--submit-a-pull-request&#34;&gt;6. Final- Submit a Pull-Request&lt;/h3&gt;
+&lt;p&gt;It was finally time to show off my changes and submit a pull-request.  I went back
+to the original repository of the website, the one I went to in step 1. And
+clicked the green button below.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://chrislabarge.com/images/compare-pull.jpg&#34; alt=&#34;Pull-Icon Screen Shot&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Next, I selected my branch to compare, (updating-bootstrap) and clicked
+&amp;ldquo;Create pull request&amp;rdquo;.
+(The compare branch in the photo below says testing, it should be updating-bootstrap.)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://chrislabarge.com/images/pull.jpg&#34; alt=&#34;Fork Screen Shot&#34;&gt;&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -93,8 +795,57 @@ It was a perfect opportunity for me to learn how to submit a pull-request and at
       <pubDate>Mon, 16 Mar 2015 12:01:27 +0000</pubDate>
       
       <guid>http://chrislabarge.com/posts/nightcrawler/</guid>
-      <description>Overview This Dan Gilroy film (director and writer) starring Jake Gyllenhaal was the the first film I saw this year, and I couldn&amp;rsquo;t have been more pleased.
-Not only is the acting, music and cinematography top notch but it gives an extraordinarly intimate view local news media. Which in my opinion is a very fascinating subject given thats almost everyone consumes. If you are familiar with the television show The Wire , each season examines a different part of the city of Baltimore.</description>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;This &lt;a href=&#34;http://www.imdb.com/name/nm0319659/&#34;&gt;Dan Gilroy&lt;/a&gt; film (director and writer)
+starring &lt;a href=&#34;http://www.imdb.com/name/nm0350453/&#34;&gt;Jake Gyllenhaal&lt;/a&gt; was the
+the first film I saw this year, and I couldn&amp;rsquo;t have been more pleased.&lt;/p&gt;
+&lt;p&gt;Not only is the acting, music and cinematography top notch but it gives an extraordinarly
+intimate view local news media. Which in my opinion is a very fascinating subject
+given thats almost everyone consumes. If you are familiar with the television show &lt;a href=&#34;http://en.wikipedia.org/wiki/The_Wire&#34;&gt;The Wire&lt;/a&gt; ,
+each season examines a different part of the city of Baltimore.  My favorite,
+season 5  which focus&amp;rsquo;s on the local newspaper, in particular,
+which articles made it to print.&lt;/p&gt;
+&lt;p&gt;This film follows that season&amp;rsquo;s same type of news transparency but instead, on
+the ground floor of a  Los Angeles tv newsroom.  As Wire fans might have guessed, it is
+all about ratings, bottom line. Morals and integrity gets thrown out the window
+when it all boils down to numbers.&lt;/p&gt;
+&lt;h2 id=&#34;main-character&#34;&gt;Main Character&lt;/h2&gt;
+&lt;p&gt;This is where the main character Louis (Gyllenhaal) comes in.  Right off the bat,
+the director shows you what Louis is capable of&amp;hellip;Anything.  The first scene, very
+effectively, showcases his sociopathic behavior and sets up an infinite amount of suspense
+for the remainder of the movie.&lt;/p&gt;
+&lt;p&gt;Louis gives an amazing sense of robotic intellect.  Not only is he highly
+educated, but he knows it. The only problem is he seems to be lacking a sort of
+organic human interaction/empathy.&lt;/p&gt;
+&lt;p&gt;He sees the system for what it is, to him its all numbers.  He is capable
+and willing of anything as long as he is ahead in the system.&lt;/p&gt;
+&lt;h2 id=&#34;plot&#34;&gt;Plot&lt;/h2&gt;
+&lt;p&gt;After capturing some very amateur video, Louis stumbles into the editing
+room of executive producer Nina Romina&amp;rsquo;s (&lt;a href=&#34;http://www.imdb.com/name/nm0000623/&#34;&gt;Rene Russo&lt;/a&gt;) news station, attempting
+to sell his footage. Let&amp;rsquo;s just say he THRIVES in the environment.&lt;/p&gt;
+&lt;p&gt;He quickly evolves from an amateur to a professional free-lance video journalist in no time at all.
+Learning all the tricks of the trade, and understanding what sells, he begins to manipulate.
+Not only the people around him,(Nina as well as Louis&amp;rsquo;s new intern Rick)
+but the actual crime scenes he is filming.&lt;/p&gt;
+&lt;p&gt;By the time this manipulated footage makes it to air, Nina has added her own
+spin to give the local audience exactly what they want.  The content being broadcasted
+is a mix between reality and a production. The lines are so far blurred, that it
+doesn&amp;rsquo;t even matter what is real or not, the only thing that matters is the ratings.&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;There is so much going on in this movie, I could write pages and pages. And in
+fact, my earlier drafts touched on many, many more elements. But I realized I wanted to
+do a movie review rather than an analyzation.&lt;/p&gt;
+&lt;p&gt;That is what is so
+awesome about this movie.  It throws so much at you. There is so many artistically
+crafted scenes as well as ideas in this movie, I&amp;rsquo;m amazed the creator Dan Gilroy
+was able to fit in all in a cohesive and non-stop 117 minute ride.&lt;/p&gt;
+&lt;p&gt;The performances from the cast, especially Gyllenhaal and Russo, are fantastic.  The
+music score compliments each scene perfectly. And the cinematography is so well
+choreographed, you feel as if you are right by Gyllenhaal&amp;rsquo;s side, capturing video
+with him.&lt;/p&gt;
+&lt;p&gt;If you haven&amp;rsquo;t yet, GO WATCH THIS FILM!!&lt;/p&gt;
+&lt;h2 id=&#34;score-55&#34;&gt;Score 5/5&lt;/h2&gt;
+</description>
     </item>
     
     <item>
@@ -103,7 +854,8 @@ Not only is the acting, music and cinematography top notch but it gives an extra
       <pubDate>Mon, 02 Mar 2015 18:30:21 -0500</pubDate>
       
       <guid>http://chrislabarge.com/projects/typing-calculator/</guid>
-      <description>This is a simple words per minute typing calculator. I built it using the Volt framework, which specializes in running your Ruby code on the CLIENT as well as the server. I did not write a single line of Javascript, as Volt uses the Opal gem to compile your Ruby code to javascript. You can read about how I made this simple app here .</description>
+      <description>&lt;p&gt;This is a simple words per minute typing calculator. I built it using the Volt framework, which specializes in running your Ruby code on the CLIENT as well as the server. I did not write a single line of Javascript, as Volt uses the Opal gem to compile your Ruby code to javascript.  You can read about how I made this simple app &lt;!-- raw HTML omitted --&gt; here &lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -112,7 +864,8 @@ Not only is the acting, music and cinematography top notch but it gives an extra
       <pubDate>Sun, 04 Jan 2015 18:30:21 -0500</pubDate>
       
       <guid>http://chrislabarge.com/projects/tech-valley/</guid>
-      <description>This is redesign I did for a local User-Group of Ruby programmers. It was already using github pages for hosting so there was no need to mess with the back-end, I simply updated the bootstrap and took advantage of the responsive grid.</description>
+      <description>&lt;p&gt;This is redesign I did for a local User-Group of Ruby programmers. It was already using github pages for hosting so there was no need to mess with the back-end, I simply updated the bootstrap and took advantage of the responsive grid.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -121,12 +874,19 @@ Not only is the acting, music and cinematography top notch but it gives an extra
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://chrislabarge.com/about/</guid>
-      <description>I am a software developer from Albany NY.
-I enjoy programming, playing guitar, watching movies and hiking.
-I really love building new things with software, hardware, and/or construction.
-It is always great to work on projects with new people, so contact me if you would like to collaborate!
-Some Tools I use on a daily basis.
- NeoVim TMUX Ruby on Rails Rspec  </description>
+      <description>&lt;p&gt;I am a software developer from Albany NY.&lt;/p&gt;
+&lt;p&gt;I enjoy programming, playing guitar, watching movies and hiking.&lt;/p&gt;
+&lt;p&gt;I really love building new things with software, hardware, and/or construction.&lt;/p&gt;
+&lt;p&gt;It is always great to work on projects with new people, so contact me if you
+would like to collaborate!&lt;/p&gt;
+&lt;h4 id=&#34;tools-i-use-on-a-daily-basis&#34;&gt;Tools I use on a daily basis&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://neovim.io/&#34;&gt;NeoVim&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/tmux/tmux&#34;&gt;TMUX&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://rubyonrails.org/&#34;&gt;Ruby on Rails&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://rspec.info/&#34;&gt;Rspec&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

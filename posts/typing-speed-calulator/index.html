@@ -3,24 +3,180 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="An overview of how I created a Words Per Minute Typing Calculator using Ruby, and the Volt web framework.">
 
-        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:site" content="@clabvessels" />
+          <meta name="twitter:creator" content="@clabvessels" />
+          <meta property="og:url" content="http://chrislabarge.com/posts/typing-speed-calulator/" />
+          <meta property="og:title" content="How I Made a Typing Speed Calculator" />
+          <meta property="og:description" content="An overview of how I created a Words Per Minute Typing Calculator using Ruby, and the Volt web framework." />
+          <meta property="og:image" content="http://chrislabarge.com/img/WPM6.jpg" />
+        
 
         <title>How I Made a Typing Speed Calculator</title>
 
-          <meta name="description" content="An overview of how I created a Words Per Minute Typing Calculator using Ruby, and the Volt web framework.">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link rel="stylesheet" href="/css/stylesheet.css">
         <link rel="stylesheet" href="/css/custom.css">
         <link rel="icon" type="image/png" href="/img/favicon.ico">
 
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
         <script src="/javascript/custom.js"></script>
-    </head> <body>
+    </head>
+    <body>
         <section id="page-title">
             <h1><a href="/">Chris LaBarge</a></h1>
         </section>
         <div class="content">
 
+
+
+
+
+
+
+
+<nav class="taxonomy">
+  <ul class="taxonomy-options">
+    
+      
+      <li>
+        <a data-list-class="categories"
+           class="clickable active">
+          categories
+        </a>
+      </li>
+    
+      
+      <li>
+        <a data-list-class="tags"
+           class="clickable ">
+          tags
+        </a>
+      </li>
+    
+  </ul>
+
+  
+    
+
+    
+      
+    
+
+    <ul class ="taxonomy-list categories active">
+      
+        <li>
+          <a href="http://chrislabarge.com/categories/dev-tools/"
+             class="">
+             dev-tools
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/categories/tutorial/"
+             class="active">
+             tutorial
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/categories/review/"
+             class="">
+             review
+            <span class="float-right">2</span>
+          </a>
+        </li>
+      
+    </ul>
+  
+    
+
+    
+      
+    
+
+    <ul class ="taxonomy-list tags ">
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/linux/"
+             class="">
+             linux
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/ruby/"
+             class="active">
+             ruby
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/ruby-on-rails/"
+             class="">
+             ruby-on-rails
+            <span class="float-right">2</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/git/"
+             class="">
+             git
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/movies/"
+             class="">
+             movies
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/open-source/"
+             class="">
+             open-source
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/raspberry-pi/"
+             class="">
+             raspberry-pi
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/resource/"
+             class="">
+             resource
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/vim/"
+             class="">
+             vim
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
 
 <section class="blog-post">
     
@@ -33,6 +189,10 @@
                 March 26, 2015
             </span>
         
+        <a href="/posts/index.xml" class="tooltip">
+            <span class="tooltip-text">RSS Feed</span>
+            <i class="fas fa-rss"></i>
+        </a>
         
     </div>
     <div class="blog-post-content">
@@ -55,9 +215,10 @@ that updates as the user types in real time (<a href="https://typing-calculator.
 </ul>
 <h2 id="installation">Installation</h2>
 <p>First we need to install the Volt framework:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	gem install volt</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">gem install volt</code></pre></div>
 <p>Once installed, create a new Volt project:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">volt new typing-calculator
+
 <span style="color:#8be9fd;font-style:italic">cd</span> typing-calculator</code></pre></div>
 <p>If you are using git for version control and plan on pushing your app up to
 github, you must get rid of your secret key. Just open up the app.rb in your
@@ -67,13 +228,13 @@ applications config directory&hellip;</p>
 <h2 id="setup">SetUp</h2>
 <p>Fire up the Volt server which automatically pushes any changes you save to
 anyone viewing the page.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	bundle <span style="color:#8be9fd;font-style:italic">exec</span> volt server</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">bundle <span style="color:#8be9fd;font-style:italic">exec</span> volt server</code></pre></div>
 <p>Open your browser and type &ldquo;http://localhost:3000/&rdquo; in the address bar.  This
 will bring you to the homepage of your new app. The template already includes
 a login link for in the navigation.  We won&rsquo;t be needing users to sign up or
 log in for this project so go ahead open the project in your favorite editor and
 locate the main.html file.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/views/main/main.html</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/views/main/main.html</code></pre></div>
 <p>And comment out the user templates</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-html" data-lang="html">.
 .
@@ -92,7 +253,7 @@ locate the main.html file.</p>
 .
 .</code></pre></div>
 <p>You can also comment out the routes for signing in and logging in as well.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/config/routes.rb</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/config/routes.rb</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#6272a4"># See https://github.com/voltrb/volt#routes for more info on routes</span>
 
 get <span style="color:#f1fa8c">&#39;/about&#39;</span>, <span style="color:#f1fa8c">_action</span>: <span style="color:#f1fa8c">&#39;about&#39;</span>
@@ -107,7 +268,7 @@ get <span style="color:#f1fa8c">&#39;/&#39;</span>, {}</code></pre></div>
 <h2 id="reactive-form-input">Reactive Form Input</h2>
 <p>Locate the index.html file within views and add some content along with a form
 to get user input.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/views/main/index.html</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/views/main/index.html</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-html" data-lang="html">&lt;<span style="color:#ff79c6">:Title</span>&gt;
   Typing Calculator
 
@@ -134,7 +295,7 @@ this form is how we will calculate the typing speed of the user.</p>
 <p>Now we need sample text that the user will type. This can be any chunk of text you want to use.
 We will start by defining a function in the app controller that returns the
 text.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/controllers/main_controller.rb</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/controllers/main_controller.rb</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">MainController</span> <span style="color:#ff79c6">&lt;</span> Volt<span style="color:#ff79c6">::</span>ModelController
   <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">index</span>
     <span style="color:#6272a4"># Add code for when the index view is loaded</span>
@@ -146,9 +307,10 @@ text.</p>
 
   <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">sample_text</span>
    <span style="color:#f1fa8c">&#34;In Volt, to simplify managing application state, all application state is kept in models that can optionally be persisted in different locations. By centralizing the application state, we reduce the amount of complex code needed to update a page. We can then build our page&#39;s html declaratively.&#34;</span>
-  <span style="color:#ff79c6">end</span></code></pre></div>
+  <span style="color:#ff79c6">end</span>
+<span style="color:#ff79c6">end</span></code></pre></div>
 <p>Now add the newly defined method to the home-page</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/views/main/index.html</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/views/main/index.html</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-html" data-lang="html">&lt;<span style="color:#ff79c6">:Title</span>&gt;
   Typing Calculator
 
@@ -170,20 +332,23 @@ to get a deeper understanding of the code.</p>
 <p>In order to compare the sample text with the user input we must split the strings
 and put them into an array.</p>
 <p>Create two functions in the controller that handle this task.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/controllers/main_controller.rb</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/controllers/main_controller.rb</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">MainController</span> <span style="color:#ff79c6">&lt;</span> Volt<span style="color:#ff79c6">::</span>ModelController
- <span style="color:#ff79c6">.</span>
- <span style="color:#ff79c6">.</span>
- <span style="color:#ff79c6">.</span>
- <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">sample_array</span>
-   sample_text<span style="color:#ff79c6">.</span>split
- <span style="color:#ff79c6">end</span>
+  <span style="color:#ff79c6">.</span>
+  <span style="color:#ff79c6">.</span>
+  <span style="color:#ff79c6">.</span>
+  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">sample_array</span>
+    sample_text<span style="color:#ff79c6">.</span>split
+  <span style="color:#ff79c6">end</span>
 
- <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">user_array</span>
-   page<span style="color:#ff79c6">.</span>_user_string<span style="color:#ff79c6">.</span>split
- <span style="color:#ff79c6">end</span></code></pre></div>
+  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">user_array</span>
+    page<span style="color:#ff79c6">.</span>_user_string<span style="color:#ff79c6">.</span>split
+  <span style="color:#ff79c6">end</span>
+  <span style="color:#ff79c6">.</span>
+  <span style="color:#ff79c6">.</span>
+  <span style="color:#ff79c6">.</span></code></pre></div>
 <p>You can do this right on the home page for now in order to help you visualize.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/views/index.html</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/views/index.html</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-html" data-lang="html">&lt;<span style="color:#ff79c6">b</span>&gt;sample text array&lt;/<span style="color:#ff79c6">b</span>&gt;
 &lt;<span style="color:#ff79c6">p</span>&gt;{{sample_array}}&lt;/<span style="color:#ff79c6">p</span>&gt;
 
@@ -192,7 +357,7 @@ and put them into an array.</p>
 <p><!-- raw HTML omitted --></p>
 <p>Now we have to create a function that compares the two arrays, and gives us
 an array of user mistakes.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/controllers/main_controller.rb</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/controllers/main_controller.rb</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">.</span>
 <span style="color:#ff79c6">.</span>
 <span style="color:#ff79c6">.</span>
@@ -209,7 +374,7 @@ because you do not want the current word that the user is typing to count as
 a mistake.  You only want completed words to be considered.</p>
 <p>Add the &lsquo;mistakes_array&rsquo; function to the home page to get an idea of what I am
 talking about.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/views/index.html</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/views/index.html</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-html" data-lang="html">&lt;<span style="color:#ff79c6">b</span>&gt;mistakes array&lt;/<span style="color:#ff79c6">b</span>&gt;
 &lt;<span style="color:#ff79c6">p</span>&gt;{{mistakes_array}}&lt;/<span style="color:#ff79c6">p</span>&gt;</code></pre></div>
 <p><!-- raw HTML omitted --></p>
@@ -218,7 +383,7 @@ user starts a new word following the mistake.</p>
 <p>We can use the mistakes_array to find the users accuracy. But before writing
 the accuracy method, we must create one the finds the total number of characters
 in an array.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/controllers/main_controller.rb</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/controllers/main_controller.rb</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">character_length</span>(array)
   array<span style="color:#ff79c6">.</span>join<span style="color:#ff79c6">.</span>length
 <span style="color:#ff79c6">end</span>
@@ -233,13 +398,13 @@ gives us a decimal/fraction that we multiply by 100 to get the accuracy percenta
 <p>Per  <a href="http://www.speedtypingonline.com/typing-equations">SpeedTypingOnline.com</a>,
 when calculating a typing speed, a WORD is any &ldquo;5 characters&rdquo;.  Lets create the
 function to find the number of words in the controller.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/controllers/main_controller.rb</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/controllers/main_controller.rb</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">word_num</span>
  character_length(user_array) <span style="color:#ff79c6">/</span> <span style="color:#bd93f9">5</span>
 <span style="color:#ff79c6">end</span></code></pre></div>
 <p>Feel free to add your new &ldquo;word_num&rdquo; and &ldquo;accuracy&rdquo; functions to the the home
 page if you want to see them in action.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/views/index.html</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/views/index.html</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-html" data-lang="html">&lt;<span style="color:#ff79c6">p</span>&gt;{{word_num}}&lt;/<span style="color:#ff79c6">p</span>&gt;
 &lt;<span style="color:#ff79c6">b</span>&gt;number of words&lt;/<span style="color:#ff79c6">b</span>&gt;
 
@@ -247,18 +412,15 @@ page if you want to see them in action.</p>
 &lt;<span style="color:#ff79c6">b</span>&gt;accuracy&lt;/<span style="color:#ff79c6">b</span>&gt;</code></pre></div>
 <p>Now it&rsquo;s time to create the methods that will allow us to calculate how much
 time has passed.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/controllers/main_controller.rb</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/controllers/main_controller.rb</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">time_elapsed</span>
   <span style="color:#ff79c6">if</span> page<span style="color:#ff79c6">.</span>_user_string<span style="color:#ff79c6">.</span>length <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">1</span>
     <span style="color:#8be9fd;font-style:italic">@start_time</span> <span style="color:#ff79c6">=</span> Time<span style="color:#ff79c6">.</span>new
   <span style="color:#ff79c6">elsif</span> page<span style="color:#ff79c6">.</span>_user_string<span style="color:#ff79c6">.</span>length <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span>
     <span style="color:#8be9fd;font-style:italic">@start_time</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-  <span style="color:#ff79c6">else</span>
-   <span style="color:#ff79c6">nil</span>
   <span style="color:#ff79c6">end</span>
 
   minutes <span style="color:#ff79c6">=</span> (Time<span style="color:#ff79c6">.</span>now <span style="color:#ff79c6">-</span> <span style="color:#8be9fd;font-style:italic">@start_time</span>)<span style="color:#ff79c6">.</span>round <span style="color:#ff79c6">/</span> <span style="color:#bd93f9">60</span>
-
 <span style="color:#ff79c6">end</span></code></pre></div>
 <p>The if-statement allows the timer to start only when the user starts typing.  The
 function then returns the amount of time elapsed in minutes.  The if-statement
@@ -266,7 +428,7 @@ also allows the timer to restart once the user clears out the form.</p>
 <p>By dividing the elapsed time in seconds by 60, the function returns the number
 of elapsed time in minutes.</p>
 <p>Now that we have the time, we can find the gross words per minute.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/controllers/main_controller.rb</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/controllers/main_controller.rb</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">def</span> <span style="color:#50fa7b">gross_wpm</span>
   (word_num <span style="color:#ff79c6">/</span> time_elapsed)<span style="color:#ff79c6">.</span>round
 <span style="color:#ff79c6">end</span></code></pre></div>
@@ -279,7 +441,7 @@ what will give us our final words per minute calculation.</p>
 <p>Now that we have the net words per minute typed we can use that function in
 a bootstap progress bar.  This is one of several ways you can use reactive form
 input to control real time animation on your page.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">	app/main/views/index.html</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">app/main/views/index.html</code></pre></div>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-html" data-lang="html">&lt;<span style="color:#ff79c6">div</span> <span style="color:#50fa7b">class</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;progress&#34;</span>&gt;
   &lt;<span style="color:#ff79c6">div</span> <span style="color:#50fa7b">class</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;progress-bar progress-bar-{{ if net_wpm &gt; 60 }}success
 </span><span style="color:#f1fa8c">                          {{elsif net_wpm &gt; 31 }}warning
@@ -292,7 +454,6 @@ input to control real time animation on your page.</p>
 
      &lt;<span style="color:#ff79c6">span</span> <span style="color:#50fa7b">class</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;sr-only&#34;</span>&gt;{{net_wpm}}%&lt;/<span style="color:#ff79c6">span</span>&gt;
   &lt;/<span style="color:#ff79c6">div</span>&gt;
-
 &lt;/<span style="color:#ff79c6">div</span>&gt;
 .
 .
@@ -347,8 +508,8 @@ on my <a href="https://github.com/chrislabarge/typing-calculator">Github</a></p>
                     <ul class=navbar>
                         <li><div><a href="/">Home</a></div></li>
                         <li><div><a href="/about">About Me</a></div></li>
+                        <li><div><a href="/posts">Blog Posts</a></div></li>
                         <li><div><a href="/projects">Projects</a></div></li>
-                        <li><div><a href="/posts">Blog</a></div></li>
                     </ul>
                 </section>
             

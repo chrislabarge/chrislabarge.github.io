@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Vim on Chris LaBarge - Software Developer - Portfolio</title>
+    <title>vim on Chris LaBarge - Software Developer - Portfolio</title>
     <link>http://chrislabarge.com/tags/vim/</link>
-    <description>Recent content in Vim on Chris LaBarge - Software Developer - Portfolio</description>
+    <description>Recent content in vim on Chris LaBarge - Software Developer - Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 28 Mar 2020 18:30:21 -0500</lastBuildDate>
@@ -17,14 +17,68 @@
       <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
       
       <guid>http://chrislabarge.com/posts/bold-italic-tmux/</guid>
-      <description>You have just installed a hip new font face for programming. 🤙
-It has the all of the bells and whistles including bold and italic font styles.
-You configure your terminal to use the new font, and start typing away.
-&amp;hellip;.WHAT???&amp;hellip;.
-Its not working&amp;hellip;.🙄
-Has this happened to you before?
-There is always some caveat when tweaking your work environment no matter how trivial.
-This guide will briefly outline the solutions I came across to get bold and italic font styles working Vim/NeoVim running within a TMUX session, from a GNOME terminal shell.</description>
+      <description>&lt;p&gt;You have just installed a hip new font face for programming. 🤙&lt;/p&gt;
+&lt;p&gt;It has the all of the bells and whistles including &lt;strong&gt;bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt; font styles.&lt;/p&gt;
+&lt;p&gt;You configure your terminal to use the new font, and start typing away.&lt;/p&gt;
+&lt;p&gt;&amp;hellip;.&lt;strong&gt;WHAT???&lt;/strong&gt;&amp;hellip;.&lt;/p&gt;
+&lt;p&gt;Its not working&amp;hellip;.🙄&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Has this happened to you before?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;There is always some caveat when tweaking your work environment no matter how trivial.&lt;/p&gt;
+&lt;p&gt;This guide will briefly outline the solutions I came across to get &lt;strong&gt;bold&lt;/strong&gt; and
+&lt;em&gt;italic&lt;/em&gt; font styles working Vim/NeoVim running within a TMUX session, from a
+GNOME terminal shell.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Bold&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Italic&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;VIM/NeoVIM&lt;/li&gt;
+&lt;li&gt;TMUX&lt;/li&gt;
+&lt;li&gt;GNOME Shell&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;
+&lt;p&gt;The &lt;strong&gt;bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt; font faces were not properly working in a Tmux
+session. But they &lt;strong&gt;were&lt;/strong&gt; working outside of Tmux in a gnome terminal.&lt;/p&gt;
+&lt;p&gt;I came across this
+&lt;a href=&#34;https://gist.github.com/gutoyr/4192af1aced7a1b555df06bd3781a722&#34;&gt;Tutorial&lt;/a&gt; and
+it got me close to a solution. But there was issues.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Step 3 in the
+&lt;a href=&#34;https://gist.github.com/gutoyr/4192af1aced7a1b555df06bd3781a722&#34;&gt;tutorial&lt;/a&gt;
+did not work for me, so I had to rely on exporting the TERM env variable
+previous to running &lt;code&gt;tmux&lt;/code&gt; command. (&lt;em&gt;Per the instructions&lt;/em&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;env &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;TERM&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;screen-256color tmux&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;This worked for me. The &lt;code&gt;bold&lt;/code&gt; and &lt;code&gt;italic&lt;/code&gt; fonts are now working within Tmux.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add this to the &lt;code&gt;.zhrc&lt;/code&gt; configuration file to make an alias to prevent from
+having to explicitly set the &lt;code&gt;TERM&lt;/code&gt; environment variable.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;alias&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;tmux&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;env TERM=screen-256color tmux&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;cursor-issues&#34;&gt;Cursor Issues&lt;/h2&gt;
+&lt;p&gt;In Vim and NeoVim I have the options to allow for &lt;code&gt;block&lt;/code&gt; cursor shape when in
+&lt;code&gt;normal&lt;/code&gt; mode and &lt;code&gt;line&lt;/code&gt; shape when in &lt;code&gt;insert&lt;/code&gt; mode.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; &amp;amp;term =~ &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;screen.&amp;#34;&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_ti.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\eP\e[1 q\e\\&amp;#34;&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_SI.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\eP\e[5 q\e\\&amp;#34;&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_EI.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\eP\e[1 q\e\\&amp;#34;&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_te.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\eP\e[0 q\e\\&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_ti.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\&amp;lt;Esc&amp;gt;[1 q&amp;#34;&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_SI.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\&amp;lt;Esc&amp;gt;[5 q&amp;#34;&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_EI.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\&amp;lt;Esc&amp;gt;[1 q&amp;#34;&lt;/span&gt;
+   &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_te.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\&amp;lt;Esc&amp;gt;[0 q&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;endif&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;This code is for displaying the desired cursor dependent on being in a remote
+session or not.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Unfortunately the font solution broke the cursor shape for Vim, running in
+Tmux.   The fix from above was only showing the &lt;code&gt;line&lt;/code&gt; shape cursor.&lt;/p&gt;
+&lt;p&gt;I found this solution from a neovim &lt;a href=&#34;https://neovim.io/doc/user/term.html#tui-cursor-shape&#34;&gt; document &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Which instructed me to add an override to &lt;code&gt;~/.tmux.conf&lt;/code&gt; file&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;set&lt;/span&gt; -ga terminal-overrides &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;*:Ss=\E[%p1%d q:Se=\E[ q&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
     </item>
     
   </channel>

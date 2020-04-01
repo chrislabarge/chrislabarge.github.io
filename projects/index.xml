@@ -17,7 +17,8 @@
       <pubDate>Mon, 02 Mar 2015 18:30:21 -0500</pubDate>
       
       <guid>http://chrislabarge.com/projects/typing-calculator/</guid>
-      <description>This is a simple words per minute typing calculator. I built it using the Volt framework, which specializes in running your Ruby code on the CLIENT as well as the server. I did not write a single line of Javascript, as Volt uses the Opal gem to compile your Ruby code to javascript. You can read about how I made this simple app here .</description>
+      <description>&lt;p&gt;This is a simple words per minute typing calculator. I built it using the Volt framework, which specializes in running your Ruby code on the CLIENT as well as the server. I did not write a single line of Javascript, as Volt uses the Opal gem to compile your Ruby code to javascript.  You can read about how I made this simple app &lt;!-- raw HTML omitted --&gt; here &lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;
+</description>
     </item>
     
     <item>
@@ -26,7 +27,8 @@
       <pubDate>Sun, 04 Jan 2015 18:30:21 -0500</pubDate>
       
       <guid>http://chrislabarge.com/projects/tech-valley/</guid>
-      <description>This is redesign I did for a local User-Group of Ruby programmers. It was already using github pages for hosting so there was no need to mess with the back-end, I simply updated the bootstrap and took advantage of the responsive grid.</description>
+      <description>&lt;p&gt;This is redesign I did for a local User-Group of Ruby programmers. It was already using github pages for hosting so there was no need to mess with the back-end, I simply updated the bootstrap and took advantage of the responsive grid.&lt;/p&gt;
+</description>
     </item>
     
   </channel>

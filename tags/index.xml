@@ -12,38 +12,83 @@
     
     
     <item>
-      <title>Coding</title>
-      <link>http://chrislabarge.com/tags/coding/</link>
+      <title>linux</title>
+      <link>http://chrislabarge.com/tags/linux/</link>
       <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
       
-      <guid>http://chrislabarge.com/tags/coding/</guid>
+      <guid>http://chrislabarge.com/tags/linux/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Development Tools</title>
-      <link>http://chrislabarge.com/tags/development-tools/</link>
-      <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
-      
-      <guid>http://chrislabarge.com/tags/development-tools/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>TMUX</title>
-      <link>http://chrislabarge.com/tags/tmux/</link>
-      <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
-      
-      <guid>http://chrislabarge.com/tags/tmux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Vim</title>
+      <title>vim</title>
       <link>http://chrislabarge.com/tags/vim/</link>
       <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
       
       <guid>http://chrislabarge.com/tags/vim/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ruby</title>
+      <link>http://chrislabarge.com/tags/ruby/</link>
+      <pubDate>Wed, 23 May 2018 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/tags/ruby/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ruby-on-rails</title>
+      <link>http://chrislabarge.com/tags/ruby-on-rails/</link>
+      <pubDate>Wed, 23 May 2018 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/tags/ruby-on-rails/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>raspberry-pi</title>
+      <link>http://chrislabarge.com/tags/raspberry-pi/</link>
+      <pubDate>Mon, 27 Feb 2017 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/tags/raspberry-pi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>resource</title>
+      <link>http://chrislabarge.com/tags/resource/</link>
+      <pubDate>Thu, 19 Mar 2015 12:01:27 +0000</pubDate>
+      
+      <guid>http://chrislabarge.com/tags/resource/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>http://chrislabarge.com/tags/git/</link>
+      <pubDate>Wed, 18 Mar 2015 12:01:27 +0000</pubDate>
+      
+      <guid>http://chrislabarge.com/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>open-source</title>
+      <link>http://chrislabarge.com/tags/open-source/</link>
+      <pubDate>Wed, 18 Mar 2015 12:01:27 +0000</pubDate>
+      
+      <guid>http://chrislabarge.com/tags/open-source/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>movies</title>
+      <link>http://chrislabarge.com/tags/movies/</link>
+      <pubDate>Mon, 16 Mar 2015 12:01:27 +0000</pubDate>
+      
+      <guid>http://chrislabarge.com/tags/movies/</guid>
       <description></description>
     </item>
     

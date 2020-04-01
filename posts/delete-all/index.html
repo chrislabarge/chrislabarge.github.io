@@ -3,24 +3,180 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A blog post about a Ruby on Rails ActiveRelation function &#39;#delete_all&#39;. A fast way to purge your Date Base of rows from a Table.">
 
-        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:site" content="@clabvessels" />
+          <meta name="twitter:creator" content="@clabvessels" />
+          <meta property="og:url" content="http://chrislabarge.com/posts/delete-all/" />
+          <meta property="og:title" content="Rails &#39;#delete_all&#39; - Fast &amp; Powerful - Beware" />
+          <meta property="og:description" content="A blog post about a Ruby on Rails ActiveRelation function &#39;#delete_all&#39;. A fast way to purge your Date Base of rows from a Table." />
+          <meta property="og:image" content="http://chrislabarge.com/img/trash.jpg" />
+        
 
         <title>Rails &#39;#delete_all&#39; - Fast &amp; Powerful - Beware</title>
 
-          <meta name="description" content="A blog post about a Ruby on Rails ActiveRelation function &#39;#delete_all&#39;. A fast way to purge your Date Base of rows from a Table.">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link rel="stylesheet" href="/css/stylesheet.css">
         <link rel="stylesheet" href="/css/custom.css">
         <link rel="icon" type="image/png" href="/img/favicon.ico">
 
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
         <script src="/javascript/custom.js"></script>
-    </head> <body>
+    </head>
+    <body>
         <section id="page-title">
             <h1><a href="/">Chris LaBarge</a></h1>
         </section>
         <div class="content">
 
+
+
+
+
+
+
+
+<nav class="taxonomy">
+  <ul class="taxonomy-options">
+    
+      
+      <li>
+        <a data-list-class="categories"
+           class="clickable active">
+          categories
+        </a>
+      </li>
+    
+      
+      <li>
+        <a data-list-class="tags"
+           class="clickable ">
+          tags
+        </a>
+      </li>
+    
+  </ul>
+
+  
+    
+
+    
+      
+    
+
+    <ul class ="taxonomy-list categories active">
+      
+        <li>
+          <a href="http://chrislabarge.com/categories/dev-tools/"
+             class="active">
+             dev-tools
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/categories/tutorial/"
+             class="">
+             tutorial
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/categories/review/"
+             class="">
+             review
+            <span class="float-right">2</span>
+          </a>
+        </li>
+      
+    </ul>
+  
+    
+
+    
+      
+    
+
+    <ul class ="taxonomy-list tags ">
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/linux/"
+             class="">
+             linux
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/ruby/"
+             class="active">
+             ruby
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/ruby-on-rails/"
+             class="active">
+             ruby-on-rails
+            <span class="float-right">2</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/git/"
+             class="">
+             git
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/movies/"
+             class="">
+             movies
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/open-source/"
+             class="">
+             open-source
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/raspberry-pi/"
+             class="">
+             raspberry-pi
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/resource/"
+             class="">
+             resource
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/vim/"
+             class="">
+             vim
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
 
 <section class="blog-post">
     
@@ -33,6 +189,10 @@
                 May 23, 2018
             </span>
         
+        <a href="/posts/index.xml" class="tooltip">
+            <span class="tooltip-text">RSS Feed</span>
+            <i class="fas fa-rss"></i>
+        </a>
         
     </div>
     <div class="blog-post-content">
@@ -56,44 +216,43 @@
 <p>Because some of these data deletions can consist of thousands of rows you must code the removal process a little differently.</p>
 <p>When a User imports/uploads new data into the application it creates a new <code>DataUplodad</code> model.  The application also creates a new <code>DataSet</code> record for every single data set from the import.</p>
 <p>I have the model <code>DataSet</code> which has a <code>belongs_to</code> relationship to <code>DataUploads</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby">  <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">DataSet</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
-    belongs_to <span style="color:#f1fa8c">:data_uploads</span>
-  <span style="color:#ff79c6">end</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">DataSet</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
+  belongs_to <span style="color:#f1fa8c">:data_uploads</span>
+<span style="color:#ff79c6">end</span></code></pre></div>
 <p>I have the model <code>DataUploads</code> which has a <code>has_many</code> relationship to <code>DataSets</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby">  <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">DataUpload</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
-    has_many <span style="color:#f1fa8c">:data_sets</span>, <span style="color:#f1fa8c">dependent</span>: <span style="color:#f1fa8c">:destroy</span>
-  <span style="color:#ff79c6">end</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">DataUpload</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
+  has_many <span style="color:#f1fa8c">:data_sets</span>, <span style="color:#f1fa8c">dependent</span>: <span style="color:#f1fa8c">:destroy</span>
+<span style="color:#ff79c6">end</span></code></pre></div>
 <p>Notice the <code>dependent: :destroy</code>.  This means that when a <code>DataUpload</code> model gets deleted/destroyed, all of the associated <code>DataSet</code> models will all get destroyed as well.</p>
 <p>This also loads every associated <code>DataSet</code> model into memory as well.  This will bog down the server if there is a very large association of thousands of <code>DataSet</code> records.</p>
 <p>The way we solve this is to use the <code>ActiveRecord::Relation#delete_all</code>. This <a href="https://apidock.com/rails/ActiveRecord/Relation/delete_all">method</a> performs a single SQL statement and efficiently deletes all of the records within the Relation.</p>
 <p><em>Look at the example below.</em></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby">  <span style="color:#6272a4"># Remove the data sets of the last Data Upload instance</span>
-  upload <span style="color:#ff79c6">=</span> DataUpload<span style="color:#ff79c6">.</span>last
-  data_sets <span style="color:#ff79c6">=</span> upload<span style="color:#ff79c6">.</span>data_sets
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby">upload <span style="color:#ff79c6">=</span> DataUpload<span style="color:#ff79c6">.</span>last
+data_sets <span style="color:#ff79c6">=</span> upload<span style="color:#ff79c6">.</span>data_sets
 
-  data_sets<span style="color:#ff79c6">.</span>delete_all</code></pre></div>
+data_sets<span style="color:#ff79c6">.</span>delete_all</code></pre></div>
 <h3 id="warning">WARNING</h3>
 <ul>
 <li>DO NOT use this method on more then 5,000 records in a Database table.  It will lock the Database for the entire transaction.</li>
 <li><code>#delete_all</code> does not load the record, so any callbacks will not be fired.  Make sure the application and/or model is not dependent on any pre/post delete processes.</li>
 </ul>
 <p>Now we can implement the method in the in the <code>DataUpload</code> callback.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby">  <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">DataUpload</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
-    has_many <span style="color:#f1fa8c">:data_sets</span>, <span style="color:#f1fa8c">dependent</span>: <span style="color:#f1fa8c">:delete_all</span>
-  <span style="color:#ff79c6">end</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">DataUpload</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
+  has_many <span style="color:#f1fa8c">:data_sets</span>, <span style="color:#f1fa8c">dependent</span>: <span style="color:#f1fa8c">:delete_all</span>
+<span style="color:#ff79c6">end</span></code></pre></div>
 <p>BUT WAIT!! If you were a good reader and saw the first WARNING above you will notice that if I left the code this way and a particular <code>DataUpload</code> instance had an association of more then 5,000 <code>DataSet</code> records&hellip;the Database will lock for the entire transaction. To prevent from this we must utilize one of the Ruby on Rails 5.0 <a href="http://api.rubyonrails.org/classes/ActiveRecord/Batches.html#method-i-in_batches">methods</a> <code>#in_batches</code></p>
 <p><em>If you are not use a Rails version that is &gt;= 5.0 then check out the gem <a href="https://github.com/ankane/delete_in_batches">delete_in_batches</a></em></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby">  <span style="color:#ff79c6">class</span> <span style="color:#50fa7b">DataUpload</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
-    has_many <span style="color:#f1fa8c">:data_sets</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">class</span> <span style="color:#50fa7b">DataUpload</span> <span style="color:#ff79c6">&lt;</span> ApplicationRecord
+  has_many <span style="color:#f1fa8c">:data_sets</span>
 
-    before_destroy <span style="color:#f1fa8c">:destroy_data_sets</span>
+  before_destroy <span style="color:#f1fa8c">:destroy_data_sets</span>
 
-    <span style="color:#ff79c6">private</span>
+  <span style="color:#ff79c6">private</span>
 
-    <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">destroy_data_sets</span>
-      data_sets<span style="color:#ff79c6">.</span>in_batches(<span style="color:#f1fa8c">of</span>: <span style="color:#bd93f9">1000</span>)<span style="color:#ff79c6">.</span>delete_all
-    <span style="color:#ff79c6">end</span>
-  <span style="color:#ff79c6">end</span></code></pre></div>
+  <span style="color:#ff79c6">def</span> <span style="color:#50fa7b">destroy_data_sets</span>
+    data_sets<span style="color:#ff79c6">.</span>in_batches(<span style="color:#f1fa8c">of</span>: <span style="color:#bd93f9">1000</span>)<span style="color:#ff79c6">.</span>delete_all
+  <span style="color:#ff79c6">end</span>
+<span style="color:#ff79c6">end</span></code></pre></div>
 <p>First we remove the previous callback <code>dependent: :delete_all</code>, and replace it with <code>before_destroy</code> callback and pass in the new private method <code>#destroy_data_sets</code>.</p>
 <p>You will notice that <code>#in_batches</code> takes an option <code>:of</code> set to <code>1000</code>. This will limit the amount of records deleted in a single SQL transaction to 1,000.  Thus preventing the Database from locking.</p>
 
@@ -132,8 +291,8 @@
                     <ul class=navbar>
                         <li><div><a href="/">Home</a></div></li>
                         <li><div><a href="/about">About Me</a></div></li>
+                        <li><div><a href="/posts">Blog Posts</a></div></li>
                         <li><div><a href="/projects">Projects</a></div></li>
-                        <li><div><a href="/posts">Blog</a></div></li>
                     </ul>
                 </section>
             

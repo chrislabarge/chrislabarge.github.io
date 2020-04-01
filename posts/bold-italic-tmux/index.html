@@ -3,24 +3,180 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A Guide to get bold and italic font styles working Vim/NeoVim running within a TMUX session, from a GNOME terminal shell.">
 
-        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:site" content="@clabvessels" />
+          <meta name="twitter:creator" content="@clabvessels" />
+          <meta property="og:url" content="http://chrislabarge.com/posts/bold-italic-tmux/" />
+          <meta property="og:title" content="Bold &#43; Italic Font in TMUX" />
+          <meta property="og:description" content="A Guide to get bold and italic font styles working Vim/NeoVim running within a TMUX session, from a GNOME terminal shell." />
+          <meta property="og:image" content="http://chrislabarge.com/img/bold.png" />
+        
 
         <title>Bold &#43; Italic Font in TMUX</title>
 
-          <meta name="description" content="A Guide to get bold and italic font styles working Vim/NeoVim running within a TMUX session, from a GNOME terminal shell.">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <link rel="stylesheet" href="/css/stylesheet.css">
         <link rel="stylesheet" href="/css/custom.css">
         <link rel="icon" type="image/png" href="/img/favicon.ico">
 
         <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
         <script src="/javascript/custom.js"></script>
-    </head> <body>
+    </head>
+    <body>
         <section id="page-title">
             <h1><a href="/">Chris LaBarge</a></h1>
         </section>
         <div class="content">
 
+
+
+
+
+
+
+
+<nav class="taxonomy">
+  <ul class="taxonomy-options">
+    
+      
+      <li>
+        <a data-list-class="categories"
+           class="clickable active">
+          categories
+        </a>
+      </li>
+    
+      
+      <li>
+        <a data-list-class="tags"
+           class="clickable ">
+          tags
+        </a>
+      </li>
+    
+  </ul>
+
+  
+    
+
+    
+      
+    
+
+    <ul class ="taxonomy-list categories active">
+      
+        <li>
+          <a href="http://chrislabarge.com/categories/dev-tools/"
+             class="active">
+             dev-tools
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/categories/tutorial/"
+             class="">
+             tutorial
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/categories/review/"
+             class="">
+             review
+            <span class="float-right">2</span>
+          </a>
+        </li>
+      
+    </ul>
+  
+    
+
+    
+      
+    
+
+    <ul class ="taxonomy-list tags ">
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/linux/"
+             class="active">
+             linux
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/ruby/"
+             class="">
+             ruby
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/ruby-on-rails/"
+             class="">
+             ruby-on-rails
+            <span class="float-right">2</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/git/"
+             class="">
+             git
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/movies/"
+             class="">
+             movies
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/open-source/"
+             class="">
+             open-source
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/raspberry-pi/"
+             class="">
+             raspberry-pi
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/resource/"
+             class="">
+             resource
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/vim/"
+             class="active">
+             vim
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
 
 <section class="blog-post">
     
@@ -33,6 +189,10 @@
                 March 28, 2020
             </span>
         
+        <a href="/posts/index.xml" class="tooltip">
+            <span class="tooltip-text">RSS Feed</span>
+            <i class="fas fa-rss"></i>
+        </a>
         
     </div>
     <div class="blog-post-content">
@@ -65,7 +225,7 @@ it got me close to a solution. But there was issues.</p>
 did not work for me, so I had to rely on exporting the TERM env variable
 previous to running <code>tmux</code> command. (<em>Per the instructions</em>)</li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">  env <span style="color:#8be9fd;font-style:italic">TERM</span><span style="color:#ff79c6">=</span>screen-256color tmux</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">env <span style="color:#8be9fd;font-style:italic">TERM</span><span style="color:#ff79c6">=</span>screen-256color tmux</code></pre></div>
 <ul>
 <li>
 <p>This worked for me. The <code>bold</code> and <code>italic</code> fonts are now working within Tmux.</p>
@@ -75,28 +235,28 @@ previous to running <code>tmux</code> command. (<em>Per the instructions</em>)</
 having to explicitly set the <code>TERM</code> environment variable.</p>
 </li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">  <span style="color:#8be9fd;font-style:italic">alias</span> <span style="color:#8be9fd;font-style:italic">tmux</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;env TERM=screen-256color tmux&#34;</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">alias</span> <span style="color:#8be9fd;font-style:italic">tmux</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;env TERM=screen-256color tmux&#34;</span></code></pre></div>
 <h2 id="cursor-issues">Cursor Issues</h2>
 <p>In Vim and NeoVim I have the options to allow for <code>block</code> cursor shape when in
 <code>normal</code> mode and <code>line</code> shape when in <code>insert</code> mode.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-vim" data-lang="vim">  <span style="color:#ff79c6">if</span> &amp;term =~ <span style="color:#f1fa8c">&#34;screen.&#34;</span>
-     <span style="color:#ff79c6">let</span> &amp;t_ti.=<span style="color:#f1fa8c">&#34;\eP\e[1 q\e\\&#34;</span>
-     <span style="color:#ff79c6">let</span> &amp;t_SI.=<span style="color:#f1fa8c">&#34;\eP\e[5 q\e\\&#34;</span>
-     <span style="color:#ff79c6">let</span> &amp;t_EI.=<span style="color:#f1fa8c">&#34;\eP\e[1 q\e\\&#34;</span>
-     <span style="color:#ff79c6">let</span> &amp;t_te.=<span style="color:#f1fa8c">&#34;\eP\e[0 q\e\\&#34;</span>
-  <span style="color:#ff79c6">else</span>
-     <span style="color:#ff79c6">let</span> &amp;t_ti.=<span style="color:#f1fa8c">&#34;\&lt;Esc&gt;[1 q&#34;</span>
-     <span style="color:#ff79c6">let</span> &amp;t_SI.=<span style="color:#f1fa8c">&#34;\&lt;Esc&gt;[5 q&#34;</span>
-     <span style="color:#ff79c6">let</span> &amp;t_EI.=<span style="color:#f1fa8c">&#34;\&lt;Esc&gt;[1 q&#34;</span>
-     <span style="color:#ff79c6">let</span> &amp;t_te.=<span style="color:#f1fa8c">&#34;\&lt;Esc&gt;[0 q&#34;</span>
-  <span style="color:#ff79c6">endif</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-vim" data-lang="vim"><span style="color:#ff79c6">if</span> &amp;term =~ <span style="color:#f1fa8c">&#34;screen.&#34;</span>
+   <span style="color:#ff79c6">let</span> &amp;t_ti.=<span style="color:#f1fa8c">&#34;\eP\e[1 q\e\\&#34;</span>
+   <span style="color:#ff79c6">let</span> &amp;t_SI.=<span style="color:#f1fa8c">&#34;\eP\e[5 q\e\\&#34;</span>
+   <span style="color:#ff79c6">let</span> &amp;t_EI.=<span style="color:#f1fa8c">&#34;\eP\e[1 q\e\\&#34;</span>
+   <span style="color:#ff79c6">let</span> &amp;t_te.=<span style="color:#f1fa8c">&#34;\eP\e[0 q\e\\&#34;</span>
+<span style="color:#ff79c6">else</span>
+   <span style="color:#ff79c6">let</span> &amp;t_ti.=<span style="color:#f1fa8c">&#34;\&lt;Esc&gt;[1 q&#34;</span>
+   <span style="color:#ff79c6">let</span> &amp;t_SI.=<span style="color:#f1fa8c">&#34;\&lt;Esc&gt;[5 q&#34;</span>
+   <span style="color:#ff79c6">let</span> &amp;t_EI.=<span style="color:#f1fa8c">&#34;\&lt;Esc&gt;[1 q&#34;</span>
+   <span style="color:#ff79c6">let</span> &amp;t_te.=<span style="color:#f1fa8c">&#34;\&lt;Esc&gt;[0 q&#34;</span>
+<span style="color:#ff79c6">endif</span></code></pre></div>
 <p><em>This code is for displaying the desired cursor dependent on being in a remote
 session or not.</em></p>
 <p>Unfortunately the font solution broke the cursor shape for Vim, running in
 Tmux.   The fix from above was only showing the <code>line</code> shape cursor.</p>
 <p>I found this solution from a neovim <a href="https://neovim.io/doc/user/term.html#tui-cursor-shape"> document </a></p>
 <p>Which instructed me to add an override to <code>~/.tmux.conf</code> file</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">  <span style="color:#8be9fd;font-style:italic">set</span> -ga terminal-overrides <span style="color:#f1fa8c">&#39;*:Ss=\E[%p1%d q:Se=\E[ q&#39;</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">set</span> -ga terminal-overrides <span style="color:#f1fa8c">&#39;*:Ss=\E[%p1%d q:Se=\E[ q&#39;</span></code></pre></div>
 
     </div>
 </section>
@@ -133,8 +293,8 @@ Tmux.   The fix from above was only showing the <code>line</code> shape cursor.<
                     <ul class=navbar>
                         <li><div><a href="/">Home</a></div></li>
                         <li><div><a href="/about">About Me</a></div></li>
+                        <li><div><a href="/posts">Blog Posts</a></div></li>
                         <li><div><a href="/projects">Projects</a></div></li>
-                        <li><div><a href="/posts">Blog</a></div></li>
                     </ul>
                 </section>
             

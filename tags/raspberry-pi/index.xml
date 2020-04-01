@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>raspberry-pi on Chris LaBarge - Software Developer - Portfolio</title>
+    <link>http://chrislabarge.com/tags/raspberry-pi/</link>
+    <description>Recent content in raspberry-pi on Chris LaBarge - Software Developer - Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 27 Feb 2017 18:30:21 -0500</lastBuildDate>
+    
+	<atom:link href="http://chrislabarge.com/tags/raspberry-pi/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Installing Raspberry Pi OS on SD card</title>
+      <link>http://chrislabarge.com/posts/sd-format/</link>
+      <pubDate>Mon, 27 Feb 2017 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/posts/sd-format/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;A &lt;a href=&#34;https://www.raspberrypi.org/&#34;&gt;Raspberry Pi&lt;/a&gt; is an $35 dollar computer that is the size of a credit card.
+It can be utilized in everything from &lt;a href=&#34;https://pimylifeup.com/category/projects/&#34;&gt;DIY home projects&lt;/a&gt; to &lt;a href=&#34;https://www.reddit.com/r/raspberry_pi/comments/5c2f6d/raspberry_pi_spotted_in_ukrainian_missile/&#34;&gt;missle guidence systems&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This tutorial will demonstrate the process of installing an operating system on the device.
+Although it is aimed at beginners, we will be using the command line.  Don&amp;rsquo;t worry though,
+the goal is to ease newbies into command line, as you are sure to come across it
+again and again in future raspberry pi endeavers.&lt;/p&gt;
+&lt;h2 id=&#34;items-needed&#34;&gt;Items Needed&lt;/h2&gt;
+&lt;p&gt;For this tutorial you will need the following items&amp;hellip;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Computer with OSX (Unix) or Linux installed&lt;/li&gt;
+&lt;li&gt;Raspberry Pi&lt;/li&gt;
+&lt;li&gt;MicroSD card (4gb minimum)&lt;/li&gt;
+&lt;li&gt;SD adapter (comes with the microSD card)&lt;/li&gt;
+&lt;li&gt;SD card reader (internal or external)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;step-1-choose-an-operating-system&#34;&gt;Step 1. Choose an operating system&lt;/h3&gt;
+&lt;p&gt;Although there are many different raspberry pi operating systems (aka distributions) that range in functionality, the
+installation process of these operating systems are for the most part, all the same.&lt;/p&gt;
+&lt;p&gt;For this tutorial we will be installing the &lt;a href=&#34;https://retropie.org.uk/download/&#34;&gt;RetroPi OS&lt;/a&gt;, which turns the Pi into a emulation station for gaming.&lt;/p&gt;
+&lt;h3 id=&#34;step-2-download-and-extract-the-operating-system&#34;&gt;Step 2. Download and Extract the operating system&lt;/h3&gt;
+&lt;p&gt;From your OSX or Linux computer, download and extract the .img file of the operating system you will be installing.&lt;/p&gt;
+&lt;h3 id=&#34;step-3-find-the-pathname-of-the-extracted-image-file&#34;&gt;Step 3. Find the pathname of the extracted Image file.&lt;/h3&gt;
+&lt;p&gt;Everything on a computer is a file. And all of these files have pathnames.  One way to discover the pathname is as follows..&lt;/p&gt;
+&lt;p&gt;Right click on the extracted Image (.img) file from STEP 2 and select &amp;ldquo;Get Info&amp;rdquo; (OSX) or &amp;ldquo;Properties&amp;rdquo; (Linux).
+Within the window that pops up, under &amp;ldquo;Where:&amp;rdquo; for OSX you will see a pathname that looks similar to this
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/Users/chris/Downloads/the_file_name.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;For Linux users, under &amp;ldquo;Location:&amp;rdquo; you will see a pathname that looks similar to this
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/home/chris/Downloads/the_file_name.img&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+On your computer ‘chris’ will be replaced with your username, ‘Downloads’ will be replaced with whichever folder the .img file is contained in.&lt;/p&gt;
+&lt;p&gt;We will need this pathname later in the tutorial, so copy it down.&lt;/p&gt;
+&lt;h3 id=&#34;step-4-connect-the-microsd-card-to-your-computer&#34;&gt;Step 4. Connect the microSD card to your computer&lt;/h3&gt;
+&lt;p&gt;Insert the microSD card into the SD adapter.
+Plug the SD adapter card into the SD card reader.
+If the card reader is external, you may now plug the card reader into the computer.&lt;/p&gt;
+&lt;h3 id=&#34;step-5-find-the-sd-card-partition-pathname&#34;&gt;Step 5. Find the SD card partition pathname&lt;/h3&gt;
+&lt;p&gt;Now we must find the pathname of the SD card &lt;a href=&#34;https://en.wikipedia.org/wiki/Disk_partitioning&#34;&gt;partition&lt;/a&gt; (aka region).
+So how would go about repeating process in Step 3 and right clicking the SD card reader file?&lt;/p&gt;
+&lt;p&gt;Well we could try sifting through system folders with the mouse to find the correct file, but that would take too long.
+The computer can just tell us the pathname if we ask it.&lt;/p&gt;
+&lt;p&gt;This is where the command line comes in.  Now don’t be scared.  Although the command line can be intimidating, it is fairly easy to use.&lt;/p&gt;
+&lt;p&gt;We can use the command line to tell the computer to do things.
+In this case, will will be entering a command that tells the computer to display information for us.&lt;/p&gt;
+&lt;p&gt;Open the Terminal application on your computer.  Here is the command we are going to type into the terminal (aka command line)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo fdisk -l&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Lets break down this command.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;sudo&amp;rdquo; stands for superuser, and it gives us &amp;ldquo;superuser&amp;rdquo; privileges in order to have access to the &amp;ldquo;fdisk&amp;rdquo; command.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;fdisk&amp;rdquo; stands for &amp;ldquo;fixed disks&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;The &amp;ldquo;-l&amp;rdquo; at the end of the command stands for &amp;ldquo;List&amp;rdquo;, and is a &amp;ldquo;fdisk&amp;rdquo; option flag.&lt;/p&gt;
+&lt;p&gt;If you want a closer look at the capabilities of the commands, you can type &amp;ldquo;man&amp;rdquo; (manual) + the command.
+For instance
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;man sudo&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+will show us all of the capabilities of &amp;ldquo;sudo&amp;rdquo; and how to use it.  You can do the same for &amp;ldquo;fdisk&amp;rdquo;.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;man fdisk&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Do yourself a favor and scroll through the manual pages for each command and take note of the format similarities.
+All &amp;ldquo;man&amp;rdquo; (manual) pages for commands will be in this format.
+So if you are ever unsure of how a command works, just read up on it using &amp;ldquo;man&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Alright so now that you know what the command is doing, type out the full command and press enter.&lt;/p&gt;
+&lt;p&gt;Because we used &amp;ldquo;sudo&amp;rdquo; (superuser) in this command, it will ask for a password. Type your username’s password and press enter.
+(The traditional dots or ‘*’ asterisk that appear when you type your password will not do so in the command line. This is normal.)&lt;/p&gt;
+&lt;p&gt;You should now see a list of columns. Look for the column with the header labeled &amp;ldquo;Size&amp;rdquo;
+and look the corresponding amount that your SD card has available on it. The size will
+usually be a couple hundred megabytes less then the full capacity of the card. So for
+instance I am formatting a 8gb SD card and it shows up in the size column as 7.2gb. The
+column with the header labled &amp;ldquo;Device&amp;rdquo; is the pathname of the card partition.&lt;/p&gt;
+&lt;p&gt;If the card reader is external the pathname should look similar to
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/dev/sdc1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+If it is internal the pathname should look similar to
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/dev/mmcblk0p1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;This is the file pathname for the partition on the SD card. Copy down
+this path name which will be used in the following step.&lt;/p&gt;
+&lt;h3 id=&#34;step-6-unmount-the-sd-card&#34;&gt;Step 6. Unmount the SD card&lt;/h3&gt;
+&lt;p&gt;Before we can format the card in the next step, we must unmount it. This is accomplished by entering another command in the (not so scary) command line.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo umount the_pathname_from_step5&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+So the command for this demonstration will be
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo umount /dev/mmcblk0p1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;h3 id=&#34;step-7-format-the-sd-card&#34;&gt;Step 7. Format the SD card&lt;/h3&gt;
+&lt;p&gt;In order to format the SD card, we will need the pathname of the SD card reader.  Fortunetly, this is as easy as
+modifying the pathname used in the last step.  For external card readers remove the last character from the pathname.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/dev/sdc1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Turns into
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/dev/sdc&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+For internal readers, remove the last 2 characters. ‘/dev/mmcblk0p1’ turns to ‘/dev/mmcblk0’.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/dev/mmcblk0p1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Turns into
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;/dev/mmcblk0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Now that we have the pathname of the SD card reader, it is time to format the card.  The command is
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo fdisk the_pathname&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+So for this demonstration I will enter
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo fdisk /dev/mmcblk0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Once you enter the command it may ask for your password again (because we are using &amp;ldquo;sudo&amp;rdquo;).&lt;/p&gt;
+&lt;p&gt;You should now see a menu for &amp;ldquo;fdisk&amp;rdquo; within the command line.
+Now you can enter menu commands. As you can see, if we type and enter ‘m’, we will be shown the help menu.  This displays all of the available commands we can enter within the &amp;ldquo;fdisk&amp;rdquo; menu. We first are going to delete any existing partitions on the SD card.  We do this by entering the simple command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;d&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+My card had 2 existing partitions so after I entered the above command I saw the below screen.&lt;/p&gt;
+&lt;p&gt;SCREEN HERE&lt;/p&gt;
+&lt;p&gt;It tells me there are 2 partitions on the card and the default partition is 2. It wants me to tell it which one to delete by entering either &amp;ldquo;1&amp;rdquo;, &amp;ldquo;2&amp;rdquo;, or nothing at all (since the default is 2). I will enter 2, although I could just press enter and I should see the same screen as below.&lt;/p&gt;
+&lt;p&gt;SCREEN&lt;/p&gt;
+&lt;p&gt;In order to delete the last partition enter the command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;d&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+one more time.  Since there is only one left we should automatically be presented with the prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Partition &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt; has been deleted&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;We will now add a new partition to the SD card.&lt;/p&gt;
+&lt;p&gt;This is accomplished by entering the command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;n&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+(Remember you can see where these commands are coming from by entering &amp;ldquo;m&amp;rdquo; for the help menu)
+We will now be presented with the following prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Partition &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;type&lt;/span&gt;
+ p   primary &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt; primary, &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt; extended, &lt;span style=&#34;color:#bd93f9&#34;&gt;4&lt;/span&gt; free&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;
+ e   extended &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;container &lt;span style=&#34;color:#ff79c6&#34;&gt;for&lt;/span&gt; logical partitions&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+The prompt asks for the &amp;ldquo;Partition Type&amp;rdquo; and the options are &amp;ldquo;p&amp;rdquo; for primary and &amp;ldquo;e&amp;rdquo; for extended.
+We want this new partition to be primary so enter the command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;p&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+We will now be presented with following prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Partition number &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;1-4, default 1&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Enter
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+We will now be presented with following prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;First sector &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;2048-15130623, default 2048&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Just press enter without typing anything else, for the default 2048 selection.
+We will now be presented with following prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Last sector, +sectors or +size&lt;span style=&#34;color:#ff79c6&#34;&gt;{&lt;/span&gt;K,M,G,T,P&lt;span style=&#34;color:#ff79c6&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;2048-15130623, default 15130623&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Just press enter without typing anything else, for the default 15130623 selection.
+(Feel free to read up more on &lt;a href=&#34;https://en.wikipedia.org/wiki/Master_boot_record&#34;&gt;sectors&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;We will be presented with following prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Created a new partition &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt; of &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;Linux&amp;#39;&lt;/span&gt; and of size 7.2 GiB.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Beautiful! Except we want the partition type to be &amp;ldquo;FAT32&amp;rdquo; not &amp;ldquo;Linux&amp;rdquo;.  We can do this by entering the command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;t&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;We will be presented with following prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;Selected partition &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;
+Partition &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;type&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;type&lt;/span&gt; L to list all types&lt;span style=&#34;color:#ff79c6&#34;&gt;)&lt;/span&gt;:&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Enter the command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;L&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+We will be presented with all of the different foramt types. W95 FAT32 is the format we are looking for.  On my machine it is toward the beginning of the list. Once you find it, take note of the code beside it (mine is &amp;ldquo;b&amp;rdquo;).&lt;/p&gt;
+&lt;p&gt;Type the code that was beside &amp;ldquo;W95 FAT32&amp;rdquo; and press enter.
+In my case
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;b&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Now enter the command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;p&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+We should see that the newly created partition has a type of &amp;ldquo;W95 FAT32&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Now we must write all of our changed to the card in order to finalize the formatted partition. Enter the command
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;w&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+We will be presented with following prompt
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;The partition table has been altered.
+Calling ioctl&lt;span style=&#34;color:#ff79c6&#34;&gt;()&lt;/span&gt; to re-read partition table.
+Syncing disks.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+Success!  It will exit out of the &amp;lsquo;fdisk&amp;rsquo; program after writing.  Now for the last step in formatting the card. We must create a file system on the new clean partition we just created on the SD card.  This is accomplished with the commmand
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo mkfs.vfat partition_pathname_from_step5&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+So the command I entered is
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo mkfs.vfat /dev/mmcblk0p1&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;h3 id=&#34;step-8-install-the-img-file-onto-the-sd-card&#34;&gt;Step 8. Install the .img file onto the SD card&lt;/h3&gt;
+&lt;p&gt;Now for the last and final step of the tutorial.  To install the the operating system onto the SD card we will need the
+pathname of the Image (.img) file from step 3, and the pathname from the card reader (the modified partition pathname) from the beginning of step 7.&lt;/p&gt;
+&lt;p&gt;The command will be&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo dd &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;bs&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;1M &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;image_pathname &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;of&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;card_reader_device_pathname&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note, if you are on a OSX(Unix) computer, the above &amp;ldquo;M&amp;rdquo; command will need to be lowercase &amp;ldquo;m&amp;rdquo; instead.&lt;/p&gt;
+&lt;p&gt;This is the command I entered
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo dd &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;bs&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;1M &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;home/chris/Downloads/retro_pi.img &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;of&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;/dev/mmcblk0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;Once you have entered the correct command, the installation will begin. This take a while and you will just see a blinking cursor. As long as it&amp;rsquo;s blinking that means it is writing the Image (.img) file to the SD card. On my machine it was almost 5 minutes per gigabyte.  So just hang in there!!&lt;/p&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Once the installation is complete, you can eject the SD card from your computer and insert the microSD card into your Raspberry Pi.  And if everything goes well, you should witness your Pi boot up with installed operating system. Congradulations!  You just installed a operating system using only the command line, that wasn&amp;rsquo;t so hard was it?&lt;/p&gt;
+&lt;p&gt;If you have any questions, issues, or advice, please send me an email and I will be more then happy to respond.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

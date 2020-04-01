@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ruby-on-rails on Chris LaBarge - Software Developer - Portfolio</title>
+    <link>http://chrislabarge.com/tags/ruby-on-rails/</link>
+    <description>Recent content in ruby-on-rails on Chris LaBarge - Software Developer - Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 May 2018 18:30:21 -0500</lastBuildDate>
+    
+	<atom:link href="http://chrislabarge.com/tags/ruby-on-rails/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rails &#39;#delete_all&#39; - Fast &amp; Powerful - Beware</title>
+      <link>http://chrislabarge.com/posts/delete-all/</link>
+      <pubDate>Wed, 23 May 2018 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/posts/delete-all/</guid>
+      <description>&lt;h2 id=&#34;what-you-will-learn&#34;&gt;What You Will Learn&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;A fast way to delete a large batch of rows from a Database table&lt;/li&gt;
+&lt;li&gt;How to prevent from locking your Database&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;who-this-is-for&#34;&gt;Who This Is For&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Rails developers who need to delete records more efficiently.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby&lt;/li&gt;
+&lt;li&gt;Rails &amp;gt;= 5.0&lt;/li&gt;
+&lt;li&gt;Relational Database like MySQL or PostgreSQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I am currently working on a Rails project that deals with importing and exporting large amounts of data.  The user is able to import and store data into the applications Database as well and delete the data.&lt;/p&gt;
+&lt;p&gt;Because some of these data deletions can consist of thousands of rows you must code the removal process a little differently.&lt;/p&gt;
+&lt;p&gt;When a User imports/uploads new data into the application it creates a new &lt;code&gt;DataUplodad&lt;/code&gt; model.  The application also creates a new &lt;code&gt;DataSet&lt;/code&gt; record for every single data set from the import.&lt;/p&gt;
+&lt;p&gt;I have the model &lt;code&gt;DataSet&lt;/code&gt; which has a &lt;code&gt;belongs_to&lt;/code&gt; relationship to &lt;code&gt;DataUploads&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataSet&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
+  belongs_to &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_uploads&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I have the model &lt;code&gt;DataUploads&lt;/code&gt; which has a &lt;code&gt;has_many&lt;/code&gt; relationship to &lt;code&gt;DataSets&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataUpload&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
+  has_many &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_sets&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;dependent&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;:destroy&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Notice the &lt;code&gt;dependent: :destroy&lt;/code&gt;.  This means that when a &lt;code&gt;DataUpload&lt;/code&gt; model gets deleted/destroyed, all of the associated &lt;code&gt;DataSet&lt;/code&gt; models will all get destroyed as well.&lt;/p&gt;
+&lt;p&gt;This also loads every associated &lt;code&gt;DataSet&lt;/code&gt; model into memory as well.  This will bog down the server if there is a very large association of thousands of &lt;code&gt;DataSet&lt;/code&gt; records.&lt;/p&gt;
+&lt;p&gt;The way we solve this is to use the &lt;code&gt;ActiveRecord::Relation#delete_all&lt;/code&gt;. This &lt;a href=&#34;https://apidock.com/rails/ActiveRecord/Relation/delete_all&#34;&gt;method&lt;/a&gt; performs a single SQL statement and efficiently deletes all of the records within the Relation.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Look at the example below.&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;upload &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; DataUpload&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;last
+data_sets &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; upload&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;data_sets
+
+data_sets&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;delete_all&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;warning&#34;&gt;WARNING&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;DO NOT use this method on more then 5,000 records in a Database table.  It will lock the Database for the entire transaction.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;#delete_all&lt;/code&gt; does not load the record, so any callbacks will not be fired.  Make sure the application and/or model is not dependent on any pre/post delete processes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now we can implement the method in the in the &lt;code&gt;DataUpload&lt;/code&gt; callback.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataUpload&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
+  has_many &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_sets&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;dependent&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;:delete_all&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;BUT WAIT!! If you were a good reader and saw the first WARNING above you will notice that if I left the code this way and a particular &lt;code&gt;DataUpload&lt;/code&gt; instance had an association of more then 5,000 &lt;code&gt;DataSet&lt;/code&gt; records&amp;hellip;the Database will lock for the entire transaction. To prevent from this we must utilize one of the Ruby on Rails 5.0 &lt;a href=&#34;http://api.rubyonrails.org/classes/ActiveRecord/Batches.html#method-i-in_batches&#34;&gt;methods&lt;/a&gt; &lt;code&gt;#in_batches&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;If you are not use a Rails version that is &amp;gt;= 5.0 then check out the gem &lt;a href=&#34;https://github.com/ankane/delete_in_batches&#34;&gt;delete_in_batches&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataUpload&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
+  has_many &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_sets&lt;/span&gt;
+
+  before_destroy &lt;span style=&#34;color:#f1fa8c&#34;&gt;:destroy_data_sets&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;private&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;destroy_data_sets&lt;/span&gt;
+    data_sets&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;in_batches(&lt;span style=&#34;color:#f1fa8c&#34;&gt;of&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;1000&lt;/span&gt;)&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;delete_all
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;First we remove the previous callback &lt;code&gt;dependent: :delete_all&lt;/code&gt;, and replace it with &lt;code&gt;before_destroy&lt;/code&gt; callback and pass in the new private method &lt;code&gt;#destroy_data_sets&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You will notice that &lt;code&gt;#in_batches&lt;/code&gt; takes an option &lt;code&gt;:of&lt;/code&gt; set to &lt;code&gt;1000&lt;/code&gt;. This will limit the amount of records deleted in a single SQL transaction to 1,000.  Thus preventing the Database from locking.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using Chrome Driver For Headless Scraping and Downloading</title>
+      <link>http://chrislabarge.com/posts/headless-scrape/</link>
+      <pubDate>Fri, 20 Apr 2018 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/posts/headless-scrape/</guid>
+      <description>&lt;h2 id=&#34;what-you-will-learn&#34;&gt;What You Will Learn&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;How to use a non headless web driver on a headless server.&lt;/li&gt;
+&lt;li&gt;How to setup the Chrome Driver with Selenium and Capybara.&lt;/li&gt;
+&lt;li&gt;How to set up the driver to allow for automatic browser downloads.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;who-this-is-for&#34;&gt;Who This Is For&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby developers wanting to use the Chrome Driver for their browser automations.&lt;/li&gt;
+&lt;li&gt;Coders looking for a solution to headless file downloads using the browser.&lt;/li&gt;
+&lt;li&gt;Coders that need to run a non headless web driver in a headless environment.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/teamcapybara/capybara&#34;&gt; Capybara &lt;/a&gt; and &lt;a href=&#34;http://robotframework.org/SeleniumLibrary/&#34;&gt; Selenium &lt;/a&gt; installed.&lt;/li&gt;
+&lt;li&gt;Framework(ex Rails) or program utilizing the above libraries.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;Recently I was making some scrapers for a client who needed pdf&amp;rsquo;s downloaded. The program runs on a AWS Ubuntu server and is developed with the Ruby language and the Capybara library. Because this is running in a headless environment I decided to go with Phantom JS as my web driver using Poltergeist gem to integrate it with Ruby and Capybara. I use this driver for integration testing when developing in Rails and have found it accomplished most of what I asked of it, without having to rely on the Selenium Library&lt;/p&gt;
+&lt;p&gt;Most of the pdf&amp;rsquo;s I was scraping came from websites that would render them at URL  endpoints. This allowed me to just scrape the URL string with Phantom JS and use the Ruby module &lt;a href=&#34;https://ruby-doc.org/stdlib-2.4.3/libdoc/open-uri/rdoc/OpenURI.html&#34;&gt; open-uri &lt;/a&gt; to handle the downloading of the actual pdf document.&lt;/p&gt;
+&lt;p&gt;Well unfortunetly I ran into a situation where the website would only let the user download the pdf as a file-attachment.  You cannot download files from the browser using Phantom JS.  This makes sense considering the whole point of Phantom JS is that it is truley headless driver.&lt;/p&gt;
+&lt;p&gt;I would have to bring in &lt;a href=&#34;http://robotframework.org/SeleniumLibrary/&#34;&gt; Selenium &lt;/a&gt; after all.  Selenium is the end all be all of  automated browser interaction libraries. You can utilize several different web drivers with it, and integrate it with Capybara.  This allowed me to use Selenium in replace of Poltergiest without having to change any of my code.&lt;/p&gt;
+&lt;p&gt;I decided to go with the &lt;a href=&#34;https://sites.google.com/a/chromium.org/chromedriver/&#34;&gt; Chrome Driver &lt;/a&gt; because I when I was researching how I could download the pdf&amp;rsquo;s using a headless driver someone suggested that the Chrome Driver had a new headless feature that would allow for downloading.(nope!)&lt;/p&gt;
+&lt;p&gt;I plugged it in and started running the headless feature as I would Phantom JS. I actually really enjoyed the speed and performance of the driver.  I might start using it as my integration driver from now on.  Unfortunetly, it would not allow for downloads using the browser while using headless mode.(at least at this point)&lt;/p&gt;
+&lt;p&gt;However, I was able to download the file using the non-headless mode of the Chrome Driver.&lt;/p&gt;
+&lt;h2 id=&#34;code&#34;&gt;Code&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;The following is for installing the driver on Ubuntu&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Make sure Chrome is installed. &lt;a href=&#34;https://askubuntu.com/questions/510056/how-to-install-google-chrome&#34;&gt; Install Options &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Download and extract the Chrome Driver from the &lt;a href=&#34;https://sites.google.com/a/chromium.org/chromedriver/downloads&#34;&gt; Download Link &lt;/a&gt;. Then move the extracted binary driver file to &amp;ldquo;/usr/local/bin&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;There are some preferences and arguments you have to send/set in the Chrome Driver to be able to download files from the browser.
+These will allow the browser to immediately download the file without having to accept the save_as prompt that ususally pops up.  You will also have to tell the driver what folder you would like the files to be downloaded to.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;driver_options&lt;/span&gt;
+  download_directory &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;./downloads/&amp;#39;&lt;/span&gt;
+
+  { &lt;span style=&#34;color:#f1fa8c&#34;&gt;args&lt;/span&gt;: &lt;span style=&#34;color:#ff79c6&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;test-type&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;disable-extensions&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;]&lt;/span&gt;,
+    &lt;span style=&#34;color:#f1fa8c&#34;&gt;prefs&lt;/span&gt;: {
+      &lt;span style=&#34;color:#f1fa8c&#34;&gt;plugins&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;always_open_pdf_externally&lt;/span&gt;: &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt; },
+      &lt;span style=&#34;color:#f1fa8c&#34;&gt;savefile&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;default_directory&lt;/span&gt;: download_directory },
+      &lt;span style=&#34;color:#f1fa8c&#34;&gt;download&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;prompt_for_download&lt;/span&gt;: &lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;,
+                  &lt;span style=&#34;color:#f1fa8c&#34;&gt;default_directory&lt;/span&gt;: download_directory }
+    }
+  }
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Above I have wrapped the options within a ruby function.  I will call this function when passing the parameter option [:chromeOptions] to the #chrome method for  Remote::Capabilities. This takes place below when registering the driver with Capybara.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;Capybara&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;register_driver &lt;span style=&#34;color:#f1fa8c&#34;&gt;:chrome&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt;app&lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt;
+  capabilities &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; Selenium&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;WebDriver&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Remote&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;
+    Capabilities&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;chrome(
+      &lt;span style=&#34;color:#f1fa8c&#34;&gt;chromeOptions&lt;/span&gt;: driver_options
+    )
+
+  Capybara&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Selenium&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Driver&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;new(
+    app,
+    &lt;span style=&#34;color:#f1fa8c&#34;&gt;browser&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;:chrome&lt;/span&gt;,
+    &lt;span style=&#34;color:#f1fa8c&#34;&gt;desired_capabilities&lt;/span&gt;: capabilities
+  )
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+
+Capybara&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;ignore_hidden_elements &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The hash from the function #driver_options() gets parsed by the Selenium Library and then passed to the chrome driver.&lt;/p&gt;
+&lt;p&gt;If you want to see a complete list of options that you can pass to the chrome driver check out this &lt;a href=&#34;https://stackoverflow.com/questions/38335671/selenium-chrome-where-can-i-find-a-list-of-all-available-chromeoption-arguments&#34;&gt;stacked overflow response&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now when I  run the scraper locally using &amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The chrome browser window pops up and runs through the list of the Capybara session commands, navigating to the download link, and then clicking the link.  This is where the driver options come to play and automatically save the file to the proper directory.&lt;/p&gt;
+&lt;p&gt;Great!  But I need this same thing to happen on the AWS with no monitor. What am I to do?&lt;/p&gt;
+&lt;p&gt;Well that is where  Xvfb comes it.  It creates a virtual monitor and allows you to use non headless web drivers in headless environments.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://tobyho.com/2015/01/09/headless-browser-testing-xvfb/&#34;&gt;Xvfb Tutorial&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As long as Xvfb is properly installed all you need to do is pass the command that kicks off your Capybara Session to the &amp;ldquo;xvfb-run&amp;rdquo; command.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xvfb-run bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I can no longer watch the scrape occur on my monitor, but after the program is done running, I can verify it worked by finding a freshly downloaded pdf in my &amp;ldquo;./downloads&amp;rdquo; folder.&lt;/p&gt;
+&lt;p&gt;And there you have it a simple way to run non headless Chrome Driver session in a headless server environment, in order to download files using the browser.&lt;/p&gt;
+&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
+&lt;p&gt;The default screen size for the &amp;ldquo;xfvb-run&amp;rdquo; command is fairly small.  So if you are interacting with a responsive website and need you change the virtual screen dimensions run the command like so&amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xvfb-run --server-args&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;-screen 0 1024x768x24&amp;#39;&lt;/span&gt; bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

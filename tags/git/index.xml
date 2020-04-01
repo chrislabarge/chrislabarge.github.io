@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Chris LaBarge - Software Developer - Portfolio</title>
+    <link>http://chrislabarge.com/tags/git/</link>
+    <description>Recent content in git on Chris LaBarge - Software Developer - Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 18 Mar 2015 12:01:27 +0000</lastBuildDate>
+    
+	<atom:link href="http://chrislabarge.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>My first Pull Request</title>
+      <link>http://chrislabarge.com/posts/first-pull-request/</link>
+      <pubDate>Wed, 18 Mar 2015 12:01:27 +0000</pubDate>
+      
+      <guid>http://chrislabarge.com/posts/first-pull-request/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;About a month ago I was searching for a local user-group of Ruby programmers,
+and luckily came across the Tech Valley Ruby Brigade. Even more lucky, their
+website needed a modern design update and they provided the repository on github
+for anyone to grab.&lt;/p&gt;
+&lt;p&gt;It was a perfect opportunity for me to learn how to submit a pull-request and at
+the same time a good ice-breaker for the first time I would attend the user-group
+meetup.&lt;/p&gt;
+&lt;h2 id=&#34;things-you-will-learn&#34;&gt;Things You Will Learn&lt;/h2&gt;
+&lt;p&gt;Through my experience I will go over how to&amp;hellip;..&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fork a repository&lt;/li&gt;
+&lt;li&gt;Clone a repository&lt;/li&gt;
+&lt;li&gt;Commit and push new branch with changes&lt;/li&gt;
+&lt;li&gt;Submit a Pull-Request&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;1-fork-the-repository&#34;&gt;1. Fork the repository&lt;/h3&gt;
+&lt;p&gt;I went to the github repository for the website that I wanted to work on. Once
+there, I clicked the &amp;ldquo;Fork&amp;rdquo; button in the top right corner.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;This copies the entire repository of the website right onto my personal github
+account.&lt;/p&gt;
+&lt;h3 id=&#34;2-clone-the-repository&#34;&gt;2. Clone the repository&lt;/h3&gt;
+&lt;p&gt;Next I had to clone the forked repository from my github account to my local
+machine. By going to terminal and entering the following command.
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;	chrislabarge$ git clone https://github.com/chrislabarge/techvalleyrb.github.com.git&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;You can get the url path of the above command from the forked repository on your
+github account by copying from and pasting into the command-line.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://chrislabarge.com/images/clone.jpg&#34; alt=&#34;Url Path &#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3-create-a-new-branch&#34;&gt;3. Create a new branch&lt;/h3&gt;
+&lt;p&gt;Once I had the repository cloned onto my machine, I created a new branch
+from the master and named it &amp;ldquo;updating-bootstrap&amp;rdquo;. Creating a new required in
+order to make changes.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;	chrislabarge$ git checkout -b updating-bootstrap&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;At this point I was able to start making changes. I updated the css bootstrap
+framework for the website and took advantage of the responsive grid design.&lt;/p&gt;
+&lt;h4 id=&#34;note&#34;&gt;Note&lt;/h4&gt;
+&lt;p&gt;&lt;em&gt;Normally you would not want  want to perform any MAJOR adjustments on your contribution&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;4-add-and-commit-any-changes&#34;&gt;4. Add and commit any changes&lt;/h3&gt;
+&lt;p&gt;Once I was satisfied with my changes, I added all of the newly changed files&amp;hellip;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;   chrislabarge$ git add -A&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;And then made a commit.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;	chrislabarge$ git commit -m &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;updated the bootstrap version and put the content into grid format&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;5-push-the-branch-to-github&#34;&gt;5. Push the branch to Github&lt;/h3&gt;
+&lt;p&gt;After I made the commit, it was time to push the branch up to my github.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;	chrislabarge$ git push origin updating-bootstrap&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;6-final--submit-a-pull-request&#34;&gt;6. Final- Submit a Pull-Request&lt;/h3&gt;
+&lt;p&gt;It was finally time to show off my changes and submit a pull-request.  I went back
+to the original repository of the website, the one I went to in step 1. And
+clicked the green button below.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://chrislabarge.com/images/compare-pull.jpg&#34; alt=&#34;Pull-Icon Screen Shot&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Next, I selected my branch to compare, (updating-bootstrap) and clicked
+&amp;ldquo;Create pull request&amp;rdquo;.
+(The compare branch in the photo below says testing, it should be updating-bootstrap.)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://chrislabarge.com/images/pull.jpg&#34; alt=&#34;Fork Screen Shot&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

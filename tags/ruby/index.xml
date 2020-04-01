@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ruby on Chris LaBarge - Software Developer - Portfolio</title>
+    <link>http://chrislabarge.com/tags/ruby/</link>
+    <description>Recent content in ruby on Chris LaBarge - Software Developer - Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 23 May 2018 18:30:21 -0500</lastBuildDate>
+    
+	<atom:link href="http://chrislabarge.com/tags/ruby/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Rails &#39;#delete_all&#39; - Fast &amp; Powerful - Beware</title>
+      <link>http://chrislabarge.com/posts/delete-all/</link>
+      <pubDate>Wed, 23 May 2018 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/posts/delete-all/</guid>
+      <description>&lt;h2 id=&#34;what-you-will-learn&#34;&gt;What You Will Learn&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;A fast way to delete a large batch of rows from a Database table&lt;/li&gt;
+&lt;li&gt;How to prevent from locking your Database&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;who-this-is-for&#34;&gt;Who This Is For&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Rails developers who need to delete records more efficiently.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby&lt;/li&gt;
+&lt;li&gt;Rails &amp;gt;= 5.0&lt;/li&gt;
+&lt;li&gt;Relational Database like MySQL or PostgreSQL&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;I am currently working on a Rails project that deals with importing and exporting large amounts of data.  The user is able to import and store data into the applications Database as well and delete the data.&lt;/p&gt;
+&lt;p&gt;Because some of these data deletions can consist of thousands of rows you must code the removal process a little differently.&lt;/p&gt;
+&lt;p&gt;When a User imports/uploads new data into the application it creates a new &lt;code&gt;DataUplodad&lt;/code&gt; model.  The application also creates a new &lt;code&gt;DataSet&lt;/code&gt; record for every single data set from the import.&lt;/p&gt;
+&lt;p&gt;I have the model &lt;code&gt;DataSet&lt;/code&gt; which has a &lt;code&gt;belongs_to&lt;/code&gt; relationship to &lt;code&gt;DataUploads&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataSet&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
+  belongs_to &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_uploads&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I have the model &lt;code&gt;DataUploads&lt;/code&gt; which has a &lt;code&gt;has_many&lt;/code&gt; relationship to &lt;code&gt;DataSets&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataUpload&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
+  has_many &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_sets&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;dependent&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;:destroy&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Notice the &lt;code&gt;dependent: :destroy&lt;/code&gt;.  This means that when a &lt;code&gt;DataUpload&lt;/code&gt; model gets deleted/destroyed, all of the associated &lt;code&gt;DataSet&lt;/code&gt; models will all get destroyed as well.&lt;/p&gt;
+&lt;p&gt;This also loads every associated &lt;code&gt;DataSet&lt;/code&gt; model into memory as well.  This will bog down the server if there is a very large association of thousands of &lt;code&gt;DataSet&lt;/code&gt; records.&lt;/p&gt;
+&lt;p&gt;The way we solve this is to use the &lt;code&gt;ActiveRecord::Relation#delete_all&lt;/code&gt;. This &lt;a href=&#34;https://apidock.com/rails/ActiveRecord/Relation/delete_all&#34;&gt;method&lt;/a&gt; performs a single SQL statement and efficiently deletes all of the records within the Relation.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Look at the example below.&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;upload &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; DataUpload&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;last
+data_sets &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; upload&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;data_sets
+
+data_sets&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;delete_all&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;warning&#34;&gt;WARNING&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;DO NOT use this method on more then 5,000 records in a Database table.  It will lock the Database for the entire transaction.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;#delete_all&lt;/code&gt; does not load the record, so any callbacks will not be fired.  Make sure the application and/or model is not dependent on any pre/post delete processes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now we can implement the method in the in the &lt;code&gt;DataUpload&lt;/code&gt; callback.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataUpload&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
+  has_many &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_sets&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;dependent&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;:delete_all&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;BUT WAIT!! If you were a good reader and saw the first WARNING above you will notice that if I left the code this way and a particular &lt;code&gt;DataUpload&lt;/code&gt; instance had an association of more then 5,000 &lt;code&gt;DataSet&lt;/code&gt; records&amp;hellip;the Database will lock for the entire transaction. To prevent from this we must utilize one of the Ruby on Rails 5.0 &lt;a href=&#34;http://api.rubyonrails.org/classes/ActiveRecord/Batches.html#method-i-in_batches&#34;&gt;methods&lt;/a&gt; &lt;code&gt;#in_batches&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;If you are not use a Rails version that is &amp;gt;= 5.0 then check out the gem &lt;a href=&#34;https://github.com/ankane/delete_in_batches&#34;&gt;delete_in_batches&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataUpload&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
+  has_many &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_sets&lt;/span&gt;
+
+  before_destroy &lt;span style=&#34;color:#f1fa8c&#34;&gt;:destroy_data_sets&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;private&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;destroy_data_sets&lt;/span&gt;
+    data_sets&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;in_batches(&lt;span style=&#34;color:#f1fa8c&#34;&gt;of&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;1000&lt;/span&gt;)&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;delete_all
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;First we remove the previous callback &lt;code&gt;dependent: :delete_all&lt;/code&gt;, and replace it with &lt;code&gt;before_destroy&lt;/code&gt; callback and pass in the new private method &lt;code&gt;#destroy_data_sets&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You will notice that &lt;code&gt;#in_batches&lt;/code&gt; takes an option &lt;code&gt;:of&lt;/code&gt; set to &lt;code&gt;1000&lt;/code&gt;. This will limit the amount of records deleted in a single SQL transaction to 1,000.  Thus preventing the Database from locking.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using Chrome Driver For Headless Scraping and Downloading</title>
+      <link>http://chrislabarge.com/posts/headless-scrape/</link>
+      <pubDate>Fri, 20 Apr 2018 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/posts/headless-scrape/</guid>
+      <description>&lt;h2 id=&#34;what-you-will-learn&#34;&gt;What You Will Learn&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;How to use a non headless web driver on a headless server.&lt;/li&gt;
+&lt;li&gt;How to setup the Chrome Driver with Selenium and Capybara.&lt;/li&gt;
+&lt;li&gt;How to set up the driver to allow for automatic browser downloads.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;who-this-is-for&#34;&gt;Who This Is For&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby developers wanting to use the Chrome Driver for their browser automations.&lt;/li&gt;
+&lt;li&gt;Coders looking for a solution to headless file downloads using the browser.&lt;/li&gt;
+&lt;li&gt;Coders that need to run a non headless web driver in a headless environment.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/teamcapybara/capybara&#34;&gt; Capybara &lt;/a&gt; and &lt;a href=&#34;http://robotframework.org/SeleniumLibrary/&#34;&gt; Selenium &lt;/a&gt; installed.&lt;/li&gt;
+&lt;li&gt;Framework(ex Rails) or program utilizing the above libraries.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;Recently I was making some scrapers for a client who needed pdf&amp;rsquo;s downloaded. The program runs on a AWS Ubuntu server and is developed with the Ruby language and the Capybara library. Because this is running in a headless environment I decided to go with Phantom JS as my web driver using Poltergeist gem to integrate it with Ruby and Capybara. I use this driver for integration testing when developing in Rails and have found it accomplished most of what I asked of it, without having to rely on the Selenium Library&lt;/p&gt;
+&lt;p&gt;Most of the pdf&amp;rsquo;s I was scraping came from websites that would render them at URL  endpoints. This allowed me to just scrape the URL string with Phantom JS and use the Ruby module &lt;a href=&#34;https://ruby-doc.org/stdlib-2.4.3/libdoc/open-uri/rdoc/OpenURI.html&#34;&gt; open-uri &lt;/a&gt; to handle the downloading of the actual pdf document.&lt;/p&gt;
+&lt;p&gt;Well unfortunetly I ran into a situation where the website would only let the user download the pdf as a file-attachment.  You cannot download files from the browser using Phantom JS.  This makes sense considering the whole point of Phantom JS is that it is truley headless driver.&lt;/p&gt;
+&lt;p&gt;I would have to bring in &lt;a href=&#34;http://robotframework.org/SeleniumLibrary/&#34;&gt; Selenium &lt;/a&gt; after all.  Selenium is the end all be all of  automated browser interaction libraries. You can utilize several different web drivers with it, and integrate it with Capybara.  This allowed me to use Selenium in replace of Poltergiest without having to change any of my code.&lt;/p&gt;
+&lt;p&gt;I decided to go with the &lt;a href=&#34;https://sites.google.com/a/chromium.org/chromedriver/&#34;&gt; Chrome Driver &lt;/a&gt; because I when I was researching how I could download the pdf&amp;rsquo;s using a headless driver someone suggested that the Chrome Driver had a new headless feature that would allow for downloading.(nope!)&lt;/p&gt;
+&lt;p&gt;I plugged it in and started running the headless feature as I would Phantom JS. I actually really enjoyed the speed and performance of the driver.  I might start using it as my integration driver from now on.  Unfortunetly, it would not allow for downloads using the browser while using headless mode.(at least at this point)&lt;/p&gt;
+&lt;p&gt;However, I was able to download the file using the non-headless mode of the Chrome Driver.&lt;/p&gt;
+&lt;h2 id=&#34;code&#34;&gt;Code&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;The following is for installing the driver on Ubuntu&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Make sure Chrome is installed. &lt;a href=&#34;https://askubuntu.com/questions/510056/how-to-install-google-chrome&#34;&gt; Install Options &lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Download and extract the Chrome Driver from the &lt;a href=&#34;https://sites.google.com/a/chromium.org/chromedriver/downloads&#34;&gt; Download Link &lt;/a&gt;. Then move the extracted binary driver file to &amp;ldquo;/usr/local/bin&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;There are some preferences and arguments you have to send/set in the Chrome Driver to be able to download files from the browser.
+These will allow the browser to immediately download the file without having to accept the save_as prompt that ususally pops up.  You will also have to tell the driver what folder you would like the files to be downloaded to.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;driver_options&lt;/span&gt;
+  download_directory &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;./downloads/&amp;#39;&lt;/span&gt;
+
+  { &lt;span style=&#34;color:#f1fa8c&#34;&gt;args&lt;/span&gt;: &lt;span style=&#34;color:#ff79c6&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;test-type&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;disable-extensions&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;]&lt;/span&gt;,
+    &lt;span style=&#34;color:#f1fa8c&#34;&gt;prefs&lt;/span&gt;: {
+      &lt;span style=&#34;color:#f1fa8c&#34;&gt;plugins&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;always_open_pdf_externally&lt;/span&gt;: &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt; },
+      &lt;span style=&#34;color:#f1fa8c&#34;&gt;savefile&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;default_directory&lt;/span&gt;: download_directory },
+      &lt;span style=&#34;color:#f1fa8c&#34;&gt;download&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;prompt_for_download&lt;/span&gt;: &lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;,
+                  &lt;span style=&#34;color:#f1fa8c&#34;&gt;default_directory&lt;/span&gt;: download_directory }
+    }
+  }
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Above I have wrapped the options within a ruby function.  I will call this function when passing the parameter option [:chromeOptions] to the #chrome method for  Remote::Capabilities. This takes place below when registering the driver with Capybara.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;Capybara&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;register_driver &lt;span style=&#34;color:#f1fa8c&#34;&gt;:chrome&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt;app&lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt;
+  capabilities &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; Selenium&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;WebDriver&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Remote&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;
+    Capabilities&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;chrome(
+      &lt;span style=&#34;color:#f1fa8c&#34;&gt;chromeOptions&lt;/span&gt;: driver_options
+    )
+
+  Capybara&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Selenium&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Driver&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;new(
+    app,
+    &lt;span style=&#34;color:#f1fa8c&#34;&gt;browser&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;:chrome&lt;/span&gt;,
+    &lt;span style=&#34;color:#f1fa8c&#34;&gt;desired_capabilities&lt;/span&gt;: capabilities
+  )
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+
+Capybara&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;ignore_hidden_elements &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The hash from the function #driver_options() gets parsed by the Selenium Library and then passed to the chrome driver.&lt;/p&gt;
+&lt;p&gt;If you want to see a complete list of options that you can pass to the chrome driver check out this &lt;a href=&#34;https://stackoverflow.com/questions/38335671/selenium-chrome-where-can-i-find-a-list-of-all-available-chromeoption-arguments&#34;&gt;stacked overflow response&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Now when I  run the scraper locally using &amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The chrome browser window pops up and runs through the list of the Capybara session commands, navigating to the download link, and then clicking the link.  This is where the driver options come to play and automatically save the file to the proper directory.&lt;/p&gt;
+&lt;p&gt;Great!  But I need this same thing to happen on the AWS with no monitor. What am I to do?&lt;/p&gt;
+&lt;p&gt;Well that is where  Xvfb comes it.  It creates a virtual monitor and allows you to use non headless web drivers in headless environments.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://tobyho.com/2015/01/09/headless-browser-testing-xvfb/&#34;&gt;Xvfb Tutorial&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As long as Xvfb is properly installed all you need to do is pass the command that kicks off your Capybara Session to the &amp;ldquo;xvfb-run&amp;rdquo; command.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xvfb-run bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I can no longer watch the scrape occur on my monitor, but after the program is done running, I can verify it worked by finding a freshly downloaded pdf in my &amp;ldquo;./downloads&amp;rdquo; folder.&lt;/p&gt;
+&lt;p&gt;And there you have it a simple way to run non headless Chrome Driver session in a headless server environment, in order to download files using the browser.&lt;/p&gt;
+&lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
+&lt;p&gt;The default screen size for the &amp;ldquo;xfvb-run&amp;rdquo; command is fairly small.  So if you are interacting with a responsive website and need you change the virtual screen dimensions run the command like so&amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xvfb-run --server-args&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;-screen 0 1024x768x24&amp;#39;&lt;/span&gt; bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How I Made a Typing Speed Calculator</title>
+      <link>http://chrislabarge.com/posts/typing-speed-calulator/</link>
+      <pubDate>Thu, 26 Mar 2015 12:01:27 +0000</pubDate>
+      
+      <guid>http://chrislabarge.com/posts/typing-speed-calulator/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;http://voltframework.com/&#34;&gt;Volt&lt;/a&gt; is a new Ruby framework that allows your Ruby code to run on both the
+server and the client.  It uses the &lt;a href=&#34;http://opalrb.org/&#34;&gt;opal&lt;/a&gt; gem to compile
+the Ruby code to Javascript.&lt;/p&gt;
+&lt;p&gt;I suggest watching the &lt;a href=&#34;https://www.youtube.com/watch?v=Tg-EtRnMz7o&#34;&gt;Intro to Volt&lt;/a&gt;
+video, that goes over how to set up a to-do list in under 20 minutes. It is very
+comprehensible and showcases the magic of Volt.&lt;/p&gt;
+&lt;p&gt;In this tutorial you will learn how to create a typing speed calculator
+that updates as the user types in real time (&lt;a href=&#34;https://typing-calculator.herokuapp.com/&#34;&gt;like this one&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;We will cover how to:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Install the Volt Framework&lt;/li&gt;
+&lt;li&gt;Generate new Volt application&lt;/li&gt;
+&lt;li&gt;Use reactive form input&lt;/li&gt;
+&lt;li&gt;Create backend code for the typing calculator&lt;/li&gt;
+&lt;li&gt;Enable Bootstrap Animation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;installation&#34;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;First we need to install the Volt framework:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;gem install volt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once installed, create a new Volt project:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;volt new typing-calculator
+
+&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;cd&lt;/span&gt; typing-calculator&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you are using git for version control and plan on pushing your app up to
+github, you must get rid of your secret key. Just open up the app.rb in your
+applications config directory&amp;hellip;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;config/app.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And delete the string labeled config.app_secret&lt;/p&gt;
+&lt;h2 id=&#34;setup&#34;&gt;SetUp&lt;/h2&gt;
+&lt;p&gt;Fire up the Volt server which automatically pushes any changes you save to
+anyone viewing the page.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; volt server&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Open your browser and type &amp;ldquo;http://localhost:3000/&amp;rdquo; in the address bar.  This
+will bring you to the homepage of your new app. The template already includes
+a login link for in the navigation.  We won&amp;rsquo;t be needing users to sign up or
+log in for this project so go ahead open the project in your favorite editor and
+locate the main.html file.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/views/main/main.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And comment out the user templates&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;.
+.
+.
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:Body&lt;/span&gt;&amp;gt;
+  &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;container&amp;#34;&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;header&amp;#34;&lt;/span&gt;&amp;gt;
+      &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;ul&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;nav nav-pills pull-right&amp;#34;&lt;/span&gt;&amp;gt;
+        &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:nav&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;text&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;Home&amp;#34;&lt;/span&gt; /&amp;gt;
+        &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:nav&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;href&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;/about&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;text&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;About&amp;#34;&lt;/span&gt; /&amp;gt;
+    &lt;span style=&#34;color:#6272a4&#34;&gt;&amp;lt;!--    &amp;lt;:user-templates:menu /&amp;gt; COMMENT ME OUT --&amp;gt;&lt;/span&gt;
+      &amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;ul&lt;/span&gt;&amp;gt;
+      &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;h3&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;text-muted&amp;#34;&lt;/span&gt;&amp;gt;typing-calculator&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;h3&lt;/span&gt;&amp;gt;
+    &amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt;&amp;gt;
+.
+.
+.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can also comment out the routes for signing in and logging in as well.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/config/routes.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;# See https://github.com/voltrb/volt#routes for more info on routes&lt;/span&gt;
+
+get &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;/about&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;_action&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;about&amp;#39;&lt;/span&gt;
+
+&lt;span style=&#34;color:#6272a4&#34;&gt;# Routes for login and signup, provided by user-templates component gem&lt;/span&gt;
+&lt;span style=&#34;color:#6272a4&#34;&gt;#get &amp;#39;/signup&amp;#39;, _controller: &amp;#39;user-templates&amp;#39;, _action: &amp;#39;signup&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color:#6272a4&#34;&gt;#get &amp;#39;/login&amp;#39;, _controller: &amp;#39;user-templates&amp;#39;, _action: &amp;#39;login&amp;#39;&lt;/span&gt;
+
+&lt;span style=&#34;color:#6272a4&#34;&gt;# The main route, this should be last. It will match any params not&lt;/span&gt;
+&lt;span style=&#34;color:#6272a4&#34;&gt;# previously matched.&lt;/span&gt;
+get &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;, {}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;reactive-form-input&#34;&gt;Reactive Form Input&lt;/h2&gt;
+&lt;p&gt;Locate the index.html file within views and add some content along with a form
+to get user input.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/views/main/index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:Title&lt;/span&gt;&amp;gt;
+  Typing Calculator
+
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:Body&lt;/span&gt;&amp;gt;
+  &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;h1&lt;/span&gt;&amp;gt;Words Per Minute Typing Calculator&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;h1&lt;/span&gt;&amp;gt;
+
+  &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;form&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;e-submit&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;complete&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;role&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;form&amp;#34;&lt;/span&gt;&amp;gt;
+    &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;form-group&amp;#34;&lt;/span&gt;&amp;gt;
+     &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;label&lt;/span&gt;&amp;gt;&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;h3&lt;/span&gt;&amp;gt;Begin Typing&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;h3&lt;/span&gt;&amp;gt;&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;label&lt;/span&gt;&amp;gt;
+     &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;input&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;form-control submit-field&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;text&amp;#34;&lt;/span&gt;
+            &lt;span style=&#34;color:#50fa7b&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34; {% raw html %}{{page._user_string}}{% endraw %}&amp;#34;&lt;/span&gt;&amp;gt;
+    &amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt;&amp;gt;
+  &amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;form&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The input value for the form {% raw %}{{ page._user_string }}{% endraw %} is a piece
+of Ruby code.  Anything within the double curly brackets {% raw %}{{ ruby_function }}{% endraw %}
+is executed as ruby code.  In this case we are creating a page collection. In Volt,
+there are several types of collections to store data.  Page collections are
+temporary, meaning they will lose their data once you refresh or visit a
+different page.  We will not be using more that one page, so page collections are
+perfect for this project.&lt;/p&gt;
+&lt;p&gt;This form/input field is where the users will begin typing. The data we get from
+this form is how we will calculate the typing speed of the user.&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;Now we need sample text that the user will type. This can be any chunk of text you want to use.
+We will start by defining a function in the app controller that returns the
+text.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/controllers/main_controller.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;MainController&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; Volt&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;ModelController
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;index&lt;/span&gt;
+    &lt;span style=&#34;color:#6272a4&#34;&gt;# Add code for when the index view is loaded&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;about&lt;/span&gt;
+    &lt;span style=&#34;color:#6272a4&#34;&gt;# Add code for when the about view is loaded&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;sample_text&lt;/span&gt;
+   &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;In Volt, to simplify managing application state, all application state is kept in models that can optionally be persisted in different locations. By centralizing the application state, we reduce the amount of complex code needed to update a page. We can then build our page&amp;#39;s html declaratively.&amp;#34;&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now add the newly defined method to the home-page&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/views/main/index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:Title&lt;/span&gt;&amp;gt;
+  Typing Calculator
+
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:Body&lt;/span&gt;&amp;gt;
+ &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;h1&lt;/span&gt;&amp;gt;Words Per Minute Typing Calculator&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;h1&lt;/span&gt;&amp;gt;
+
+ &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;h3&lt;/span&gt;&amp;gt;Sample Text&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;h3&lt;/span&gt;&amp;gt;
+ &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{%raw ruby%}{{sample_text}}{%endraw%}&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;
+.
+.
+.&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;h2 id=&#34;words-per-minutewpm-calculations&#34;&gt;Words Per Minute(WPM) Calculations&lt;/h2&gt;
+&lt;p&gt;Now we can work on the back end code.  This will compare the users input with the
+sample text and calculate how much time has passed.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.speedtypingonline.com/typing-equations&#34;&gt;How to Calculate Typing Speed (WPM) and Accuracy&lt;/a&gt;
+is what I used to come up with the back end. Browse through the article in order
+to get a deeper understanding of the code.&lt;/p&gt;
+&lt;p&gt;In order to compare the sample text with the user input we must split the strings
+and put them into an array.&lt;/p&gt;
+&lt;p&gt;Create two functions in the controller that handle this task.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/controllers/main_controller.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;MainController&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; Volt&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;ModelController
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;sample_array&lt;/span&gt;
+    sample_text&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;split
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;user_array&lt;/span&gt;
+    page&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;_user_string&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;split
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can do this right on the home page for now in order to help you visualize.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/views/index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;sample text array&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{{sample_array}}&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;
+
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;user text array&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{{user_array}}&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;Now we have to create a function that compares the two arrays, and gives us
+an array of user mistakes.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/controllers/main_controller.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;mistakes_array&lt;/span&gt;
+  popped_array &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; user_array
+  popped_array&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;pop
+  mistakes &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; popped_array &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; sample_array
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The reason we set a new variable to the &amp;ldquo;user_array&amp;rdquo; and &amp;ldquo;pop&amp;rdquo; that new variable is
+because you do not want the current word that the user is typing to count as
+a mistake.  You only want completed words to be considered.&lt;/p&gt;
+&lt;p&gt;Add the &amp;lsquo;mistakes_array&amp;rsquo; function to the home page to get an idea of what I am
+talking about.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/views/index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;mistakes array&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{{mistakes_array}}&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;As you can see in the photo above, the second mistake will not count until the
+user starts a new word following the mistake.&lt;/p&gt;
+&lt;p&gt;We can use the mistakes_array to find the users accuracy. But before writing
+the accuracy method, we must create one the finds the total number of characters
+in an array.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/controllers/main_controller.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;character_length&lt;/span&gt;(array)
+  array&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;join&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;length
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+
+&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;accuracy&lt;/span&gt;
+  correct_characters &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; character_length(user_array) &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; character_length(mistakes_array)
+  fraction &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; correct_characters&lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; character_length(user_array)
+  accuracy_percentage &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (fraction &lt;span style=&#34;color:#ff79c6&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;100&lt;/span&gt;)&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;round
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Dividing the total character length of the &amp;lsquo;user_array&amp;rsquo; by only the &amp;lsquo;correct_word_length&amp;rsquo;
+gives us a decimal/fraction that we multiply by 100 to get the accuracy percentage.&lt;/p&gt;
+&lt;p&gt;Per  &lt;a href=&#34;http://www.speedtypingonline.com/typing-equations&#34;&gt;SpeedTypingOnline.com&lt;/a&gt;,
+when calculating a typing speed, a WORD is any &amp;ldquo;5 characters&amp;rdquo;.  Lets create the
+function to find the number of words in the controller.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/controllers/main_controller.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;word_num&lt;/span&gt;
+ character_length(user_array) &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;5&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Feel free to add your new &amp;ldquo;word_num&amp;rdquo; and &amp;ldquo;accuracy&amp;rdquo; functions to the the home
+page if you want to see them in action.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/views/index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{{word_num}}&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;number of words&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;
+
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{{accuracy}}&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;accuracy&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now it&amp;rsquo;s time to create the methods that will allow us to calculate how much
+time has passed.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/controllers/main_controller.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;time_elapsed&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; page&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;_user_string&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;length &lt;span style=&#34;color:#ff79c6&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;@start_time&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; Time&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;new
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;elsif&lt;/span&gt; page&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;_user_string&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;length &lt;span style=&#34;color:#ff79c6&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;@start_time&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;0&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;
+
+  minutes &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (Time&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;now &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;@start_time&lt;/span&gt;)&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;round &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#bd93f9&#34;&gt;60&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The if-statement allows the timer to start only when the user starts typing.  The
+function then returns the amount of time elapsed in minutes.  The if-statement
+also allows the timer to restart once the user clears out the form.&lt;/p&gt;
+&lt;p&gt;By dividing the elapsed time in seconds by 60, the function returns the number
+of elapsed time in minutes.&lt;/p&gt;
+&lt;p&gt;Now that we have the time, we can find the gross words per minute.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/controllers/main_controller.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;gross_wpm&lt;/span&gt;
+  (word_num &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; time_elapsed)&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;round
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Using the &amp;lsquo;gross_wpm&amp;rsquo; function we can find the net words per minute, which is
+what will give us our final words per minute calculation.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;net_wpm&lt;/span&gt;
+  errors_per_min &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; (mistakes_array&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;count &lt;span style=&#34;color:#ff79c6&#34;&gt;/&lt;/span&gt; time_elapsed)&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;round
+  gross_wpm &lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt; errors_per_min
+&lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now that we have the net words per minute typed we can use that function in
+a bootstap progress bar.  This is one of several ways you can use reactive form
+input to control real time animation on your page.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;app/main/views/index.html&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;progress&amp;#34;&lt;/span&gt;&amp;gt;
+  &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;progress-bar progress-bar-{{ if net_wpm &amp;gt; 60 }}success
+&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;                          {{elsif net_wpm &amp;gt; 31 }}warning
+&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;                          {{else}}danger{{end}}
+&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;              progress-bar-striped&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;role&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;progressbar&amp;#34;&lt;/span&gt;
+              &lt;span style=&#34;color:#50fa7b&#34;&gt;aria-valuenow&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;{{net_wpm}}&amp;#34;&lt;/span&gt;
+              &lt;span style=&#34;color:#50fa7b&#34;&gt;aria-valuemin&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;
+              &lt;span style=&#34;color:#50fa7b&#34;&gt;aria-valuemax&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;100&amp;#34;&lt;/span&gt;
+              &lt;span style=&#34;color:#50fa7b&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;width: {{net_wpm}}%&amp;#34;&lt;/span&gt;&amp;gt;
+
+     &amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;span&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;class&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;sr-only&amp;#34;&lt;/span&gt;&amp;gt;{{net_wpm}}%&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;span&lt;/span&gt;&amp;gt;
+  &amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt;&amp;gt;
+&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;div&lt;/span&gt;&amp;gt;
+.
+.
+.
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{{net_wpm}}&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;net wpm&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;
+
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;{{gross_wpm}}&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;p&lt;/span&gt;&amp;gt;
+&amp;lt;&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;gross wpm&amp;lt;/&lt;span style=&#34;color:#ff79c6&#34;&gt;b&lt;/span&gt;&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;h2 id=&#34;all-done&#34;&gt;ALL DONE&lt;/h2&gt;
+&lt;p&gt;Now we have a working application, you can style and animate it how ever you&amp;rsquo;d like.
+This is your chance to be creative with new features. Leave a comment below and share with me what you&amp;rsquo;ve come up with.&lt;/p&gt;
+&lt;p&gt;Here is an example of my design.&lt;/p&gt;
+&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;The above site is hosted on Heroku @ &lt;a href=&#34;https://typing-calculator.herokuapp.com/&#34;&gt;https://typing-calculator.herokuapp.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can view the code for this application
+on my &lt;a href=&#34;https://github.com/chrislabarge/typing-calculator&#34;&gt;Github&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
