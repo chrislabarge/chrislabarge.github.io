@@ -39,7 +39,7 @@ GNOME terminal shell.&lt;/p&gt;
 session. But they &lt;strong&gt;were&lt;/strong&gt; working outside of Tmux in a gnome terminal.&lt;/p&gt;
 &lt;p&gt;I came across this
 &lt;a href=&#34;https://gist.github.com/gutoyr/4192af1aced7a1b555df06bd3781a722&#34;&gt;Tutorial&lt;/a&gt; and
-it got me close to a solution. But there was issues.&lt;/p&gt;
+it got me close to a solution. But there were issues.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Step 3 in the
 &lt;a href=&#34;https://gist.github.com/gutoyr/4192af1aced7a1b555df06bd3781a722&#34;&gt;tutorial&lt;/a&gt;

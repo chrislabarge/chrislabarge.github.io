@@ -6,10 +6,186 @@
     <description>Recent content on Chris LaBarge - Software Developer - Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Mar 2020 18:30:21 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 12 Apr 2020 18:30:21 -0500</lastBuildDate>
     
 	<atom:link href="http://chrislabarge.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Color Picker with Ruby on Rails 6, Stimulus and Webpacker</title>
+      <link>http://chrislabarge.com/posts/color-picker/</link>
+      <pubDate>Sun, 12 Apr 2020 18:30:21 -0500</pubDate>
+      
+      <guid>http://chrislabarge.com/posts/color-picker/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://color-picker-demo.herokuapp.com/&#34;&gt;Demo Application&lt;/a&gt; - Hosted on a Free dyno. (May take 10-20 seconds to wake up)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/chrislabarge/color-picker-demo&#34;&gt;Github&lt;/a&gt; - Git repo for the hosted application.&lt;/p&gt;
+&lt;h2 id=&#34;tools&#34;&gt;Tools&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/rails/rails&#34;&gt;Ruby on Rails 6.0.2.2&lt;/a&gt; - Ruby Web Framework&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/stimulusjs/stimulus&#34;&gt;StimulusJS&lt;/a&gt; - A minimal Javascript framework developed by Basecamp.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/rails/webpacker&#34;&gt;Webpacker&lt;/a&gt; - Rails gem for using Webpack to bundle assets including Javascript modules.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Simonwep/pickr&#34;&gt;Pickr&lt;/a&gt; - Color Picker Javascript library.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;set-up&#34;&gt;Set Up&lt;/h2&gt;
+&lt;p&gt;This tutorial assumes that your have a Rails application with webpacker and stimulus installed (&lt;em&gt;along with some familiarity using each&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;If you are using Rails &amp;gt;= 6.0 version, you can generate the application with the following command.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;rails new sample_app --webpacker&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;stimulus
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The demo model we working with is the &lt;code&gt;ColorOption&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;ColorOption(
+  id&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; integer,
+  font_color&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; string,
+  background_color&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; string,
+  created_at&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; datetime,
+  updated_at&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; datetime
+)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As you can see above the model has two &lt;code&gt;string&lt;/code&gt; columns&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;font_color: string&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;background_color: string&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These will be updated by the Color Picker. The columns can currently be updated using a regular rails form.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appviewscolor_options_formhtmlhaml-&#34;&gt;app/views/color_options/_form.html.haml&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; form_with(&lt;span style=&#34;color:#f1fa8c&#34;&gt;model&lt;/span&gt;: local_assigns&lt;span style=&#34;color:#ff79c6&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;:model&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;]&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;local&lt;/span&gt;: &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt;f&lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;field
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;text_field &lt;span style=&#34;color:#f1fa8c&#34;&gt;:font_color&lt;/span&gt;
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;label &lt;span style=&#34;color:#f1fa8c&#34;&gt;:font_color&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;field
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;text_field &lt;span style=&#34;color:#f1fa8c&#34;&gt;:background_color&lt;/span&gt;
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;label &lt;span style=&#34;color:#f1fa8c&#34;&gt;:background_color&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;field
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;submit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://chrislabarge.com/img/standard.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Pretty standard stuff. Now lets get the Color Picker library installed.&lt;/p&gt;
+&lt;h2 id=&#34;install-with-yarn--webpacker&#34;&gt;Install with Yarn &amp;amp; Webpacker&lt;/h2&gt;
+&lt;p&gt;Add the Pickr library using &lt;code&gt;yarn&lt;/code&gt;&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;command-line-&#34;&gt;Command Line&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;yarn add @simonwep/pickr
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Afterwords, create a css file to load the module&amp;rsquo;s styles.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appjavascriptstylesheetscolor_pickercss-&#34;&gt;app/javascript/stylesheets/color_picker.css&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;/*Change &amp;#39;classic&amp;#39; to which ever theme you are using from Pickr*/&lt;/span&gt;
+@&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;@simonwep/pickr/dist/themes/classic.min.css&amp;#39;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#6272a4&#34;&gt;/*Custom form field style*/&lt;/span&gt;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;form&lt;/span&gt; .&lt;span style=&#34;color:#50fa7b&#34;&gt;field&lt;/span&gt; .&lt;span style=&#34;color:#50fa7b&#34;&gt;pickr&lt;/span&gt; {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;display&lt;/span&gt;: &lt;span style=&#34;color:#ff79c6&#34;&gt;inline&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;block&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If you do not use a css style path such as &lt;code&gt;app/javascripts/stylesheets/&lt;/code&gt; in your build, you can load the the Pickr library styles in the &lt;code&gt;packs&lt;/code&gt; file.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;h4 class=&#34;snippet-heading no-file-only&#34; id=&#34;appjavascriptspacksapplicationjs-&#34;&gt;app/javascripts/packs/application.js&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;@simonwep/pickr/dist/themes/classic.min.css&amp;#39;&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;stimulus-integration&#34;&gt;Stimulus Integration&lt;/h2&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appjavascriptcontrollercolor-pickerjs--&#34;&gt;app/javascript/controller/color-picker.js &lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; { Controller } from &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;stimulus&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; Pickr from &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;@simonwep/pickr&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;../stylesheets/color_picker.css&amp;#34;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#ff79c6&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;default&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;extends&lt;/span&gt; Controller {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; targets &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;picker&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;input&amp;#34;&lt;/span&gt;]
+
+  initialize() {
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.initPicker();
+  }
+
+  initPicker() {
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.picker &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; Pickr.create({
+      el&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.pickerTarget,
+      theme&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;classic&amp;#39;&lt;/span&gt;,
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.inputTarget.value,
+
+      components&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; {
+        preview&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;,
+        opacity&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;,
+        hue&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;,
+
+        interaction&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; {
+          hex&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;,
+          rgba&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;,
+          hsla&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;,
+          hsva&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;,
+          cmyk&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;,
+          input&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;,
+          clear&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;false&lt;/span&gt;,
+          save&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;,
+        },
+      },
+    });
+
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.picker.on(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;save&amp;#39;&lt;/span&gt;, (color, _instance) =&amp;gt; {
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.inputTarget.value &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; color.toHEXA().toString();
+
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.picker.hide();
+    });
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We load the &lt;code&gt;Picker&lt;/code&gt; class from the node module at the top of the stimulus controller file along with the stylesheet.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Do NOT load the stylesheet if already imported in &lt;code&gt;app/javascript/packs/application.js&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; Pickr from &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;@simonwep/pickr&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;../stylesheets/color_picker.css&amp;#34;&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We have two stimulus targets.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; targets &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;picker&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;input&amp;#34;&lt;/span&gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;this.pickerTarget&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This is the HTML element we will be using to initialize the Picker class with. It will turn the element into a Picker button.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;this.inputTarget&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This Is the HTML form input we will fill after a color has been selected/picked.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We use the &lt;code&gt;initialize()&lt;/code&gt; stimulus lifecycle function&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;initialize() {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.initPicker();
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;to call &lt;code&gt;this.initPicker()&lt;/code&gt; which contains all of the logic to intialize the Pickr component.&lt;/p&gt;
+&lt;p&gt;We set an instance of the Pickr class to &lt;code&gt;this.picker&lt;/code&gt; in order to use in the callback.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;initPicker() {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.picker &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; Pickr.create(...)
+
+  &lt;span style=&#34;color:#6272a4&#34;&gt;//ect...
+&lt;/span&gt;&lt;span style=&#34;color:#6272a4&#34;&gt;&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The create settings were provided by the Picker &lt;a href=&#34;https://github.com/Simonwep/pickr&#34;&gt;README&lt;/a&gt; with the exception of setting &lt;code&gt;el&lt;/code&gt; and &lt;code&gt;default&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;el&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.pickerTarget,
+&lt;span style=&#34;color:#ff79c6&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.inputTarget.value,
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This uses the controller&amp;rsquo;s &lt;code&gt;this.pickerTarget&lt;/code&gt; to set the picker element, and the value of &lt;code&gt;this.inputTarget&lt;/code&gt; to initialize the Picker with.&lt;/p&gt;
+&lt;p&gt;We then use the on &lt;code&gt;save&lt;/code&gt; Pickr callback in order to&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;set the input field&amp;rsquo;s value&lt;/li&gt;
+&lt;li&gt;hide the widget&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;after a user has clicked &amp;ldquo;Save&amp;rdquo; on the Color Picker.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.picker.on(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;save&amp;#34;&lt;/span&gt;, (color, _instance) =&amp;gt; {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.inputTarget.value &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; color.toHEXA().toString();
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.picker.hide();
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;final-touches&#34;&gt;Final Touches&lt;/h2&gt;
+&lt;p&gt;Now all we have to do is update our form partial to utilize the &lt;code&gt;color-picker&lt;/code&gt; controller.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appviewscolor_options_formhtmlhaml--1&#34;&gt;app/views/color_options/_form.html.haml&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; form_with(&lt;span style=&#34;color:#f1fa8c&#34;&gt;model&lt;/span&gt;: local_assigns&lt;span style=&#34;color:#ff79c6&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;:model&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;]&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;local&lt;/span&gt;: &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;) &lt;span style=&#34;color:#ff79c6&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt;f&lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;field{ &lt;span style=&#34;color:#f1fa8c&#34;&gt;data&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;controller&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;color-picker&amp;#34;&lt;/span&gt; } }
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;text_field &lt;span style=&#34;color:#f1fa8c&#34;&gt;:font_color&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;data&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;target&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;color-picker.input&amp;#34;&lt;/span&gt; }
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;%&lt;/span&gt;div{ &lt;span style=&#34;color:#f1fa8c&#34;&gt;data&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;target&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;color-picker.picker&amp;#34;&lt;/span&gt; } }
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;label &lt;span style=&#34;color:#f1fa8c&#34;&gt;:font_color&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;field{ &lt;span style=&#34;color:#f1fa8c&#34;&gt;data&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;controller&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;color-picker&amp;#34;&lt;/span&gt; } }
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;text_field &lt;span style=&#34;color:#f1fa8c&#34;&gt;:background_color&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;data&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;target&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;color-picker.input&amp;#34;&lt;/span&gt; }
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;%&lt;/span&gt;div{ &lt;span style=&#34;color:#f1fa8c&#34;&gt;data&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;target&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;color-picker.picker&amp;#34;&lt;/span&gt; } }
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;label &lt;span style=&#34;color:#f1fa8c&#34;&gt;:background_color&lt;/span&gt;
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;field
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;submit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://chrislabarge.com/img/stimulus.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Bold &#43; Italic Font in TMUX</title>
@@ -39,7 +215,7 @@ GNOME terminal shell.&lt;/p&gt;
 session. But they &lt;strong&gt;were&lt;/strong&gt; working outside of Tmux in a gnome terminal.&lt;/p&gt;
 &lt;p&gt;I came across this
 &lt;a href=&#34;https://gist.github.com/gutoyr/4192af1aced7a1b555df06bd3781a722&#34;&gt;Tutorial&lt;/a&gt; and
-it got me close to a solution. But there was issues.&lt;/p&gt;
+it got me close to a solution. But there were issues.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Step 3 in the
 &lt;a href=&#34;https://gist.github.com/gutoyr/4192af1aced7a1b555df06bd3781a722&#34;&gt;tutorial&lt;/a&gt;

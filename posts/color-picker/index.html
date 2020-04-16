@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A tutorial to integrate a Javascript color picker library Pickr, with Rails on Rails 6.0, StimulusJS, and Webpacker.">
+
+        
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:site" content="@clabvessels" />
+          <meta name="twitter:creator" content="@clabvessels" />
+          <meta property="og:url" content="http://chrislabarge.com/posts/color-picker/" />
+          <meta property="og:title" content="Color Picker with Ruby on Rails 6, Stimulus and Webpacker" />
+          <meta property="og:description" content="A tutorial to integrate a Javascript color picker library Pickr, with Rails on Rails 6.0, StimulusJS, and Webpacker." />
+          <meta property="og:image" content="http://chrislabarge.com/img/color-picker.jpg" />
+        
+
+        <title>Color Picker with Ruby on Rails 6, Stimulus and Webpacker</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/custom.css">
+        <link rel="icon" type="image/png" href="/img/favicon.ico">
+
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        <script src="/javascript/custom.js"></script>
+
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104350449-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-104350449-2');
+        </script>
+    </head>
+    <body>
+        <section id="page-title">
+            <h1><a href="/">Chris LaBarge</a></h1>
+        </section>
+        <div class="content">
+
+
+
+
+
+
+
+
+<nav class="taxonomy">
+  <ul class="taxonomy-options">
+    
+      
+      <li>
+        <a data-list-class="categories"
+           class="clickable active">
+          categories
+        </a>
+      </li>
+    
+      
+      <li>
+        <a data-list-class="tags"
+           class="clickable ">
+          tags
+        </a>
+      </li>
+    
+  </ul>
+
+  
+    
+
+    
+      
+    
+
+    <ul class ="taxonomy-list categories active">
+      
+        <li>
+          <a href="http://chrislabarge.com/categories/tutorial/"
+             class="active">
+             tutorial
+            <span class="float-right">4</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/categories/dev-tools/"
+             class="">
+             dev-tools
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/categories/review/"
+             class="">
+             review
+            <span class="float-right">2</span>
+          </a>
+        </li>
+      
+    </ul>
+  
+    
+
+    
+      
+    
+
+    <ul class ="taxonomy-list tags ">
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/ruby/"
+             class="active">
+             ruby
+            <span class="float-right">4</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/linux/"
+             class="">
+             linux
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/ruby-on-rails/"
+             class="active">
+             ruby-on-rails
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/git/"
+             class="">
+             git
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/javascript/"
+             class="active">
+             javascript
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/movies/"
+             class="">
+             movies
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/open-source/"
+             class="">
+             open-source
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/raspberry-pi/"
+             class="">
+             raspberry-pi
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/resource/"
+             class="">
+             resource
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://chrislabarge.com/tags/vim/"
+             class="">
+             vim
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+<section class="blog-post">
+    
+    <img class="header-img" src="/img/color-picker.jpg" alt="A Page screen shot of the Color Option form being developed in the following tutorial" />
+    
+    <h1>Color Picker with Ruby on Rails 6, Stimulus and Webpacker</h1>
+    <div class="blog-post-subheader">
+        
+            <span class="date-title">
+                April 12, 2020
+            </span>
+        
+        <a href="/posts/index.xml" class="tooltip">
+            <span class="tooltip-text">RSS Feed</span>
+            <i class="fas fa-rss"></i>
+        </a>
+        
+        
+          <span id="onlyFiles">
+            <a href="#files" class="tooltip" id="quickView">
+              <span class="tooltip-text">Only Files</span>
+              Quick View
+            </a>
+            <a href="http://chrislabarge.com/posts/color-picker/" class="tooltip" style="display: none" id="normalView" >
+              <span class="tooltip-text">Entire Post</span>
+              Normal View
+            </a>
+          </span>
+        
+    </div>
+    <div class="blog-post-content">
+        <p><a href="https://color-picker-demo.herokuapp.com/">Demo Application</a> - Hosted on a Free dyno. (May take 10-20 seconds to wake up)</p>
+<p><a href="https://github.com/chrislabarge/color-picker-demo">Github</a> - Git repo for the hosted application.</p>
+<h2 id="tools">Tools</h2>
+<ul>
+<li><a href="https://github.com/rails/rails">Ruby on Rails 6.0.2.2</a> - Ruby Web Framework</li>
+<li><a href="https://github.com/stimulusjs/stimulus">StimulusJS</a> - A minimal Javascript framework developed by Basecamp.</li>
+<li><a href="https://github.com/rails/webpacker">Webpacker</a> - Rails gem for using Webpack to bundle assets including Javascript modules.</li>
+<li><a href="https://github.com/Simonwep/pickr">Pickr</a> - Color Picker Javascript library.</li>
+</ul>
+<h2 id="set-up">Set Up</h2>
+<p>This tutorial assumes that your have a Rails application with webpacker and stimulus installed (<em>along with some familiarity using each</em>).</p>
+<p>If you are using Rails &gt;= 6.0 version, you can generate the application with the following command.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">rails new sample_app --webpacker<span style="color:#ff79c6">=</span>stimulus
+</code></pre></div><p>The demo model we working with is the <code>ColorOption</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript">ColorOption(
+  id<span style="color:#ff79c6">:</span> integer,
+  font_color<span style="color:#ff79c6">:</span> string,
+  background_color<span style="color:#ff79c6">:</span> string,
+  created_at<span style="color:#ff79c6">:</span> datetime,
+  updated_at<span style="color:#ff79c6">:</span> datetime
+)
+</code></pre></div><p>As you can see above the model has two <code>string</code> columns</p>
+<ul>
+<li><code>font_color: string</code></li>
+<li><code>background_color: string</code></li>
+</ul>
+<p>These will be updated by the Color Picker. The columns can currently be updated using a regular rails form.</p>
+<h4 class="snippet-heading" id="appviewscolor_options_formhtmlhaml-">app/views/color_options/_form.html.haml</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">=</span> form_with(<span style="color:#f1fa8c">model</span>: local_assigns<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:model</span><span style="color:#ff79c6">]</span>, <span style="color:#f1fa8c">local</span>: <span style="color:#ff79c6">true</span>) <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>f<span style="color:#ff79c6">|</span>
+  <span style="color:#ff79c6">.</span>field
+    <span style="color:#ff79c6">=</span> f<span style="color:#ff79c6">.</span>text_field <span style="color:#f1fa8c">:font_color</span>
+    <span style="color:#ff79c6">=</span> f<span style="color:#ff79c6">.</span>label <span style="color:#f1fa8c">:font_color</span>
+  <span style="color:#ff79c6">.</span>field
+    <span style="color:#ff79c6">=</span> f<span style="color:#ff79c6">.</span>text_field <span style="color:#f1fa8c">:background_color</span>
+    <span style="color:#ff79c6">=</span> f<span style="color:#ff79c6">.</span>label <span style="color:#f1fa8c">:background_color</span>
+  <span style="color:#ff79c6">.</span>field
+    <span style="color:#ff79c6">=</span> f<span style="color:#ff79c6">.</span>submit
+</code></pre></div><p><img src="/img/standard.gif" alt=""></p>
+<p>Pretty standard stuff. Now lets get the Color Picker library installed.</p>
+<h2 id="install-with-yarn--webpacker">Install with Yarn &amp; Webpacker</h2>
+<p>Add the Pickr library using <code>yarn</code></p>
+<h4 class="snippet-heading" id="command-line-">Command Line</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">yarn add @simonwep/pickr
+</code></pre></div><p>Afterwords, create a css file to load the module&rsquo;s styles.</p>
+<h4 class="snippet-heading" id="appjavascriptstylesheetscolor_pickercss-">app/javascript/stylesheets/color_picker.css</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-css" data-lang="css"><span style="color:#6272a4">/*Change &#39;classic&#39; to which ever theme you are using from Pickr*/</span>
+@<span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#39;@simonwep/pickr/dist/themes/classic.min.css&#39;</span>;
+
+<span style="color:#6272a4">/*Custom form field style*/</span>
+<span style="color:#ff79c6">form</span> .<span style="color:#50fa7b">field</span> .<span style="color:#50fa7b">pickr</span> {
+  <span style="color:#ff79c6">display</span>: <span style="color:#ff79c6">inline</span><span style="color:#ff79c6">-</span><span style="color:#ff79c6">block</span>;
+}
+</code></pre></div><blockquote>
+<blockquote>
+<p><strong>NOTE:</strong> If you do not use a css style path such as <code>app/javascripts/stylesheets/</code> in your build, you can load the the Pickr library styles in the <code>packs</code> file.</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<h4 class="snippet-heading no-file-only" id="appjavascriptspacksapplicationjs-">app/javascripts/packs/application.js</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript"><span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#39;@simonwep/pickr/dist/themes/classic.min.css&#39;</span>;
+</code></pre></div></blockquote>
+</blockquote>
+<h2 id="stimulus-integration">Stimulus Integration</h2>
+<h4 class="snippet-heading" id="appjavascriptcontrollercolor-pickerjs--">app/javascript/controller/color-picker.js </h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript"><span style="color:#ff79c6">import</span> { Controller } from <span style="color:#f1fa8c">&#34;stimulus&#34;</span>;
+<span style="color:#ff79c6">import</span> Pickr from <span style="color:#f1fa8c">&#34;@simonwep/pickr&#34;</span>;
+<span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#34;../stylesheets/color_picker.css&#34;</span>;
+
+<span style="color:#ff79c6">export</span> <span style="color:#ff79c6">default</span> <span style="color:#ff79c6">class</span> <span style="color:#ff79c6">extends</span> Controller {
+  <span style="color:#ff79c6">static</span> targets <span style="color:#ff79c6">=</span> [<span style="color:#f1fa8c">&#34;picker&#34;</span>, <span style="color:#f1fa8c">&#34;input&#34;</span>]
+
+  initialize() {
+    <span style="color:#ff79c6">this</span>.initPicker();
+  }
+
+  initPicker() {
+    <span style="color:#ff79c6">this</span>.picker <span style="color:#ff79c6">=</span> Pickr.create({
+      el<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">this</span>.pickerTarget,
+      theme<span style="color:#ff79c6">:</span> <span style="color:#f1fa8c">&#39;classic&#39;</span>,
+      <span style="color:#ff79c6">default</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">this</span>.inputTarget.value,
+
+      components<span style="color:#ff79c6">:</span> {
+        preview<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">true</span>,
+        opacity<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">true</span>,
+        hue<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">true</span>,
+
+        interaction<span style="color:#ff79c6">:</span> {
+          hex<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">true</span>,
+          rgba<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">true</span>,
+          hsla<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">false</span>,
+          hsva<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">false</span>,
+          cmyk<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">false</span>,
+          input<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">true</span>,
+          clear<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">false</span>,
+          save<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">true</span>,
+        },
+      },
+    });
+
+    <span style="color:#ff79c6">this</span>.picker.on(<span style="color:#f1fa8c">&#39;save&#39;</span>, (color, _instance) =&gt; {
+      <span style="color:#ff79c6">this</span>.inputTarget.value <span style="color:#ff79c6">=</span> color.toHEXA().toString();
+
+      <span style="color:#ff79c6">this</span>.picker.hide();
+    });
+  }
+}
+</code></pre></div><p>We load the <code>Picker</code> class from the node module at the top of the stimulus controller file along with the stylesheet.</p>
+<p><strong>NOTE:</strong> Do NOT load the stylesheet if already imported in <code>app/javascript/packs/application.js</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript"><span style="color:#ff79c6">import</span> Pickr from <span style="color:#f1fa8c">&#34;@simonwep/pickr&#34;</span>;
+<span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#34;../stylesheets/color_picker.css&#34;</span>;
+</code></pre></div><p>We have two stimulus targets.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript"><span style="color:#ff79c6">static</span> targets <span style="color:#ff79c6">=</span> [<span style="color:#f1fa8c">&#34;picker&#34;</span>, <span style="color:#f1fa8c">&#34;input&#34;</span>]
+</code></pre></div><ul>
+<li>
+<p><code>this.pickerTarget</code></p>
+<p>This is the HTML element we will be using to initialize the Picker class with. It will turn the element into a Picker button.</p>
+</li>
+<li>
+<p><code>this.inputTarget</code></p>
+<p>This Is the HTML form input we will fill after a color has been selected/picked.</p>
+</li>
+</ul>
+<p>We use the <code>initialize()</code> stimulus lifecycle function</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript">initialize() {
+  <span style="color:#ff79c6">this</span>.initPicker();
+}
+</code></pre></div><p>to call <code>this.initPicker()</code> which contains all of the logic to intialize the Pickr component.</p>
+<p>We set an instance of the Pickr class to <code>this.picker</code> in order to use in the callback.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript">initPicker() {
+  <span style="color:#ff79c6">this</span>.picker <span style="color:#ff79c6">=</span> Pickr.create(...)
+
+  <span style="color:#6272a4">//ect...
+</span><span style="color:#6272a4"></span>}
+</code></pre></div><p>The create settings were provided by the Picker <a href="https://github.com/Simonwep/pickr">README</a> with the exception of setting <code>el</code> and <code>default</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript">el<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">this</span>.pickerTarget,
+<span style="color:#ff79c6">default</span><span style="color:#ff79c6">:</span> <span style="color:#ff79c6">this</span>.inputTarget.value,
+</code></pre></div><p>This uses the controller&rsquo;s <code>this.pickerTarget</code> to set the picker element, and the value of <code>this.inputTarget</code> to initialize the Picker with.</p>
+<p>We then use the on <code>save</code> Pickr callback in order to</p>
+<ul>
+<li>set the input field&rsquo;s value</li>
+<li>hide the widget</li>
+</ul>
+<p>after a user has clicked &ldquo;Save&rdquo; on the Color Picker.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript"><span style="color:#ff79c6">this</span>.picker.on(<span style="color:#f1fa8c">&#34;save&#34;</span>, (color, _instance) =&gt; {
+  <span style="color:#ff79c6">this</span>.inputTarget.value <span style="color:#ff79c6">=</span> color.toHEXA().toString();
+
+  <span style="color:#ff79c6">this</span>.picker.hide();
+});
+</code></pre></div><h2 id="final-touches">Final Touches</h2>
+<p>Now all we have to do is update our form partial to utilize the <code>color-picker</code> controller.</p>
+<h4 class="snippet-heading" id="appviewscolor_options_formhtmlhaml--1">app/views/color_options/_form.html.haml</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">=</span> form_with(<span style="color:#f1fa8c">model</span>: local_assigns<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">:model</span><span style="color:#ff79c6">]</span>, <span style="color:#f1fa8c">local</span>: <span style="color:#ff79c6">true</span>) <span style="color:#ff79c6">do</span> <span style="color:#ff79c6">|</span>f<span style="color:#ff79c6">|</span>
+
+  <span style="color:#ff79c6">.</span>field{ <span style="color:#f1fa8c">data</span>: { <span style="color:#f1fa8c">controller</span>: <span style="color:#f1fa8c">&#34;color-picker&#34;</span> } }
+    <span style="color:#ff79c6">=</span> f<span style="color:#ff79c6">.</span>text_field <span style="color:#f1fa8c">:font_color</span>, <span style="color:#f1fa8c">data</span>: { <span style="color:#f1fa8c">target</span>: <span style="color:#f1fa8c">&#34;color-picker.input&#34;</span> }
+    <span style="color:#ff79c6">%</span>div{ <span style="color:#f1fa8c">data</span>: { <span style="color:#f1fa8c">target</span>: <span style="color:#f1fa8c">&#34;color-picker.picker&#34;</span> } }
+    <span style="color:#ff79c6">=</span> f<span style="color:#ff79c6">.</span>label <span style="color:#f1fa8c">:font_color</span>
+
+  <span style="color:#ff79c6">.</span>field{ <span style="color:#f1fa8c">data</span>: { <span style="color:#f1fa8c">controller</span>: <span style="color:#f1fa8c">&#34;color-picker&#34;</span> } }
+    <span style="color:#ff79c6">=</span> f<span style="color:#ff79c6">.</span>text_field <span style="color:#f1fa8c">:background_color</span>, <span style="color:#f1fa8c">data</span>: { <span style="color:#f1fa8c">target</span>: <span style="color:#f1fa8c">&#34;color-picker.input&#34;</span> }
+    <span style="color:#ff79c6">%</span>div{ <span style="color:#f1fa8c">data</span>: { <span style="color:#f1fa8c">target</span>: <span style="color:#f1fa8c">&#34;color-picker.picker&#34;</span> } }
+    <span style="color:#ff79c6">=</span> f<span style="color:#ff79c6">.</span>label <span style="color:#f1fa8c">:background_color</span>
+
+  <span style="color:#ff79c6">.</span>field
+    <span style="color:#ff79c6">=</span> f<span style="color:#ff79c6">.</span>submit
+</code></pre></div><p><img src="/img/stimulus.gif" alt=""></p>
+
+    </div>
+</section>
+
+        </div>
+        <div class="footer" id="footer">
+            <div class="contact-options">
+                <div class="social-icons">
+                    <a href="https://github.com/chrislabarge" class="tooltip">
+                        <span class="tooltip-text">Github</span>
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://gitlab.com/chrislabarge" class="tooltip">
+                        <span class="tooltip-text">Gitlab</span>
+                        <i class="fab fa-gitlab"></i>
+                    </a>
+                    <a href="mailto:chrislabargedev@gmail.com" class="tooltip">
+                        <span class="tooltip-text">Send Email</span>
+                        <i class="far fa-envelope"></i>
+                    </a>
+                    <a id="light" class="toggle-theme tooltip">
+                        <span class="tooltip-text"> Light Theme</span>
+                        <i class="fas fa-sun"></i>
+                    </a>
+                    <a id="dark" class="toggle-theme tooltip" style="display: none">
+                        <span class="tooltip-text">Dark Theme</span>
+                        <i class="fas fa-moon"></i>
+                    </a>
+                </div>
+            </div>
+
+            
+                <section id=nav>
+                    <ul class=navbar>
+                        <li><div><a href="/">Home</a></div></li>
+                        <li><div><a href="/about">About Me</a></div></li>
+                        <li><div><a href="/posts">Blog Posts</a></div></li>
+                        <li><div><a href="/projects">Projects</a></div></li>
+                    </ul>
+                </section>
+            
+        </div>
+    </body>
+</html>
+
