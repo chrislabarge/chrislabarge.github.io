@@ -301,6 +301,7 @@ data_sets&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;delete_all&lt;/
 &lt;p&gt;Download and extract the Chrome Driver from the &lt;a href=&#34;https://sites.google.com/a/chromium.org/chromedriver/downloads&#34;&gt; Download Link &lt;/a&gt;. Then move the extracted binary driver file to &amp;ldquo;/usr/local/bin&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;There are some preferences and arguments you have to send/set in the Chrome Driver to be able to download files from the browser.
 These will allow the browser to immediately download the file without having to accept the save_as prompt that ususally pops up.  You will also have to tell the driver what folder you would like the files to be downloaded to.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;config-or-initializer-file&#34;&gt;config or initializer file&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;driver_options&lt;/span&gt;
   download_directory &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;./downloads/&amp;#39;&lt;/span&gt;
 
@@ -314,6 +315,7 @@ These will allow the browser to immediately download the file without having to 
   }
 &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Above I have wrapped the options within a ruby function.  I will call this function when passing the parameter option [:chromeOptions] to the #chrome method for  Remote::Capabilities. This takes place below when registering the driver with Capybara.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;config-or-initializer-file-1&#34;&gt;config or initializer file&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;Capybara&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;register_driver &lt;span style=&#34;color:#f1fa8c&#34;&gt;:chrome&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt;app&lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt;
   capabilities &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; Selenium&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;WebDriver&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Remote&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;
     Capabilities&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;chrome(
@@ -331,17 +333,20 @@ Capybara&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;ignore_hidden_el
 &lt;p&gt;The hash from the function #driver_options() gets parsed by the Selenium Library and then passed to the chrome driver.&lt;/p&gt;
 &lt;p&gt;If you want to see a complete list of options that you can pass to the chrome driver check out this &lt;a href=&#34;https://stackoverflow.com/questions/38335671/selenium-chrome-where-can-i-find-a-list-of-all-available-chromeoption-arguments&#34;&gt;stacked overflow response&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Now when I  run the scraper locally using &amp;hellip;&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;command-line&#34;&gt;Command Line&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The chrome browser window pops up and runs through the list of the Capybara session commands, navigating to the download link, and then clicking the link.  This is where the driver options come to play and automatically save the file to the proper directory.&lt;/p&gt;
 &lt;p&gt;Great!  But I need this same thing to happen on the AWS with no monitor. What am I to do?&lt;/p&gt;
 &lt;p&gt;Well that is where  Xvfb comes it.  It creates a virtual monitor and allows you to use non headless web drivers in headless environments.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://tobyho.com/2015/01/09/headless-browser-testing-xvfb/&#34;&gt;Xvfb Tutorial&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;As long as Xvfb is properly installed all you need to do is pass the command that kicks off your Capybara Session to the &amp;ldquo;xvfb-run&amp;rdquo; command.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;command-line-1&#34;&gt;Command Line&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xvfb-run bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I can no longer watch the scrape occur on my monitor, but after the program is done running, I can verify it worked by finding a freshly downloaded pdf in my &amp;ldquo;./downloads&amp;rdquo; folder.&lt;/p&gt;
 &lt;p&gt;And there you have it a simple way to run non headless Chrome Driver session in a headless server environment, in order to download files using the browser.&lt;/p&gt;
 &lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
 &lt;p&gt;The default screen size for the &amp;ldquo;xfvb-run&amp;rdquo; command is fairly small.  So if you are interacting with a responsive website and need you change the virtual screen dimensions run the command like so&amp;hellip;&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;command-line-2&#34;&gt;Command Line&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xvfb-run --server-args&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;-screen 0 1024x768x24&amp;#39;&lt;/span&gt; bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>

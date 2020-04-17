@@ -17,22 +17,18 @@
       <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
       
       <guid>https://chrislabarge.com/posts/bold-italic-tmux/</guid>
-      <description>&lt;p&gt;You have just installed a hip new font face for programming. 🤙&lt;/p&gt;
-&lt;p&gt;It has the all of the bells and whistles including &lt;strong&gt;bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt; font styles.&lt;/p&gt;
+      <description>&lt;p&gt;You have just installed a hip new font face for programming. It has the all of the bells and whistles including &lt;strong&gt;bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt; font styles. 🤙&lt;/p&gt;
 &lt;p&gt;You configure your terminal to use the new font, and start typing away.&lt;/p&gt;
-&lt;p&gt;&amp;hellip;.&lt;strong&gt;WHAT???&lt;/strong&gt;&amp;hellip;.&lt;/p&gt;
-&lt;p&gt;Its not working&amp;hellip;.🙄&lt;/p&gt;
+&lt;p&gt;&amp;hellip;.&lt;strong&gt;WHAT???&lt;/strong&gt;&amp;hellip;.Its not working&amp;hellip;.🙄&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Has this happened to you before?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;There is always some caveat when tweaking your work environment no matter how trivial.&lt;/p&gt;
 &lt;p&gt;This guide will briefly outline the solutions I came across to get &lt;strong&gt;bold&lt;/strong&gt; and
 &lt;em&gt;italic&lt;/em&gt; font styles working Vim/NeoVim running within a TMUX session, from a
 GNOME terminal shell.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Bold&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Italic&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;VIM/NeoVIM&lt;/li&gt;
-&lt;li&gt;TMUX&lt;/li&gt;
-&lt;li&gt;GNOME Shell&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://neovim.io/&#34;&gt;VIM/NeoVIM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/tmux/tmux&#34;&gt;TMUX&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/GNOME_Terminal&#34;&gt;GNOME Terminal&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;
 &lt;p&gt;The &lt;strong&gt;bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt; font faces were not properly working in a Tmux
@@ -56,10 +52,12 @@ previous to running &lt;code&gt;tmux&lt;/code&gt; command. (&lt;em&gt;Per the in
 having to explicitly set the &lt;code&gt;TERM&lt;/code&gt; environment variable.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;zhrc-&#34;&gt;~/.zhrc&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;alias&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;tmux&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;env TERM=screen-256color tmux&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;cursor-issues&#34;&gt;Cursor Issues&lt;/h2&gt;
 &lt;p&gt;In Vim and NeoVim I have the options to allow for &lt;code&gt;block&lt;/code&gt; cursor shape when in
 &lt;code&gt;normal&lt;/code&gt; mode and &lt;code&gt;line&lt;/code&gt; shape when in &lt;code&gt;insert&lt;/code&gt; mode.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;confignviminitvim-&#34;&gt;~/.config/nvim/init.vim&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; &amp;amp;term =~ &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;screen.&amp;#34;&lt;/span&gt;
    &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_ti.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\eP\e[1 q\e\\&amp;#34;&lt;/span&gt;
    &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_SI.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\eP\e[5 q\e\\&amp;#34;&lt;/span&gt;
@@ -77,6 +75,7 @@ session or not.&lt;/em&gt;&lt;/p&gt;
 Tmux.   The fix from above was only showing the &lt;code&gt;line&lt;/code&gt; shape cursor.&lt;/p&gt;
 &lt;p&gt;I found this solution from a neovim &lt;a href=&#34;https://neovim.io/doc/user/term.html#tui-cursor-shape&#34;&gt; document &lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Which instructed me to add an override to &lt;code&gt;~/.tmux.conf&lt;/code&gt; file&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;tmuxconf-&#34;&gt;~/.tmux.conf&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;set&lt;/span&gt; -ga terminal-overrides &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;*:Ss=\E[%p1%d q:Se=\E[ q&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
@@ -195,6 +194,7 @@ data_sets&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;delete_all&lt;/
 &lt;p&gt;Download and extract the Chrome Driver from the &lt;a href=&#34;https://sites.google.com/a/chromium.org/chromedriver/downloads&#34;&gt; Download Link &lt;/a&gt;. Then move the extracted binary driver file to &amp;ldquo;/usr/local/bin&amp;rdquo;&lt;/p&gt;
 &lt;p&gt;There are some preferences and arguments you have to send/set in the Chrome Driver to be able to download files from the browser.
 These will allow the browser to immediately download the file without having to accept the save_as prompt that ususally pops up.  You will also have to tell the driver what folder you would like the files to be downloaded to.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;config-or-initializer-file&#34;&gt;config or initializer file&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;driver_options&lt;/span&gt;
   download_directory &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;./downloads/&amp;#39;&lt;/span&gt;
 
@@ -208,6 +208,7 @@ These will allow the browser to immediately download the file without having to 
   }
 &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Above I have wrapped the options within a ruby function.  I will call this function when passing the parameter option [:chromeOptions] to the #chrome method for  Remote::Capabilities. This takes place below when registering the driver with Capybara.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;config-or-initializer-file-1&#34;&gt;config or initializer file&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;Capybara&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;register_driver &lt;span style=&#34;color:#f1fa8c&#34;&gt;:chrome&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;do&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt;app&lt;span style=&#34;color:#ff79c6&#34;&gt;|&lt;/span&gt;
   capabilities &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; Selenium&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;WebDriver&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;Remote&lt;span style=&#34;color:#ff79c6&#34;&gt;::&lt;/span&gt;
     Capabilities&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;chrome(
@@ -225,17 +226,20 @@ Capybara&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;ignore_hidden_el
 &lt;p&gt;The hash from the function #driver_options() gets parsed by the Selenium Library and then passed to the chrome driver.&lt;/p&gt;
 &lt;p&gt;If you want to see a complete list of options that you can pass to the chrome driver check out this &lt;a href=&#34;https://stackoverflow.com/questions/38335671/selenium-chrome-where-can-i-find-a-list-of-all-available-chromeoption-arguments&#34;&gt;stacked overflow response&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Now when I  run the scraper locally using &amp;hellip;&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;command-line&#34;&gt;Command Line&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;The chrome browser window pops up and runs through the list of the Capybara session commands, navigating to the download link, and then clicking the link.  This is where the driver options come to play and automatically save the file to the proper directory.&lt;/p&gt;
 &lt;p&gt;Great!  But I need this same thing to happen on the AWS with no monitor. What am I to do?&lt;/p&gt;
 &lt;p&gt;Well that is where  Xvfb comes it.  It creates a virtual monitor and allows you to use non headless web drivers in headless environments.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;http://tobyho.com/2015/01/09/headless-browser-testing-xvfb/&#34;&gt;Xvfb Tutorial&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;As long as Xvfb is properly installed all you need to do is pass the command that kicks off your Capybara Session to the &amp;ldquo;xvfb-run&amp;rdquo; command.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;command-line-1&#34;&gt;Command Line&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xvfb-run bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I can no longer watch the scrape occur on my monitor, but after the program is done running, I can verify it worked by finding a freshly downloaded pdf in my &amp;ldquo;./downloads&amp;rdquo; folder.&lt;/p&gt;
 &lt;p&gt;And there you have it a simple way to run non headless Chrome Driver session in a headless server environment, in order to download files using the browser.&lt;/p&gt;
 &lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
 &lt;p&gt;The default screen size for the &amp;ldquo;xfvb-run&amp;rdquo; command is fairly small.  So if you are interacting with a responsive website and need you change the virtual screen dimensions run the command like so&amp;hellip;&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;command-line-2&#34;&gt;Command Line&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xvfb-run --server-args&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;-screen 0 1024x768x24&amp;#39;&lt;/span&gt; bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>

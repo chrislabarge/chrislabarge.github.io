@@ -25,7 +25,7 @@
           <meta property="og:description" content="A Guide to get bold and italic font styles working Vim/NeoVim running within a TMUX session, from a GNOME terminal shell." />
           <meta property="og:image" content="https://chrislabarge.com/img/bold.png" />
           <meta property="article:published_time" content="2020-03-28 18:30:21 -0500 -0500">
-          <meta property="article:modified_time" content="2020-03-28 18:30:21 -0500 -0500">
+          <meta property="article:modified_time" content="2020-04-17T14:30:21-05:00">
         
 
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
@@ -228,22 +228,18 @@
         
     </div>
     <div class="blog-post-content">
-        <p>You have just installed a hip new font face for programming. 🤙</p>
-<p>It has the all of the bells and whistles including <strong>bold</strong> and <em>italic</em> font styles.</p>
+        <p>You have just installed a hip new font face for programming. It has the all of the bells and whistles including <strong>bold</strong> and <em>italic</em> font styles. 🤙</p>
 <p>You configure your terminal to use the new font, and start typing away.</p>
-<p>&hellip;.<strong>WHAT???</strong>&hellip;.</p>
-<p>Its not working&hellip;.🙄</p>
+<p>&hellip;.<strong>WHAT???</strong>&hellip;.Its not working&hellip;.🙄</p>
 <p><strong>Has this happened to you before?</strong></p>
 <p>There is always some caveat when tweaking your work environment no matter how trivial.</p>
 <p>This guide will briefly outline the solutions I came across to get <strong>bold</strong> and
 <em>italic</em> font styles working Vim/NeoVim running within a TMUX session, from a
 GNOME terminal shell.</p>
 <ul>
-<li><strong>Bold</strong></li>
-<li><em>Italic</em></li>
-<li>VIM/NeoVIM</li>
-<li>TMUX</li>
-<li>GNOME Shell</li>
+<li><a href="https://neovim.io/">VIM/NeoVIM</a></li>
+<li><a href="https://github.com/tmux/tmux">TMUX</a></li>
+<li><a href="https://en.wikipedia.org/wiki/GNOME_Terminal">GNOME Terminal</a></li>
 </ul>
 <h2 id="the-problem">The Problem</h2>
 <p>The <strong>bold</strong> and <em>italic</em> font faces were not properly working in a Tmux
@@ -267,10 +263,12 @@ previous to running <code>tmux</code> command. (<em>Per the instructions</em>)</
 having to explicitly set the <code>TERM</code> environment variable.</p>
 </li>
 </ul>
+<h4 class="snippet-heading" id="zhrc-">~/.zhrc</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">alias</span> <span style="color:#8be9fd;font-style:italic">tmux</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;env TERM=screen-256color tmux&#34;</span></code></pre></div>
 <h2 id="cursor-issues">Cursor Issues</h2>
 <p>In Vim and NeoVim I have the options to allow for <code>block</code> cursor shape when in
 <code>normal</code> mode and <code>line</code> shape when in <code>insert</code> mode.</p>
+<h4 class="snippet-heading" id="confignviminitvim-">~/.config/nvim/init.vim</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-vim" data-lang="vim"><span style="color:#ff79c6">if</span> &amp;term =~ <span style="color:#f1fa8c">&#34;screen.&#34;</span>
    <span style="color:#ff79c6">let</span> &amp;t_ti.=<span style="color:#f1fa8c">&#34;\eP\e[1 q\e\\&#34;</span>
    <span style="color:#ff79c6">let</span> &amp;t_SI.=<span style="color:#f1fa8c">&#34;\eP\e[5 q\e\\&#34;</span>
@@ -288,6 +286,7 @@ session or not.</em></p>
 Tmux.   The fix from above was only showing the <code>line</code> shape cursor.</p>
 <p>I found this solution from a neovim <a href="https://neovim.io/doc/user/term.html#tui-cursor-shape"> document </a></p>
 <p>Which instructed me to add an override to <code>~/.tmux.conf</code> file</p>
+<h4 class="snippet-heading" id="tmuxconf-">~/.tmux.conf</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">set</span> -ga terminal-overrides <span style="color:#f1fa8c">&#39;*:Ss=\E[%p1%d q:Se=\E[ q&#39;</span></code></pre></div>
 
     </div>

@@ -17,22 +17,18 @@
       <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
       
       <guid>https://chrislabarge.com/posts/bold-italic-tmux/</guid>
-      <description>&lt;p&gt;You have just installed a hip new font face for programming. 🤙&lt;/p&gt;
-&lt;p&gt;It has the all of the bells and whistles including &lt;strong&gt;bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt; font styles.&lt;/p&gt;
+      <description>&lt;p&gt;You have just installed a hip new font face for programming. It has the all of the bells and whistles including &lt;strong&gt;bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt; font styles. 🤙&lt;/p&gt;
 &lt;p&gt;You configure your terminal to use the new font, and start typing away.&lt;/p&gt;
-&lt;p&gt;&amp;hellip;.&lt;strong&gt;WHAT???&lt;/strong&gt;&amp;hellip;.&lt;/p&gt;
-&lt;p&gt;Its not working&amp;hellip;.🙄&lt;/p&gt;
+&lt;p&gt;&amp;hellip;.&lt;strong&gt;WHAT???&lt;/strong&gt;&amp;hellip;.Its not working&amp;hellip;.🙄&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Has this happened to you before?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;There is always some caveat when tweaking your work environment no matter how trivial.&lt;/p&gt;
 &lt;p&gt;This guide will briefly outline the solutions I came across to get &lt;strong&gt;bold&lt;/strong&gt; and
 &lt;em&gt;italic&lt;/em&gt; font styles working Vim/NeoVim running within a TMUX session, from a
 GNOME terminal shell.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Bold&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Italic&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;VIM/NeoVIM&lt;/li&gt;
-&lt;li&gt;TMUX&lt;/li&gt;
-&lt;li&gt;GNOME Shell&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://neovim.io/&#34;&gt;VIM/NeoVIM&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/tmux/tmux&#34;&gt;TMUX&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/GNOME_Terminal&#34;&gt;GNOME Terminal&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;the-problem&#34;&gt;The Problem&lt;/h2&gt;
 &lt;p&gt;The &lt;strong&gt;bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt; font faces were not properly working in a Tmux
@@ -56,10 +52,12 @@ previous to running &lt;code&gt;tmux&lt;/code&gt; command. (&lt;em&gt;Per the in
 having to explicitly set the &lt;code&gt;TERM&lt;/code&gt; environment variable.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;zhrc-&#34;&gt;~/.zhrc&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;alias&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;tmux&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;env TERM=screen-256color tmux&amp;#34;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id=&#34;cursor-issues&#34;&gt;Cursor Issues&lt;/h2&gt;
 &lt;p&gt;In Vim and NeoVim I have the options to allow for &lt;code&gt;block&lt;/code&gt; cursor shape when in
 &lt;code&gt;normal&lt;/code&gt; mode and &lt;code&gt;line&lt;/code&gt; shape when in &lt;code&gt;insert&lt;/code&gt; mode.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;confignviminitvim-&#34;&gt;~/.config/nvim/init.vim&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-vim&#34; data-lang=&#34;vim&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; &amp;amp;term =~ &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;screen.&amp;#34;&lt;/span&gt;
    &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_ti.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\eP\e[1 q\e\\&amp;#34;&lt;/span&gt;
    &lt;span style=&#34;color:#ff79c6&#34;&gt;let&lt;/span&gt; &amp;amp;t_SI.=&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;\eP\e[5 q\e\\&amp;#34;&lt;/span&gt;
@@ -77,6 +75,7 @@ session or not.&lt;/em&gt;&lt;/p&gt;
 Tmux.   The fix from above was only showing the &lt;code&gt;line&lt;/code&gt; shape cursor.&lt;/p&gt;
 &lt;p&gt;I found this solution from a neovim &lt;a href=&#34;https://neovim.io/doc/user/term.html#tui-cursor-shape&#34;&gt; document &lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Which instructed me to add an override to &lt;code&gt;~/.tmux.conf&lt;/code&gt; file&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;tmuxconf-&#34;&gt;~/.tmux.conf&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;set&lt;/span&gt; -ga terminal-overrides &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;*:Ss=\E[%p1%d q:Se=\E[ q&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
