@@ -188,57 +188,65 @@
     </item>
     
     <item>
-      <title>Rails &#39;#delete_all&#39; - Fast &amp; Powerful - Beware</title>
+      <title>Rails ActiveRecord::Relation#delete_all - Fast &amp; Powerful - Beware</title>
       <link>https://chrislabarge.com/posts/delete-all/</link>
       <pubDate>Wed, 23 May 2018 18:30:21 -0500</pubDate>
       
       <guid>https://chrislabarge.com/posts/delete-all/</guid>
       <description>&lt;h2 id=&#34;what-you-will-learn&#34;&gt;What You Will Learn&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;A fast way to delete a large batch of rows from a Database table&lt;/li&gt;
-&lt;li&gt;How to prevent from locking your Database&lt;/li&gt;
+&lt;li&gt;How to use &lt;a href=&#34;https://apidock.com/rails/v6.0.0/ActiveRecord/Relation/delete_all&#34;&gt; ActiveRecord::Relation#delete_all &lt;/a&gt; - A fast way to delete a large batch of rows from a Database table&lt;/li&gt;
+&lt;li&gt;How to use &lt;a href=&#34;http://api.rubyonrails.org/classes/ActiveRecord/Batches.html#method-i-in_batches&#34;&gt; ActiveRecord::Batches::BatchEnumerator#in_batches &lt;/a&gt; - To prevent from locking your Database&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;who-this-is-for&#34;&gt;Who This Is For&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Rails developers who need to delete records more efficiently.&lt;/li&gt;
+&lt;li&gt;Ruby on Rails developers who need to delete records more efficiently.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;requirements&#34;&gt;Requirements&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Ruby&lt;/li&gt;
-&lt;li&gt;Rails &amp;gt;= 5.0&lt;/li&gt;
-&lt;li&gt;Relational Database like MySQL or PostgreSQL&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/rails/rails&#34;&gt;Ruby on Rails&lt;/a&gt; &amp;gt;= 5.0&lt;/li&gt;
+&lt;li&gt;Relational Database like &lt;a href=&#34;https://www.mysql.com/&#34;&gt;MySQL&lt;/a&gt; or &lt;a href=&#34;https://www.postgresql.org/&#34;&gt;PostgreSQL&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
 &lt;p&gt;I am currently working on a Rails project that deals with importing and exporting large amounts of data.  The user is able to import and store data into the applications Database as well and delete the data.&lt;/p&gt;
-&lt;p&gt;Because some of these data deletions can consist of thousands of rows you must code the removal process a little differently.&lt;/p&gt;
-&lt;p&gt;When a User imports/uploads new data into the application it creates a new &lt;code&gt;DataUplodad&lt;/code&gt; model.  The application also creates a new &lt;code&gt;DataSet&lt;/code&gt; record for every single data set from the import.&lt;/p&gt;
-&lt;p&gt;I have the model &lt;code&gt;DataSet&lt;/code&gt; which has a &lt;code&gt;belongs_to&lt;/code&gt; relationship to &lt;code&gt;DataUploads&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Because some of these data deletions can consist of thousands of rows, the removal process must be developed a little differently.&lt;/p&gt;
+&lt;h2 id=&#34;setup&#34;&gt;Setup&lt;/h2&gt;
+&lt;p&gt;When a User imports/uploads new data into the application it creates a new &lt;code&gt;DataUplodad&lt;/code&gt; table row.  The application also creates a new &lt;code&gt;DataSet&lt;/code&gt; table row, for every single data set from the import.&lt;/p&gt;
+&lt;p&gt;I have the model &lt;code&gt;DataSet&lt;/code&gt; which has a &lt;code&gt;belongs_to&lt;/code&gt; relationship to &lt;code&gt;DataUpload&lt;/code&gt;.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appmodelsdata_setrb-&#34;&gt;app/models/data_set.rb&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataSet&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
   belongs_to &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_uploads&lt;/span&gt;
 &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;I have the model &lt;code&gt;DataUploads&lt;/code&gt; which has a &lt;code&gt;has_many&lt;/code&gt; relationship to &lt;code&gt;DataSets&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I have the model &lt;code&gt;DataUpload&lt;/code&gt; which has a &lt;code&gt;has_many&lt;/code&gt; relationship to &lt;code&gt;DataSet&lt;/code&gt;.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appmodelsdata_uploadrb-&#34;&gt;app/models/data_upload.rb&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataUpload&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
   has_many &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_sets&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;dependent&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;:destroy&lt;/span&gt;
 &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Notice the &lt;code&gt;dependent: :destroy&lt;/code&gt;.  This means that when a &lt;code&gt;DataUpload&lt;/code&gt; model gets deleted/destroyed, all of the associated &lt;code&gt;DataSet&lt;/code&gt; models will all get destroyed as well.&lt;/p&gt;
-&lt;p&gt;This also loads every associated &lt;code&gt;DataSet&lt;/code&gt; model into memory as well.  This will bog down the server if there is a very large association of thousands of &lt;code&gt;DataSet&lt;/code&gt; records.&lt;/p&gt;
+&lt;p&gt;Notice the &lt;code&gt;dependent: :destroy&lt;/code&gt;.  This means that when a &lt;code&gt;DataUpload&lt;/code&gt; instance gets deleted/destroyed, all of the associated &lt;code&gt;DataSet&lt;/code&gt; instances will be destroyed as well.&lt;/p&gt;
+&lt;p&gt;This also loads every associated &lt;code&gt;DataSet&lt;/code&gt; model instance into memory as well.  This will bog down the server if there is a very large association of thousands of &lt;code&gt;DataSet&lt;/code&gt; records.&lt;/p&gt;
 &lt;p&gt;The way we solve this is to use the &lt;code&gt;ActiveRecord::Relation#delete_all&lt;/code&gt;. This &lt;a href=&#34;https://apidock.com/rails/ActiveRecord/Relation/delete_all&#34;&gt;method&lt;/a&gt; performs a single SQL statement and efficiently deletes all of the records within the Relation.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Look at the example below.&lt;/em&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;upload &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; DataUpload&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;last
 data_sets &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; upload&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;data_sets
 
 data_sets&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;delete_all&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
 &lt;h3 id=&#34;warning&#34;&gt;WARNING&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;DO NOT use this method on more then 5,000 records in a Database table.  It will lock the Database for the entire transaction.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DO NOT&lt;/strong&gt; use this method on more then 5,000 records in a Database table.  It will lock the Database for the entire transaction.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;#delete_all&lt;/code&gt; does not load the record, so any callbacks will not be fired.  Make sure the application and/or model is not dependent on any pre/post delete processes.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Now we can implement the method in the in the &lt;code&gt;DataUpload&lt;/code&gt; callback.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appmodelsdata_uploadrb--1&#34;&gt;app/models/data_upload.rb&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataUpload&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
   has_many &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_sets&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;dependent&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;:delete_all&lt;/span&gt;
 &lt;span style=&#34;color:#ff79c6&#34;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;BUT WAIT!! If you were a good reader and saw the first WARNING above you will notice that if I left the code this way and a particular &lt;code&gt;DataUpload&lt;/code&gt; instance had an association of more then 5,000 &lt;code&gt;DataSet&lt;/code&gt; records&amp;hellip;the Database will lock for the entire transaction. To prevent from this we must utilize one of the Ruby on Rails 5.0 &lt;a href=&#34;http://api.rubyonrails.org/classes/ActiveRecord/Batches.html#method-i-in_batches&#34;&gt;methods&lt;/a&gt; &lt;code&gt;#in_batches&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;BUT WAIT!!&lt;/strong&gt; If you were a good reader and saw the first WARNING above you will notice that if I left the code this way and a particular &lt;code&gt;DataUpload&lt;/code&gt; instance had an association of more then 5,000 &lt;code&gt;DataSet&lt;/code&gt; records&amp;hellip; the Database will lock for the entire transaction. To prevent from this we must utilize one of the Ruby on Rails 5.0 &lt;a href=&#34;http://api.rubyonrails.org/classes/ActiveRecord/Batches.html#method-i-in_batches&#34;&gt;methods&lt;/a&gt; &lt;code&gt;#in_batches&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;If you are not use a Rails version that is &amp;gt;= 5.0 then check out the gem &lt;a href=&#34;https://github.com/ankane/delete_in_batches&#34;&gt;delete_in_batches&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appmodelsdata_uploadrb--2&#34;&gt;app/models/data_upload.rb&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#50fa7b&#34;&gt;DataUpload&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;&amp;lt;&lt;/span&gt; ApplicationRecord
   has_many &lt;span style=&#34;color:#f1fa8c&#34;&gt;:data_sets&lt;/span&gt;
 
