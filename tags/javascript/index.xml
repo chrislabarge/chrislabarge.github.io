@@ -27,7 +27,7 @@
 &lt;li&gt;&lt;a href=&#34;https://github.com/Simonwep/pickr&#34;&gt;Pickr&lt;/a&gt; - Color Picker Javascript library.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;set-up&#34;&gt;Set Up&lt;/h2&gt;
-&lt;p&gt;This tutorial assumes that your have a Rails application with webpacker and stimulus installed (&lt;em&gt;along with some familiarity using each&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;This tutorial assumes that you have a Rails application with webpacker and stimulus installed (&lt;em&gt;along with some familiarity using each&lt;/em&gt;).&lt;/p&gt;
 &lt;p&gt;If you are using Rails &amp;gt;= 6.0 version, you can generate the application with the following command.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;rails new sample_app --webpacker&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;stimulus
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The demo model we working with is the &lt;code&gt;ColorOption&lt;/code&gt;.&lt;/p&gt;
@@ -124,7 +124,7 @@
     });
   }
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We load the &lt;code&gt;Picker&lt;/code&gt; class from the node module at the top of the stimulus controller file along with the stylesheet.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We load the &lt;code&gt;Pickr&lt;/code&gt; class from the node module at the top of the stimulus controller file along with the stylesheet.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Do NOT load the stylesheet if already imported in &lt;code&gt;app/javascript/packs/application.js&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; Pickr from &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;@simonwep/pickr&amp;#34;&lt;/span&gt;;
 &lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;../stylesheets/color_picker.css&amp;#34;&lt;/span&gt;;
