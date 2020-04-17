@@ -55,7 +55,7 @@
   &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;field
     &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;submit
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://chrislabarge.com/img/standard.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;p&gt;Pretty standard stuff. Now lets get the Color Picker library installed.&lt;/p&gt;
+&lt;p&gt;Pretty standard stuff, now lets get the Color Picker library installed.&lt;/p&gt;
 &lt;h2 id=&#34;install-with-yarn--webpacker&#34;&gt;Install with Yarn &amp;amp; Webpacker&lt;/h2&gt;
 &lt;p&gt;Add the Pickr library using &lt;code&gt;yarn&lt;/code&gt;&lt;/p&gt;
 &lt;h4 class=&#34;snippet-heading&#34; id=&#34;command-line-&#34;&gt;Command Line&lt;/h4&gt;
@@ -140,11 +140,11 @@
 &lt;p&gt;This Is the HTML form input we will fill after a color has been selected/picked.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;We use the &lt;code&gt;initialize()&lt;/code&gt; stimulus lifecycle function&lt;/p&gt;
+&lt;p&gt;We use the &lt;code&gt;initialize()&lt;/code&gt; stimulus lifecycle function:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;initialize() {
   &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.initPicker();
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;to call &lt;code&gt;this.initPicker()&lt;/code&gt; which contains all of the logic to intialize the Pickr component.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;To call &lt;code&gt;this.initPicker()&lt;/code&gt; which contains all of the logic to intialize the Pickr component.&lt;/p&gt;
 &lt;p&gt;We set an instance of the Pickr class to &lt;code&gt;this.picker&lt;/code&gt; in order to use in the callback.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;initPicker() {
   &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.picker &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; Pickr.create(...)
@@ -155,12 +155,12 @@
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;el&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.pickerTarget,
 &lt;span style=&#34;color:#ff79c6&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.inputTarget.value,
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This uses the controller&amp;rsquo;s &lt;code&gt;this.pickerTarget&lt;/code&gt; to set the picker element, and the value of &lt;code&gt;this.inputTarget&lt;/code&gt; to initialize the Picker with.&lt;/p&gt;
-&lt;p&gt;We then use the on &lt;code&gt;save&lt;/code&gt; Pickr callback in order to&lt;/p&gt;
+&lt;p&gt;We then use the on &lt;code&gt;save&lt;/code&gt; Pickr callback in order to:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;set the input field&amp;rsquo;s value&lt;/li&gt;
-&lt;li&gt;hide the widget&lt;/li&gt;
+&lt;li&gt;Set the input field&amp;rsquo;s value&lt;/li&gt;
+&lt;li&gt;Hide the widget&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;after a user has clicked &amp;ldquo;Save&amp;rdquo; on the Color Picker.&lt;/p&gt;
+&lt;p&gt;After a user has clicked &amp;ldquo;Save&amp;rdquo; on the Color Picker.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.picker.on(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;save&amp;#34;&lt;/span&gt;, (color, _instance) =&amp;gt; {
   &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.inputTarget.value &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; color.toHEXA().toString();
 
@@ -405,6 +405,30 @@ Capybara&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;ignore_hidden_el
 &lt;h2 id=&#34;notes&#34;&gt;Notes&lt;/h2&gt;
 &lt;p&gt;The default screen size for the &amp;ldquo;xfvb-run&amp;rdquo; command is fairly small.  So if you are interacting with a responsive website and need you change the virtual screen dimensions run the command like so&amp;hellip;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;xvfb-run --server-args&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;-screen 0 1024x768x24&amp;#39;&lt;/span&gt; bundle &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;exec&lt;/span&gt; rake scrape_pdfs&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>MenuBerry - Vegan App</title>
+      <link>https://chrislabarge.com/projects/menuberry/</link>
+      <pubDate>Tue, 02 Jan 2018 18:30:21 -0500</pubDate>
+      
+      <guid>https://chrislabarge.com/projects/menuberry/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;NOTE: No Longer Hosted&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;MenuBerry is resource for vegans to discover food options at restaurants.&lt;/p&gt;
+&lt;p&gt;I built MenuBerry part-time for about year. It started as a hobby project
+that eventually grew. Visitors could utilize the application as a resource to
+find restaurants and vegan menu items.  Registered users were allowed to
+contribute content and receive updates about their favorite restaurants.&lt;/p&gt;
+&lt;h2 id=&#34;tech-stack&#34;&gt;Tech Stack&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby on Rails&lt;/li&gt;
+&lt;li&gt;Semantic UI&lt;/li&gt;
+&lt;li&gt;JQuery&lt;/li&gt;
+&lt;li&gt;Google Places&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;code&#34;&gt;Code&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/chrislabarge/vegan-choices&#34;&gt;Github Repo&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     

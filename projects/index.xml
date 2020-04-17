@@ -6,10 +6,34 @@
     <description>Recent content in Chris LaBarge&#39;s Portfolio on Chris LaBarge - Software Developer - Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 02 Mar 2015 18:30:21 -0500</lastBuildDate>
+    <lastBuildDate>Tue, 02 Jan 2018 18:30:21 -0500</lastBuildDate>
     
 	<atom:link href="https://chrislabarge.com/projects/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MenuBerry - Vegan App</title>
+      <link>https://chrislabarge.com/projects/menuberry/</link>
+      <pubDate>Tue, 02 Jan 2018 18:30:21 -0500</pubDate>
+      
+      <guid>https://chrislabarge.com/projects/menuberry/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;NOTE: No Longer Hosted&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;MenuBerry is resource for vegans to discover food options at restaurants.&lt;/p&gt;
+&lt;p&gt;I built MenuBerry part-time for about year. It started as a hobby project
+that eventually grew. Visitors could utilize the application as a resource to
+find restaurants and vegan menu items.  Registered users were allowed to
+contribute content and receive updates about their favorite restaurants.&lt;/p&gt;
+&lt;h2 id=&#34;tech-stack&#34;&gt;Tech Stack&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby on Rails&lt;/li&gt;
+&lt;li&gt;Semantic UI&lt;/li&gt;
+&lt;li&gt;JQuery&lt;/li&gt;
+&lt;li&gt;Google Places&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;code&#34;&gt;Code&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/chrislabarge/vegan-choices&#34;&gt;Github Repo&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Typing Speed Calculator</title>
