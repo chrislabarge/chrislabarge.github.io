@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>tutorial on Chris LaBarge - Software Developer - Portfolio</title>
-    <link>http://chrislabarge.com/categories/tutorial/</link>
+    <link>https://chrislabarge.com/categories/tutorial/</link>
     <description>Recent content in tutorial on Chris LaBarge - Software Developer - Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 12 Apr 2020 18:30:21 -0500</lastBuildDate>
     
-	<atom:link href="http://chrislabarge.com/categories/tutorial/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chrislabarge.com/categories/tutorial/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Color Picker with Ruby on Rails 6, Stimulus and Webpacker</title>
-      <link>http://chrislabarge.com/posts/color-picker/</link>
+      <link>https://chrislabarge.com/posts/color-picker/</link>
       <pubDate>Sun, 12 Apr 2020 18:30:21 -0500</pubDate>
       
-      <guid>http://chrislabarge.com/posts/color-picker/</guid>
+      <guid>https://chrislabarge.com/posts/color-picker/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://color-picker-demo.herokuapp.com/&#34;&gt;Demo Application&lt;/a&gt; - Hosted on a Free dyno. (May take 10-20 seconds to wake up)&lt;/p&gt;
 &lt;p&gt;&lt;a href=&#34;https://github.com/chrislabarge/color-picker-demo&#34;&gt;Github&lt;/a&gt; - Git repo for the hosted application.&lt;/p&gt;
 &lt;h2 id=&#34;tools&#34;&gt;Tools&lt;/h2&gt;
@@ -54,7 +54,7 @@
     &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;label &lt;span style=&#34;color:#f1fa8c&#34;&gt;:background_color&lt;/span&gt;
   &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;field
     &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;submit
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://chrislabarge.com/img/standard.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://chrislabarge.com/img/standard.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Pretty standard stuff. Now lets get the Color Picker library installed.&lt;/p&gt;
 &lt;h2 id=&#34;install-with-yarn--webpacker&#34;&gt;Install with Yarn &amp;amp; Webpacker&lt;/h2&gt;
 &lt;p&gt;Add the Pickr library using &lt;code&gt;yarn&lt;/code&gt;&lt;/p&gt;
@@ -183,16 +183,16 @@
 
   &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;field
     &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; f&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;submit
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://chrislabarge.com/img/stimulus.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://chrislabarge.com/img/stimulus.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Installing Raspberry Pi OS on SD card</title>
-      <link>http://chrislabarge.com/posts/sd-format/</link>
+      <link>https://chrislabarge.com/posts/sd-format/</link>
       <pubDate>Mon, 27 Feb 2017 18:30:21 -0500</pubDate>
       
-      <guid>http://chrislabarge.com/posts/sd-format/</guid>
+      <guid>https://chrislabarge.com/posts/sd-format/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
 &lt;p&gt;A &lt;a href=&#34;https://www.raspberrypi.org/&#34;&gt;Raspberry Pi&lt;/a&gt; is an $35 dollar computer that is the size of a credit card.
 It can be utilized in everything from &lt;a href=&#34;https://pimylifeup.com/category/projects/&#34;&gt;DIY home projects&lt;/a&gt; to &lt;a href=&#34;https://www.reddit.com/r/raspberry_pi/comments/5c2f6d/raspberry_pi_spotted_in_ukrainian_missile/&#34;&gt;missle guidence systems&lt;/a&gt;.&lt;/p&gt;
@@ -360,10 +360,10 @@ pathname of the Image (.img) file from step 3, and the pathname from the card re
     
     <item>
       <title>How I Made a Typing Speed Calculator</title>
-      <link>http://chrislabarge.com/posts/typing-speed-calulator/</link>
+      <link>https://chrislabarge.com/posts/typing-speed-calulator/</link>
       <pubDate>Thu, 26 Mar 2015 12:01:27 +0000</pubDate>
       
-      <guid>http://chrislabarge.com/posts/typing-speed-calulator/</guid>
+      <guid>https://chrislabarge.com/posts/typing-speed-calulator/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&#34;http://voltframework.com/&#34;&gt;Volt&lt;/a&gt; is a new Ruby framework that allows your Ruby code to run on both the
 server and the client.  It uses the &lt;a href=&#34;http://opalrb.org/&#34;&gt;opal&lt;/a&gt; gem to compile
@@ -645,10 +645,10 @@ on my &lt;a href=&#34;https://github.com/chrislabarge/typing-calculator&#34;&gt;
     
     <item>
       <title>My first Pull Request</title>
-      <link>http://chrislabarge.com/posts/first-pull-request/</link>
+      <link>https://chrislabarge.com/posts/first-pull-request/</link>
       <pubDate>Wed, 18 Mar 2015 12:01:27 +0000</pubDate>
       
-      <guid>http://chrislabarge.com/posts/first-pull-request/</guid>
+      <guid>https://chrislabarge.com/posts/first-pull-request/</guid>
       <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
 &lt;p&gt;About a month ago I was searching for a local user-group of Ruby programmers,
 and luckily came across the Tech Valley Ruby Brigade. Even more lucky, their
@@ -677,7 +677,7 @@ machine. By going to terminal and entering the following command.
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;	chrislabarge$ git clone https://github.com/chrislabarge/techvalleyrb.github.com.git&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/p&gt;
 &lt;p&gt;You can get the url path of the above command from the forked repository on your
 github account by copying from and pasting into the command-line.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://chrislabarge.com/images/clone.jpg&#34; alt=&#34;Url Path &#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://chrislabarge.com/images/clone.jpg&#34; alt=&#34;Url Path &#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;3-create-a-new-branch&#34;&gt;3. Create a new branch&lt;/h3&gt;
 &lt;p&gt;Once I had the repository cloned onto my machine, I created a new branch
 from the master and named it &amp;ldquo;updating-bootstrap&amp;rdquo;. Creating a new required in
@@ -699,11 +699,11 @@ framework for the website and took advantage of the responsive grid design.&lt;/
 &lt;p&gt;It was finally time to show off my changes and submit a pull-request.  I went back
 to the original repository of the website, the one I went to in step 1. And
 clicked the green button below.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://chrislabarge.com/images/compare-pull.jpg&#34; alt=&#34;Pull-Icon Screen Shot&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://chrislabarge.com/images/compare-pull.jpg&#34; alt=&#34;Pull-Icon Screen Shot&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Next, I selected my branch to compare, (updating-bootstrap) and clicked
 &amp;ldquo;Create pull request&amp;rdquo;.
 (The compare branch in the photo below says testing, it should be updating-bootstrap.)&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://chrislabarge.com/images/pull.jpg&#34; alt=&#34;Fork Screen Shot&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://chrislabarge.com/images/pull.jpg&#34; alt=&#34;Fork Screen Shot&#34;&gt;&lt;/p&gt;
 </description>
     </item>
     

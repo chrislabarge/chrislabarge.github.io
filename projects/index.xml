@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Chris LaBarge&#39;s Portfolio on Chris LaBarge - Software Developer - Portfolio</title>
-    <link>http://chrislabarge.com/projects/</link>
+    <link>https://chrislabarge.com/projects/</link>
     <description>Recent content in Chris LaBarge&#39;s Portfolio on Chris LaBarge - Software Developer - Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 02 Mar 2015 18:30:21 -0500</lastBuildDate>
     
-	<atom:link href="http://chrislabarge.com/projects/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chrislabarge.com/projects/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Typing Speed Calculator</title>
-      <link>http://chrislabarge.com/projects/typing-calculator/</link>
+      <link>https://chrislabarge.com/projects/typing-calculator/</link>
       <pubDate>Mon, 02 Mar 2015 18:30:21 -0500</pubDate>
       
-      <guid>http://chrislabarge.com/projects/typing-calculator/</guid>
+      <guid>https://chrislabarge.com/projects/typing-calculator/</guid>
       <description>&lt;p&gt;This is a simple words per minute typing calculator. I built it using the Volt framework, which specializes in running your Ruby code on the CLIENT as well as the server. I did not write a single line of Javascript, as Volt uses the Opal gem to compile your Ruby code to javascript.  You can read about how I made this simple app &lt;!-- raw HTML omitted --&gt; here &lt;!-- raw HTML omitted --&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Tech Valley Ruby Brigade</title>
-      <link>http://chrislabarge.com/projects/tech-valley/</link>
+      <link>https://chrislabarge.com/projects/tech-valley/</link>
       <pubDate>Sun, 04 Jan 2015 18:30:21 -0500</pubDate>
       
-      <guid>http://chrislabarge.com/projects/tech-valley/</guid>
+      <guid>https://chrislabarge.com/projects/tech-valley/</guid>
       <description>&lt;p&gt;This is redesign I did for a local User-Group of Ruby programmers. It was already using github pages for hosting so there was no need to mess with the back-end, I simply updated the bootstrap and took advantage of the responsive grid.&lt;/p&gt;
 </description>
     </item>

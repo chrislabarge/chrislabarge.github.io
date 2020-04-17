@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>dev-tools on Chris LaBarge - Software Developer - Portfolio</title>
-    <link>http://chrislabarge.com/categories/dev-tools/</link>
+    <link>https://chrislabarge.com/categories/dev-tools/</link>
     <description>Recent content in dev-tools on Chris LaBarge - Software Developer - Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 28 Mar 2020 18:30:21 -0500</lastBuildDate>
     
-	<atom:link href="http://chrislabarge.com/categories/dev-tools/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://chrislabarge.com/categories/dev-tools/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Bold &#43; Italic Font in TMUX</title>
-      <link>http://chrislabarge.com/posts/bold-italic-tmux/</link>
+      <link>https://chrislabarge.com/posts/bold-italic-tmux/</link>
       <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
       
-      <guid>http://chrislabarge.com/posts/bold-italic-tmux/</guid>
+      <guid>https://chrislabarge.com/posts/bold-italic-tmux/</guid>
       <description>&lt;p&gt;You have just installed a hip new font face for programming. 🤙&lt;/p&gt;
 &lt;p&gt;It has the all of the bells and whistles including &lt;strong&gt;bold&lt;/strong&gt; and &lt;em&gt;italic&lt;/em&gt; font styles.&lt;/p&gt;
 &lt;p&gt;You configure your terminal to use the new font, and start typing away.&lt;/p&gt;
@@ -83,10 +83,10 @@ Tmux.   The fix from above was only showing the &lt;code&gt;line&lt;/code&gt; sh
     
     <item>
       <title>Rails &#39;#delete_all&#39; - Fast &amp; Powerful - Beware</title>
-      <link>http://chrislabarge.com/posts/delete-all/</link>
+      <link>https://chrislabarge.com/posts/delete-all/</link>
       <pubDate>Wed, 23 May 2018 18:30:21 -0500</pubDate>
       
-      <guid>http://chrislabarge.com/posts/delete-all/</guid>
+      <guid>https://chrislabarge.com/posts/delete-all/</guid>
       <description>&lt;h2 id=&#34;what-you-will-learn&#34;&gt;What You Will Learn&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;A fast way to delete a large batch of rows from a Database table&lt;/li&gt;
@@ -151,10 +151,10 @@ data_sets&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;delete_all&lt;/
     
     <item>
       <title>Using Chrome Driver For Headless Scraping and Downloading</title>
-      <link>http://chrislabarge.com/posts/headless-scrape/</link>
+      <link>https://chrislabarge.com/posts/headless-scrape/</link>
       <pubDate>Fri, 20 Apr 2018 18:30:21 -0500</pubDate>
       
-      <guid>http://chrislabarge.com/posts/headless-scrape/</guid>
+      <guid>https://chrislabarge.com/posts/headless-scrape/</guid>
       <description>&lt;h2 id=&#34;what-you-will-learn&#34;&gt;What You Will Learn&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;How to use a non headless web driver on a headless server.&lt;/li&gt;
