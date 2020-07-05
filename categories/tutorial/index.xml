@@ -81,7 +81,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/blockquote&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&#34;stimulus-integration&#34;&gt;Stimulus Integration&lt;/h2&gt;
-&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appjavascriptcontrollercolor-pickerjs--&#34;&gt;app/javascript/controller/color-picker.js &lt;/h4&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appjavascriptcontrollerscolor_picker_controllerjs--&#34;&gt;app/javascript/controllers/color_picker_controller.js &lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; { Controller } from &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;stimulus&amp;#34;&lt;/span&gt;;
 &lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; Pickr from &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;@simonwep/pickr&amp;#34;&lt;/span&gt;;
 &lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;../stylesheets/color_picker.css&amp;#34;&lt;/span&gt;;
