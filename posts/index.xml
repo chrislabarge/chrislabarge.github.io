@@ -49,17 +49,16 @@
 &lt;h4 class=&#34;snippet-heading&#34; id=&#34;appjavascriptstylesheetspopupscss-&#34;&gt;app/javascript/stylesheets/popup.scss&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;@&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;tippy.js/dist/tippy.css&amp;#39;&lt;/span&gt;;
 
-&lt;span style=&#34;color:#6272a4&#34;&gt;/*Custom style*/&lt;/span&gt;
-
 .&lt;span style=&#34;color:#50fa7b&#34;&gt;popup&lt;/span&gt; {
-  &lt;span style=&#34;color:#ff79c6&#34;&gt;padding&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;px&lt;/span&gt;;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;padding&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;px&lt;/span&gt;;
 
   .image {
     &lt;span style=&#34;color:#ff79c6&#34;&gt;text-align&lt;/span&gt;: &lt;span style=&#34;color:#ff79c6&#34;&gt;center&lt;/span&gt;;
     &lt;span style=&#34;color:#ff79c6&#34;&gt;margin-bottom&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;px&lt;/span&gt;;
-    &lt;span style=&#34;color:#ff79c6&#34;&gt;margin-top&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;px&lt;/span&gt;;
 
     img {
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;height&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;200&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;px&lt;/span&gt;;
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;width&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;200&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;px&lt;/span&gt;;
       &lt;span style=&#34;color:#ff79c6&#34;&gt;border-radius&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;px&lt;/span&gt;;
     }
   }
