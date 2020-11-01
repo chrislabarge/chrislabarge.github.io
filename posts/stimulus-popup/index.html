@@ -211,7 +211,7 @@
 
 <section class="blog-post">
     
-    <img class="header-img" src="/img/popup-header.jpg" alt="A Page screen shot of a working Popup component being developed in the following tutorial" />
+    <img class="header-img" src="/img/popup-header.jpg" alt="A Page screen shot of a working Popup component from the following tutorial" />
     
     <h1>Popup with Tippy.js, Ruby on Rails 6, Stimulus and Webpacker</h1>
     <div class="blog-post-subheader">
@@ -252,8 +252,8 @@
 <p>This tutorial assumes that you have a Rails application with webpacker and stimulus installed (<em>along with some familiarity using each</em>).</p>
 <p>If you are using Rails &gt;= 6.0 version, you can generate the application with the following command.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">rails new sample_app --webpacker<span style="color:#ff79c6">=</span>stimulus
-</code></pre></div><p>The demo model we are working with is <code>Fabric</code>.</p>
-<p>We have a typical index listing of the Fabric in the system.</p>
+</code></pre></div><p>The model we will be working with from the demo is <code>Fabric</code>.</p>
+<p>We have a typical index listing of the Fabric in the system:</p>
 <h4 class="snippet-heading" id="appviewsfabrics_fabrichtmlhaml-">app/views/fabrics/_fabric.html.haml</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">%</span>li
   <span style="color:#ff79c6">.</span>avatar
@@ -267,7 +267,7 @@
 <p>Add the Tippy.js library using <code>yarn</code></p>
 <h4 class="snippet-heading" id="command-line-">Command Line</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">  yarn add tippy.js
-</code></pre></div><p>Afterwords, create a css file to load the module&rsquo;s styles.</p>
+</code></pre></div><p>Afterwords, create a css file to load the module&rsquo;s styles:</p>
 <h4 class="snippet-heading" id="appjavascriptstylesheetspopupcss-">app/javascript/stylesheets/popup.css</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-css" data-lang="css">@<span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#39;tippy.js/dist/tippy.css&#39;</span>;
 
@@ -288,7 +288,7 @@
 }
 </code></pre></div><blockquote>
 <blockquote>
-<p><strong>NOTE:</strong> If you do not use a css style path such as <code>app/javascripts/stylesheets/</code> in your build, you can load the the Tippy.js library styles in the <code>packs</code> file.</p>
+<p><strong>NOTE:</strong> If you do not use a css style path such as <code>app/javascripts/stylesheets/</code> in your build, you can load the the Tippy.js library styles in the <code>packs</code> file:</p>
 </blockquote>
 </blockquote>
 <blockquote>
@@ -319,13 +319,15 @@
     });
   }
 }
-</code></pre></div><p>We load the <code>tippy</code> module at the top of the stimulus controller file along with the stylesheet.</p>
+</code></pre></div><p>We load the <code>tippy</code> module at the top of the stimulus controller file along with the stylesheet:</p>
+<blockquote>
 <blockquote>
 <p><strong>NOTE:</strong> Do not load the stylesheet if already imported in <code>app/javascript/packs/application.js</code></p>
 </blockquote>
+</blockquote>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript"><span style="color:#ff79c6">import</span> tippy from <span style="color:#f1fa8c">&#39;tippy.js&#39;</span>;
 <span style="color:#ff79c6">import</span> <span style="color:#f1fa8c">&#34;../stylesheets/popup.scss&#34;</span>;
-</code></pre></div><p>We have two stimulus targets.</p>
+</code></pre></div><p>We have two stimulus targets:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript"><span style="color:#ff79c6">static</span> targets <span style="color:#ff79c6">=</span> [<span style="color:#f1fa8c">&#34;trigger&#34;</span>, <span style="color:#f1fa8c">&#34;content&#34;</span>]
 </code></pre></div><ul>
 <li>
@@ -343,7 +345,7 @@
 
   <span style="color:#ff79c6">this</span>.contentTarget.style.display <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;none&#34;</span>;
 }
-</code></pre></div><p>In the <code>initPopup()</code> method, we set <code>this.popup</code> to the return call of <code>tippy()</code> in order to access the popup.</p>
+</code></pre></div><p>In the <code>initPopup()</code> method, we set <code>this.popup</code> to the return call of <code>tippy()</code> in order to access the popup:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript">initPopup() {
   <span style="color:#ff79c6">this</span>.popup <span style="color:#ff79c6">=</span> tippy(<span style="color:#ff79c6">this</span>.triggerTarget, {
     content<span style="color:#ff79c6">:</span> <span style="color:#ff79c6">this</span>.contentTarget.innerHTML,
@@ -357,10 +359,10 @@
 <li>In order to allow for HTML rendering from Tippy.js we set the the <code>allowHTML</code> option to <code>true</code>.</li>
 </ul>
 <p>Additional options can be found at Tippy.js <a href="https://atomiks.github.io/tippyjs/">README</a>.</p>
-<p>To prevent from the content from rendering outside the popup we hide it.</p>
+<p>To prevent from the content from rendering outside the popup we hide it:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-javascript" data-lang="javascript">  <span style="color:#ff79c6">this</span>.contentTarget.style.display <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;none&#34;</span>;
 </code></pre></div><h2 id="haml-view-changes">HAML View Changes</h2>
-<p>Now we have to update our fabric partial to utilize the <code>popup</code> controller.</p>
+<p>Now we have to update our fabric partial to utilize the <code>popup</code> controller:</p>
 <h4 class="snippet-heading" id="appviewsfabrics_fabrichtmlhaml--1">app/views/fabrics/_fabric.html.haml</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-ruby" data-lang="ruby"><span style="color:#ff79c6">%</span>li
   <span style="color:#ff79c6">.</span>avatar{ <span style="color:#f1fa8c">data</span>: { <span style="color:#f1fa8c">controller</span>: <span style="color:#f1fa8c">:popup</span>, <span style="color:#f1fa8c">target</span>: <span style="color:#f1fa8c">&#34;popup.trigger&#34;</span> } }
