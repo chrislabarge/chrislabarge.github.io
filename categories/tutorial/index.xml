@@ -6,10 +6,218 @@
     <description>Recent content in tutorial on Chris LaBarge - Software Developer - Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 12 Apr 2020 18:30:21 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 30 Oct 2020 18:30:21 -0500</lastBuildDate>
     
 	<atom:link href="https://chrislabarge.com/categories/tutorial/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Popup with Tippy.js, Ruby on Rails 6, Stimulus and Webpacker</title>
+      <link>https://chrislabarge.com/posts/stimulus-popup/</link>
+      <pubDate>Fri, 30 Oct 2020 18:30:21 -0500</pubDate>
+      
+      <guid>https://chrislabarge.com/posts/stimulus-popup/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://popup-demo.herokuapp.com/&#34;&gt;Demo Application&lt;/a&gt; - Hosted on a Free dyno. (May take 10-20 seconds to wake up)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/chrislabarge/popup-demo&#34;&gt;Github&lt;/a&gt; - Git repo for the hosted application.&lt;/p&gt;
+&lt;h2 id=&#34;tools&#34;&gt;Tools&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/rails/rails&#34;&gt;Ruby on Rails 6.0.2.2&lt;/a&gt; - Ruby Web Framework&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/stimulusjs/stimulus&#34;&gt;StimulusJS&lt;/a&gt; - A minimal Javascript framework developed by Basecamp.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/rails/webpacker&#34;&gt;Webpacker&lt;/a&gt; - Rails gem for using Webpack to bundle assets including Javascript modules.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://atomiks.github.io/tippyjs/&#34;&gt;Tippy.js&lt;/a&gt; - Popup Javascript library.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;set-up&#34;&gt;Set Up&lt;/h2&gt;
+&lt;p&gt;This tutorial assumes that you have a Rails application with webpacker and stimulus installed (&lt;em&gt;along with some familiarity using each&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;If you are using Rails &amp;gt;= 6.0 version, you can generate the application with the following command.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;rails new sample_app --webpacker&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;stimulus
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The demo model we are working with is &lt;code&gt;Fabric&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;We have a typical index listing of the Fabric in the system.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appviewsfabrics_fabrichtmlhaml-&#34;&gt;app/views/fabrics/_fabric.html.haml&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;%&lt;/span&gt;li
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;avatar
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; img_pack_tag(fabric&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;image, &lt;span style=&#34;color:#f1fa8c&#34;&gt;class&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;circular&amp;#34;&lt;/span&gt;)
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;data
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; fabric&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;name
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://chrislabarge.com/img/popup-index.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;However, the avatar is too small for comparing fabrics, and it would be nice to have the image enlarged when hovering over it.&lt;/p&gt;
+&lt;p&gt;We will need to install a popup library to accomplish the wanted feature.&lt;/p&gt;
+&lt;h2 id=&#34;install-with-yarn--webpacker&#34;&gt;Install with Yarn &amp;amp; Webpacker&lt;/h2&gt;
+&lt;p&gt;Add the Tippy.js library using &lt;code&gt;yarn&lt;/code&gt;&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;command-line-&#34;&gt;Command Line&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;  yarn add tippy.js
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Afterwords, create a css file to load the module&amp;rsquo;s styles.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appjavascriptstylesheetspopupcss-&#34;&gt;app/javascript/stylesheets/popup.css&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;@&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;tippy.js/dist/tippy.css&amp;#39;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#6272a4&#34;&gt;/*Custom style*/&lt;/span&gt;
+
+.&lt;span style=&#34;color:#50fa7b&#34;&gt;popup&lt;/span&gt; {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;padding&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;px&lt;/span&gt;;
+
+  .image {
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;text-align&lt;/span&gt;: &lt;span style=&#34;color:#ff79c6&#34;&gt;center&lt;/span&gt;;
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;margin-bottom&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;px&lt;/span&gt;;
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;margin-top&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;px&lt;/span&gt;;
+
+    img {
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;border-radius&lt;/span&gt;: &lt;span style=&#34;color:#bd93f9&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#8be9fd&#34;&gt;px&lt;/span&gt;;
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; If you do not use a css style path such as &lt;code&gt;app/javascripts/stylesheets/&lt;/code&gt; in your build, you can load the the Tippy.js library styles in the &lt;code&gt;packs&lt;/code&gt; file.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;h4 class=&#34;snippet-heading no-file-only&#34; id=&#34;appjavascriptspacksapplicationjs-&#34;&gt;app/javascripts/packs/application.js&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;tippy.js/dist/tippy.css&amp;#39;&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;stimulus-integration&#34;&gt;Stimulus Integration&lt;/h2&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appjavascriptcontrollerspopup_controllerjs--&#34;&gt;app/javascript/controllers/popup_controller.js &lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; { Controller } from &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;stimulus&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; tippy from &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;tippy.js&amp;#39;&lt;/span&gt;;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;../stylesheets/popup.scss&amp;#34;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#ff79c6&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;default&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;extends&lt;/span&gt; Controller {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; targets &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;trigger&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;content&amp;#34;&lt;/span&gt;]
+
+  initialize() {
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.initPopup();
+
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.contentTarget.style.display &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;none&amp;#34;&lt;/span&gt;;
+  }
+
+  initPopup() {
+    tippy(&lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.triggerTarget, {
+      content&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.contentTarget.innerHTML,
+      allowHTML&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;,
+    });
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We load the &lt;code&gt;tippy&lt;/code&gt; module at the top of the stimulus controller file along with the stylesheet.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;NOTE:&lt;/strong&gt; Do not load the stylesheet if already imported in &lt;code&gt;app/javascript/packs/application.js&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; tippy from &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;tippy.js&amp;#39;&lt;/span&gt;;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;../stylesheets/popup.scss&amp;#34;&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We have two stimulus targets.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; targets &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;trigger&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;content&amp;#34;&lt;/span&gt;]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;this.triggerTarget&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This is the HTML element we will be passing into the &lt;code&gt;tippy()&lt;/code&gt; function. It will turn the element into a trigger for the popup component.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;this.contentTarget&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This is the HTML content that the popup will contain.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We use the &lt;code&gt;initialize()&lt;/code&gt; stimulus life-cycle function:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;initialize() {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.initPopup();
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.contentTarget.style.display &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;none&amp;#34;&lt;/span&gt;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;In the &lt;code&gt;initPopup()&lt;/code&gt; method, we set &lt;code&gt;this.popup&lt;/code&gt; to the return call of &lt;code&gt;tippy()&lt;/code&gt; in order to access the popup.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;initPopup() {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.popup &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; tippy(&lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.triggerTarget, {
+    content&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.contentTarget.innerHTML,
+    allowHTML&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;,
+  });
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The first argument passed into the &lt;code&gt;tippy()&lt;/code&gt; function is the element that will toggle the popup. In this case our &lt;code&gt;this.triggerTarget&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The second argument is a options object.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;this.contentTarget.innerHTML&lt;/code&gt; is set as the &lt;code&gt;content&lt;/code&gt; option.&lt;/li&gt;
+&lt;li&gt;In order to allow for HTML rendering from Tippy.js we set the the &lt;code&gt;allowHTML&lt;/code&gt; option to &lt;code&gt;true&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Additional options can be found at Tippy.js &lt;a href=&#34;https://atomiks.github.io/tippyjs/&#34;&gt;README&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;To prevent from the content from rendering outside the popup we hide it.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;  &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.contentTarget.style.display &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;none&amp;#34;&lt;/span&gt;;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;haml-view-changes&#34;&gt;HAML View Changes&lt;/h2&gt;
+&lt;p&gt;Now we have to update our fabric partial to utilize the &lt;code&gt;popup&lt;/code&gt; controller.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appviewsfabrics_fabrichtmlhaml--1&#34;&gt;app/views/fabrics/_fabric.html.haml&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;%&lt;/span&gt;li
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;avatar{ &lt;span style=&#34;color:#f1fa8c&#34;&gt;data&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;controller&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;:popup&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;target&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;popup.trigger&amp;#34;&lt;/span&gt; } }
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; image_pack_tag(fabric&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;image, &lt;span style=&#34;color:#f1fa8c&#34;&gt;class&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;circular&amp;#34;&lt;/span&gt;)
+
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;%&lt;/span&gt;div{ &lt;span style=&#34;color:#f1fa8c&#34;&gt;data&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;target&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;popup.content&amp;#34;&lt;/span&gt; } }
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;popup
+        &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;image
+          &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; image_pack_tag(fabric&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;image)
+        &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;data
+          Created &lt;span style=&#34;color:#f1fa8c&#34;&gt;On&lt;/span&gt;:
+          &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; display_date fabric&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;created_at
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;data
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; fabric&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;name&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;titleize
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://chrislabarge.com/img/popup.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Looks Good!&lt;/p&gt;
+&lt;p&gt;Now lets do some refactoring to clean up our view and make the popup controller more modular.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appjavascriptcontrollerspopup_controllerjs---1&#34;&gt;app/javascript/controllers/popup_controller.js &lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-javascript&#34; data-lang=&#34;javascript&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; { Controller } from &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;stimulus&amp;#34;&lt;/span&gt;;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; tippy from &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;tippy.js&amp;#39;&lt;/span&gt;;
+&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;../stylesheets/popup.scss&amp;#34;&lt;/span&gt;;
+
+&lt;span style=&#34;color:#ff79c6&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;default&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;extends&lt;/span&gt; Controller {
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;static&lt;/span&gt; targets &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;trigger&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;content&amp;#34;&lt;/span&gt;]
+
+  initialize() {
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.trigger &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.getTrigger();
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.content &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.getContent();
+
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.initPopup();
+
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.content.style.display &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;none&amp;#34;&lt;/span&gt;;
+  }
+
+  initPopup() {
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.popup &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; tippy(&lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.trigger, {
+      content&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.content.innerHTML,
+      allowHTML&lt;span style=&#34;color:#ff79c6&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;true&lt;/span&gt;,
+    });
+  }
+
+  getContent() {
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.hasContentTarget) {
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.contentTarget;
+    } &lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt; {
+      &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;var&lt;/span&gt; content &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;document&lt;/span&gt;.createElement(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;div&amp;#39;&lt;/span&gt;)
+      content.innerHTML &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.data.get(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;content&amp;#34;&lt;/span&gt;);
+
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; content
+    }
+  }
+
+  getTrigger() {
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.hasTriggerTarget) {
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.triggerTarget;
+    } &lt;span style=&#34;color:#ff79c6&#34;&gt;else&lt;/span&gt; {
+      &lt;span style=&#34;color:#ff79c6&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ff79c6&#34;&gt;this&lt;/span&gt;.element;
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appviewsfabrics_fabrichtmlhaml--2&#34;&gt;app/views/fabrics/_fabric.html.haml&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;%&lt;/span&gt;li
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;avatar{ &lt;span style=&#34;color:#f1fa8c&#34;&gt;data&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;controller&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;:popup&lt;/span&gt;,
+                   &lt;span style=&#34;color:#f1fa8c&#34;&gt;popup&lt;/span&gt;: { &lt;span style=&#34;color:#f1fa8c&#34;&gt;content&lt;/span&gt;: render(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;popup&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f1fa8c&#34;&gt;fabric&lt;/span&gt;: fabric) } } }
+
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; image_pack_tag(fabric&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;image, &lt;span style=&#34;color:#f1fa8c&#34;&gt;class&lt;/span&gt;: &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;circular&amp;#34;&lt;/span&gt;)
+
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;data
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; fabric&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;name&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;titleize
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appviewsfabrics_popuphtmlhaml-&#34;&gt;app/views/fabrics/_popup.html.haml&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-ruby&#34; data-lang=&#34;ruby&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;popup
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;image
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; image_pack_tag(fabric&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;image)
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;data
+    Created &lt;span style=&#34;color:#f1fa8c&#34;&gt;On&lt;/span&gt;:
+    &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; display_date fabric&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;created_at
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Color Picker with Ruby on Rails 6, Stimulus and Webpacker</title>
