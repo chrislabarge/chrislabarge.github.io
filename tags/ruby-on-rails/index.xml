@@ -40,13 +40,13 @@
     &lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt; fabric&lt;span style=&#34;color:#ff79c6&#34;&gt;.&lt;/span&gt;name
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://chrislabarge.com/img/popup-index.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;However, the avatar is too small for comparing fabrics, and it would be nice to have the image enlarged when hovering over it.&lt;/p&gt;
-&lt;p&gt;We will need to install a popup library to accomplish the wanted feature.&lt;/p&gt;
+&lt;p&gt;We will need to install a popup library to accomplish the desired feature.&lt;/p&gt;
 &lt;h2 id=&#34;install-with-yarn--webpacker&#34;&gt;Install with Yarn &amp;amp; Webpacker&lt;/h2&gt;
 &lt;p&gt;Add the Tippy.js library using &lt;code&gt;yarn&lt;/code&gt;&lt;/p&gt;
 &lt;h4 class=&#34;snippet-heading&#34; id=&#34;command-line-&#34;&gt;Command Line&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;yarn add tippy.js
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Afterwords, create a css file to load the module&amp;rsquo;s styles:&lt;/p&gt;
-&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appjavascriptstylesheetspopupcss-&#34;&gt;app/javascript/stylesheets/popup.css&lt;/h4&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Afterwords, create a scss file to load the module&amp;rsquo;s styles:&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;appjavascriptstylesheetspopupscss-&#34;&gt;app/javascript/stylesheets/popup.scss&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;@&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;tippy.js/dist/tippy.css&amp;#39;&lt;/span&gt;;
 
 &lt;span style=&#34;color:#6272a4&#34;&gt;/*Custom style*/&lt;/span&gt;
