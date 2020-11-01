@@ -44,7 +44,7 @@
 &lt;h2 id=&#34;install-with-yarn--webpacker&#34;&gt;Install with Yarn &amp;amp; Webpacker&lt;/h2&gt;
 &lt;p&gt;Add the Tippy.js library using &lt;code&gt;yarn&lt;/code&gt;&lt;/p&gt;
 &lt;h4 class=&#34;snippet-heading&#34; id=&#34;command-line-&#34;&gt;Command Line&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;  yarn add tippy.js
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;yarn add tippy.js
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Afterwords, create a css file to load the module&amp;rsquo;s styles:&lt;/p&gt;
 &lt;h4 class=&#34;snippet-heading&#34; id=&#34;appjavascriptstylesheetspopupcss-&#34;&gt;app/javascript/stylesheets/popup.css&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-css&#34; data-lang=&#34;css&#34;&gt;@&lt;span style=&#34;color:#ff79c6&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;tippy.js/dist/tippy.css&amp;#39;&lt;/span&gt;;
