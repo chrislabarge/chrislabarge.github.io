@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Chris LaBarge - Software Developer - Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Oct 2020 18:30:21 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 15 Nov 2020 18:30:21 -0500</lastBuildDate>
     
 	<atom:link href="https://chrislabarge.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>vim</title>
+      <link>https://chrislabarge.com/tags/vim/</link>
+      <pubDate>Sun, 15 Nov 2020 18:30:21 -0500</pubDate>
+      
+      <guid>https://chrislabarge.com/tags/vim/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>javascript</title>
@@ -44,15 +53,6 @@
       <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
       
       <guid>https://chrislabarge.com/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>vim</title>
-      <link>https://chrislabarge.com/tags/vim/</link>
-      <pubDate>Sat, 28 Mar 2020 18:30:21 -0500</pubDate>
-      
-      <guid>https://chrislabarge.com/tags/vim/</guid>
       <description></description>
     </item>
     

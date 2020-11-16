@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Configure (Neo)Vim for Unity Game Engine Development</title>
+
+        <meta name="description" content="A tutorial for using Neovim as the external text editor &#43; debugger for the Unity Game Engine.">
+        <meta itemprop="name" content="Configure (Neo)Vim for Unity Game Engine Development">
+        <meta itemprop="description" content="A tutorial for using Neovim as the external text editor &#43; debugger for the Unity Game Engine.">
+
+        
+          <meta itemprop="datePublished"
+                content="November 15, 2020">
+          <meta itemprop="dateModified"
+                content="November 15, 2020">
+          <meta itemprop="image"  content="https://chrislabarge.com/img/nvim-unity.png" />
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:site" content="@clabvessels" />
+          <meta name="twitter:creator" content="@clabvessels" />
+          <meta property="og:url" content="https://chrislabarge.com/posts/neovim-unity-engine/" />
+          <meta property="og:title" content="Configure (Neo)Vim for Unity Game Engine Development" />
+          <meta property="og:type" content="article" />
+          <meta property="og:description" content="A tutorial for using Neovim as the external text editor &#43; debugger for the Unity Game Engine." />
+          <meta property="og:image" content="https://chrislabarge.com/img/nvim-unity.png" />
+          <meta property="article:published_time" content="2020-11-15 18:30:21 -0500 EST">
+          <meta property="article:modified_time" content="2020-11-15 18:30:21 -0500 EST">
+        
+
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/custom.css">
+        <link rel="icon" type="image/png" href="/img/favicon.ico">
+
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        <script src="/javascript/custom.js"></script>
+
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104350449-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-104350449-2');
+        </script>
+    </head>
+    <body>
+        <section id="pageHeader">
+            
+              <h2><a href="/">Chris LaBarge</a></h2>
+            
+        </section>
+        <div class="content">
+
+
+
+
+
+
+
+
+<nav class="taxonomy">
+  <ul class="taxonomy-options">
+    
+      
+      <li>
+        <a data-list-class="categories"
+           class="clickable active">
+          categories
+        </a>
+      </li>
+    
+      
+      <li>
+        <a data-list-class="tags"
+           class="clickable ">
+          tags
+        </a>
+      </li>
+    
+  </ul>
+
+  
+    
+
+    
+      
+    
+
+    <ul class ="taxonomy-list categories active">
+      
+        <li>
+          <a href="https://chrislabarge.com/categories/tutorial/"
+             class="active">
+             tutorial
+            <span class="float-right">6</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://chrislabarge.com/categories/dev-tools/"
+             class="">
+             dev-tools
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://chrislabarge.com/categories/review/"
+             class="">
+             review
+            <span class="float-right">2</span>
+          </a>
+        </li>
+      
+    </ul>
+  
+    
+
+    
+      
+    
+
+    <ul class ="taxonomy-list tags ">
+      
+        <li>
+          <a href="https://chrislabarge.com/tags/ruby/"
+             class="">
+             ruby
+            <span class="float-right">5</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://chrislabarge.com/tags/ruby-on-rails/"
+             class="">
+             ruby-on-rails
+            <span class="float-right">4</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://chrislabarge.com/tags/linux/"
+             class="">
+             linux
+            <span class="float-right">3</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://chrislabarge.com/tags/javascript/"
+             class="">
+             javascript
+            <span class="float-right">2</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://chrislabarge.com/tags/vim/"
+             class="active">
+             vim
+            <span class="float-right">2</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://chrislabarge.com/tags/git/"
+             class="">
+             git
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://chrislabarge.com/tags/movies/"
+             class="">
+             movies
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://chrislabarge.com/tags/open-source/"
+             class="">
+             open-source
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://chrislabarge.com/tags/raspberry-pi/"
+             class="">
+             raspberry-pi
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+        <li>
+          <a href="https://chrislabarge.com/tags/resource/"
+             class="">
+             resource
+            <span class="float-right">1</span>
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+<section class="blog-post">
+    
+    <img class="header-img" src="/img/nvim-unity.png" alt="A Page screen shot of the Neovim text editor showcasing Intellisense autocomplete working with a Unity .NET c# file." />
+    
+    <h1>Configure (Neo)Vim for Unity Game Engine Development</h1>
+    <div class="blog-post-subheader">
+        
+            <span class="date-title">
+                November 15, 2020
+            </span>
+        
+        <a href="/posts/index.xml" class="tooltip">
+            <span class="tooltip-text">RSS Feed</span>
+            <i class="fas fa-rss"></i>
+        </a>
+        
+        
+          <span id="onlyFiles">
+            <a href="#files" class="tooltip" id="quickView">
+              <span class="tooltip-text">Only Files</span>
+              Quick View
+            </a>
+            <a href="https://chrislabarge.com/posts/neovim-unity-engine/" class="tooltip" style="display: none" id="normalView" >
+              <span class="tooltip-text">Entire Post</span>
+              Normal View
+            </a>
+          </span>
+        
+    </div>
+    <div class="blog-post-content">
+        <h2 id="tools---install-the-following">Tools - <em>Install the following</em></h2>
+<ul>
+<li><a href="https://neovim.io/">NeoVim</a> - Open source fork of the Vim editor.</li>
+<li><a href="https://github.com/neoclide/coc.nvim">Neovim-CoC</a> - Intellisense Engine - Make your Vim/Neovim as smart as VSCode.</li>
+<li><a href="https://github.com/OmniSharp/omnisharp-vim">OmniSharp-vim</a>  - A great vim plugin that installs omnisharp and integrates with mono/.NET and Coc.</li>
+<li><a href="https://www.mono-project.com/">Mono</a> - Open Sourced version of the .NET software framework - Unity compiles c# code to c++. <em>Only needed if you are developing on OSX/Linux</em></li>
+<li><a href="https://unity.com/">Unity</a> - Game Development Engine.</li>
+<li><a href="https://github.com/mhinz/neovim-remote">Neovim-Remote</a> - This is a python
+executable script that extends Neovim to allow for remote features that are
+available with regular vim.</li>
+</ul>
+<h2 id="preface">Preface</h2>
+<p><a href="https://github.com/neoclide/coc.nvim">Neovim-CoC</a> is a very robust vim plugin
+which allows for numerous extensions and configurations.  It is not really an
+&ldquo;out of the box&rdquo; solution, and you will have to get your hands dirty. Having
+said that, I really appreciate all of the work that is going into this plugin,
+and can&rsquo;t imagine developing without it.</p>
+<p>If you use a different <code>Intellisense</code> solution, just make sure <a href="https://github.com/OmniSharp/omnisharp-vim">OmniSharp-vim</a> is compatible with it.</p>
+<h2 id="tutorial">Tutorial</h2>
+<p>I LOVE editing code in Vim.  Recently I
+decided to dabble with the Unity Game Engine. Unity has terrific
+built in integration with VScode, but not with Vim.</p>
+<p>Luckily Unity allows for integrating any editor that can accept <code>line</code> and <code>file</code>  arguments.</p>
+<p>Open up your Unity game/project.</p>
+<p>From the tool bar select:</p>
+<h4 class="snippet-heading" id="edit--preferences--external-tools-">edit &gt; preferences &gt; External Tools</h4>
+<p><img src="/img/unity-files.jpeg" alt=""></p>
+<p>As you can see there is a dropdown that allows for choosing a text editor executable file.</p>
+<p>You must create the file first in order to choose it.</p>
+<h4 class="snippet-heading" id="utilitiesneovim-unity-">Utilities/neovim-unity</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#ff79c6">#!/bin/bash
+</span><span style="color:#ff79c6"></span>gnome-terminal -- nvr --servername unity <span style="color:#8be9fd;font-style:italic">$@</span>
+</code></pre></div><p>Lets breakdown this simple file.</p>
+<ul>
+<li>
+<p><code>gnome-terminal</code> is the executable command that opens a new terminal window on my machine. If you use a different terminal the command will be different.</p>
+</li>
+<li>
+<p><code>nvr --servername unity $@</code> is the argument, which itself is a command.</p>
+</li>
+<li>
+<p><code>nvr</code> is the executable command for <code>neovim-remote</code>.  This is needed because you are unable to pass server and remote options into <code>neovim</code> like you can for <code>vim</code>.</p>
+</li>
+<li>
+<p><code>--servername unity</code> is how we name the neovim server instance.</p>
+</li>
+<li>
+<p><code>$@</code> allows the Unity Game Editor to pass in File arguments into the (executable) file.</p>
+</li>
+</ul>
+<p>Now we must make the file an executable.</p>
+<h4 class="snippet-heading" id="command-line-">Command Line</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">cd</span> Utilities
+chmod +x neovim-unity
+</code></pre></div><p>Choose the newly created executable file in the Unity preferences.
+The external script editor arguments field will appear.</p>
+<p>Add the following line:</p>
+<h4 class="snippet-heading" id="external-script-editor-args-">External Script Editor Args</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">  --remote-silent +<span style="color:#ff79c6">$(</span>Line<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">$(</span>File<span style="color:#ff79c6">)</span>
+</code></pre></div><h4 class="snippet-heading" id="edit--preferences--external-tools--1">edit &gt; preferences &gt; External Tools</h4>
+<p><img src="/img/unity-nvim.jpeg" alt=""></p>
+<p>Now you can open/debug files within the Unity UI and it will automatically open the file in your Vim editor.</p>
+<p>However you will notice that the intellisense is most likely not working.</p>
+<p>First, we must edit the <a href="https://github.com/neoclide/coc.nvim">Neovim-CoC</a> configuration file.
+Within vim enter the following command:</p>
+<h4 class="snippet-heading" id="neovim-command-">(Neo)Vim Command</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">:CocConfig
+</code></pre></div><p>This will open you configuration file for <a href="https://github.com/neoclide/coc.nvim">Neovim-CoC</a>.
+Add the following lines to the object:</p>
+<h4 class="snippet-heading" id="coc-configjson-">CoC config.json</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-json" data-lang="json">{
+  //...
+  <span style="color:#ff79c6">&#34;coc.source.OmniSharp.enable&#34;</span> : <span style="color:#ff79c6">true</span>,
+  <span style="color:#ff79c6">&#34;coc.source.OmniSharp.triggerCharacters&#34;</span>: <span style="color:#f1fa8c">&#34;.&#34;</span>,
+}
+</code></pre></div><p>Now you must generate the project files so that the OmniSharp server can analyze the project.</p>
+<p>In order to do this, switch the External Text Editor option back to &ldquo;Open by file extension&rdquo;. (<em>For some reason it will not allow for generating these files when the nvim-unity is selected</em>) You will now have the options to <code>regenerate project files</code>.
+Make sure the following are checked before regenerating:</p>
+<ul>
+<li>Embedded Packages</li>
+<li>Registry Packages</li>
+<li>Local Packages</li>
+</ul>
+<h4 class="snippet-heading no-file-only" id="edit--preferences--external-tools--2">edit &gt; preferences &gt; External Tools</h4>
+<p><img src="/img/unity-files.jpeg" alt=""></p>
+<p>Switch the External Text Editor option back to &ldquo;neovim-unity&rdquo;. Make
+sure that the argument field still has the following:</p>
+<h4 class="snippet-heading no-file-only" id="external-script-editor-args--1">External Script Editor Args</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">--remote-silent +<span style="color:#ff79c6">$(</span>Line<span style="color:#ff79c6">)</span> <span style="color:#ff79c6">$(</span>File<span style="color:#ff79c6">)</span>
+</code></pre></div><h4 class="snippet-heading no-file-only" id="edit--preferences--external-tools--3">edit &gt; preferences &gt; External Tools</h4>
+<p><img src="/img/unity-nvim.jpeg" alt=""></p>
+<p>Now, upon opening any <code>.cs</code> file within the project, should open in vim, and
+your OmniSharp server should start up, analyze the project files, and provide
+you with an IDE like experience.</p>
+<p><img src="/img/nvim-unity.gif#visible" alt=""></p>
+<h2 id="side-note">Side Note</h2>
+<p>If there are any issues with the OmniSharp server, make sure to follow ALL of the installation instructions at <a href="https://github.com/OmniSharp/omnisharp-vim">OmniSharp-vim</a>. There are a few different caveats in regards to the operating system you are running.</p>
+
+    </div>
+</section>
+
+        </div>
+        <div class="footer" id="footer">
+            <div class="contact-options">
+                <div class="social-icons">
+                    <a href="https://github.com/chrislabarge" class="tooltip">
+                        <span class="tooltip-text">Github</span>
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://gitlab.com/chrislabarge" class="tooltip">
+                        <span class="tooltip-text">Gitlab</span>
+                        <i class="fab fa-gitlab"></i>
+                    </a>
+                    <a href="https://twitter.com/clabvessels" class="tooltip">
+                        <span class="tooltip-text">Twitter</span>
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="mailto:chrislabargedev@gmail.com" class="tooltip">
+                        <span class="tooltip-text">Send Email</span>
+                        <i class="far fa-envelope"></i>
+                    </a>
+                    <a id="light" class="toggle-theme tooltip">
+                        <span class="tooltip-text"> Light Theme</span>
+                        <i class="fas fa-sun"></i>
+                    </a>
+                    <a id="dark" class="toggle-theme tooltip" style="display: none">
+                        <span class="tooltip-text">Dark Theme</span>
+                        <i class="fas fa-moon"></i>
+                    </a>
+                </div>
+            </div>
+
+            
+                <section id=nav>
+                    <ul class=navbar>
+                        <li><div><a href="/">Home</a></div></li>
+                        <li><div><a href="/about">About Me</a></div></li>
+                        <li><div><a href="/posts">Blog Posts</a></div></li>
+                        <li><div><a href="/projects">Projects</a></div></li>
+                    </ul>
+                </section>
+            
+        </div>
+    </body>
+</html>
+
