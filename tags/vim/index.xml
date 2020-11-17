@@ -67,7 +67,7 @@ built in integration with VScode, but not with Vim.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;$@&lt;/code&gt; allows the Unity Game Editor to pass in File arguments into the (executable) file.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Now we must make the file an executable.&lt;/p&gt;
+&lt;p&gt;Now you must make the file an executable.&lt;/p&gt;
 &lt;h4 class=&#34;snippet-heading&#34; id=&#34;command-line-&#34;&gt;Command Line&lt;/h4&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;cd&lt;/span&gt; Utilities
 chmod +x neovim-unity
