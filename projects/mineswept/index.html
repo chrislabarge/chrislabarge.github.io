@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>MineSwept.io</title>
+
+        <meta name="description" content="A portfolio page for MineSwept.io. A minesweeper clone developed using Ruby on Rails. Users can play the classic game with a modern twist.">
+        <meta itemprop="name" content="MineSwept.io">
+        <meta itemprop="description" content="A portfolio page for MineSwept.io. A minesweeper clone developed using Ruby on Rails. Users can play the classic game with a modern twist.">
+
+        
+          <meta itemprop="datePublished"
+                content="November 22, 2020">
+          <meta itemprop="dateModified"
+                content="November 22, 2020">
+          <meta itemprop="image"  content="https://chrislabarge.com/img/mine-swept.png" />
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:site" content="@clabvessels" />
+          <meta name="twitter:creator" content="@clabvessels" />
+          <meta property="og:url" content="https://chrislabarge.com/projects/mineswept/" />
+          <meta property="og:title" content="MineSwept.io" />
+          <meta property="og:type" content="article" />
+          <meta property="og:description" content="A portfolio page for MineSwept.io. A minesweeper clone developed using Ruby on Rails. Users can play the classic game with a modern twist." />
+          <meta property="og:image" content="https://chrislabarge.com/img/mine-swept.png" />
+          <meta property="article:published_time" content="2020-11-22 18:30:21 -0500 EST">
+          <meta property="article:modified_time" content="2020-11-22 18:30:21 -0500 EST">
+        
+
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/custom.css">
+        <link rel="icon" type="image/png" href="/img/favicon.ico">
+
+        <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        <script src="/javascript/custom.js"></script>
+
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104350449-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-104350449-2');
+        </script>
+    </head>
+    <body>
+        <section id="pageHeader">
+            
+              <h2><a href="/">Chris LaBarge</a></h2>
+            
+        </section>
+        <div class="content">
+
+
+<section class="blog-post">
+    
+    <img class="header-img" src="/img/mine-swept.png" alt="A screen-shot of the MineSwept.io landing page" />
+    
+    <h1>MineSwept.io</h1>
+    <div class="blog-post-subheader">
+        
+            <span class="date-title">
+                November 22, 2020
+            </span>
+        
+        
+            <span class="website">
+                <a href="https://www.mineswept.io">https://www.mineswept.io</a>
+            </span>
+        
+    </div>
+    <div class="blog-post-content">
+        <p><a href="https://www.mineswept.io">MineSwept.io</a> is web app that allows users to play the classic Mine Sweeper game on ALL devices.</p>
+<p>I built <a href="https://www.mineswept.io">MineSwept.io</a> after listening to a <a href="https://www.codewithjason.com/rails-with-jason-podcast/tyler-williams/">podcast</a> by <a href="https://www.codewithjason.com/">Jason Swett</a> featuring <a href="https://ogdenstudios.xyz/">Tyler Williams</a>.
+They discuss applicable solutions for syncing the Back &amp; Front-End for a Poker game.</p>
+<p>I had always wanted to build a mine sweeper clone. The requirements/rules are
+fairly simple, and the mechanics were perfect for implementing some of the
+solutions referenced in the <a href="https://www.codewithjason.com/rails-with-jason-podcast/tyler-williams/">podcast</a>.</p>
+<p>Right now the backend generates the game
+boards, and the front-end uses a StimulusJS controller to handle spot logic.
+My goal is to build a game mode where multiple users can play on the same
+board, using Action Cable/<a href="https://docs.stimulusreflex.com/">Stimulus Reflex</a>.</p>
+<p><a href="https://www.mineswept.io/play_game">Play for free</a> as a guest</p>
+<p>OR</p>
+<p><a href="https://www.mineswept.io/users/sign_up">Create an account today</a> to unlock all of the features.</p>
+<h2 id="tech-stack">Tech Stack</h2>
+<ul>
+<li>Ruby on Rails</li>
+<li>StimulusJS</li>
+<li>TailwindCSS</li>
+</ul>
+<h2 id="code">Code</h2>
+<p><a href="https://gitlab.com/chrislabarge/mineswept">Github Repo</a></p>
+
+    </div>
+</section>
+
+        </div>
+        <div class="footer" id="footer">
+            <div class="contact-options">
+                <div class="social-icons">
+                    <a href="https://github.com/chrislabarge" class="tooltip">
+                        <span class="tooltip-text">Github</span>
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://gitlab.com/chrislabarge" class="tooltip">
+                        <span class="tooltip-text">Gitlab</span>
+                        <i class="fab fa-gitlab"></i>
+                    </a>
+                    <a href="https://twitter.com/clabvessels" class="tooltip">
+                        <span class="tooltip-text">Twitter</span>
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="mailto:chrislabargedev@gmail.com" class="tooltip">
+                        <span class="tooltip-text">Send Email</span>
+                        <i class="far fa-envelope"></i>
+                    </a>
+                    <a id="light" class="toggle-theme tooltip">
+                        <span class="tooltip-text"> Light Theme</span>
+                        <i class="fas fa-sun"></i>
+                    </a>
+                    <a id="dark" class="toggle-theme tooltip" style="display: none">
+                        <span class="tooltip-text">Dark Theme</span>
+                        <i class="fas fa-moon"></i>
+                    </a>
+                </div>
+            </div>
+
+            
+                <section id=nav>
+                    <ul class=navbar>
+                        <li><div><a href="/">Home</a></div></li>
+                        <li><div><a href="/about">About Me</a></div></li>
+                        <li><div><a href="/posts">Blog Posts</a></div></li>
+                        <li><div><a href="/projects">Projects</a></div></li>
+                    </ul>
+                </section>
+            
+        </div>
+    </body>
+</html>
+

@@ -6,10 +6,40 @@
     <description>Recent content in Chris LaBarge&#39;s Portfolio on Chris LaBarge - Software Developer - Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 02 Jan 2018 18:30:21 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 22 Nov 2020 18:30:21 -0500</lastBuildDate>
     
 	<atom:link href="https://chrislabarge.com/projects/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>MineSwept.io</title>
+      <link>https://chrislabarge.com/projects/mineswept/</link>
+      <pubDate>Sun, 22 Nov 2020 18:30:21 -0500</pubDate>
+      
+      <guid>https://chrislabarge.com/projects/mineswept/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.mineswept.io&#34;&gt;MineSwept.io&lt;/a&gt; is web app that allows users to play the classic Mine Sweeper game on ALL devices.&lt;/p&gt;
+&lt;p&gt;I built &lt;a href=&#34;https://www.mineswept.io&#34;&gt;MineSwept.io&lt;/a&gt; after listening to a &lt;a href=&#34;https://www.codewithjason.com/rails-with-jason-podcast/tyler-williams/&#34;&gt;podcast&lt;/a&gt; by &lt;a href=&#34;https://www.codewithjason.com/&#34;&gt;Jason Swett&lt;/a&gt; featuring &lt;a href=&#34;https://ogdenstudios.xyz/&#34;&gt;Tyler Williams&lt;/a&gt;.
+They discuss applicable solutions for syncing the Back &amp;amp; Front-End for a Poker game.&lt;/p&gt;
+&lt;p&gt;I had always wanted to build a mine sweeper clone. The requirements/rules are
+fairly simple, and the mechanics were perfect for implementing some of the
+solutions referenced in the &lt;a href=&#34;https://www.codewithjason.com/rails-with-jason-podcast/tyler-williams/&#34;&gt;podcast&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Right now the backend generates the game
+boards, and the front-end uses a StimulusJS controller to handle spot logic.
+My goal is to build a game mode where multiple users can play on the same
+board, using Action Cable/&lt;a href=&#34;https://docs.stimulusreflex.com/&#34;&gt;Stimulus Reflex&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.mineswept.io/play_game&#34;&gt;Play for free&lt;/a&gt; as a guest&lt;/p&gt;
+&lt;p&gt;OR&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.mineswept.io/users/sign_up&#34;&gt;Create an account today&lt;/a&gt; to unlock all of the features.&lt;/p&gt;
+&lt;h2 id=&#34;tech-stack&#34;&gt;Tech Stack&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ruby on Rails&lt;/li&gt;
+&lt;li&gt;StimulusJS&lt;/li&gt;
+&lt;li&gt;TailwindCSS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;code&#34;&gt;Code&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://gitlab.com/chrislabarge/mineswept&#34;&gt;Github Repo&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>MenuBerry - Vegan App</title>
