@@ -3,8 +3,43 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://chrislabarge.com/posts/docker-postgres/</loc>
+    <lastmod>2021-01-14T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrislabarge.com/categories/</loc>
+    <lastmod>2021-01-14T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://chrislabarge.com/</loc>
-    <lastmod>2020-11-22T18:30:21-05:00</lastmod>
+    <lastmod>2021-01-14T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrislabarge.com/posts/</loc>
+    <lastmod>2021-01-14T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrislabarge.com/categories/dev-tools/</loc>
+    <lastmod>2021-01-14T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrislabarge.com/tags/docker/</loc>
+    <lastmod>2021-01-14T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrislabarge.com/tags/rails/</loc>
+    <lastmod>2021-01-14T18:30:21-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrislabarge.com/tags/</loc>
+    <lastmod>2021-01-14T18:30:21-05:00</lastmod>
   </url>
   
   <url>
@@ -18,22 +53,7 @@
   </url>
   
   <url>
-    <loc>https://chrislabarge.com/categories/</loc>
-    <lastmod>2020-11-15T18:30:21-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chrislabarge.com/posts/</loc>
-    <lastmod>2020-11-15T18:30:21-05:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://chrislabarge.com/posts/neovim-unity-engine/</loc>
-    <lastmod>2020-11-15T18:30:21-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chrislabarge.com/tags/</loc>
     <lastmod>2020-11-15T18:30:21-05:00</lastmod>
   </url>
   
@@ -74,11 +94,6 @@
   
   <url>
     <loc>https://chrislabarge.com/posts/bold-italic-tmux/</loc>
-    <lastmod>2020-03-28T18:30:21-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chrislabarge.com/categories/dev-tools/</loc>
     <lastmod>2020-03-28T18:30:21-05:00</lastmod>
   </url>
   

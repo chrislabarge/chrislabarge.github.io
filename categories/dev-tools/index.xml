@@ -6,10 +6,82 @@
     <description>Recent content in dev-tools on Chris LaBarge - Software Developer - Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Mar 2020 18:30:21 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 14 Jan 2021 18:30:21 -0500</lastBuildDate>
     
 	<atom:link href="https://chrislabarge.com/categories/dev-tools/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Bind Postgres Docker Container to Localhost</title>
+      <link>https://chrislabarge.com/posts/docker-postgres/</link>
+      <pubDate>Thu, 14 Jan 2021 18:30:21 -0500</pubDate>
+      
+      <guid>https://chrislabarge.com/posts/docker-postgres/</guid>
+      <description>&lt;h2 id=&#34;tools---install-the-following&#34;&gt;Tools - &lt;em&gt;Install the following&lt;/em&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.docker.com/&#34;&gt;Docker&lt;/a&gt; - A platform to run isolated software packages called containers.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://hub.docker.com/_/postgres&#34;&gt;Docker Postgres Image&lt;/a&gt; - The instructions for building a postgres container. A container is an instance of a docker image.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
+&lt;p&gt;I recently
+&lt;a href=&#34;https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes&#34;&gt;pruned&lt;/a&gt;
+my docker containers and images to free up some space on my local drive. In
+doing so, I was required to spin up some of the containers that I rely on for
+local development.&lt;/p&gt;
+&lt;p&gt;One of these containers is a instance of &lt;a href=&#34;https://hub.docker.com/_/postgres&#34;&gt;postgres&lt;/a&gt; docker
+image. I prefer using a docker container of this image in replace of local postgres installations, as
+it is much less of a headache.&lt;/p&gt;
+&lt;p&gt;I also like to treat the postgres database in the container as if it were installed
+locally by binding the port to localhost.&lt;/p&gt;
+&lt;p&gt;I find this helps limit configuration issues when working on new projects.
+Now all I will have worry about is my DB username, and password.&lt;/p&gt;
+&lt;h2 id=&#34;command&#34;&gt;Command&lt;/h2&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;terminal-&#34;&gt;terminal&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker run --name localhost-postgres -p 5432:5432 -e &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;POSTGRES_USER&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;some_user &lt;span style=&#34;color:#8be9fd;font-style:italic&#34;&gt;POSTGRES_PASSWORD&lt;/span&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;=&lt;/span&gt;some_password -d postgres
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;This entire command is not specific to &lt;code&gt;postgres&lt;/code&gt;.  You run commands like this using most one off docker images.
+Lets break this command down.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;docker run&lt;/code&gt; Run a command in a new container&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--name&lt;/code&gt; the custom name of the container ( I prefer to prefix it with &lt;code&gt;localhost&lt;/code&gt; in case I have other postgres docker containers, NOT binded to localhost.)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-d&lt;/code&gt; Run container in background and print container ID&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-e&lt;/code&gt; Set environment variables&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;POSTGRES_USER=&lt;/code&gt; fill this value with username for your projects database configuration/secret files. (do not include the ENV variable in the command if you prefer to use default &lt;code&gt;postgres&lt;/code&gt; as your username)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;POSTGRES_PASSWORD=&lt;/code&gt; fill this value with the password for your projects database configuration/secret files. (this ENV variable is required for the container)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-p&lt;/code&gt; Publish a container&amp;rsquo;s port(s) to the host&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;5432:5432&lt;/code&gt; The default container postgres port binded to the default localhost postgres port.  &lt;a href=&#34;https://www.adminsub.net/tcp-udp-port-finder/5432&#34;&gt;5432&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;postgres&lt;/code&gt; The installed postgres docker image you are using for the container&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;using&#34;&gt;Using&lt;/h2&gt;
+&lt;p&gt;Now all you have to do is is use the value for &lt;code&gt;POSTGRES_USER=&lt;/code&gt; as your database username and &lt;code&gt;POSTGRES_PASSWORD=&lt;/code&gt; as your database password.&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;rails_projectenv-&#34;&gt;rails_project/.env&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yml&#34; data-lang=&#34;yml&#34;&gt;DB_USER=some_user
+DB_PASSWORD=some_password
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;And that is typically all I need to get up an running on a new project and run a command such as &lt;code&gt;rake db:setup&lt;/code&gt;
+This is how a typical database configuration file looks in rails:&lt;/p&gt;
+&lt;h4 class=&#34;snippet-heading&#34; id=&#34;rails_projectconfigdatabaseyml-&#34;&gt;rails_project/config/database.yml&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2&#34;&gt;&lt;code class=&#34;language-yml&#34; data-lang=&#34;yml&#34;&gt;&lt;span style=&#34;color:#ff79c6&#34;&gt;production&lt;/span&gt;:
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;url&lt;/span&gt;:  &amp;lt;%= ENV[&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;DATABASE_URL&amp;#34;&lt;/span&gt;] %&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;  pool: &amp;lt;%= ENV[&amp;#34;DB_POOL&amp;#34;] || ENV[&amp;#39;RAILS_MAX_THREADS&amp;#39;] || 5 %&amp;gt;&lt;/span&gt;
+
+&lt;span style=&#34;color:#ff79c6&#34;&gt;development&lt;/span&gt;:
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;pool&lt;/span&gt;: &amp;lt;%= ENV.fetch(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;RAILS_MAX_THREADS&amp;#34;&lt;/span&gt;) { &lt;span style=&#34;color:#bd93f9&#34;&gt;5&lt;/span&gt; } %&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;  adapter: postgresql&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;encoding&lt;/span&gt;: unicode
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;database&lt;/span&gt;: rails_project
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;host&lt;/span&gt;: localhost
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;username&lt;/span&gt;: &amp;lt;%= ENV[&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;DB_USER&amp;#39;&lt;/span&gt;] %&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;  password: &amp;lt;%= ENV[&amp;#39;DB_PASSWORD&amp;#39;] %&amp;gt;&lt;/span&gt;
+
+&lt;span style=&#34;color:#ff79c6&#34;&gt;test&lt;/span&gt;:
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;pool&lt;/span&gt;: &amp;lt;%= ENV.fetch(&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#34;RAILS_MAX_THREADS&amp;#34;&lt;/span&gt;) { &lt;span style=&#34;color:#bd93f9&#34;&gt;5&lt;/span&gt; } %&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;  adapter: postgresql&lt;/span&gt;
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;encoding&lt;/span&gt;: unicode
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;database&lt;/span&gt;: rails_project_test
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;host&lt;/span&gt;: localhost
+  &lt;span style=&#34;color:#ff79c6&#34;&gt;username&lt;/span&gt;: &amp;lt;%= ENV[&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;#39;DB_USER&amp;#39;&lt;/span&gt;] %&lt;span style=&#34;color:#f1fa8c&#34;&gt;&amp;gt;
+&lt;/span&gt;&lt;span style=&#34;color:#f1fa8c&#34;&gt;  password: &amp;lt;%= ENV[&amp;#39;DB_PASSWORD&amp;#39;] %&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+    </item>
     
     <item>
       <title>Bold &#43; Italic Font in TMUX</title>
