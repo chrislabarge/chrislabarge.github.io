@@ -272,7 +272,7 @@ it is much less of a headache.</p>
 <p>I also like to treat the postgres database in the container as if it were installed
 locally by binding the port to localhost.</p>
 <p>I find this helps limit configuration issues when working on new projects.
-Now all I will have worry about is my DB username, and password.</p>
+Now all I will have worry about is my database <code>username</code> and <code>password</code>.</p>
 <h2 id="command">Command</h2>
 <h4 class="snippet-heading" id="terminal-">terminal</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">docker run --name localhost-postgres -p 5432:5432 -e <span style="color:#8be9fd;font-style:italic">POSTGRES_USER</span><span style="color:#ff79c6">=</span>some_user <span style="color:#8be9fd;font-style:italic">POSTGRES_PASSWORD</span><span style="color:#ff79c6">=</span>some_password -d postgres
@@ -280,17 +280,17 @@ Now all I will have worry about is my DB username, and password.</p>
 Lets break this command down.</p>
 <ul>
 <li><code>docker run</code> Run a command in a new container</li>
-<li><code>--name</code> the custom name of the container ( I prefer to prefix it with <code>localhost</code> in case I have other postgres docker containers, NOT binded to localhost.)</li>
+<li><code>--name</code> the custom name of the container ( I prefer to prefix it with <code>localhost</code> in case I have other postgres docker containers, NOT binded to localhost)</li>
 <li><code>-d</code> Run container in background and print container ID</li>
 <li><code>-e</code> Set environment variables</li>
-<li><code>POSTGRES_USER=</code> fill this value with username for your projects database configuration/secret files. (do not include the ENV variable in the command if you prefer to use default <code>postgres</code> as your username)</li>
-<li><code>POSTGRES_PASSWORD=</code> fill this value with the password for your projects database configuration/secret files. (this ENV variable is required for the container)</li>
-<li><code>-p</code> Publish a container&rsquo;s port(s) to the host</li>
-<li><code>5432:5432</code> The default container postgres port binded to the default localhost postgres port.  <a href="https://www.adminsub.net/tcp-udp-port-finder/5432">5432</a></li>
+<li><code>POSTGRES_USER=</code> fill this value with <code>username</code> for your projects database configuration/secret files. (do not include the ENV variable in the command if you prefer to use default <code>postgres</code> as your username)</li>
+<li><code>POSTGRES_PASSWORD=</code> fill this value with the <code>password</code> for your projects database configuration/secret files. (this ENV variable is required for the container)</li>
+<li><code>-p</code> Publish a container&rsquo;s port(s) to the hosj</li>
+<li><code>5432:5432</code> The default container postgres port binded to the default localhost postgres port <a href="https://www.adminsub.net/tcp-udp-port-finder/5432">5432</a></li>
 <li><code>postgres</code> The installed postgres docker image you are using for the container</li>
 </ul>
 <h2 id="using">Using</h2>
-<p>Now all you have to do is is use the value for <code>POSTGRES_USER=</code> as your database username and <code>POSTGRES_PASSWORD=</code> as your database password.</p>
+<p>Now all you have to do is is use the value for <code>POSTGRES_USER=</code> as your database <code>username</code> and <code>POSTGRES_PASSWORD=</code> as your database <code>password</code>.</p>
 <h4 class="snippet-heading" id="rails_projectenv-">rails_project/.env</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-yml" data-lang="yml">DB_USER=some_user
 DB_PASSWORD=some_password
