@@ -6,15 +6,15 @@
     <description>Recent content on Chris LaBarge - Software Developer - Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Jan 2021 18:30:21 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 05 Feb 2021 18:30:21 -0500</lastBuildDate>
     
 	<atom:link href="https://chrislabarge.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Bind Postgres Docker Container to Localhost</title>
+      <title>Port Forward Postgres Docker Container to Localhost</title>
       <link>https://chrislabarge.com/posts/docker-postgres/</link>
-      <pubDate>Thu, 14 Jan 2021 18:30:21 -0500</pubDate>
+      <pubDate>Fri, 05 Feb 2021 18:30:21 -0500</pubDate>
       
       <guid>https://chrislabarge.com/posts/docker-postgres/</guid>
       <description>&lt;h2 id=&#34;tools---install-the-following&#34;&gt;Tools - &lt;em&gt;Install the following&lt;/em&gt;&lt;/h2&gt;
@@ -32,7 +32,7 @@ local development.&lt;/p&gt;
 image. I prefer using a docker container of this image in replace of local postgres installations, as
 it is much less of a headache.&lt;/p&gt;
 &lt;p&gt;I also like to treat the postgres database in the container as if it were installed
-locally by binding the port to localhost.&lt;/p&gt;
+locally by forwarding the container port to localhost.&lt;/p&gt;
 &lt;p&gt;I find this helps limit configuration issues when working on new projects.
 Now all I will have worry about is my database &lt;code&gt;username&lt;/code&gt; and &lt;code&gt;password&lt;/code&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;command&#34;&gt;Command&lt;/h2&gt;
@@ -47,8 +47,8 @@ Lets break this command down.&lt;/p&gt;
 &lt;li&gt;&lt;code&gt;-e&lt;/code&gt; Set environment variables&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;POSTGRES_USER=&lt;/code&gt; fill this value with &lt;code&gt;username&lt;/code&gt; for your projects database configuration/secret files. (do not include the ENV variable in the command if you prefer to use default &lt;code&gt;postgres&lt;/code&gt; as your username)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;POSTGRES_PASSWORD=&lt;/code&gt; fill this value with the &lt;code&gt;password&lt;/code&gt; for your projects database configuration/secret files. (this ENV variable is required for the container)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-p&lt;/code&gt; Publish a container&amp;rsquo;s port(s) to the hosj&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;5432:5432&lt;/code&gt; The default container postgres port binded to the default localhost postgres port &lt;a href=&#34;https://www.adminsub.net/tcp-udp-port-finder/5432&#34;&gt;5432&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-p&lt;/code&gt; Publish a container&amp;rsquo;s port(s) to the host&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;5432:5432&lt;/code&gt; The default container postgres port mapped (fowarded) to the default localhost postgres port &lt;a href=&#34;https://www.adminsub.net/tcp-udp-port-finder/5432&#34;&gt;5432&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;postgres&lt;/code&gt; The installed postgres docker image you are using for the container&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;using&#34;&gt;Using&lt;/h2&gt;

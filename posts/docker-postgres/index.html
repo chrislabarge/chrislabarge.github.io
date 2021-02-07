@@ -4,28 +4,28 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>Bind Postgres Docker Container to Localhost</title>
+        <title>Port Forward Postgres Docker Container to Localhost</title>
 
         <meta name="description" content="A guide for binding the port of a docker container running postgres to localhost">
-        <meta itemprop="name" content="Bind Postgres Docker Container to Localhost">
+        <meta itemprop="name" content="Port Forward Postgres Docker Container to Localhost">
         <meta itemprop="description" content="A guide for binding the port of a docker container running postgres to localhost">
 
         
           <meta itemprop="datePublished"
-                content="January 14, 2021">
+                content="February 5, 2021">
           <meta itemprop="dateModified"
-                content="January 14, 2021">
+                content="February 5, 2021">
           <meta itemprop="image"  content="https://chrislabarge.com/img/binding-knot.jpg" />
           <meta name="twitter:card" content="summary" />
           <meta name="twitter:site" content="@clabvessels" />
           <meta name="twitter:creator" content="@clabvessels" />
           <meta property="og:url" content="https://chrislabarge.com/posts/docker-postgres/" />
-          <meta property="og:title" content="Bind Postgres Docker Container to Localhost" />
+          <meta property="og:title" content="Port Forward Postgres Docker Container to Localhost" />
           <meta property="og:type" content="article" />
           <meta property="og:description" content="A guide for binding the port of a docker container running postgres to localhost" />
           <meta property="og:image" content="https://chrislabarge.com/img/binding-knot.jpg" />
-          <meta property="article:published_time" content="2021-01-14 18:30:21 -0500 EST">
-          <meta property="article:modified_time" content="2021-01-14 18:30:21 -0500 EST">
+          <meta property="article:published_time" content="2021-02-05 18:30:21 -0500 EST">
+          <meta property="article:modified_time" content="2021-02-05 18:30:21 -0500 EST">
         
 
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
@@ -229,11 +229,11 @@
     
     <img class="header-img" src="/img/binding-knot.jpg" alt="A header image of two iron cables binded in a knot" />
     
-    <h1>Bind Postgres Docker Container to Localhost</h1>
+    <h1>Port Forward Postgres Docker Container to Localhost</h1>
     <div class="blog-post-subheader">
         
             <span class="date-title">
-                January 14, 2021
+                February 5, 2021
             </span>
         
         <a href="/posts/index.xml" class="tooltip">
@@ -270,7 +270,7 @@ local development.</p>
 image. I prefer using a docker container of this image in replace of local postgres installations, as
 it is much less of a headache.</p>
 <p>I also like to treat the postgres database in the container as if it were installed
-locally by binding the port to localhost.</p>
+locally by forwarding the container port to localhost.</p>
 <p>I find this helps limit configuration issues when working on new projects.
 Now all I will have worry about is my database <code>username</code> and <code>password</code>.</p>
 <h2 id="command">Command</h2>
@@ -285,8 +285,8 @@ Lets break this command down.</p>
 <li><code>-e</code> Set environment variables</li>
 <li><code>POSTGRES_USER=</code> fill this value with <code>username</code> for your projects database configuration/secret files. (do not include the ENV variable in the command if you prefer to use default <code>postgres</code> as your username)</li>
 <li><code>POSTGRES_PASSWORD=</code> fill this value with the <code>password</code> for your projects database configuration/secret files. (this ENV variable is required for the container)</li>
-<li><code>-p</code> Publish a container&rsquo;s port(s) to the hosj</li>
-<li><code>5432:5432</code> The default container postgres port binded to the default localhost postgres port <a href="https://www.adminsub.net/tcp-udp-port-finder/5432">5432</a></li>
+<li><code>-p</code> Publish a container&rsquo;s port(s) to the host</li>
+<li><code>5432:5432</code> The default container postgres port mapped (fowarded) to the default localhost postgres port <a href="https://www.adminsub.net/tcp-udp-port-finder/5432">5432</a></li>
 <li><code>postgres</code> The installed postgres docker image you are using for the container</li>
 </ul>
 <h2 id="using">Using</h2>
