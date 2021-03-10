@@ -6,10 +6,19 @@
     <description>Recent content in Categories on Chris LaBarge - Software Developer - Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Feb 2021 18:30:21 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 05 Mar 2021 12:01:00 +0000</lastBuildDate>
     
 	<atom:link href="https://chrislabarge.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>tutorial</title>
+      <link>https://chrislabarge.com/categories/tutorial/</link>
+      <pubDate>Fri, 05 Mar 2021 12:01:00 +0000</pubDate>
+      
+      <guid>https://chrislabarge.com/categories/tutorial/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>dev-tools</title>
@@ -17,15 +26,6 @@
       <pubDate>Fri, 05 Feb 2021 18:30:21 -0500</pubDate>
       
       <guid>https://chrislabarge.com/categories/dev-tools/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tutorial</title>
-      <link>https://chrislabarge.com/categories/tutorial/</link>
-      <pubDate>Sun, 15 Nov 2020 18:30:21 -0500</pubDate>
-      
-      <guid>https://chrislabarge.com/categories/tutorial/</guid>
       <description></description>
     </item>
     

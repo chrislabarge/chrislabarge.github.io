@@ -4,17 +4,42 @@
   
   <url>
     <loc>https://chrislabarge.com/categories/</loc>
-    <lastmod>2021-02-05T18:30:21-05:00</lastmod>
+    <lastmod>2021-03-05T12:01:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://chrislabarge.com/</loc>
-    <lastmod>2021-02-05T18:30:21-05:00</lastmod>
+    <lastmod>2021-03-05T12:01:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://chrislabarge.com/posts/</loc>
-    <lastmod>2021-02-05T18:30:21-05:00</lastmod>
+    <lastmod>2021-03-05T12:01:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrislabarge.com/tags/linux/</loc>
+    <lastmod>2021-03-05T12:01:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrislabarge.com/tags/raspberry-pi/</loc>
+    <lastmod>2021-03-05T12:01:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrislabarge.com/posts/remote-mount/</loc>
+    <lastmod>2021-03-05T12:01:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrislabarge.com/tags/</loc>
+    <lastmod>2021-03-05T12:01:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://chrislabarge.com/categories/tutorial/</loc>
+    <lastmod>2021-03-05T12:01:00+00:00</lastmod>
   </url>
   
   <url>
@@ -33,12 +58,12 @@
   </url>
   
   <url>
-    <loc>https://chrislabarge.com/tags/rails/</loc>
+    <loc>https://chrislabarge.com/tags/ruby/</loc>
     <lastmod>2021-02-05T18:30:21-05:00</lastmod>
   </url>
   
   <url>
-    <loc>https://chrislabarge.com/tags/</loc>
+    <loc>https://chrislabarge.com/tags/ruby-on-rails/</loc>
     <lastmod>2021-02-05T18:30:21-05:00</lastmod>
   </url>
   
@@ -58,11 +83,6 @@
   </url>
   
   <url>
-    <loc>https://chrislabarge.com/categories/tutorial/</loc>
-    <lastmod>2020-11-15T18:30:21-05:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://chrislabarge.com/tags/vim/</loc>
     <lastmod>2020-11-15T18:30:21-05:00</lastmod>
   </url>
@@ -78,27 +98,12 @@
   </url>
   
   <url>
-    <loc>https://chrislabarge.com/tags/ruby/</loc>
-    <lastmod>2020-10-30T18:30:21-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chrislabarge.com/tags/ruby-on-rails/</loc>
-    <lastmod>2020-10-30T18:30:21-05:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://chrislabarge.com/posts/color-picker/</loc>
     <lastmod>2020-04-12T18:30:21-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://chrislabarge.com/posts/bold-italic-tmux/</loc>
-    <lastmod>2020-03-28T18:30:21-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chrislabarge.com/tags/linux/</loc>
     <lastmod>2020-03-28T18:30:21-05:00</lastmod>
   </url>
   
@@ -119,11 +124,6 @@
   
   <url>
     <loc>https://chrislabarge.com/posts/sd-format/</loc>
-    <lastmod>2017-02-27T18:30:21-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://chrislabarge.com/tags/raspberry-pi/</loc>
     <lastmod>2017-02-27T18:30:21-05:00</lastmod>
   </url>
   
