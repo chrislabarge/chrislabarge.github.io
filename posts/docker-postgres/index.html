@@ -267,7 +267,7 @@ locally by forwarding the container port to localhost.</p>
 Now all I will have worry about is my database <code>username</code> and <code>password</code>.</p>
 <h2 id="command">Command</h2>
 <h4 class="snippet-heading" id="terminal-">terminal</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">docker run --name localhost-postgres -p 5432:5432 -e <span style="color:#8be9fd;font-style:italic">POSTGRES_USER</span><span style="color:#ff79c6">=</span>some_user <span style="color:#8be9fd;font-style:italic">POSTGRES_PASSWORD</span><span style="color:#ff79c6">=</span>some_password -d postgres
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2"><code class="language-bash" data-lang="bash">docker run --name localhost-postgres -p 5432:5432 -e <span style="color:#8be9fd;font-style:italic">POSTGRES_USER</span><span style="color:#ff79c6">=</span>some_user -e <span style="color:#8be9fd;font-style:italic">POSTGRES_PASSWORD</span><span style="color:#ff79c6">=</span>some_password -d postgres
 </code></pre></div><p>This entire command is not specific to <code>postgres</code>.  You run commands like this using most one off docker images.
 Lets break this command down.</p>
 <ul>
