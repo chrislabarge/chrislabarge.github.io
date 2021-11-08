@@ -1677,8 +1677,7 @@ with him.&lt;/p&gt;
       
       <guid>https://chrislabarge.com/about/</guid>
       <description>&lt;p&gt;I am a software developer from Albany NY.&lt;/p&gt;
-&lt;p&gt;I enjoy programming, playing guitar, watching movies and hiking.&lt;/p&gt;
-&lt;p&gt;I really love building new things with software, hardware, and/or construction.&lt;/p&gt;
+&lt;p&gt;I enjoy coding, guitar, long boarding, and creating new things in any medium.&lt;/p&gt;
 &lt;p&gt;It is always great to work on projects with new people, so contact me if you
 would like to collaborate!&lt;/p&gt;
 &lt;h4 id=&#34;tools-i-use-on-a-daily-basis&#34;&gt;Tools I use on a daily basis&lt;/h4&gt;
@@ -1687,6 +1686,18 @@ would like to collaborate!&lt;/p&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/tmux/tmux&#34;&gt;TMUX&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://rubyonrails.org/&#34;&gt;Ruby on Rails&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://rspec.info/&#34;&gt;Rspec&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Press</title>
+      <link>https://chrislabarge.com/press/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://chrislabarge.com/press/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.codewithjason.com/code-with-jason-podcast/9478210-105-the-benefits-of-a-test-oriented-development-workflow-with-chris-labarge/&#34;&gt;Code with Jason Podcast - Episode 105 - The Benefits of a Test-Oriented Development Workflow with Chris LaBarge&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
